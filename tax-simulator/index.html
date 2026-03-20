@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>確定申告・還付判定シミュレーター</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-light: #eff6ff;
+            --primary-dark: #1e40af;
+            --success: #047857;
+            --success-bg: #ecfdf5;
+            --success-border: #6ee7b7;
+            --warning: #b45309;
+            --warning-bg: #fffbeb;
+            --warning-border: #fcd34d;
+            --danger: #b91c1c;
+            --danger-bg: #fef2f2;
+            --danger-border: #fca5a5;
+            --info: #0369a1;
+            --info-bg: #f0f9ff;
+            --info-border: #7dd3fc;
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 2px 12px rgba(0,0,0,0.07);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 16px;
+        }
+
+        .container { max-width: 580px; margin: 0 auto; }
+
+        /* ヘッダー */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 24px 20px 20px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .header h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .header p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* タブ切替 */
+        .type-selector {
+            display: flex;
+            gap: 6px;
+            background: #e2e8f0;
+            padding: 4px;
+            border-radius: 10px;
+            margin-bottom: 0;
+        }
+        .type-btn {
+            flex: 1;
+            border: none;
+            padding: 9px 6px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 700;
+            background: transparent;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .type-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+        }
+
+        /* エリアカード */
+        .area-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+        .area-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            user-select: none;
+        }
+        .area-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .icon-blue { background: var(--primary-light); }
+        .icon-green { background: #ecfdf5; }
+        .icon-orange { background: #fff7ed; }
+        .area-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            flex: 1;
+        }
+        .area-toggle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+        .area-toggle.open { transform: rotate(180deg); }
+        .area-body {
+            padding: 16px 18px 18px;
+        }
+        .area-body.collapsed { display: none; }
+
+        /* 入力グループ */
+        .input-group { margin-bottom: 16px; }
+        .input-group:last-child { margin-bottom: 0; }
+
+        label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: var(--text);
+        }
+
+        .hint-toggle {
+            font-size: 0.75rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            margin-bottom: 5px;
+            text-decoration: none;
+            border: none;
+            background: none;
+            padding: 0;
+            font-family: inherit;
+        }
+        .hint-toggle:hover { text-decoration: underline; }
+
+        .hint-content {
+            display: none;
+            background: var(--primary-light);
+            border-left: 3px solid var(--primary);
+            padding: 9px 12px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.78rem;
+            color: #1e40af;
+            margin-bottom: 7px;
+            line-height: 1.5;
+        }
+        .hint-content.show { display: block; }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--text);
+            background: #fafafa;
+            transition: all 0.2s;
+            appearance: none;
+        }
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+        }
+        input[type="number"]::placeholder { color: #a0aec0; }
+
+        .input-suffix {
+            position: relative;
+        }
+        .input-suffix::after {
+            content: '円';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+        .input-suffix input { padding-right: 36px; }
+
+        /* 年齢区分 */
+        .age-select-wrap {
+            display: flex;
+            gap: 8px;
+        }
+        .age-btn {
+            flex: 1;
+            border: 1.5px solid var(--border);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: #fafafa;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .age-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .hidden { display: none; }
+
+        /* 判定ボタン */
+        .btn-calc {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 6px;
+            font-family: inherit;
+            box-shadow: 0 4px 12px rgba(26,86,219,0.25);
+            transition: all 0.2s;
+        }
+        .btn-calc:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-calc:active { transform: scale(0.98); }
+
+        /* 結果エリア */
+        #result { display: none; margin-top: 16px; animation: fadeIn 0.4s ease; }
+
+        .result-card {
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 12px;
+        }
+        .result-success { background: var(--success-bg); border: 1.5px solid var(--success-border); }
+        .result-warn { background: var(--warning-bg); border: 1.5px solid var(--warning-border); }
+        .result-danger { background: var(--danger-bg); border: 1.5px solid var(--danger-border); }
+        .result-info { background: var(--info-bg); border: 1.5px solid var(--info-border); }
+        .result-neutral { background: #f8fafc; border: 1.5px solid var(--border); }
+
+        .result-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .result-success .result-title { color: var(--success); }
+        .result-warn .result-title { color: var(--warning); }
+        .result-danger .result-title { color: var(--danger); }
+        .result-info .result-title { color: var(--info); }
+        .result-neutral .result-title { color: var(--text-muted); }
+
+        .result-body { font-size: 0.88rem; line-height: 1.7; }
+
+        .refund-amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--success);
+            display: block;
+            margin: 6px 0;
+        }
+
+        .breakdown {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            font-size: 0.82rem;
+        }
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px dashed #d1fae5;
+        }
+        .breakdown-row:last-child { border-bottom: none; }
+        .breakdown-label { color: #065f46; }
+        .breakdown-value { font-weight: 700; color: var(--success); }
+
+        /* フッター */
+        .footer-note {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 16px;
+            padding: 0 8px;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ヘッダー -->
+    <div class="header">
+        <h1>📋 確定申告・還付判定シミュレーター</h1>
+        <p>源泉徴収票を見ながら入力するだけで、還付の見込みを簡易判定します</p>
+    </div>
+
+    <!-- ①収入タイプ選択 -->
+    <div class="area-card">
+        <div class="area-header" onclick="toggleArea('area-type')">
+            <div class="area-icon icon-blue">👤</div>
+            <span class="area-title">① あなたの収入タイプ</span>
+            <span class="area-toggle open" id="toggle-area-type">▼</span>
+        </div>
+        <div class="area-body" id="area-type">
+            <div class="input-group">
+                <label>現在の収入状況を選んでください</label>
+                <div class="type-selector">
+                    <button class="type-btn active" onclick="switchType('salary', this)">給与のみ</button>
+                    <button class="type-btn" onclick="switchType('pension', this)">年金のみ</button>
+                    <button class="type-btn" onclick="switchType('both', this)">両方あり</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ②基本情報 -->
+    <div class="area-card">
+        <div class="area-header" onclick="toggleArea('area-basic')">
+            <div class="area-icon icon-blue">📄</div>
+            <span class="area-title">② 基本情報（源泉徴収票から）</span>
+            <span class="area-toggle open" id="toggle-area-basic">▼</span>
+        </div>
+        <div class="area-body" id="area-basic">
+
+            <!-- 給与収入 -->
+            <div id="salary-input" class="input-group">
+                <label for="val-salary">給与の総支給額（年収）</label>
+                <button class="hint-toggle" onclick="toggleHint('h-salary')">📌 源泉徴収票のどこを見る？</button>
+                <div id="h-salary" class="hint-content">給与の源泉徴収票「<strong>支払金額</strong>」欄の金額です。社会保険料などが引かれる前の額面（総支給額）を入力してください。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-salary" placeholder="例: 4,500,000">
+                </div>
+            </div>
+
+            <!-- 年金収入 -->
+            <div id="pension-input" class="input-group hidden">
+                <label>年金受給者の年齢区分</label>
+                <div class="age-select-wrap" style="margin-bottom:10px;">
+                    <button class="age-btn active" id="age-over65" onclick="switchAge('over65')">65歳以上</button>
+                    <button class="age-btn" id="age-under65" onclick="switchAge('under65')">65歳未満</button>
+                </div>
+                <label for="val-pension">公的年金の受給総額</label>
+                <button class="hint-toggle" onclick="toggleHint('h-pension')">📌 源泉徴収票のどこを見る？</button>
+                <div id="h-pension" class="hint-content">「<strong>公的年金等の源泉徴収票</strong>」の「支払金額」欄の金額です。国民年金・厚生年金・共済年金などが対象です。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-pension" placeholder="例: 2,400,000">
+                </div>
+            </div>
+
+            <!-- 所得控除合計 -->
+            <div class="input-group">
+                <label for="val-deduction">所得控除の額の合計額</label>
+                <button class="hint-toggle" onclick="toggleHint('h-deduction')">📌 源泉徴収票のどこを見る？</button>
+                <div id="h-deduction" class="hint-content">源泉徴収票の「<strong>所得控除の額の合計額</strong>」欄です。基礎控除・社会保険料・生命保険料などの合計が既に記載されています。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-deduction" placeholder="例: 1,200,000">
+                </div>
+            </div>
+
+            <!-- 源泉徴収税額 -->
+            <div class="input-group">
+                <label for="val-tax-paid">源泉徴収税額（既に払った所得税）</label>
+                <button class="hint-toggle" onclick="toggleHint('h-taxpaid')">📌 源泉徴収票のどこを見る？</button>
+                <div id="h-taxpaid" class="hint-content">源泉徴収票の「<strong>源泉徴収税額</strong>」欄です。還付金はこの金額が上限となります。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-tax-paid" placeholder="例: 125,000">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ③追加控除 -->
+    <div class="area-card">
+        <div class="area-header" onclick="toggleArea('area-deduction')">
+            <div class="area-icon icon-green">➕</div>
+            <span class="area-title">③ 追加の控除（年末調整後に発生したもの）</span>
+            <span class="area-toggle open" id="toggle-area-deduction">▼</span>
+        </div>
+        <div class="area-body" id="area-deduction">
+
+            <div class="input-group">
+                <label for="val-medical">医療費の自己負担額（年間合計）</label>
+                <button class="hint-toggle" onclick="toggleHint('h-medical')">📌 計算のポイント</button>
+                <div id="h-medical" class="hint-content">病院・薬局・交通費など年間の自己負担合計を入力してください。<strong>10万円を超えた分</strong>（または所得の5%を超えた分）が控除対象になります。ツールが自動で計算します。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-medical" placeholder="例: 150,000">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="val-furusato">ふるさと納税・寄附金の合計額</label>
+                <button class="hint-toggle" onclick="toggleHint('h-furusato')">📌 計算のポイント</button>
+                <div id="h-furusato" class="hint-content">ふるさと納税の合計額（2,000円を引く前の総額）を入力してください。ツールが2,000円を自動控除します。NPO等への寄附も含められます。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-furusato" placeholder="例: 50,000">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ④投資・副業 -->
+    <div class="area-card">
+        <div class="area-header" onclick="toggleArea('area-invest')">
+            <div class="area-icon icon-orange">📈</div>
+            <span class="area-title">④ 投資・副業</span>
+            <span class="area-toggle open" id="toggle-area-invest">▼</span>
+        </div>
+        <div class="area-body" id="area-invest">
+
+            <div class="input-group">
+                <label for="val-stock">株・投資信託の損失額（年間）</label>
+                <button class="hint-toggle" onclick="toggleHint('h-stock')">📌 計算のポイント</button>
+                <div id="h-stock" class="hint-content">特定口座（源泉徴収あり）でマイナスが出た場合、確定申告で損失分に課された税金（所得税15.315%）が還付される可能性があります。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-stock" placeholder="例: 300,000">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="val-dividend">配当金の受取総額（年間）</label>
+                <button class="hint-toggle" onclick="toggleHint('h-dividend')">📌 計算のポイント</button>
+                <div id="h-dividend" class="hint-content">特定口座で受け取った配当金の合計額。課税所得が900万円以下の方は、総合課税を選ぶと配当控除が適用され還付が増える可能性があります。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-dividend" placeholder="例: 100,000">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="val-side">副業の所得（収入 − 経費）</label>
+                <button class="hint-toggle" onclick="toggleHint('h-side')">📌 計算のポイント</button>
+                <div id="h-side" class="hint-content">副業の「利益（所得）」を入力してください。<strong>20万円を超える場合は確定申告が必須</strong>です。売上金額ではなく、経費を引いた後の利益額を入力してください。</div>
+                <div class="input-suffix">
+                    <input type="number" id="val-side" placeholder="例: 180,000">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 判定ボタン -->
+    <button class="btn-calc" onclick="doCalculate()">✅ 還付・申告要否をチェックする</button>
+
+    <!-- 結果表示 -->
+    <div id="result"></div>
+
+    <p class="footer-note">
+        ※ 本ツールは概算であり、正確な税額を保証するものではありません。<br>
+        住宅ローン控除（1年目）・外国税額控除・ふるさと納税ワンストップ特例等の特殊ケースは非対応です。<br>
+        最終的な申告は「国税庁 確定申告書等作成コーナー」でご確認ください。
+    </p>
+
+</div>
+
+<script>
+    let currentMode = 'salary';
+    let currentAge = 'over65';
+
+    // ===== エリア開閉 =====
+    function toggleArea(id) {
+        const body = document.getElementById(id);
+        const toggle = document.getElementById('toggle-' + id);
+        const isCollapsed = body.classList.contains('collapsed');
+        body.classList.toggle('collapsed', !isCollapsed);
+        toggle.classList.toggle('open', isCollapsed);
+    }
+
+    // ===== 収入タイプ切替 =====
+    function switchType(mode, btn) {
+        currentMode = mode;
+        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('salary-input').classList.toggle('hidden', mode === 'pension');
+        document.getElementById('pension-input').classList.toggle('hidden', mode === 'salary');
+    }
+
+    // ===== 年齢区分切替 =====
+    function switchAge(age) {
+        currentAge = age;
+        document.getElementById('age-over65').classList.toggle('active', age === 'over65');
+        document.getElementById('age-under65').classList.toggle('active', age === 'under65');
+    }
+
+    // ===== ヒント開閉 =====
+    function toggleHint(id) {
+        document.getElementById(id).classList.toggle('show');
+    }
+
+    // ===== 給与所得計算（令和2年以降・現行制度） =====
+    function calcSalaryIncome(salary) {
+        if (salary <= 0) return 0;
+        let deduction;
+        if (salary <= 1_625_000)       deduction = 550_000;
+        else if (salary <= 1_800_000)  deduction = salary * 0.4 - 100_000;
+        else if (salary <= 3_600_000)  deduction = salary * 0.3 + 80_000;
+        else if (salary <= 6_600_000)  deduction = salary * 0.2 + 440_000;
+        else if (salary <= 8_500_000)  deduction = salary * 0.1 + 1_100_000;
+        else                           deduction = 1_950_000;
+        return Math.max(0, salary - deduction);
+    }
+
+    // ===== 年金所得計算（現行制度） =====
+    function calcPensionIncome(pension, ageGroup) {
+        if (pension <= 0) return 0;
+        if (ageGroup === 'over65') {
+            if (pension <= 1_100_000)       return 0;
+            else if (pension <= 3_300_000)  return pension * 0.75 - 275_000;
+            else if (pension <= 4_100_000)  return pension * 0.85 - 605_000;
+            else if (pension <= 7_700_000)  return pension * 0.95 - 1_055_000;
+            else if (pension <= 10_000_000) return pension - 1_445_000;
+            else                            return pension - 1_955_000;
+        } else {
+            // 65歳未満
+            if (pension <= 600_000)         return 0;
+            else if (pension <= 1_300_000)  return pension - 600_000;
+            else if (pension <= 4_100_000)  return pension * 0.75 - 275_000;
+            else if (pension <= 7_700_000)  return pension * 0.85 - 685_000;
+            else if (pension <= 10_000_000) return pension * 0.95 - 1_455_000;
+            else                            return pension - 1_955_000;
+        }
+    }
+
+    // ===== 所得税率計算（7段階） =====
+    function calcIncomeTax(taxable) {
+        if (taxable <= 0) return 0;
+        let tax;
+        if (taxable <= 1_950_000)       tax = taxable * 0.05;
+        else if (taxable <= 3_300_000)  tax = taxable * 0.10 - 97_500;
+        else if (taxable <= 6_950_000)  tax = taxable * 0.20 - 427_500;
+        else if (taxable <= 9_000_000)  tax = taxable * 0.23 - 636_000;
+        else if (taxable <= 18_000_000) tax = taxable * 0.33 - 1_536_000;
+        else if (taxable <= 40_000_000) tax = taxable * 0.40 - 2_796_000;
+        else                            tax = taxable * 0.45 - 4_796_000;
+        return Math.max(0, tax) * 1.021; // 復興特別所得税込
+    }
+
+    // ===== 課税所得から税率を逆引き（配当控除判定用） =====
+    function getTaxRate(taxable) {
+        if (taxable <= 1_950_000) return 0.05;
+        if (taxable <= 3_300_000) return 0.10;
+        if (taxable <= 6_950_000) return 0.20;
+        if (taxable <= 9_000_000) return 0.23;
+        return 0.33;
+    }
+
+    // ===== メイン計算 =====
+    function doCalculate() {
+        const salary    = Number(document.getElementById('val-salary').value) || 0;
+        const pension   = Number(document.getElementById('val-pension').value) || 0;
+        const baseDeduction = Number(document.getElementById('val-deduction').value) || 0;
+        const taxPaid   = Number(document.getElementById('val-tax-paid').value) || 0;
+        const medicalRaw = Number(document.getElementById('val-medical').value) || 0;
+        const furusatoRaw = Number(document.getElementById('val-furusato').value) || 0;
+        const stockLoss = Number(document.getElementById('val-stock').value) || 0;
+        const dividend  = Number(document.getElementById('val-dividend').value) || 0;
+        const sideIncome = Number(document.getElementById('val-side').value) || 0;
+
+        // 追加控除の算出
+        const medicalDeduction = Math.max(0, medicalRaw - 100_000);
+        const furusatoDeduction = Math.max(0, furusatoRaw - 2_000);
+        const additionalDeduction = medicalDeduction + furusatoDeduction;
+
+        // 所得の算出
+        const sIncome = (currentMode !== 'pension') ? calcSalaryIncome(salary) : 0;
+        const pIncome = (currentMode !== 'salary') ? calcPensionIncome(pension, currentAge) : 0;
+        const totalIncome = sIncome + pIncome + sideIncome;
+
+        // 課税所得
+        const taxableIncome = Math.max(0, totalIncome - baseDeduction - additionalDeduction);
+
+        // 正しい税額
+        const correctTax = calcIncomeTax(taxableIncome);
+
+        // 還付額
+        const incomeTaxRefund = Math.floor(Math.max(0, taxPaid - correctTax));
+        const stockRefund = Math.floor(stockLoss * 0.15315);
+        const totalRefund = incomeTaxRefund + stockRefund;
+
+        // 住民税メリット（参考）
+        const residentTaxBenefit = Math.floor(additionalDeduction * 0.1 + stockLoss * 0.05);
+
+        // 税率（配当控除判定用）
+        const taxRate = getTaxRate(taxableIncome);
+
+        // ===== 結果組み立て =====
+        const resDiv = document.getElementById('result');
+        resDiv.style.display = 'block';
+        let html = '';
+
+        // 【副業アラート】
+        if (sideIncome > 200_000) {
+            html += `
+            <div class="result-card result-danger">
+                <div class="result-title">⚠️ 確定申告が必要です（副業）</div>
+                <div class="result-body">
+                    副業所得が<strong>20万円を超えています（${sideIncome.toLocaleString()}円）</strong>。<br>
+                    還付額の有無に関わらず、確定申告が義務となります。
+                </div>
+            </div>`;
+        }
+
+        // 【還付あり】
+        if (totalRefund >= 1_000) {
+            html += `
+            <div class="result-card result-success">
+                <div class="result-title">🎉 還付が見込まれます！</div>
+                <div class="result-body">
+                    確定申告することで、合計で
+                    <span class="refund-amount">約 ${totalRefund.toLocaleString()} 円</span>
+                    の還付が見込まれます。
+                    <div class="breakdown">
+                        ${incomeTaxRefund > 0 ? `<div class="breakdown-row"><span class="breakdown-label">所得税の還付（現金振込）</span><span class="breakdown-value">約 ${incomeTaxRefund.toLocaleString()} 円</span></div>` : ''}
+                        ${stockRefund > 0 ? `<div class="breakdown-row"><span class="breakdown-label">株の損失による還付</span><span class="breakdown-value">約 ${stockRefund.toLocaleString()} 円</span></div>` : ''}
+                        ${residentTaxBenefit > 0 ? `<div class="breakdown-row"><span class="breakdown-label">住民税の軽減（来年度分）</span><span class="breakdown-value">約 ${residentTaxBenefit.toLocaleString()} 円</span></div>` : ''}
+                    </div>
+                </div>
+            </div>`;
+        } else if (sideIncome <= 200_000) {
+            html += `
+            <div class="result-card result-neutral">
+                <div class="result-title">📋 申告のメリットは少なそうです</div>
+                <div class="result-body">
+                    現在の入力内容では、申告による還付はほとんど見込まれません。<br>
+                    ただし、株の損失や医療費が多い場合は再度ご確認ください。
+                </div>
+            </div>`;
+        }
+
+        // 【配当控除アドバイス】課税所得900万円以下の配当受取者
+        if (dividend > 0 && taxableIncome <= 9_000_000) {
+            html += `
+            <div class="result-card result-info">
+                <div class="result-title">💡 配当控除のアドバイス</div>
+                <div class="result-body">
+                    課税所得が900万円以下のため、配当金（${dividend.toLocaleString()}円）を<strong>総合課税</strong>で申告すると、
+                    配当控除が適用されてさらに還付が増える可能性があります。<br>
+                    申告前に税理士や国税庁サイトでご確認ください。
+                </div>
+            </div>`;
+        }
+
+        resDiv.innerHTML = html;
+        resDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+</script>
+</body>
+</html>
