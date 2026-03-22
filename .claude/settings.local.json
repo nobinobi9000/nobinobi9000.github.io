@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git submodule:*)",
+      "Bash(cp /c/Users/tkouno/nobi-labo-new/tax-simulator/README.md /c/Users/tkouno/nobinobi9000.github.io/tax-simulator/README.md)",
+      "Bash(cp /c/Users/tkouno/nobi-labo-new/tax-simulator/index.html /c/Users/tkouno/nobinobi9000.github.io/tax-simulator/index.html)",
+      "Bash(handle.exe \"C:\\\\Users\\\\tkouno\\\\nobi-labo-new\")"
+    ]
+  }
+}
