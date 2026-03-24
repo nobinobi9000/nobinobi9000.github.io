@@ -243,8 +243,72 @@
       footer { padding: 32px 40px; }
     }
 
+    /* ── SCREENSHOTS ── */
+    .screenshots-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+    }
+    .screenshots-scroll::-webkit-scrollbar { height: 4px; }
+    .screenshots-scroll::-webkit-scrollbar-track { background: var(--border); }
+    .screenshots-scroll::-webkit-scrollbar-thumb { background: #333; }
+
+    .screenshots-row {
+      display: flex; gap: 20px;
+      width: max-content;
+      padding: 4px 2px;
+    }
+
+    .phone-frame {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      flex-shrink: 0;
+    }
+    .phone-shell {
+      position: relative;
+      width: 200px;
+      background: #1a1a1a;
+      border-radius: 32px;
+      border: 2px solid #333;
+      padding: 14px 8px 14px 8px;
+      box-shadow:
+        0 0 0 1px #111,
+        0 20px 60px rgba(0,0,0,0.7),
+        inset 0 1px 1px rgba(255,255,255,0.05);
+    }
+    .phone-shell::before {
+      content: '';
+      display: block;
+      width: 60px; height: 6px;
+      background: #2a2a2a;
+      border-radius: 3px;
+      margin: 0 auto 10px;
+    }
+    .phone-shell::after {
+      content: '';
+      display: block;
+      width: 40px; height: 4px;
+      background: #2a2a2a;
+      border-radius: 2px;
+      margin: 10px auto 0;
+    }
+    .phone-screen {
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      display: block;
+    }
+    .phone-screen img {
+      width: 100%;
+      display: block;
+    }
+    .phone-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      color: #666; text-align: center; text-transform: uppercase;
+    }
+
     @media (max-width: 480px) {
       .pwa-grid { grid-template-columns: 1fr; }
+      .phone-shell { width: 160px; }
     }
   </style>
 </head>
@@ -282,6 +346,54 @@
     </div>
   </div>
 </div>
+
+<!-- SCREENSHOTS -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">Screenshots</div>
+    <div class="screenshots-scroll">
+      <div class="screenshots-row">
+
+        <div class="phone-frame">
+          <div class="phone-shell">
+            <div class="phone-screen">
+              <img src="/screenshots/comic-mylist-list.png" alt="マイリスト（リスト表示）">
+            </div>
+          </div>
+          <div class="phone-label">マイリスト・リスト</div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone-shell">
+            <div class="phone-screen">
+              <img src="/screenshots/comic-mylist-grid.png" alt="マイリスト（グリッド表示）">
+            </div>
+          </div>
+          <div class="phone-label">マイリスト・グリッド</div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone-shell">
+            <div class="phone-screen">
+              <img src="/screenshots/comic-newrelease.png" alt="新刊情報">
+            </div>
+          </div>
+          <div class="phone-label">新刊情報</div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone-shell">
+            <div class="phone-screen">
+              <img src="/screenshots/comic-search.png" alt="検索結果">
+            </div>
+          </div>
+          <div class="phone-label">検索</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FEATURES -->
 <section>
