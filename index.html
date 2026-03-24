@@ -17,12 +17,12 @@
 
     :root {
       --orange: #f97316;
-      --black: #080808;
+      --black: #0c0c0c;
       --dark: #111111;
-      --panel: #161616;
-      --border: #1f1f1f;
-      --muted: #555;
-      --white: #f0f0f0;
+      --panel: #181818;
+      --border: #2a2a2a;
+      --muted: #888;
+      --white: #efefef;
     }
 
     html { scroll-behavior: smooth; }
@@ -100,7 +100,7 @@
     .hero h1 em { font-style: normal; color: var(--orange); }
 
     .hero-sub {
-      font-size: 14px; color: var(--muted);
+      font-size: 14px; color: #aaa;
       max-width: 380px; line-height: 1.8;
     }
 
@@ -134,7 +134,7 @@
     }
     .app-card.live::before { background: var(--orange); }
     .app-card.live:hover { background: #1a1a1a; }
-    .app-card.coming { opacity: 0.35; cursor: default; }
+    .app-card.coming { opacity: 0.5; cursor: default; }
     .app-card.coming:hover { background: var(--panel); }
 
     .app-card-top {
@@ -150,13 +150,13 @@
     .app-badge.soon { border-color: var(--muted); color: var(--muted); }
 
     .app-name { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 8px; }
-    .app-desc { font-size: 13px; color: #777; line-height: 1.7; margin-bottom: 16px; }
+    .app-desc { font-size: 13px; color: #aaa; line-height: 1.7; margin-bottom: 16px; }
 
     .app-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
     .tag {
       font-size: 9px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
-      padding: 3px 8px; border: 1px solid #2a2a2a; color: #666;
+      padding: 3px 8px; border: 1px solid #3a3a3a; color: #888;
     }
 
     .app-cta {
@@ -181,9 +181,9 @@
     .footer-logo { font-size: 14px; font-weight: 900; letter-spacing: -0.5px; }
     .footer-logo span { color: var(--orange); }
     .footer-links { display: flex; gap: 20px; }
-    .footer-links a { font-size: 11px; color: #333; text-decoration: none; }
-    .footer-links a:hover { color: var(--muted); }
-    .footer-copy { font-size: 11px; color: #333; width: 100%; }
+    .footer-links a { font-size: 11px; color: #777; text-decoration: none; }
+    .footer-links a:hover { color: #aaa; }
+    .footer-copy { font-size: 11px; color: #555; width: 100%; }
 
     @media (min-width: 600px) {
       .hero { padding: 110px 40px 88px; }
@@ -238,7 +238,7 @@
       </div>
       <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
         <span class="app-cta">今すぐ使う</span>
-        <a href="/comic-checker.html" style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#555; text-decoration:none;">詳細を見る</a>
+        <a href="/comic-checker.html" style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#888; text-decoration:none;">詳細を見る</a>
       </div>
     </a>
 
@@ -248,14 +248,39 @@
         <div class="app-icon">🧮</div>
         <span class="app-badge">Live</span>
       </div>
-      <div class="app-name">税金シミュレーター</div>
+      <div class="app-name">確定申告・還付判定シミュレーター</div>
       <div class="app-desc">
         所得税・住民税を簡単に計算。<br>
-        収入を入力するだけで手取り額をすぐ確認できる。
+        収入を入力するだけで手取り額・還付額をすぐ確認できる。
       </div>
       <div class="app-tags">
         <span class="tag">無料</span>
         <span class="tag">登録不要</span>
+        <span class="tag">令和7年版</span>
+      </div>
+      <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+        <span class="app-cta">今すぐ使う</span>
+        <a href="/tax-simulator.html" style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#888; text-decoration:none;">詳細を見る</a>
+      </div>
+    </a>
+
+    <!-- absolute-zero-meeting -->
+    <a href="https://absolute-zero-meeting.vercel.app" class="app-card live">
+      <div class="app-card-top">
+        <div class="app-icon">🧊</div>
+        <span class="app-badge">Live</span>
+      </div>
+      <div class="app-name">ねこおじさん〜絶対零度会議室〜</div>
+      <div class="app-desc">
+        会議を凍らせる、愛すべきおやじ。<br>
+        カウントダウン終了後、ねこおじさんがAI生成おやじギャグで締める会議タイマー。<br>
+        時々（9%）いいことも言います。
+      </div>
+      <div class="app-tags">
+        <span class="tag">会議タイマー</span>
+        <span class="tag">おやじギャグ</span>
+        <span class="tag">AI生成</span>
+        <span class="tag">無料</span>
       </div>
       <span class="app-cta">今すぐ使う</span>
     </a>
