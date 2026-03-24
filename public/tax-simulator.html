@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>確定申告・還付判定シミュレーター（令和7年版）- nobi-labo</title>
+  <meta name="description" content="源泉徴収票を見ながら入力するだけで、還付の見込みを簡易判定。医療費・ふるさと納税・株の損失にも対応。令和7年版・無料・登録不要。">
+  <meta property="og:title" content="確定申告・還付判定シミュレーター（令和7年版）">
+  <meta property="og:description" content="源泉徴収票を見ながら入力するだけで還付の見込みを判定。無料・登録不要。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nobi-labo.com/tax-simulator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --black: #0c0c0c;
+      --dark: #111111;
+      --panel: #181818;
+      --border: #2a2a2a;
+      --muted: #888;
+      --white: #efefef;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(12,12,12,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+    }
+    .logo { font-size: 17px; font-weight: 900; letter-spacing: -0.5px; color: var(--white); text-decoration: none; }
+    .logo span { color: var(--orange); }
+    .header-cta {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--orange);
+      text-decoration: none; border: 1px solid var(--orange);
+      padding: 6px 14px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .header-cta:hover { background: var(--orange); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 72px 24px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      background: var(--orange); opacity: 0.05;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      transform: rotate(10deg);
+    }
+    .hero-inner { max-width: 640px; margin: 0 auto; position: relative; }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
+    }
+    .back-link {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .back-link::before { content: '←'; }
+    .back-link:hover { color: var(--white); }
+    .divider-dot { width: 3px; height: 3px; background: #333; }
+    .app-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--orange);
+    }
+
+    .hero-icon { font-size: 40px; line-height: 1; margin-bottom: 16px; }
+
+    .hero h1 {
+      font-size: clamp(24px, 6vw, 42px);
+      font-weight: 900; letter-spacing: -1.5px; line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .hero h1 em { font-style: normal; color: var(--orange); }
+
+    .hero-version {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      color: var(--orange); border: 1px solid var(--orange);
+      padding: 3px 10px; margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .hero-sub {
+      font-size: 15px; color: #aaa; line-height: 1.8;
+      max-width: 480px; margin-bottom: 32px;
+    }
+
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; padding: 4px 10px;
+      border: 1px solid #3a3a3a; color: #888;
+    }
+    .badge.hi { border-color: var(--orange); color: var(--orange); }
+
+    .cta-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--orange); color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none;
+      padding: 14px 28px;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #ea580c; }
+    .btn-primary::after { content: '→'; }
+
+    /* ── SECTION ── */
+    .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+    section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+
+    .sec-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 4px;
+      color: var(--orange); text-transform: uppercase;
+      display: flex; align-items: center; gap: 16px; margin-bottom: 36px;
+    }
+    .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── FEATURES ── */
+    .features { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+
+    .feature {
+      background: var(--panel);
+      padding: 28px 24px;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 20px;
+      align-items: start;
+    }
+    .feature-num {
+      font-size: 32px; font-weight: 900; color: #383838;
+      line-height: 1; padding-top: 4px;
+    }
+    .feature-title {
+      font-size: 16px; font-weight: 900; letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .feature-title em { font-style: normal; color: var(--orange); }
+    .feature-desc { font-size: 13px; color: #aaa; line-height: 1.8; }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+
+    .step {
+      background: var(--panel);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 0 16px;
+      align-items: start;
+    }
+    .step-num {
+      width: 28px; height: 28px;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900; color: #fff;
+      flex-shrink: 0;
+    }
+    .step-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .step-desc { font-size: 12px; color: #aaa; line-height: 1.7; }
+    .step-note {
+      font-size: 11px; color: var(--orange);
+      background: rgba(249,115,22,0.08);
+      padding: 8px 12px; margin-top: 10px;
+      border-left: 2px solid var(--orange);
+    }
+
+    /* ── COVERAGE TABLE ── */
+    .coverage-table { width: 100%; border-collapse: collapse; background: var(--panel); }
+    .coverage-table th, .coverage-table td {
+      padding: 14px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .coverage-table th {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted);
+      background: var(--dark);
+    }
+    .coverage-table tr:last-child td { border-bottom: none; }
+    .dot-orange { color: var(--orange); font-weight: 700; }
+    .dot-muted { color: #555; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-left: 3px solid #555;
+      padding: 20px 24px;
+    }
+    .disclaimer p {
+      font-size: 12px; color: #888; line-height: 1.8;
+    }
+    .disclaimer p + p { margin-top: 8px; }
+
+    /* ── CTA BOTTOM ── */
+    .cta-bottom {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .cta-bottom h2 {
+      font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .cta-bottom h2 em { font-style: normal; color: var(--orange); }
+    .cta-bottom p { font-size: 13px; color: #aaa; margin-bottom: 28px; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 28px 24px; }
+    .footer-inner {
+      max-width: 640px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .footer-logo { font-size: 14px; font-weight: 900; text-decoration: none; color: var(--white); }
+    .footer-logo span { color: var(--orange); }
+    .footer-copy { font-size: 11px; color: #555; }
+
+    @media (min-width: 600px) {
+      .hero { padding: 88px 40px 72px; }
+      section { padding: 80px 0; }
+      .wrap { padding: 0 40px; }
+      footer { padding: 32px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">nobi<span>-labo</span></a>
+  <a href="/tax-simulator/" class="header-cta">シミュレーターを開く</a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <a href="/" class="back-link">nobi-labo</a>
+      <div class="divider-dot"></div>
+      <span class="app-tag">tax-simulator</span>
+    </div>
+    <div class="hero-icon">📋</div>
+    <h1>確定申告で<br><em>お金が戻るか</em>、<br>すぐわかる。</h1>
+    <div class="hero-version">令和7年版</div>
+    <p class="hero-sub">
+      源泉徴収票を手元に置いて入力するだけ。<br>
+      還付見込み額を瞬時に判定します。医療費・ふるさと納税・株の損失にも対応。
+    </p>
+    <div class="hero-badges">
+      <span class="badge hi">無料</span>
+      <span class="badge hi">登録不要</span>
+      <span class="badge hi">令和7年版</span>
+      <span class="badge">給与・年金対応</span>
+      <span class="badge">副業対応</span>
+    </div>
+    <div class="cta-group">
+      <a href="/tax-simulator/" class="btn-primary">今すぐ判定する</a>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">Features</div>
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-num">01</div>
+        <div>
+          <div class="feature-title"><em>源泉徴収票を見ながらそのまま入力</em></div>
+          <div class="feature-desc">
+            「支払金額」「所得控除の額の合計額」「源泉徴収税額」の3項目を入力するだけで基本判定が完了。
+            各項目に「どこを見ればいいか」のヒントが付いているので、初めての方でも迷いません。
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-num">02</div>
+        <div>
+          <div class="feature-title"><em>給与・年金・両方に対応</em></div>
+          <div class="feature-desc">
+            給与のみ・年金のみ・両方ある場合の3パターンに対応。
+            年金は65歳以上・65歳未満で公的年金等控除を自動で切り替えて計算します。
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-num">03</div>
+        <div>
+          <div class="feature-title"><em>医療費・ふるさと納税の追加控除を自動計算</em></div>
+          <div class="feature-desc">
+            年末調整後に発生した医療費控除・寄附金控除を入力欄に追加するだけ。
+            10万円超の自動控除・2,000円の自己負担分引き算もツールが処理します。
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-num">04</div>
+        <div>
+          <div class="feature-title"><em>株の損失・配当金・副業にも対応</em></div>
+          <div class="feature-desc">
+            特定口座での株損失による還付試算、配当控除アドバイス、
+            副業所得20万円超の申告義務チェックをまとめて判定します。
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-num">05</div>
+        <div>
+          <div class="feature-title"><em>還付額の内訳を明示</em></div>
+          <div class="feature-desc">
+            所得税の還付（現金振込）・株損失による還付・住民税の軽減（来年度分）を
+            それぞれ分けて表示するので、何でいくら戻るのかがひと目でわかります。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">How to use</div>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">源泉徴収票を手元に用意する</div>
+          <div class="step-desc">会社から受け取った「給与所得の源泉徴収票」を用意してください。年金の場合は「公的年金等の源泉徴収票」も使います。</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">収入タイプを選んで基本情報を入力</div>
+          <div class="step-desc">
+            給与のみ・年金のみ・両方から選択。源泉徴収票の「支払金額」「所得控除の額の合計額」「源泉徴収税額」を入力します。
+          </div>
+          <div class="step-note">各項目の「📌 源泉徴収票のどこを見る？」をタップするとヒントが表示されます</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">追加控除・投資情報を入力（任意）</div>
+          <div class="step-desc">医療費・ふるさと納税・株の損失・配当金・副業所得がある場合は入力します。空欄のまま判定も可能です。</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">「還付・申告要否をチェックする」を押す</div>
+          <div class="step-desc">
+            ボタンを押すと即座に結果が表示されます。還付見込み額・申告義務の有無・アドバイスをまとめて確認できます。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE TABLE -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">対応項目一覧</div>
+    <table class="coverage-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>対応</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>給与所得</td>
+          <td class="dot-orange">● 対応</td>
+          <td style="font-size:12px; color:#888;">令和2年以降の現行制度で計算</td>
+        </tr>
+        <tr>
+          <td>年金所得（65歳以上）</td>
+          <td class="dot-orange">● 対応</td>
+          <td style="font-size:12px; color:#888;">公的年金等控除を自動適用</td>
+        </tr>
+        <tr>
+          <td>年金所得（65歳未満）</td>
+          <td class="dot-orange">● 対応</td>
+          <td style="font-size:12px; color:#888;">公的年金等控除を自動適用</td>
+        </tr>
+        <tr>
+          <td>医療費控除</td>
+          <td class="dot-orange">● 対応</td>
+          <td style="font-size:12px; color:#888;">10万円超の分を自動控除</td>
+        </tr>
+        <tr>
+          <td>ふるさと納税・寄附金控除</td>
+          <td class="dot-orange">● 対応</td>
+          <td style="font-size:12px; color:#888;">2,000円自己負担を自動控除</td>
+        </tr>
+        <tr>
+          <td>株・投資信託の損失</td>
+          <td class="dot-orange">● 対応</td>
+          <td style="font-size:12px; color:#888;">特定口座（源泉徴収あり）</td>
+        </tr>
+        <tr>
+          <td>配当金（配当控除アドバイス）</td>
+          <td class="dot-orange">● 対応</td>
+          <td style="font-size:12px; color:#888;">課税所得900万円以下に案内</td>
+        </tr>
+        <tr>
+          <td>副業所得（申告義務チェック）</td>
+          <td class="dot-orange">● 対応</td>
+          <td style="font-size:12px; color:#888;">20万円超で申告必須アラート</td>
+        </tr>
+        <tr>
+          <td>住宅ローン控除（1年目）</td>
+          <td class="dot-muted">— 非対応</td>
+          <td style="font-size:12px; color:#888;">国税庁サイトでご確認ください</td>
+        </tr>
+        <tr>
+          <td>外国税額控除</td>
+          <td class="dot-muted">— 非対応</td>
+          <td style="font-size:12px; color:#888;">—</td>
+        </tr>
+        <tr>
+          <td>ふるさと納税ワンストップ特例</td>
+          <td class="dot-muted">— 非対応</td>
+          <td style="font-size:12px; color:#888;">特例適用済みの場合は対象外</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">ご注意</div>
+    <div class="disclaimer">
+      <p>本ツールは概算を目的としており、正確な税額や還付額を保証するものではありません。</p>
+      <p>計算結果はあくまで参考情報です。実際の申告・税額の確定は「国税庁 確定申告書等作成コーナー」または税理士にご相談ください。</p>
+      <p>令和7年（2025年）分の申告に対応した計算式を使用しています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section style="border-bottom: none;">
+  <div class="wrap">
+    <div class="cta-bottom">
+      <h2>還付金を<em>取り戻そう。</em></h2>
+      <p>
+        源泉徴収票を見ながら入力するだけ。無料・登録不要。<br>
+        令和7年版対応。今すぐ判定を始めてください。
+      </p>
+      <a href="/tax-simulator/" class="btn-primary">今すぐ判定する</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">nobi<span>-labo</span></a>
+    <div class="footer-copy">© 2026 nobi-labo. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
