@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ねこおじさんタイマー - nobi-labo</title>
+  <meta name="description" content="会議を凍らせる、愛すべきおやじ。カウントダウン終了後、ねこおじさんがAI生成おやじギャグで締める会議タイマー。無料・登録不要。">
+  <meta property="og:title" content="ねこおじさんタイマー">
+  <meta property="og:description" content="会議を凍らせる、愛すべきおやじ。カウントダウン終了後、AI生成おやじギャグで締める会議タイマー。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nobi-labo.com/nekoojiisan-timer.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --black: #0c0c0c;
+      --dark: #111111;
+      --panel: #181818;
+      --border: #2a2a2a;
+      --muted: #888;
+      --white: #efefef;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(12,12,12,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+    }
+    .logo { font-size: 17px; font-weight: 900; letter-spacing: -0.5px; color: var(--white); text-decoration: none; }
+    .logo span { color: var(--orange); }
+    .header-cta {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--orange);
+      text-decoration: none; border: 1px solid var(--orange);
+      padding: 6px 14px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .header-cta:hover { background: var(--orange); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 72px 24px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      background: var(--orange); opacity: 0.05;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      transform: rotate(10deg);
+    }
+    .hero-inner { max-width: 640px; margin: 0 auto; position: relative; }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
+    }
+    .back-link {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .back-link::before { content: '←'; }
+    .back-link:hover { color: var(--white); }
+    .divider-dot { width: 3px; height: 3px; background: #333; }
+    .app-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--orange);
+    }
+
+    .hero-icon { font-size: 40px; line-height: 1; margin-bottom: 16px; }
+
+    .hero h1 {
+      font-size: clamp(28px, 7vw, 48px);
+      font-weight: 900; letter-spacing: -1.5px; line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero h1 em { font-style: normal; color: var(--orange); }
+
+    .hero-sub {
+      font-size: 15px; color: #aaa; line-height: 1.8;
+      max-width: 480px; margin-bottom: 32px;
+    }
+
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; padding: 4px 10px;
+      border: 1px solid #3a3a3a; color: #888;
+    }
+    .badge.hi { border-color: var(--orange); color: var(--orange); }
+
+    .cta-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--orange); color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none;
+      padding: 14px 28px;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #ea580c; }
+    .btn-primary::after { content: '→'; }
+
+    /* ── SECTION ── */
+    .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+    section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+
+    .sec-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 4px;
+      color: var(--orange); text-transform: uppercase;
+      display: flex; align-items: center; gap: 16px; margin-bottom: 36px;
+    }
+    .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── FEATURES ── */
+    .features { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+
+    .feature {
+      background: var(--panel);
+      padding: 28px 24px;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 20px;
+      align-items: start;
+    }
+    .feature-num {
+      font-size: 32px; font-weight: 900; color: #383838;
+      line-height: 1; padding-top: 4px;
+    }
+    .feature-title {
+      font-size: 16px; font-weight: 900; letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .feature-title em { font-style: normal; color: var(--orange); }
+    .feature-desc { font-size: 13px; color: #aaa; line-height: 1.8; }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+
+    .step {
+      background: var(--panel);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 0 16px;
+      align-items: start;
+    }
+    .step-num {
+      width: 28px; height: 28px;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900; color: #fff;
+      flex-shrink: 0;
+    }
+    .step-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .step-desc { font-size: 12px; color: #aaa; line-height: 1.7; }
+    .step-note {
+      font-size: 11px; color: var(--orange);
+      background: rgba(249,115,22,0.08);
+      padding: 8px 12px; margin-top: 10px;
+      border-left: 2px solid var(--orange);
+    }
+
+    /* ── OJIGI CARD ── */
+    .ojigi-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      padding: 24px;
+    }
+    .ojigi-box p { font-size: 13px; color: #aaa; line-height: 1.9; }
+    .ojigi-percent {
+      display: inline-block;
+      font-size: 28px; font-weight: 900;
+      color: var(--orange); margin-right: 8px; vertical-align: middle;
+    }
+
+    /* ── CTA BOTTOM ── */
+    .cta-bottom {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .cta-bottom h2 {
+      font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .cta-bottom h2 em { font-style: normal; color: var(--orange); }
+    .cta-bottom p { font-size: 13px; color: #aaa; margin-bottom: 28px; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 28px 24px; }
+    .footer-inner {
+      max-width: 640px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .footer-logo { font-size: 14px; font-weight: 900; text-decoration: none; color: var(--white); }
+    .footer-logo span { color: var(--orange); }
+    .footer-copy { font-size: 11px; color: #555; }
+
+    @media (min-width: 600px) {
+      .hero { padding: 88px 40px 72px; }
+      section { padding: 80px 0; }
+      .wrap { padding: 0 40px; }
+      footer { padding: 32px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">nobi<span>-labo</span></a>
+  <a href="https://absolute-zero-meeting.vercel.app" class="header-cta">タイマーを開く</a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <a href="/" class="back-link">nobi-labo</a>
+      <div class="divider-dot"></div>
+      <span class="app-tag">nekoojiisan-timer</span>
+    </div>
+    <div class="hero-icon">🧊</div>
+    <h1>会議を<em>凍らせる、</em><br>愛すべきおやじ。</h1>
+    <p class="hero-sub">
+      カウントダウンが終わると、ねこおじさんが<br>
+      AI生成おやじギャグで会議を強制終了。<br>
+      時々（9%）、いいことも言います。
+    </p>
+    <div class="hero-badges">
+      <span class="badge hi">無料</span>
+      <span class="badge hi">登録不要</span>
+      <span class="badge">会議タイマー</span>
+      <span class="badge">AI生成ギャグ</span>
+    </div>
+    <div class="cta-group">
+      <a href="https://absolute-zero-meeting.vercel.app" class="btn-primary">会議を凍らせる</a>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">Features</div>
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-num">01</div>
+        <div>
+          <div class="feature-title"><em>シンプルな会議タイマー</em></div>
+          <div class="feature-desc">
+            ＋1分・＋10分・＋30分・＋60分ボタンで時間をセットしてスタート。
+            カウントダウン中はねこおじさんが見守ります。
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-num">02</div>
+        <div>
+          <div class="feature-title"><em>AI生成おやじギャグで強制終了</em></div>
+          <div class="feature-desc">
+            カウントダウンがゼロになると、ねこおじさんがAI生成のおやじギャグを披露。
+            会議を強制的に締めてくれます。だらだら会議とはもうおさらば。
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-num">03</div>
+        <div>
+          <div class="feature-title"><em>時々（9%）いいことも言う</em></div>
+          <div class="feature-desc">
+            おやじギャグだけではありません。約9%の確率で、ねこおじさんがなぜか
+            ちょっとためになることを言ってきます。何が出るかはお楽しみ。
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-num">04</div>
+        <div>
+          <div class="feature-title"><em>「今日の一言」で強制終了ボタン</em></div>
+          <div class="feature-desc">
+            タイマーを待てないときは「今日の一言（強制終了）」ボタンでいつでも締められます。
+            緊急脱出にどうぞ。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">How to use</div>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">会議の前にアプリを開く</div>
+          <div class="step-desc">登録不要。ブラウザで開くだけでそのまま使えます。</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">時間をセットする</div>
+          <div class="step-desc">＋1分・＋10分・＋30分・＋60分のボタンで会議時間を設定します。</div>
+          <div class="step-note">例：30分会議なら「＋30分」を1回タップ</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">スタートを押して会議開始</div>
+          <div class="step-desc">カウントダウンが始まります。ねこおじさんが時間を見守ります。</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">ゼロになったらおやじギャグで締め</div>
+          <div class="step-desc">
+            タイムアップと同時にねこおじさんが登場。
+            AI生成のおやじギャグ（または9%の確率で知恵）で会議を凍結します。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OJIGI SECTION -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">9%の奇跡</div>
+    <div class="ojigi-box">
+      <p>
+        ねこおじさんは基本的におやじギャグを言います。<br>
+        しかし、<span class="ojigi-percent">9%</span>の確率で、なぜかちょっとためになることを言ってきます。<br><br>
+        何が出るかは会議が終わるまでわかりません。<br>
+        おやじギャグを覚悟しつつ、密かに知恵を期待してください。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section style="border-bottom: none;">
+  <div class="wrap">
+    <div class="cta-bottom">
+      <h2>会議を<em>凍らせよう。</em></h2>
+      <p>
+        無料・登録不要。ブラウザで今すぐ使えます。<br>
+        だらだら会議に、ねこおじさんという名の終止符を。
+      </p>
+      <a href="https://absolute-zero-meeting.vercel.app" class="btn-primary">会議を凍らせる</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">nobi<span>-labo</span></a>
+    <div class="footer-copy">© 2026 nobi-labo. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
