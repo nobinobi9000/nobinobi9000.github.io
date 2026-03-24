@@ -23,7 +23,7 @@ export async function getPosts(): Promise<Post[]> {
     filter: {
       and: [
         { property: '公開日', date: { on_or_before: today } },
-        { property: 'ステータス', status: { equals: '公開' } },
+        { property: 'ステータス', status: { equals: '公開済み' } },
       ],
     },
     sorts: [{ property: '公開日', direction: 'descending' }],
