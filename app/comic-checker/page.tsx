@@ -34,6 +34,38 @@ export default function ComicCheckerPage() {
         </div>
       </div>
 
+      {/* SCREENSHOTS */}
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
+            Screenshots
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <div style={{ display: 'flex', gap: '20px', width: 'max-content', padding: '4px 2px' }}>
+              {[
+                { src: '/screenshots/comic-mylist-list.png', label: 'マイリスト・リスト' },
+                { src: '/screenshots/comic-mylist-grid.png', label: 'マイリスト・グリッド' },
+                { src: '/screenshots/comic-newrelease.png', label: '新刊情報' },
+                { src: '/screenshots/comic-search.png', label: '検索' },
+              ].map(s => (
+                <div key={s.src} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+                  <div style={{ width: '200px', background: '#1a1a1a', borderRadius: '32px', border: '2px solid #333', padding: '14px 8px', boxShadow: '0 20px 60px rgba(0,0,0,0.7)' }}>
+                    <div style={{ width: '60px', height: '6px', background: '#2a2a2a', borderRadius: '3px', margin: '0 auto 10px' }} />
+                    <div style={{ width: '100%', borderRadius: '18px', overflow: 'hidden' }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={s.src} alt={s.label} style={{ width: '100%', display: 'block' }} />
+                    </div>
+                    <div style={{ width: '40px', height: '4px', background: '#2a2a2a', borderRadius: '2px', margin: '10px auto 0' }} />
+                  </div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '1px', color: '#666', textAlign: 'center', textTransform: 'uppercase' }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* FEATURES */}
       <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
         <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
