@@ -81,7 +81,7 @@ export default function Home() {
             </div>
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
               <a href="https://absolute-zero-meeting.vercel.app" className="app-cta">今すぐ使う</a>
-              <a href="/nekoojiisan-timer.html" className="app-sub-link">詳細を見る</a>
+              <a href="/nekoojiisan-timer" className="app-sub-link">詳細を見る</a>
             </div>
           </div>
 
