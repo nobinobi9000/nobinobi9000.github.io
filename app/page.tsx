@@ -19,7 +19,7 @@ export default function Home() {
         </div>
 
         <div className="apps">
-          <a href="https://comic.nobi-labo.com" className="app-card live">
+          <div className="app-card live" style={{ cursor: 'default' }}>
             <div className="app-card-top">
               <div className="app-icon">📚</div>
               <span className="app-badge">Live</span>
@@ -37,10 +37,10 @@ export default function Home() {
               <span className="tag">楽天連携</span>
             </div>
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-              <span className="app-cta">今すぐ使う</span>
-              <a href="/comic-checker" className="app-sub-link" onClick={e => e.stopPropagation()}>詳細を見る</a>
+              <a href="https://comic.nobi-labo.com" className="app-cta">今すぐ使う</a>
+              <a href="/comic-checker" className="app-sub-link">詳細を見る</a>
             </div>
-          </a>
+          </div>
 
           <a href="/tax-simulator/" className="app-card live">
             <div className="app-card-top">

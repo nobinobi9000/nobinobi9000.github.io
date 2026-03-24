@@ -1,5 +1,12 @@
 import type { Metadata } from 'next'
+import { Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
+
+const notoSansJP = Noto_Sans_JP({
+  weight: ['400', '700', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: { default: 'nobi-labo | 日々の生活にちょっと便利をプラス', template: '%s | nobi-labo' },
@@ -9,11 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
-      </head>
+    <html lang="ja" className={notoSansJP.className}>
       <body>
         <header>
           <a href="/" className="logo">nobi<span>-labo</span></a>

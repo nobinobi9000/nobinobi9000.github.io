@@ -13,7 +13,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: inherit, -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--black);
   color: var(--white);
   line-height: 1.6;
