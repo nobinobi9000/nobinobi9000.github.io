@@ -32,7 +32,7 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       <div className="post-hero">
         <div className="post-hero-inner">
-          <a href="/blog" className="post-back">← Blog</a>
+          <a href="/?tab=blog" className="post-back">← Blog</a>
           <div className="post-meta">
             {post.publishedAt && (
               <span className="blog-date">{formatDate(post.publishedAt)}</span>

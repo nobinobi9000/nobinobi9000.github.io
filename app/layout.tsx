@@ -20,16 +20,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header>
           <a href="/" className="logo">nobi<span>-labo</span></a>
-          <nav className="header-nav">
-            <a href="/blog">Blog</a>
-          </nav>
         </header>
         {children}
         <footer>
           <div className="footer-inner">
             <a href="/" className="footer-logo">nobi<span>-labo</span></a>
             <div className="footer-links">
-              <a href="/blog">ブログ</a>
               <a href="/privacy/">プライバシーポリシー</a>
             </div>
             <div className="footer-copy">© 2026 nobi-labo. All rights reserved.</div>

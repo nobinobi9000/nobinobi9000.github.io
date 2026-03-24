@@ -136,6 +136,27 @@ header {
 .app-sub-link { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #888; text-decoration: none; }
 .app-sub-link:hover { color: #aaa; }
 
+/* ── TABS ── */
+.tab-nav {
+  display: flex;
+  gap: 1px;
+  background: var(--border);
+  margin-bottom: 32px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 12px;
+  background: var(--panel);
+  border: none;
+  color: var(--muted);
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.tab-btn:hover { color: var(--white); }
+.tab-btn.active { color: var(--orange); background: var(--dark); border-bottom: 2px solid var(--orange); }
+
 /* ── FOOTER ── */
 footer { border-top: 1px solid var(--border); padding: 28px 24px; }
 .footer-inner {
