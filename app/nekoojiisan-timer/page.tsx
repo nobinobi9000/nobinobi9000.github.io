@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import CatSlideshow from './CatSlideshow'
 
 export const metadata: Metadata = {
   title: 'ねこおじさんタイマー - nobi-labo',
@@ -37,6 +38,20 @@ export default function NekoojiisanTimerPage() {
           <a href="https://absolute-zero-meeting.vercel.app" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             会議を凍らせる →
           </a>
+        </div>
+      </div>
+
+      {/* CAT SLIDESHOW */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--panel)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', paddingTop: '48px', marginBottom: '0' }}>
+            Characters
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <CatSlideshow />
+          <p style={{ fontSize: '12px', color: '#555', textAlign: 'center', paddingBottom: '40px', marginTop: '-8px' }}>
+            全12種のねこおじさん ― 5秒ごとにランダム切り替え
+          </p>
         </div>
       </div>
 
