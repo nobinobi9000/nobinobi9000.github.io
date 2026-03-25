@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日本株スクリーナー | nobi-lab</title>
+  <meta name="description" content="東証3,700銘柄を毎営業日自動スキャン。テクニカル指標×スコアリングで上昇シグナルの銘柄をDiscordに配信。無料プランから始められる日本株スクリーニングサービス。">
+  <meta property="og:title" content="日本株スクリーナー | nobi-lab">
+  <meta property="og:description" content="東証3,700銘柄を毎営業日自動スキャン。テクニカル指標×スコアリングで上昇シグナルをDiscordへ配信。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nobi-labo.com/japan-stock-screener.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --green: #10b981;
+      --green-dim: rgba(16,185,129,0.1);
+      --green-border: rgba(16,185,129,0.3);
+      --black: #080808;
+      --dark: #111111;
+      --panel: #161616;
+      --border: #1f1f1f;
+      --muted: #555;
+      --white: #f0f0f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--orange); }
+
+    .breadcrumb {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .breadcrumb::before {
+      content: '/';
+      color: #333;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 72px 24px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 440px; height: 440px;
+      background: var(--green);
+      opacity: 0.04;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid var(--green-border);
+      padding: 4px 12px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 7vw, 48px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 8px;
+    }
+
+    .hero-en {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.9;
+      margin-bottom: 32px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--green);
+      color: #000;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding: 14px 28px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .hero-cta:hover { opacity: 0.85; }
+    .hero-cta::after { content: '→'; font-size: 16px; }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-stat-item {}
+    .hero-stat-num {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--green);
+      letter-spacing: -1px;
+      display: block;
+    }
+    .hero-stat-lbl {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CONCEPT ── */
+    .concept {
+      padding: 72px 24px;
+      max-width: 600px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .concept-body {
+      font-size: 15px;
+      color: #999;
+      line-height: 2;
+    }
+    .concept-body strong { color: var(--white); font-weight: 700; }
+    .concept-body em { color: var(--green); font-style: normal; }
+
+    /* ── PLANS ── */
+    .plans {
+      padding: 72px 24px;
+      max-width: 600px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-top: 8px;
+    }
+
+    .plan-card {
+      background: var(--panel);
+      padding: 28px 24px;
+      position: relative;
+    }
+
+    .plan-card.featured {
+      background: #0d1f17;
+    }
+    .plan-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--green);
+    }
+
+    .plan-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border: 1px solid var(--green-border);
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .plan-badge.free-badge {
+      border-color: rgba(255,255,255,0.15);
+      color: var(--muted);
+    }
+
+    .plan-name {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .plan-price {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--green);
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+    .plan-price.free { color: var(--white); }
+    .plan-price small {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+
+    .plan-note {
+      font-size: 10px;
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 20px;
+      min-height: 14px;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .plan-features li {
+      font-size: 12px;
+      color: #888;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .plan-features li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .plan-features li.off { color: #333; }
+    .plan-features li.off::before { content: '—'; color: #2a2a2a; }
+
+    .plan-coming {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 72px 24px;
+      max-width: 600px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-top: 8px;
+    }
+
+    .feature-item {
+      background: var(--panel);
+      padding: 28px 24px;
+    }
+
+    .feature-icon {
+      font-size: 24px;
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+
+    .feature-title {
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* ── HOW TO USE ── */
+    .howto {
+      padding: 72px 24px;
+      max-width: 600px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .steps {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .step {
+      background: var(--panel);
+      padding: 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--green);
+      letter-spacing: 1px;
+      width: 28px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .step-desc {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* ── INDICATORS ── */
+    .indicators {
+      padding: 72px 24px;
+      max-width: 600px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .indicator-list {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .indicator-item {
+      background: var(--panel);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .indicator-score {
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--green);
+      border: 1px solid var(--green-border);
+      padding: 3px 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+      min-width: 52px;
+      text-align: center;
+    }
+
+    .indicator-name {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .indicator-desc {
+      font-size: 11px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 80px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(16,185,129,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .cta-icon {
+      font-size: 48px;
+      margin-bottom: 24px;
+      line-height: 1;
+    }
+
+    .cta-title {
+      font-size: clamp(22px, 5vw, 34px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .cta-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--green);
+      color: #000;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding: 16px 36px;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .cta-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+    .cta-btn::after { content: '→'; font-size: 18px; }
+
+    .cta-note {
+      margin-top: 16px;
+      font-size: 11px;
+      color: #333;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+    }
+
+    .footer-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--orange); }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 11px;
+      color: #333;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--muted); }
+
+    .footer-copy { font-size: 11px; color: #333; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .plan-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 20px; }
+    }
+
+    @media (min-width: 600px) {
+      .hero { padding: 96px 40px 80px; }
+      .concept, .plans, .features, .howto, .indicators { padding: 80px 40px; }
+      .cta-section { padding: 100px 40px; }
+      footer { padding: 32px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">nobi<span>-lab</span></a>
+  <span class="breadcrumb">日本株スクリーナー</span>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">📊 Stock Screener</div>
+    <h1>日本株スクリーナー</h1>
+    <div class="hero-en">Japan Stock Screener</div>
+    <p class="hero-sub">
+      東証3,700銘柄を毎営業日自動スキャン。<br>
+      8つのテクニカル指標×スコアリングエンジンで<br>
+      上昇シグナルの銘柄を毎日夕方にDiscordへ配信。<br>
+      <strong style="color:#f0f0f0">無料プランから、今日すぐ始められる。</strong>
+    </p>
+    <a href="https://nobi-labo.com/japan-stock-screener/" class="hero-cta" target="_blank">
+      今すぐ使う
+    </a>
+    <div class="hero-stats">
+      <div class="hero-stat-item">
+        <span class="hero-stat-num">3,700+</span>
+        <span class="hero-stat-lbl">スキャン銘柄数</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="hero-stat-num">8</span>
+        <span class="hero-stat-lbl">テクニカル指標</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="hero-stat-num">毎日</span>
+        <span class="hero-stat-lbl">自動更新</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="hero-stat-num">¥0〜</span>
+        <span class="hero-stat-lbl">無料から利用可</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept">
+  <div class="section-label">Concept</div>
+  <p class="concept-body">
+    毎日3,700銘柄を手動でチェックするのは、現実的ではない。<br><br>
+    そこで生まれたのが<em>日本株スクリーナー</em>です。<br>
+    yfinanceから価格・出来高データを自動取得し、<strong>8つのテクニカル指標</strong>を計算。<br>
+    各シグナルを重み付けした<strong>0〜100点のスコア</strong>で全銘柄をランキングします。<br><br>
+    毎営業日夕方、Discordに結果を自動投稿。<br>
+    <em>見るだけでいい。</em>スキャンも計算もすべて自動。
+  </p>
+</section>
+
+<!-- PLANS -->
+<section class="plans">
+  <div class="section-label">Plans</div>
+  <div class="plan-grid">
+
+    <!-- FREE -->
+    <div class="plan-card">
+      <div class="plan-badge free-badge">FREE</div>
+      <div class="plan-name">無償版</div>
+      <div class="plan-price free">¥0</div>
+      <div class="plan-note">&nbsp;</div>
+      <ul class="plan-features">
+        <li>毎日厳選3銘柄を通知</li>
+        <li>中位スコア×多様性戦略で選定</li>
+        <li>Discord #daily-picks チャンネル</li>
+        <li class="off">全銘柄HTMLレポート</li>
+        <li class="off">指標スコア内訳</li>
+        <li class="off">セクター別集計</li>
+      </ul>
+    </div>
+
+    <!-- BASIC -->
+    <div class="plan-card featured">
+      <div class="plan-badge">BASIC — 期間限定無料</div>
+      <div class="plan-name">ベーシック</div>
+      <div class="plan-price">¥980<small> /月</small></div>
+      <div class="plan-note">現在 無料公開中</div>
+      <ul class="plan-features">
+        <li>厳選3銘柄を毎日通知</li>
+        <li>当日分 全銘柄HTMLレポート</li>
+        <li>ソート・検索・フィルター機能</li>
+        <li>全指標スコア内訳（8指標）</li>
+        <li>セクター別集計レポート</li>
+        <li>Discord #full-report + #analysis</li>
+      </ul>
+      <div class="plan-coming">
+        プレミアム（¥1,980/月）は準備中。<br>
+        30日アーカイブ・BT参考統計を予定。
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">Features</div>
+  <div class="feature-grid">
+    <div class="feature-item">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">全自動スキャン</div>
+      <div class="feature-desc">毎営業日夕方に3,700銘柄を自動取得・計算・投稿。手動操作は一切不要。</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🧮</div>
+      <div class="feature-title">スコアリング</div>
+      <div class="feature-desc">8指標を重み付けして0〜100点で評価。直感的に銘柄の強さが分かる。</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📣</div>
+      <div class="feature-title">Discord通知</div>
+      <div class="feature-desc">プランに応じて #daily-picks / #full-report / #analysis に自動投稿。</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-title">HTMLレポート</div>
+      <div class="feature-desc">ソート・検索・セクター別フィルターで気になる銘柄をすぐに見つけられる。</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📂</div>
+      <div class="feature-title">セクター分析</div>
+      <div class="feature-desc">どのセクターに強いシグナルが集中しているか、今日の市場傾向を把握できる。</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🛡</div>
+      <div class="feature-title">リスク区分</div>
+      <div class="feature-desc">銘柄ごとに🟢安定 / 🟡標準 / 🔴冒険の3段階でリスクを自動判定。</div>
+    </div>
+  </div>
+</section>
+
+<!-- INDICATORS -->
+<section class="indicators">
+  <div class="section-label">Indicators — 8つのテクニカル指標</div>
+  <div class="indicator-list">
+    <div class="indicator-item">
+      <div class="indicator-score">15 pt</div>
+      <div>
+        <div class="indicator-name">MA200 上昇トレンド</div>
+        <div class="indicator-desc">200日移動平均線が上向き。長期的な上昇トレンドの確認。</div>
+      </div>
+    </div>
+    <div class="indicator-item">
+      <div class="indicator-score">20 pt</div>
+      <div>
+        <div class="indicator-name">一目均衡表（三役好転）</div>
+        <div class="indicator-desc">転換線・基準線・雲の3条件が揃う強力な買いシグナル。</div>
+      </div>
+    </div>
+    <div class="indicator-item">
+      <div class="indicator-score">15 pt</div>
+      <div>
+        <div class="indicator-name">ボリンジャーバンド</div>
+        <div class="indicator-desc">下限タッチからの反転、または上限ブレイクアウトを検出。</div>
+      </div>
+    </div>
+    <div class="indicator-item">
+      <div class="indicator-score">10 pt</div>
+      <div>
+        <div class="indicator-name">ゴールデンクロス</div>
+        <div class="indicator-desc">短期移動平均が長期を上抜ける中期買いシグナル。</div>
+      </div>
+    </div>
+    <div class="indicator-item">
+      <div class="indicator-score">10 pt</div>
+      <div>
+        <div class="indicator-name">底値クロス</div>
+        <div class="indicator-desc">直近安値がMA200を下回った後に株価が回復するパターン。</div>
+      </div>
+    </div>
+    <div class="indicator-item">
+      <div class="indicator-score">10 pt</div>
+      <div>
+        <div class="indicator-name">OBV 上昇トレンド</div>
+        <div class="indicator-desc">出来高ベースの資金流入指標。価格上昇の持続性を確認。</div>
+      </div>
+    </div>
+    <div class="indicator-item">
+      <div class="indicator-score">10 pt</div>
+      <div>
+        <div class="indicator-name">出来高急増</div>
+        <div class="indicator-desc">30日平均比1.5倍以上の出来高急増。機関投資家の動向を示唆。</div>
+      </div>
+    </div>
+    <div class="indicator-item">
+      <div class="indicator-score">10 pt</div>
+      <div>
+        <div class="indicator-name">信用倍率</div>
+        <div class="indicator-desc">信用売り残が多い銘柄の踏み上げ（ショートスクイーズ）可能性。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="howto">
+  <div class="section-label">How to Use</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div>
+        <div class="step-title">サービスページへアクセス</div>
+        <div class="step-desc">「今すぐ使う」から <strong style="color:#f0f0f0">nobi-labo.com/japan-stock-screener/</strong> へ。プランの詳細と最新レポートを確認できます。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div>
+        <div class="step-title">Discord に参加する（無料）</div>
+        <div class="step-desc">招待リンクまたはQRコードからDiscordサーバーに参加。メールアドレスだけで1分で登録できます。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div>
+        <div class="step-title">毎日夕方に通知が届く</div>
+        <div class="step-desc">#daily-picks に厳選3銘柄が自動投稿されます。ベーシックプランでは全銘柄レポートのリンクも届きます。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div>
+        <div class="step-title">レポートで詳細を確認（Basicのみ）</div>
+        <div class="step-desc">HTMLレポートで全銘柄をソート・検索。セクター分析・指標内訳で今日の市場傾向を把握できます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-icon">📊</div>
+    <div class="cta-title">今日から始める</div>
+    <p class="cta-sub">
+      無料プランは登録不要・即利用可能。<br>
+      ベーシックプランは現在 期間限定で無料公開中。
+    </p>
+    <a href="https://nobi-labo.com/japan-stock-screener/" class="cta-btn" target="_blank">
+      今すぐ使う
+    </a>
+    <p class="cta-note">※ 本サービスは投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">nobi<span>-labo</span></a>
+    <div class="footer-links">
+      <a href="/privacy/">プライバシーポリシー</a>
+    </div>
+    <span class="footer-copy">© 2026 nobi-labo</span>
+  </div>
+</footer>
+
+</body>
+</html>

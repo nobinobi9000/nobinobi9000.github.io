@@ -42,10 +42,10 @@ const APPS = [
   {
     icon: '📊',
     name: '日本株スクリーナー',
-    desc: 'テクニカル指標×AIスコアリングで3,700銘柄を毎日自動スキャン。\n上昇シグナル銘柄をDiscordへ毎営業日配信。',
-    tags: ['無料', 'Discord連携', 'テクニカル分析', '毎日更新'],
+    desc: 'テクニカル指標×AIスコアリングで3,700銘柄を毎日自動スキャン。\n上昇シグナル銘柄をDiscordへ毎日夕方配信。',
+    tags: ['無料', 'Discord連携', 'テクニカル分析', '毎日夕方'],
     ctaUrl: '/japan-stock-screener/',
-    detailUrl: '/japan-stock-screener/',
+    detailUrl: '/japan-stock-screener.html',
   },
 ]
 
