@@ -1,0 +1,22 @@
+<svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="110" height="110" rx="18" fill="#111111"/>
+
+  <!-- nobi- : 白 -->
+  <text x="55" y="52"
+    text-anchor="middle"
+    font-size="26"
+    font-weight="500"
+    fill="#FFFFFF"
+    letter-spacing="-0.5"
+    font-family="'Helvetica Neue', 'Arial', sans-serif">nobi-</text>
+
+  <!-- labo : オレンジ -->
+  <text x="55" y="84"
+    text-anchor="middle"
+    font-size="26"
+    font-weight="500"
+    fill="#FF6B35"
+    letter-spacing="-0.5"
+    font-family="'Helvetica Neue', 'Arial', sans-serif">labo</text>
+</svg>

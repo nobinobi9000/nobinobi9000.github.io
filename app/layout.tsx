@@ -12,11 +12,18 @@ export const metadata: Metadata = {
   title: { default: 'nobi-labo | 日々の生活にちょっと便利をプラス', template: '%s | nobi-labo' },
   description: '日々の生活にちょっと便利をプラス。nobi-laboの個人開発Webアプリ・PWA一覧。',
   metadataBase: new URL('https://nobi-labo.com'),
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja" className={notoSansJP.className}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body>
         <header>
           <a href="/" className="logo">nobi<span>-labo</span></a>
