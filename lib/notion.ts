@@ -43,13 +43,17 @@ export async function getPost(id: string): Promise<Post | null> {
   }
 }
 
-export async function getBlocks(pageId: string): Promise<BlockObjectResponse[]> {
-  const blocks: BlockObjectResponse[] = []
+export type BlockWithChildren = BlockObjectResponse & {
+  children?: BlockWithChildren[]
+}
+
+async function fetchChildren(blockId: string): Promise<BlockWithChildren[]> {
+  const blocks: BlockWithChildren[] = []
   let cursor: string | undefined
 
   do {
     const response = await notion.blocks.children.list({
-      block_id: pageId,
+      block_id: blockId,
       start_cursor: cursor,
       page_size: 100,
     })
@@ -59,7 +63,20 @@ export async function getBlocks(pageId: string): Promise<BlockObjectResponse[]> 
     cursor = response.next_cursor ?? undefined
   } while (cursor)
 
+  // Recursively fetch children for nested blocks (tables, columns, toggles, etc.)
+  await Promise.all(
+    blocks.map(async (block) => {
+      if (block.has_children) {
+        block.children = await fetchChildren(block.id)
+      }
+    })
+  )
+
   return blocks
+}
+
+export async function getBlocks(pageId: string): Promise<BlockWithChildren[]> {
+  return fetchChildren(pageId)
 }
 
 function pageToPost(page: PageObjectResponse): Post {

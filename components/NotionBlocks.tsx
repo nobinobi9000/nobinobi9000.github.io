@@ -1,6 +1,7 @@
-import type { BlockObjectResponse, RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
+import type { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
+import type { BlockWithChildren } from '@/lib/notion'
 
-type Props = { blocks: BlockObjectResponse[] }
+type Props = { blocks: BlockWithChildren[] }
 
 export default function NotionBlocks({ blocks }: Props) {
   const elements: React.ReactNode[] = []
@@ -11,7 +12,7 @@ export default function NotionBlocks({ blocks }: Props) {
 
     // Group list items
     if (block.type === 'bulleted_list_item') {
-      const items: BlockObjectResponse[] = []
+      const items: BlockWithChildren[] = []
       while (i < blocks.length && blocks[i].type === 'bulleted_list_item') {
         items.push(blocks[i])
         i++
@@ -29,7 +30,7 @@ export default function NotionBlocks({ blocks }: Props) {
     }
 
     if (block.type === 'numbered_list_item') {
-      const items: BlockObjectResponse[] = []
+      const items: BlockWithChildren[] = []
       while (i < blocks.length && blocks[i].type === 'numbered_list_item') {
         items.push(blocks[i])
         i++
@@ -53,7 +54,7 @@ export default function NotionBlocks({ blocks }: Props) {
   return <>{elements}</>
 }
 
-function Block({ block }: { block: BlockObjectResponse }) {
+function Block({ block }: { block: BlockWithChildren }) {
   switch (block.type) {
     case 'paragraph':
       return (
@@ -130,6 +131,53 @@ function Block({ block }: { block: BlockObjectResponse }) {
           </a>
         </p>
       )
+    case 'table': {
+      const rows = block.children ?? []
+      const hasColHeader = block.table.has_column_header
+      const hasRowHeader = block.table.has_row_header
+      return (
+        <div className="table-wrapper">
+          <table>
+            {rows.map((row, ri) => {
+              if (row.type !== 'table_row') return null
+              const cells = (row as any).table_row.cells as RichTextItemResponse[][]
+              if (hasColHeader && ri === 0) {
+                return (
+                  <thead key={row.id}>
+                    <tr>
+                      {cells.map((cell, ci) => (
+                        <th key={ci}><RichText texts={cell} /></th>
+                      ))}
+                    </tr>
+                  </thead>
+                )
+              }
+              return (
+                <tr key={row.id}>
+                  {cells.map((cell, ci) => (
+                    hasRowHeader && ci === 0
+                      ? <th key={ci} scope="row"><RichText texts={cell} /></th>
+                      : <td key={ci}><RichText texts={cell} /></td>
+                  ))}
+                </tr>
+              )
+            })}
+          </table>
+        </div>
+      )
+    }
+    case 'column_list': {
+      const columns = block.children ?? []
+      return (
+        <div className="column-list">
+          {columns.map((col) => (
+            <div key={col.id} className="column">
+              {col.children && <NotionBlocks blocks={col.children} />}
+            </div>
+          ))}
+        </div>
+      )
+    }
     default:
       return null
   }

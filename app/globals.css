@@ -238,6 +238,13 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; }
 .prose .callout { background: #1c1c1c; border: 1px solid var(--border); border-left: 3px solid var(--orange); padding: 16px 20px; margin: 1.5em 0; border-radius: 0 4px 4px 0; display: flex; gap: 12px; }
 .prose .callout-icon { font-size: 20px; flex-shrink: 0; }
 .prose .callout-text { flex: 1; }
+.prose .table-wrapper { overflow-x: auto; margin: 1.5em 0; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.prose th, .prose td { padding: 10px 14px; text-align: left; border: 1px solid var(--border); }
+.prose thead th { background: #1c1c1c; color: var(--white); font-weight: 700; }
+.prose tr:nth-child(even) { background: #141414; }
+.prose .column-list { display: flex; gap: 24px; margin: 1.5em 0; align-items: flex-start; }
+.prose .column { flex: 1; min-width: 0; }
 
 /* ── PRIVACY ── */
 .privacy-content { max-width: 640px; margin: 0 auto; padding: 48px 24px 80px; }
