@@ -1,0 +1,10 @@
+{
+  "name": "nobi-labo-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "twitter-api-v2": "^1.18.0"
+  }
+}
