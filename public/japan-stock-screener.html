@@ -585,7 +585,7 @@
     <div class="hero-en">Japan Stock Screener</div>
     <p class="hero-sub">
       東証3,700銘柄を毎営業日自動スキャン。<br>
-      8つのテクニカル指標×スコアリングエンジンで<br>
+      9つのスコア指標×スコアリングエンジンで<br>
       上昇シグナルの銘柄を毎日夕方にDiscordへ配信。<br>
       <strong style="color:#f0f0f0">無料プランから、今日すぐ始められる。</strong>
     </p>
@@ -619,7 +619,7 @@
   <p class="concept-body">
     毎日3,700銘柄を手動でチェックするのは、現実的ではない。<br><br>
     そこで生まれたのが<em>日本株スクリーナー</em>です。<br>
-    yfinanceから価格・出来高データを自動取得し、<strong>8つのテクニカル指標</strong>を計算。<br>
+    yfinanceから価格・出来高データを自動取得し、<strong>9つのスコア指標</strong>を計算。<br>
     各シグナルを重み付けした<strong>0〜100点のスコア</strong>で全銘柄をランキングします。<br><br>
     毎営業日夕方、Discordに結果を自動投稿。<br>
     <em>見るだけでいい。</em>スキャンも計算もすべて自動。
@@ -657,7 +657,7 @@
         <li>厳選3銘柄を毎日通知</li>
         <li>当日分 全銘柄HTMLレポート</li>
         <li>ソート・検索・フィルター機能</li>
-        <li>全指標スコア内訳（8指標）</li>
+        <li>全指標スコア内訳（9項目）</li>
         <li>セクター別集計レポート</li>
         <li>Discord #full-report + #analysis</li>
       </ul>
@@ -682,7 +682,7 @@
     <div class="feature-item">
       <div class="feature-icon">🧮</div>
       <div class="feature-title">スコアリング</div>
-      <div class="feature-desc">8指標を重み付けして0〜100点で評価。直感的に銘柄の強さが分かる。</div>
+      <div class="feature-desc">9項目を重み付けして0〜100点で評価。直感的に銘柄の強さが分かる。</div>
     </div>
     <div class="feature-item">
       <div class="feature-icon">📣</div>
@@ -709,64 +709,80 @@
 
 <!-- INDICATORS -->
 <section class="indicators">
-  <div class="section-label">Indicators — 8つのテクニカル指標</div>
+  <div class="section-label">Indicators — 9つのスコア指標（合計100点）</div>
   <div class="indicator-list">
+
     <div class="indicator-item">
       <div class="indicator-score">15 pt</div>
       <div>
         <div class="indicator-name">MA200 上昇トレンド</div>
-        <div class="indicator-desc">200日移動平均線が上向き。長期的な上昇トレンドの確認。</div>
+        <div class="indicator-desc">株価が200日移動平均線を上回り、かつMA200が直近20日間で上向きであることを確認。単なる「線の上」ではなく、トレンドの継続性まで厳格に判定します。</div>
       </div>
     </div>
-    <div class="indicator-item">
-      <div class="indicator-score">20 pt</div>
+
+    <div class="indicator-item" style="border-left:3px solid #4e9af1;padding-left:12px">
+      <div class="indicator-score">10 pt</div>
       <div>
-        <div class="indicator-name">一目均衡表（三役好転）</div>
-        <div class="indicator-desc">転換線・基準線・雲の3条件が揃う強力な買いシグナル。</div>
+        <div class="indicator-name">一目均衡表 ① 雲の上</div>
+        <div class="indicator-desc">株価が一目均衡表の「雲（抵抗帯）」の上に位置する状態。中長期的な買い優勢を示す基礎条件。この段階で10pt。</div>
       </div>
     </div>
+    <div class="indicator-item" style="border-left:3px solid #4e9af1;padding-left:12px;margin-top:-8px">
+      <div class="indicator-score" style="font-size:11px">+10 pt</div>
+      <div>
+        <div class="indicator-name">一目均衡表 ② 三役好転</div>
+        <div class="indicator-desc">転換線が基準線を上抜け、遅行線が株価を上抜けた状態。①と合わせ3条件が揃う強力なシグナル。①+②で最大<strong>20pt</strong>を獲得。</div>
+      </div>
+    </div>
+
     <div class="indicator-item">
       <div class="indicator-score">15 pt</div>
       <div>
         <div class="indicator-name">ボリンジャーバンド</div>
-        <div class="indicator-desc">下限タッチからの反転、または上限ブレイクアウトを検出。</div>
+        <div class="indicator-desc">±2σ下限への接触後の反転（BB反発）または+2σ上抜け（BBブレイク）を検出。過売り反転と上昇勢いの両面をカバー。</div>
       </div>
     </div>
+
     <div class="indicator-item">
       <div class="indicator-score">10 pt</div>
       <div>
         <div class="indicator-name">ゴールデンクロス</div>
-        <div class="indicator-desc">短期移動平均が長期を上抜ける中期買いシグナル。</div>
+        <div class="indicator-desc">25日移動平均線が75日移動平均線を上抜けた状態。短・中期トレンドの転換を示す中期買いシグナル。</div>
       </div>
     </div>
+
     <div class="indicator-item">
       <div class="indicator-score">10 pt</div>
       <div>
         <div class="indicator-name">底値クロス</div>
-        <div class="indicator-desc">直近安値がMA200を下回った後に株価が回復するパターン。</div>
+        <div class="indicator-desc">直近の安値がMA200水準まで押した後に株価がMA200を上回った状態。大底形成後の反転を早期に捉えます。</div>
       </div>
     </div>
+
     <div class="indicator-item">
       <div class="indicator-score">10 pt</div>
       <div>
         <div class="indicator-name">OBV 上昇トレンド</div>
-        <div class="indicator-desc">出来高ベースの資金流入指標。価格上昇の持続性を確認。</div>
+        <div class="indicator-desc">On Balance Volume（出来高累積指標）が上昇トレンド。価格上昇を出来高が支持しているかを確認し、上昇の持続性を判定。</div>
       </div>
     </div>
+
     <div class="indicator-item">
       <div class="indicator-score">10 pt</div>
       <div>
         <div class="indicator-name">出来高急増</div>
-        <div class="indicator-desc">30日平均比1.5倍以上の出来高急増。機関投資家の動向を示唆。</div>
+        <div class="indicator-desc">直近出来高が30日平均の1.5倍以上。機関投資家など大口の動向を示唆する重要シグナル。相場の転換点でよく発生します。</div>
       </div>
     </div>
+
     <div class="indicator-item">
       <div class="indicator-score">10 pt</div>
       <div>
-        <div class="indicator-name">信用倍率</div>
-        <div class="indicator-desc">信用売り残が多い銘柄の踏み上げ（ショートスクイーズ）可能性。</div>
+        <div class="indicator-name">PBR 割安</div>
+        <div class="indicator-desc">株価純資産倍率（PBR）が1.0倍未満。企業の解散価値以下で取引されている割安銘柄を検出。東証の資本効率改善要請により注目度が高まる指標。</div>
       </div>
     </div>
+
   </div>
 </section>
 
