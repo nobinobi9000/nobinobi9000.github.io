@@ -47,6 +47,7 @@ export default function ComicCheckerPage() {
                 { src: '/screenshots/comic-mylist-list.png', label: 'マイリスト・リスト' },
                 { src: '/screenshots/comic-mylist-grid.png', label: 'マイリスト・グリッド' },
                 { src: '/screenshots/comic-newrelease.png', label: '新刊情報' },
+                { src: '/screenshots/comic-calendar.png', label: '新刊カレンダー' },
                 { src: '/screenshots/comic-search.png', label: '検索' },
               ].map(s => (
                 <div key={s.src} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
