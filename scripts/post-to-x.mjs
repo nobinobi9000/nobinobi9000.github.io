@@ -148,6 +148,10 @@ async function run() {
       console.log(`✅ Notion更新完了`)
     } catch (err) {
       console.error(`❌ 投稿失敗: ${err.message}`)
+      // X API の詳細エラーを出力（原因調査用）
+      if (err.code) console.error(`  HTTPステータス: ${err.code}`)
+      if (err.errors) console.error(`  APIエラー詳細: ${JSON.stringify(err.errors, null, 2)}`)
+      if (err.data) console.error(`  レスポンス: ${JSON.stringify(err.data, null, 2)}`)
       // 1件失敗しても次の記事は処理を続ける
     }
 
