@@ -47,6 +47,14 @@ const APPS = [
     ctaUrl: '/japan-stock-screener/',
     detailUrl: '/japan-stock-screener.html',
   },
+  {
+    icon: '📒',
+    name: 'Kabu Note（カブノート）',
+    desc: '複数証券会社の保有株を一元管理するポートフォリオダッシュボード。\n証券コード・株数・取得単価を登録するだけで損益・評価額を自動計算。\n平日16時に株価を自動更新。',
+    tags: ['無料', '日本株', '複数口座対応', '損益管理'],
+    ctaUrl: 'https://kabu.nobi-labo.com',
+    detailUrl: '/kabu-note',
+  },
 ]
 
 export default function HomeWithTabs({ posts }: { posts: Post[] }) {
