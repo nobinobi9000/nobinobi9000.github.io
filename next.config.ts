@@ -5,7 +5,8 @@ const config: NextConfig = {
     return [
       { source: '/comic-checker.html', destination: '/comic-checker', permanent: true },
       { source: '/nekoojiisan-timer.html', destination: '/nekoojiisan-timer', permanent: true },
-      { source: '/japan-stock-screener', destination: '/japan-stock-screener.html', permanent: false },
+      { source: '/japan-stock-screener', destination: 'https://nobinobi9000.github.io/japan-stock-screener/', permanent: false },
+      { source: '/japan-stock-screener/', destination: 'https://nobinobi9000.github.io/japan-stock-screener/', permanent: false },
       { source: '/privacy', destination: '/privacy/', permanent: true },
     ]
   },
