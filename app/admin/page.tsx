@@ -2,6 +2,8 @@ import { Client } from '@notionhq/client'
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import AdminClient from './AdminClient'
 
+export const dynamic = 'force-dynamic'
+
 const BASE_URL = 'https://nobi-labo.com'
 
 type UnpostedArticle = {
