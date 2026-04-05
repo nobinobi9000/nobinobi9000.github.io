@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 const SCREENSHOTS = [
   { src: '/screenshots/questlog/Top.png',    label: '冒険の地図' },
-  { src: '/screenshots/questlog/Tsumi.png',  label: '積みゲー一覧' },
+  { src: '/screenshots/questlog/tsumi.png',  label: '積みゲー一覧' },
   { src: '/screenshots/questlog/new.png',    label: '新作・予約情報' },
   { src: '/screenshots/questlog/tokei.png',  label: '冒険統計' },
   { src: '/screenshots/questlog/dendo.png',  label: '殿堂' },
