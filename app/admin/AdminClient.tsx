@@ -62,7 +62,7 @@ export default function AdminClient({ article }: { article: Article }) {
             <span style={{
               width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '11px', fontWeight: 'bold', flexShrink: 0,
-              background: step === 'step1done' || step === 'done' ? '#16a34a' : '#000',
+              background: step === 'step1done' ? '#16a34a' : '#000',
               color: '#fff',
             }}>
               {step === 'step1done' ? '✓' : '1'}
