@@ -13,9 +13,10 @@ type UnpostedArticle = {
   category: string | null
   tags: string[]
   tweetText: string
+  threadText: string
 }
 
-function generateTweet(title: string, url: string, category: string | null, tags: string[]): string {
+function generateTweet(title: string, category: string | null, tags: string[]): string {
   const isComic =
     category === 'マンガ紹介' ||
     tags.some((t) => ['マンガ', '漫画', 'comic', 'comicchecker'].includes(t.toLowerCase()))
@@ -25,14 +26,22 @@ function generateTweet(title: string, url: string, category: string | null, tags
     tags.some((t) => t.includes('AI') || t.includes('開発') || t.includes('vibe'))
 
   if (isComic) {
-    return `📚 新記事を公開しました\n\n${title}\n\ncomic-checkerで新刊通知を設定するのがおすすめです📲\n\n👉 ${url}\n\n#マンガ #漫画好きと繋がりたい #comicchecker`
+    return `📚 新記事を公開しました\n\n${title}\n\ncomic-checkerで新刊通知を設定するのがおすすめです📲\n\n#マンガ #漫画好きと繋がりたい #comicchecker`
   }
 
   if (isAppDev) {
-    return `📝 新記事を公開しました\n\n${title}\n\n非エンジニアがAIを使って実際にアプリを作った記録です。\n同じように開発に挑戦したい方の参考になれば！\n\n👉 ${url}\n\n#個人開発 #AIでアプリ開発 #ノーコード #vibecoding`
+    return `📝 新記事を公開しました\n\n${title}\n\n非エンジニアがAIを使って実際にアプリを作った記録です。\n同じように開発に挑戦したい方の参考になれば！\n\n#個人開発 #AIでアプリ開発 #ノーコード #vibecoding`
   }
 
-  return `📣 新記事を公開しました\n\n${title}\n\n👉 ${url}\n\n#nobi_labo`
+  return `📣 新記事を公開しました\n\n${title}\n\n#nobi_labo`
+}
+
+function generateThread(url: string, category: string | null): string {
+  const isComic = category === 'マンガ紹介'
+  if (isComic) {
+    return `記事はこちら👇\n${url}\n\n新刊通知はcomic-checkerで→ https://comic.nobi-labo.com`
+  }
+  return `記事はこちら👇\n${url}`
 }
 
 async function getUnpostedArticles(): Promise<UnpostedArticle[]> {
@@ -72,7 +81,8 @@ async function getUnpostedArticles(): Promise<UnpostedArticle[]> {
         url,
         category,
         tags,
-        tweetText: generateTweet(title, url, category, tags),
+        tweetText: generateTweet(title, category, tags),
+        threadText: generateThread(url, category),
       }
     })
 }
