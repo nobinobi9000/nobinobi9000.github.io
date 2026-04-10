@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import InstallGuide from '@/components/InstallGuide'
 
 export const metadata: Metadata = {
   title: 'QUESTLOG | 積みゲー冒険ログ',
-  description: '積みゲーを冒険の地図として管理するゲームバックログアプリ。新作・予約情報、冒険統計、ステータス管理。無料・PWA対応。',
+  description: '積みゲーを冒険の地図として管理するゲームバックログアプリ。新作・予約情報、冒険統計、ステータス管理。無料・スマホのホーム画面に追加して使えます。',
 }
 
 const SCREENSHOTS = [
@@ -42,8 +43,8 @@ const FEATURES = [
   },
   {
     num: '06',
-    title: 'PWA対応',
-    desc: 'スマホのホーム画面に追加してアプリとして使える。インストール不要でいつでも起動。Push通知で新作情報もお届け。',
+    title: 'ホーム画面に追加して使える',
+    desc: 'スマホのホーム画面に追加してアプリのように使える。インストール不要でいつでも起動。Push通知で新作情報もお届け。',
   },
 ]
 
@@ -66,8 +67,8 @@ const STEPS = [
   },
   {
     n: 4,
-    title: 'ホーム画面に追加してPWAとして使う',
-    desc: 'ブラウザの「ホーム画面に追加」でアプリとしてインストール。通知もONにすれば新作・予約情報が届く。',
+    title: 'ホーム画面に追加してアプリとして使う',
+    desc: 'ブラウザの「ホーム画面に追加」でアプリのように起動できる。通知もONにすれば新作・予約情報が届く。',
   },
 ]
 
@@ -90,7 +91,7 @@ export default function QuestlogPage() {
             Backlog → Playing → Cleared で自分だけの冒険記録を残そう。
           </p>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '32px' }}>
-            {['無料', 'PWA', 'Push通知', 'ゲーム管理', '新作情報', '予約リンク'].map((b, i) => (
+            {['無料', 'ホーム追加OK', 'Push通知', 'ゲーム管理', '新作情報', '予約リンク'].map((b, i) => (
               <span key={b} style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', padding: '4px 10px', border: `1px solid ${i < 3 ? 'var(--orange)' : '#2a2a2a'}`, color: i < 3 ? 'var(--orange)' : '#666' }}>{b}</span>
             ))}
           </div>
@@ -194,6 +195,8 @@ export default function QuestlogPage() {
           </div>
         </div>
       </div>
+
+      <InstallGuide />
 
       {/* CTA BOTTOM */}
       <div style={{ borderTop: '1px solid var(--border)' }}>

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import InstallGuide from '@/components/InstallGuide'
 
 export const metadata: Metadata = {
   title: 'comic-checker | マンガ新刊チェッカー',
-  description: 'マンガの新刊を自動チェック。発売14日前・7日前・当日にPush通知でお知らせ。無料・PWA対応。',
+  description: 'マンガの新刊を自動チェック。発売14日前・7日前・当日にPush通知でお知らせ。無料・スマホのホーム画面に追加して使えます。',
 }
 
 export default function ComicCheckerPage() {
@@ -24,7 +25,7 @@ export default function ComicCheckerPage() {
             発売前にPush通知でお知らせするので、予約も買い忘れもなし。
           </p>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '32px' }}>
-            {['無料', 'PWA', 'Push通知', '登録制', '楽天連携', 'Amazon連携'].map((b, i) => (
+            {['無料', 'ホーム追加OK', 'Push通知', '登録制', '楽天連携', 'Amazon連携'].map((b, i) => (
               <span key={b} style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', padding: '4px 10px', border: `1px solid ${i < 3 ? 'var(--orange)' : '#2a2a2a'}`, color: i < 3 ? 'var(--orange)' : '#666' }}>{b}</span>
             ))}
           </div>
@@ -118,6 +119,8 @@ export default function ComicCheckerPage() {
           </div>
         </div>
       </div>
+
+      <InstallGuide />
 
       {/* CTA BOTTOM */}
       <div style={{ borderTop: '1px solid var(--border)' }}>

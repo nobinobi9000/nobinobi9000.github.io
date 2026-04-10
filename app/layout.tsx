@@ -11,7 +11,7 @@ const notoSansJP = Noto_Sans_JP({
 
 export const metadata: Metadata = {
   title: { default: 'nobi-labo | 日々の生活にちょっと便利をプラス', template: '%s | nobi-labo' },
-  description: '日々の生活にちょっと便利をプラス。nobi-laboの個人開発Webアプリ・PWA一覧。',
+  description: '日々の生活にちょっと便利をプラス。nobi-laboの個人開発Webアプリ一覧。',
   metadataBase: new URL('https://nobi-labo.com'),
   icons: {
     icon: '/favicon.svg',

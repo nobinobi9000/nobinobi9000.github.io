@@ -14,7 +14,7 @@ export default async function Home() {
           <h1>日々の生活に<br /><em>ちょっと便利</em>を<br />プラス。</h1>
           <p className="hero-sub">
             日常の小さな不便を解消する、<br />
-            個人開発のWebアプリ・PWAを公開しています。
+            個人開発のWebアプリを公開しています。
           </p>
         </div>
       </section>

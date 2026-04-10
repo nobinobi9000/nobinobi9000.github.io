@@ -19,7 +19,7 @@ const APPS = [
     icon: '📚',
     name: 'comic-checker',
     desc: 'マンガの新刊を自動チェック。\n発売14日前・7日前・当日にPush通知でお知らせ。\nスマホのホーム画面に追加してすぐ使える。',
-    tags: ['PWA', '無料', 'Push通知', '楽天連携'],
+    tags: ['ホーム追加OK', '無料', 'Push通知', '楽天連携'],
     ctaUrl: 'https://comic.nobi-labo.com',
     detailUrl: '/comic-checker',
   },
@@ -36,7 +36,7 @@ const APPS = [
     name: 'ねこおじさんタイマー',
     desc: '会議を凍らせる、愛すべきおやじ。\nカウントダウン終了後、ねこおじさんがAI生成おやじギャグで締める会議タイマー。',
     tags: ['会議タイマー', 'おやじギャグ', 'AI生成', '無料'],
-    ctaUrl: 'https://absolute-zero-meeting.vercel.app',
+    ctaUrl: '/meeting-timer',
     detailUrl: '/nekoojiisan-timer',
   },
   {
@@ -48,12 +48,28 @@ const APPS = [
     detailUrl: '/japan-stock-screener.html',
   },
   {
+    icon: '🗺️',
+    name: 'QUESTLOG',
+    desc: '積みゲーを冒険の地図として前向きに管理するゲームバックログアプリ。\nBacklog→Playing→Clearedでプレイ状況を記録。\nPush通知で新作リリース情報もお届け。',
+    tags: ['ホーム追加OK', '無料', 'Push通知', 'ゲーム管理'],
+    ctaUrl: 'https://gamelog.nobi-labo.com',
+    detailUrl: '/questlog',
+  },
+  {
     icon: '📒',
     name: 'Kabu Note（カブノート）',
     desc: '複数証券会社の保有株を一元管理するポートフォリオダッシュボード。\n証券コード・株数・取得単価を登録するだけで損益・評価額を自動計算。\n平日16時に株価を自動更新。',
     tags: ['無料', '日本株', '複数口座対応', '損益管理'],
     ctaUrl: 'https://kabu.nobi-labo.com',
     detailUrl: '/kabu-note',
+  },
+  {
+    icon: '🌱',
+    name: 'めばえ',
+    desc: '毎日の習慣にちいさな新習慣を積み上げる。\nアンカー習慣の直後にスタック習慣を設定するだけ。\n継続を見える化するミニマルな習慣トラッカー。',
+    tags: ['ホーム追加OK', '無料', 'Push通知', '習慣形成'],
+    ctaUrl: 'https://mebae.nobi-labo.com',
+    detailUrl: '/mebae',
   },
 ]
 
