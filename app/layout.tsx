@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 const notoSansJP = Noto_Sans_JP({
@@ -23,17 +24,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ja" className={notoSansJP.className}>
       <head>
         <link rel="manifest" href="/manifest.json" />
+        {/* Google AdSense */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3281505059279597" crossOrigin="anonymous"></script>
       </head>
       <body>
         <header>
           <a href="/" className="logo">nobi<span>-labo</span></a>
         </header>
         {children}
+        <Analytics />
         <footer>
           <div className="footer-inner">
             <a href="/" className="footer-logo">nobi<span>-labo</span></a>
             <div className="footer-links">
-              <a href="/privacy/">プライバシーポリシー</a>
+              <a href="/privacy">プライバシーポリシー</a>
               <a href="/admin/login" style={{ color: '#555', fontSize: '11px' }}>管理</a>
             </div>
             <div className="footer-copy">© 2026 nobi-labo. All rights reserved.</div>
