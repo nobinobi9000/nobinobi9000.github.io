@@ -275,15 +275,51 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; }
 .feature-card {
   display: flex;
   gap: 40px;
-  align-items: flex-start;
+  align-items: center;
   background: var(--panel);
   border: 1px solid var(--border);
   border-left: 4px solid var(--orange);
   padding: 40px;
   margin-bottom: 32px;
 }
-.feature-card-icon { font-size: 56px; line-height: 1; flex-shrink: 0; }
 .feature-card-body { flex: 1; min-width: 0; }
+.feature-phone {
+  flex-shrink: 0;
+  width: 140px;
+  height: 260px;
+  border: 3px solid #3a3a3a;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  background: #111;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), inset 0 0 0 1px #222;
+}
+.feature-phone-notch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 4px;
+  background: #3a3a3a;
+  border-radius: 2px;
+  z-index: 2;
+}
+.feature-phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.feature-phone-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 52px;
+  background: linear-gradient(160deg, #1e1e1e 0%, #2a2a2a 100%);
+}
 .feature-card-category {
   display: block;
   font-size: 10px; font-weight: 700; letter-spacing: 3px;
@@ -306,30 +342,30 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; }
 }
 .feature-cta:hover { opacity: 0.85; }
 
-/* ── カルーセル（PC） ── */
-.carousel-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
-  padding-bottom: 8px;
-}
-.carousel-track { display: flex; min-width: max-content; }
-.carousel-group { display: flex; flex-direction: column; margin-right: 32px; }
-.carousel-group:last-child { margin-right: 0; }
+/* ── カルーセル（PC・Netflix風） ── */
+.carousel-rows { display: flex; flex-direction: column; gap: 28px; }
+.carousel-row {}
 .category-label {
   font-size: 10px; font-weight: 700; letter-spacing: 3px;
   text-transform: uppercase; color: var(--orange); margin-bottom: 10px; padding-left: 2px;
 }
-.carousel-cards-row { display: flex; gap: 1px; background: var(--border); }
+.carousel-row-track {
+  display: flex;
+  gap: 1px;
+  overflow-x: auto;
+  background: var(--border);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  padding-bottom: 2px;
+}
 .carousel-card {
-  width: 240px; background: var(--panel); padding: 20px 18px;
+  width: 220px; background: var(--panel); padding: 20px 18px;
   display: flex; flex-direction: column;
   border-left: 3px solid var(--orange);
   transition: background 0.15s; flex-shrink: 0;
 }
 .carousel-card:hover { background: #1a1a1a; }
-.carousel-card.coming { border-left-color: var(--border); opacity: 0.5; }
 .carousel-card-top {
   display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px;
 }
@@ -343,6 +379,21 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; }
   text-transform: uppercase; color: var(--orange); text-decoration: none;
 }
 .carousel-cta:hover { text-decoration: underline; }
+
+/* ── Next App（PC最下段） ── */
+.next-app-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border: 1px dashed var(--border);
+  margin-top: 12px;
+  opacity: 0.5;
+}
+.next-app-icon { font-size: 28px; line-height: 1; }
+.next-app-body { flex: 1; }
+.next-app-name { font-size: 14px; font-weight: 900; color: var(--white); margin-bottom: 4px; }
+.next-app-desc { font-size: 12px; color: var(--muted); }
 
 /* ── スマホ カテゴリフィルター ── */
 .cat-filter-nav {

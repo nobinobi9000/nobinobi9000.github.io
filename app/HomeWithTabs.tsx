@@ -17,6 +17,7 @@ type App = {
   ctaUrl: string
   detailUrl: string
   category: '日常・ライフ' | 'お金・投資'
+  screenshot?: string
 }
 
 function formatDate(dateStr: string): string {
@@ -33,6 +34,7 @@ const APPS: App[] = [
     ctaUrl: 'https://comic.nobi-labo.com',
     detailUrl: '/comic-checker',
     category: '日常・ライフ',
+    screenshot: '/screenshots/comic-mylist-grid.png',
   },
   {
     icon: '🧮',
@@ -42,6 +44,7 @@ const APPS: App[] = [
     ctaUrl: '/tax-simulator/',
     detailUrl: '/tax-simulator.html',
     category: 'お金・投資',
+    screenshot: '/screenshots/tax-simulator.png',
   },
   {
     icon: '🧊',
@@ -51,6 +54,7 @@ const APPS: App[] = [
     ctaUrl: '/meeting-timer',
     detailUrl: '/nekoojiisan-timer',
     category: '日常・ライフ',
+    screenshot: '/screenshots/nekoojiisan-timer.png',
   },
   {
     icon: '📊',
@@ -60,6 +64,7 @@ const APPS: App[] = [
     ctaUrl: '/japan-stock-screener/',
     detailUrl: '/japan-stock-screener.html',
     category: 'お金・投資',
+    screenshot: '/screenshots/japan-stock-screener.png',
   },
   {
     icon: '🗺️',
@@ -69,6 +74,7 @@ const APPS: App[] = [
     ctaUrl: 'https://gamelog.nobi-labo.com',
     detailUrl: '/questlog',
     category: '日常・ライフ',
+    screenshot: '/screenshots/questlog/Top.png',
   },
   {
     icon: '📒',
@@ -78,6 +84,7 @@ const APPS: App[] = [
     ctaUrl: 'https://kabu.nobi-labo.com',
     detailUrl: '/kabu-note',
     category: 'お金・投資',
+    screenshot: '/screenshots/kabu-note.png',
   },
   {
     icon: '🌱',
@@ -87,6 +94,7 @@ const APPS: App[] = [
     ctaUrl: 'https://mebae.nobi-labo.com',
     detailUrl: '/mebae',
     category: '日常・ライフ',
+    screenshot: '/screenshots/mebae.png',
   },
 ]
 
@@ -154,7 +162,6 @@ export default function HomeWithTabs({ posts }: { posts: Post[] }) {
           <div className="pc-layout">
             {/* Feature card */}
             <div className="feature-card">
-              <div className="feature-card-icon">{featuredApp.icon}</div>
               <div className="feature-card-body">
                 <span className="feature-card-category">{featuredApp.category}</span>
                 <div className="feature-card-name">{featuredApp.name}</div>
@@ -171,49 +178,50 @@ export default function HomeWithTabs({ posts }: { posts: Post[] }) {
                   <a href={featuredApp.detailUrl} className="app-sub-link">詳細を見る</a>
                 </div>
               </div>
+              <div className="feature-phone">
+                <div className="feature-phone-notch" />
+                {featuredApp.screenshot
+                  ? <img src={featuredApp.screenshot} alt={featuredApp.name} />
+                  : <div className="feature-phone-placeholder">{featuredApp.icon}</div>
+                }
+              </div>
             </div>
 
-            {/* Carousel */}
-            <div className="carousel-wrap">
-              <div className="carousel-track">
-                {groupedApps.map(group => (
-                  <div key={group.label} className="carousel-group">
-                    <div className="category-label">{group.label}</div>
-                    <div className="carousel-cards-row">
-                      {group.apps.map(app => (
-                        <div key={app.name} className="carousel-card">
-                          <div className="carousel-card-top">
-                            <span className="carousel-icon">{app.icon}</span>
-                            <span className="app-badge">Live</span>
-                          </div>
-                          <div className="carousel-name">{app.name}</div>
-                          <div className="app-tags" style={{ marginBottom: '12px' }}>
-                            {app.tags.slice(0, 2).map(t => <span key={t} className="tag">{t}</span>)}
-                          </div>
-                          <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: 'auto' }}>
-                            <a href={app.ctaUrl} className="carousel-cta">使う →</a>
-                            <a href={app.detailUrl} className="app-sub-link" style={{ fontSize: '9px' }}>詳細</a>
-                          </div>
+            {/* Carousel — カテゴリごとに独立した行 */}
+            <div className="carousel-rows">
+              {groupedApps.map(group => (
+                <div key={group.label} className="carousel-row">
+                  <div className="category-label">{group.label}</div>
+                  <div className="carousel-row-track">
+                    {group.apps.map(app => (
+                      <div key={app.name} className="carousel-card">
+                        <div className="carousel-card-top">
+                          <span className="carousel-icon">{app.icon}</span>
+                          <span className="app-badge">Live</span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-                {/* Coming Soon */}
-                <div className="carousel-group">
-                  <div className="category-label" aria-hidden="true">&nbsp;</div>
-                  <div className="carousel-cards-row">
-                    <div className="carousel-card coming">
-                      <div className="carousel-card-top">
-                        <span className="carousel-icon">🔜</span>
-                        <span className="app-badge soon">Coming Soon</span>
+                        <div className="carousel-name">{app.name}</div>
+                        <div className="app-tags" style={{ marginBottom: '12px' }}>
+                          {app.tags.slice(0, 2).map(t => <span key={t} className="tag">{t}</span>)}
+                        </div>
+                        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: 'auto' }}>
+                          <a href={app.ctaUrl} className="carousel-cta">使う →</a>
+                          <a href={app.detailUrl} className="app-sub-link" style={{ fontSize: '9px' }}>詳細</a>
+                        </div>
                       </div>
-                      <div className="carousel-name">Next App</div>
-                      <div style={{ fontSize: '12px', color: 'var(--muted)' }}>次のアプリを開発中</div>
-                    </div>
+                    ))}
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Next App — 最下段 */}
+            <div className="next-app-row">
+              <span className="next-app-icon">🔜</span>
+              <div className="next-app-body">
+                <div className="next-app-name">Next App</div>
+                <div className="next-app-desc">次のアプリを開発中</div>
               </div>
+              <span className="app-badge soon">Coming Soon</span>
             </div>
           </div>
 
