@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 type Post = {
   id: string
@@ -9,12 +9,22 @@ type Post = {
   tags: string[]
 }
 
+type App = {
+  icon: string
+  name: string
+  desc: string
+  tags: string[]
+  ctaUrl: string
+  detailUrl: string
+  category: '日常・ライフ' | 'お金・投資'
+}
+
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
   return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`
 }
 
-const APPS = [
+const APPS: App[] = [
   {
     icon: '📚',
     name: 'comic-checker',
@@ -22,6 +32,7 @@ const APPS = [
     tags: ['ホーム追加OK', '無料', 'Push通知', '楽天連携'],
     ctaUrl: 'https://comic.nobi-labo.com',
     detailUrl: '/comic-checker',
+    category: '日常・ライフ',
   },
   {
     icon: '🧮',
@@ -30,6 +41,7 @@ const APPS = [
     tags: ['無料', '登録不要', '令和7年版'],
     ctaUrl: '/tax-simulator/',
     detailUrl: '/tax-simulator.html',
+    category: 'お金・投資',
   },
   {
     icon: '🧊',
@@ -38,6 +50,7 @@ const APPS = [
     tags: ['会議タイマー', 'おやじギャグ', 'AI生成', '無料'],
     ctaUrl: '/meeting-timer',
     detailUrl: '/nekoojiisan-timer',
+    category: '日常・ライフ',
   },
   {
     icon: '📊',
@@ -46,6 +59,7 @@ const APPS = [
     tags: ['無料', 'Discord連携', 'テクニカル分析', '毎日夕方'],
     ctaUrl: '/japan-stock-screener/',
     detailUrl: '/japan-stock-screener.html',
+    category: 'お金・投資',
   },
   {
     icon: '🗺️',
@@ -54,6 +68,7 @@ const APPS = [
     tags: ['ホーム追加OK', '無料', 'Push通知', 'ゲーム管理'],
     ctaUrl: 'https://gamelog.nobi-labo.com',
     detailUrl: '/questlog',
+    category: '日常・ライフ',
   },
   {
     icon: '📒',
@@ -62,6 +77,7 @@ const APPS = [
     tags: ['無料', '日本株', '複数口座対応', '損益管理'],
     ctaUrl: 'https://kabu.nobi-labo.com',
     detailUrl: '/kabu-note',
+    category: 'お金・投資',
   },
   {
     icon: '🌱',
@@ -70,11 +86,40 @@ const APPS = [
     tags: ['ホーム追加OK', '無料', 'Push通知', '習慣形成'],
     ctaUrl: 'https://mebae.nobi-labo.com',
     detailUrl: '/mebae',
+    category: '日常・ライフ',
   },
 ]
 
+const CATEGORIES = ['日常・ライフ', 'お金・投資'] as const
+
+function MobileAppCard({ app }: { app: App }) {
+  return (
+    <div className="app-card live" style={{ cursor: 'default' }}>
+      <div className="app-card-top">
+        <div className="app-icon">{app.icon}</div>
+        <span className="app-badge">Live</span>
+      </div>
+      <div className="app-name">{app.name}</div>
+      <div className="app-desc">
+        {app.desc.split('\n').map((line, i, arr) => (
+          <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+        ))}
+      </div>
+      <div className="app-tags">
+        {app.tags.map(t => <span key={t} className="tag">{t}</span>)}
+      </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <a href={app.ctaUrl} className="app-cta">今すぐ使う</a>
+        <a href={app.detailUrl} className="app-sub-link">詳細を見る</a>
+      </div>
+    </div>
+  )
+}
+
 export default function HomeWithTabs({ posts }: { posts: Post[] }) {
   const [tab, setTab] = useState<'apps' | 'blog'>('apps')
+  const [featuredIndex] = useState<number>(() => Math.floor(Math.random() * APPS.length))
+  const [catFilter, setCatFilter] = useState<'すべて' | '日常・ライフ' | 'お金・投資'>('すべて')
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -89,6 +134,10 @@ export default function HomeWithTabs({ posts }: { posts: Post[] }) {
     window.history.replaceState({}, '', url.toString())
   }
 
+  const featuredApp = APPS[featuredIndex]
+  const mobileApps = catFilter === 'すべて' ? APPS : APPS.filter(a => a.category === catFilter)
+  const groupedApps = CATEGORIES.map(cat => ({ label: cat, apps: APPS.filter(a => a.category === cat) }))
+
   return (
     <div className="section">
       {/* TAB NAV */}
@@ -99,34 +148,115 @@ export default function HomeWithTabs({ posts }: { posts: Post[] }) {
 
       {/* APPS */}
       {tab === 'apps' && (
-        <div className="apps">
-          {APPS.map(app => (
-            <div key={app.name} className="app-card live" style={{ cursor: 'default' }}>
-              <div className="app-card-top">
-                <div className="app-icon">{app.icon}</div>
-                <span className="app-badge">Live</span>
-              </div>
-              <div className="app-name">{app.name}</div>
-              <div className="app-desc">{app.desc.split('\n').map((line, i) => (
-                <span key={i}>{line}{i < app.desc.split('\n').length - 1 && <br />}</span>
-              ))}</div>
-              <div className="app-tags">
-                {app.tags.map(t => <span key={t} className="tag">{t}</span>)}
-              </div>
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-                <a href={app.ctaUrl} className="app-cta">今すぐ使う</a>
-                <a href={app.detailUrl} className="app-sub-link">詳細を見る</a>
+        <div className="apps-root">
+
+          {/* ── PC LAYOUT ── */}
+          <div className="pc-layout">
+            {/* Feature card */}
+            <div className="feature-card">
+              <div className="feature-card-icon">{featuredApp.icon}</div>
+              <div className="feature-card-body">
+                <span className="feature-card-category">{featuredApp.category}</span>
+                <div className="feature-card-name">{featuredApp.name}</div>
+                <div className="feature-card-desc">
+                  {featuredApp.desc.split('\n').map((line, i, arr) => (
+                    <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                  ))}
+                </div>
+                <div className="app-tags">
+                  {featuredApp.tags.map(t => <span key={t} className="tag">{t}</span>)}
+                </div>
+                <div className="feature-card-actions">
+                  <a href={featuredApp.ctaUrl} className="feature-cta">今すぐ使う</a>
+                  <a href={featuredApp.detailUrl} className="app-sub-link">詳細を見る</a>
+                </div>
               </div>
             </div>
-          ))}
-          <div className="app-card coming">
-            <div className="app-card-top">
-              <div className="app-icon">🔜</div>
-              <span className="app-badge soon">Coming Soon</span>
+
+            {/* Carousel */}
+            <div className="carousel-wrap">
+              <div className="carousel-track">
+                {groupedApps.map(group => (
+                  <div key={group.label} className="carousel-group">
+                    <div className="category-label">{group.label}</div>
+                    <div className="carousel-cards-row">
+                      {group.apps.map(app => (
+                        <div key={app.name} className="carousel-card">
+                          <div className="carousel-card-top">
+                            <span className="carousel-icon">{app.icon}</span>
+                            <span className="app-badge">Live</span>
+                          </div>
+                          <div className="carousel-name">{app.name}</div>
+                          <div className="app-tags" style={{ marginBottom: '12px' }}>
+                            {app.tags.slice(0, 2).map(t => <span key={t} className="tag">{t}</span>)}
+                          </div>
+                          <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: 'auto' }}>
+                            <a href={app.ctaUrl} className="carousel-cta">使う →</a>
+                            <a href={app.detailUrl} className="app-sub-link" style={{ fontSize: '9px' }}>詳細</a>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                {/* Coming Soon */}
+                <div className="carousel-group">
+                  <div className="category-label" aria-hidden="true">&nbsp;</div>
+                  <div className="carousel-cards-row">
+                    <div className="carousel-card coming">
+                      <div className="carousel-card-top">
+                        <span className="carousel-icon">🔜</span>
+                        <span className="app-badge soon">Coming Soon</span>
+                      </div>
+                      <div className="carousel-name">Next App</div>
+                      <div style={{ fontSize: '12px', color: 'var(--muted)' }}>次のアプリを開発中</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="app-name">Next App</div>
-            <div className="app-desc">次のアプリを開発中です。</div>
           </div>
+
+          {/* ── MOBILE LAYOUT ── */}
+          <div className="mobile-layout">
+            {/* Category filter */}
+            <div className="cat-filter-nav">
+              {(['すべて', '日常・ライフ', 'お金・投資'] as const).map(cat => (
+                <button
+                  key={cat}
+                  className={`cat-filter-btn${catFilter === cat ? ' active' : ''}`}
+                  onClick={() => setCatFilter(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* App list */}
+            <div className="apps">
+              {catFilter === 'すべて' ? (
+                CATEGORIES.map(cat => (
+                  <React.Fragment key={cat}>
+                    <div className="mobile-category-header">{cat}</div>
+                    {APPS.filter(a => a.category === cat).map(app => (
+                      <MobileAppCard key={app.name} app={app} />
+                    ))}
+                  </React.Fragment>
+                ))
+              ) : (
+                mobileApps.map(app => <MobileAppCard key={app.name} app={app} />)
+              )}
+              <div className="app-card coming">
+                <div className="app-card-top">
+                  <div className="app-icon">🔜</div>
+                  <span className="app-badge soon">Coming Soon</span>
+                </div>
+                <div className="app-name">Next App</div>
+                <div className="app-desc">次のアプリを開発中です。</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       )}
 
