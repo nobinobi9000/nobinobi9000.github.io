@@ -15,7 +15,7 @@ export default function KabuNotePage() {
             <a href="/" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: '#555', textDecoration: 'none', textTransform: 'uppercase' }}>← nobi-labo</a>
             <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--orange)' }}>kabu-note</span>
           </div>
-          <div style={{ fontSize: '40px', marginBottom: '16px' }}>📒</div>
+          <img src="/kabu-note-icon-192.png" alt="Kabu Note" style={{ width: '72px', height: '72px', borderRadius: '16px', marginBottom: '16px', display: 'block' }} />
           <h1 style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: '16px' }}>
             複数口座の株を、<br /><em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>1画面で把握。</em>
           </h1>
