@@ -96,6 +96,15 @@ const APPS: App[] = [
     category: '日常・ライフ',
     screenshot: '/screenshots/mebae.png',
   },
+  {
+    icon: '🛒',
+    name: 'SoroSoro',
+    desc: '日用品の消費ペースを記録して、切れる前に通知。\nバーコードスキャン・楽天検索で商品を簡単登録。\n楽天・Amazonへのワンタップ購入リンク付き。',
+    tags: ['ホーム追加OK', '無料', 'Push通知', '楽天連携'],
+    ctaUrl: 'https://sorosoro.nobi-labo.com',
+    detailUrl: '/sorosoro',
+    category: '日常・ライフ',
+  },
 ]
 
 const CATEGORIES = ['日常・ライフ', 'お金・投資'] as const

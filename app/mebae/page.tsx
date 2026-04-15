@@ -218,7 +218,61 @@ export default function MebaePage() {
         </div>
       </div>
 
+      {/* SCREENSHOTS */}
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: accent, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
+            Screenshots
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <div style={{ display: 'flex', gap: '20px', width: 'max-content', padding: '4px 2px 16px' }}>
+              {[
+                { src: '/screenshots/mebae/top.png',        label: 'Top' },
+                { src: '/screenshots/mebae/statistics.png', label: '統計' },
+                { src: '/screenshots/mebae/stack.png',      label: 'スタック追加' },
+              ].map(({ src, label }) => (
+                <div key={src} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+                  <div style={{ width: '160px', background: '#1a1a1a', borderRadius: '32px', border: '2px solid #333', padding: '12px 8px', boxShadow: '0 16px 48px rgba(0,0,0,0.6)' }}>
+                    <div style={{ width: '48px', height: '5px', background: '#2a2a2a', borderRadius: '3px', margin: '0 auto 8px' }} />
+                    <div style={{ borderRadius: '20px', overflow: 'hidden' }}>
+                      <img src={src} alt={label} style={{ width: '100%', display: 'block' }} />
+                    </div>
+                    <div style={{ width: '32px', height: '4px', background: '#2a2a2a', borderRadius: '2px', margin: '8px auto 0' }} />
+                  </div>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', color: '#555', textTransform: 'uppercase' }}>{label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <InstallGuide />
+
+      {/* FAQ */}
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: accent, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
+            FAQ
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
+            {[
+              { q: 'アカウント登録は必要ですか？', a: '不要です。ホーム画面に追加するだけですぐに使えます。データはすべてお使いの端末（ブラウザのLocalStorage）に保存されます。メールアドレスやパスワードの登録は一切不要です。' },
+              { q: 'アンカー習慣とは何ですか？', a: '「歯を磨く」「朝コーヒーを飲む」「シャワーを浴びる」など、すでに毎日100%できていることです。この習慣の直後に新しい習慣を積み上げることで、意志力に頼らず習慣を定着させやすくなります。' },
+              { q: 'スタック習慣は何個まで登録できますか？', a: '1つのアンカー習慣に対して、スタック習慣を最大3つまで登録できます。まずは1つから始めて、慣れてきたら少しずつ追加するのがおすすめです。' },
+              { q: 'Push通知はどうやって設定しますか？', a: '習慣の詳細画面から通知時刻を設定できます。iOSをお使いの場合は、ホーム画面に追加したアプリとして開いてから設定してください（iOS 16.4以降対応）。通常のSafariブラウザからは通知を受け取れません。' },
+              { q: 'データのバックアップはできますか？', a: '現在はバックアップ・エクスポート機能に対応していません。データはお使いの端末のLocalStorageに保存されているため、ブラウザのデータを消去したりアプリを削除すると、登録した習慣データも削除されます。ご注意ください。' },
+            ].map((item, i) => (
+              <div key={i} style={{ background: 'var(--panel)', padding: '24px' }}>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: accent, marginBottom: '8px' }}>Q. {item.q}</div>
+                <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.8 }}>A. {item.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* CTA BOTTOM */}
       <div style={{ borderTop: '1px solid var(--border)' }}>

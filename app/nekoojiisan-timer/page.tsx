@@ -35,7 +35,7 @@ export default function NekoojiisanTimerPage() {
               <span key={b.label} style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', padding: '4px 10px', border: `1px solid ${b.hi ? 'var(--orange)' : '#2a2a2a'}`, color: b.hi ? 'var(--orange)' : '#666' }}>{b.label}</span>
             ))}
           </div>
-          <a href="https://absolute-zero-meeting.vercel.app" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
+          <a href="/meeting-timer/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             会議を凍らせる →
           </a>
         </div>
@@ -124,6 +124,30 @@ export default function NekoojiisanTimerPage() {
         </div>
       </div>
 
+      {/* FAQ */}
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
+            FAQ
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
+            {[
+              { q: 'アカウント登録は必要ですか？', a: '不要です。ブラウザでURLを開くだけで、登録なしにすぐ使えます。' },
+              { q: 'スマートフォンで使えますか？', a: 'はい。スマートフォン・タブレット・PCのすべてに対応しています。会議室のプロジェクターに映したり、リモート会議で画面共有したりしてご利用ください。' },
+              { q: 'アラームが鳴りません', a: 'iOSではブラウザを開いた後、必ず一度画面をタップしてからタイマーを開始してください（iOS Web Audioの仕様制限）。またスマートフォンがサイレントモードになっていないか確認してください。' },
+              { q: '音を出したくない場面で使えますか？', a: 'はい。タイマー画面の「サイレントモード」をONにすると、タイムアップ時の音が鳴りません。おやじギャグのテキスト表示は継続されます。' },
+              { q: 'おやじギャグの内容は選べますか？', a: 'おやじギャグはAIが毎回ランダムに生成するため、内容を選ぶことはできません。約91%の確率でおやじギャグ、約9%の確率でためになることを言います。' },
+            ].map((item, i) => (
+              <div key={i} style={{ background: 'var(--panel)', padding: '24px' }}>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--orange)', marginBottom: '8px' }}>Q. {item.q}</div>
+                <div style={{ fontSize: '13px', color: '#aaa', lineHeight: 1.8 }}>A. {item.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* CTA BOTTOM */}
       <div style={{ borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
@@ -135,7 +159,7 @@ export default function NekoojiisanTimerPage() {
               無料・登録不要。ブラウザで今すぐ使えます。<br />
               だらだら会議に、ねこおじさんという名の終止符を。
             </p>
-            <a href="https://absolute-zero-meeting.vercel.app" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
+            <a href="/meeting-timer/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
               会議を凍らせる →
             </a>
           </div>

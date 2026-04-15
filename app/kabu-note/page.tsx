@@ -93,6 +93,39 @@ export default function KabuNotePage() {
         </div>
       </div>
 
+      {/* SCREENSHOTS */}
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
+            Screenshots
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <div style={{ display: 'flex', gap: '20px', width: 'max-content', padding: '4px 2px 16px' }}>
+              {[
+                { src: '/screenshots/kabu-note/Summary.png',  label: 'サマリー' },
+                { src: '/screenshots/kabu-note/Stocks.png',   label: '個別銘柄' },
+                { src: '/screenshots/kabu-note/Sector.png',   label: 'セクター' },
+                { src: '/screenshots/kabu-note/Dividend.png', label: '配当' },
+                { src: '/screenshots/kabu-note/Settings.png', label: '個別設定' },
+                { src: '/screenshots/kabu-note/login.png',    label: 'ログイン' },
+              ].map(({ src, label }) => (
+                <div key={src} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+                  <div style={{ width: '160px', background: '#1a1a1a', borderRadius: '32px', border: '2px solid #333', padding: '12px 8px', boxShadow: '0 16px 48px rgba(0,0,0,0.6)' }}>
+                    <div style={{ width: '48px', height: '5px', background: '#2a2a2a', borderRadius: '3px', margin: '0 auto 8px' }} />
+                    <div style={{ borderRadius: '20px', overflow: 'hidden' }}>
+                      <img src={src} alt={label} style={{ width: '100%', display: 'block' }} />
+                    </div>
+                    <div style={{ width: '32px', height: '4px', background: '#2a2a2a', borderRadius: '2px', margin: '8px auto 0' }} />
+                  </div>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', color: '#555', textTransform: 'uppercase' }}>{label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* SPEC */}
       <div style={{ borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
@@ -111,6 +144,30 @@ export default function KabuNotePage() {
               <div key={r.label} style={{ background: 'var(--panel)', padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '12px', color: '#555', fontWeight: 700, letterSpacing: '0.5px' }}>{r.label}</span>
                 <span style={{ fontSize: '13px', color: '#ccc' }}>{r.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
+            FAQ
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
+            {[
+              { q: '証券口座との連携は必要ですか？', a: '不要です。証券コード・保有株数・取得単価を手動で入力するだけで使えます。証券会社のAPIや口座連携は一切不要です。' },
+              { q: '株価はリアルタイムで更新されますか？', a: '毎営業日16時（JST）に自動更新されます。リアルタイムの株価ではありませんが、引け後の終値ベースで毎日更新されるため、日々の損益確認に十分な精度です。' },
+              { q: '米国株や外国株には対応していますか？', a: '現在は日本株（東証上場銘柄）のみ対応しています。米国株対応は今後のバージョンで検討中です。' },
+              { q: '登録した銘柄データは消えませんか？', a: 'データはクラウド（Supabase）に保存されているため、ブラウザのキャッシュを消去しても消えません。どのデバイスからでも同じアカウントでログインすればデータを確認できます。' },
+              { q: '複数の証券会社を分けて管理できますか？', a: 'はい。銘柄登録時に「証券会社名」を入力しておくと、口座別に絞り込み表示ができます。SBI証券・楽天証券など複数口座をまとめて管理できます。' },
+            ].map((item, i) => (
+              <div key={i} style={{ background: 'var(--panel)', padding: '24px' }}>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--orange)', marginBottom: '8px' }}>Q. {item.q}</div>
+                <div style={{ fontSize: '13px', color: '#aaa', lineHeight: 1.8 }}>A. {item.a}</div>
               </div>
             ))}
           </div>

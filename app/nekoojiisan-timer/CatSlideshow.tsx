@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 
 const CAT_IMGS = Array.from({ length: 12 }, (_, i) =>
-  `https://absolute-zero-meeting.vercel.app/cat_pic/cat${i + 1}.png`
+  `/meeting-timer/cat_pic/cat${i + 1}.png`
 )
 
 export default function CatSlideshow() {

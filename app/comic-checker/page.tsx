@@ -122,6 +122,30 @@ export default function ComicCheckerPage() {
 
       <InstallGuide />
 
+      {/* FAQ */}
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
+            FAQ
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
+            {[
+              { q: '登録は無料ですか？', a: 'はい、完全無料です。メールアドレスとパスワードでアカウント登録するだけで、すべての機能をご利用いただけます。' },
+              { q: 'iPhoneで通知が届きません', a: 'iOSのPush通知はホーム画面に追加したSafariアプリでのみ動作します（iOS 16.4以降対応）。ホーム画面に追加してからアプリを開き、設定画面の「通知をONにする」を押してください。' },
+              { q: '新刊情報はいつ更新されますか？', a: '毎日サーバー側で自動更新されます。アプリを開いていなくても最新情報が反映されるため、通知が届いた時点で必ず最新の新刊情報になっています。' },
+              { q: '登録したマンガを削除するには？', a: 'マイリストでシリーズ名をタップして詳細ページを開き、「マイリストから削除」ボタンで削除できます。' },
+              { q: '楽天・Amazonリンクはアフィリエイトですか？', a: 'nobi-laboのアフィリエイトリンクを使用しています。リンク先での購入に追加費用は一切発生しません。アフィリエイト収益はアプリの維持・改善に充てています。' },
+            ].map((item, i) => (
+              <div key={i} style={{ background: 'var(--panel)', padding: '24px' }}>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--orange)', marginBottom: '8px' }}>Q. {item.q}</div>
+                <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.8 }}>A. {item.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* CTA BOTTOM */}
       <div style={{ borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
