@@ -37,6 +37,15 @@ const APPS: App[] = [
     screenshot: '/screenshots/comic-mylist-grid.png',
   },
   {
+    icon: '✂️',
+    name: 'サブスクの断捨離',
+    desc: 'サブスク支出を可視化して断捨離。\n解約してS&P500に投資したら将来いくらに？\n断捨離スコアで見直すべきサブスクを提案。',
+    tags: ['無料', '登録不要', '投資換算', '断捨離スコア'],
+    ctaUrl: 'https://subshari.nobi-labo.com',
+    detailUrl: '/subshari',
+    category: 'お金・投資',
+  },
+  {
     icon: '🧮',
     name: '確定申告・還付判定シミュレーター',
     desc: '所得税・住民税を簡単に計算。\n収入を入力するだけで手取り額・還付額をすぐ確認できる。',
