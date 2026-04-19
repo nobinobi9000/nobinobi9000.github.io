@@ -109,16 +109,9 @@ export function formatYen(amount: number): string {
   return `約${man.toLocaleString()}万円`
 }
 
-/** 投資利率見直しが必要か（3ヶ月 = 90日 を目安に） */
+/** 投資利率見直しが必要か（6ヶ月 = 180日 を目安に） */
 export function needsRateReview(lastRateCheckDate: string | undefined): boolean {
   if (!lastRateCheckDate) return true
   const daysSince = (Date.now() - new Date(lastRateCheckDate).getTime()) / 86_400_000
-  return daysSince >= 90
-}
-
-/** マスターリスト価格確認が必要か（30日ごと） */
-export function needsPriceCheck(lastPriceCheckDate: string | undefined): boolean {
-  if (!lastPriceCheckDate) return true
-  const daysSince = (Date.now() - new Date(lastPriceCheckDate).getTime()) / 86_400_000
-  return daysSince >= 30
+  return daysSince >= 180
 }

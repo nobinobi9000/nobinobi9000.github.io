@@ -54,9 +54,9 @@ export interface SubshariStore {
   lastUpdated: string
   version: number
   investmentProfileId?: string
-  /** 投資利率見直しリマインダー（3ヶ月ごと） */
+  /** 投資利率見直しリマインダー（6ヶ月ごと） */
   lastRateCheckDate?: string
-  /** マスターリスト価格確認リマインダー（毎月） */
+  /** マスターリスト価格確認（スケジュールエージェントが6ヶ月ごとに自動更新） */
   lastPriceCheckDate?: string
   lastUsageCheck?: string
 }

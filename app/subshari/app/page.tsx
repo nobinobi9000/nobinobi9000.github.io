@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import type { Subscription } from './lib/types'
 import { useSubscriptions } from './hooks/useSubscriptions'
 import { getSubscriptionsNeedingUsageCheck, getSubscriptionsNearRenewal } from './lib/danshariScore'
-import { needsRateReview, needsPriceCheck } from './lib/investmentCalc'
+import { needsRateReview } from './lib/investmentCalc'
 import SubscriptionList from './components/SubscriptionList'
 import Dashboard from './components/Dashboard'
 import InvestmentCalculator from './components/InvestmentCalculator'
@@ -27,7 +27,6 @@ export default function SubshariApp() {
     isLoaded,
     investmentProfileId,
     lastRateCheckDate,
-    lastPriceCheckDate,
     addSubscription,
     updateSubscription,
     deleteSubscription,
@@ -36,7 +35,6 @@ export default function SubshariApp() {
     recordUsageCheck,
     setInvestmentProfile,
     markRateCheckSeen,
-    markPriceCheckSeen,
     exportToJson,
   } = useSubscriptions()
 
@@ -49,9 +47,8 @@ export default function SubshariApp() {
   const [usageCheckTrigger, setUsageCheckTrigger] = useState<UsageCheckTrigger>('startup')
   const [showUsageCheck, setShowUsageCheck] = useState(false)
 
-  // 通知バナー（投資利率・価格）
+  // 投資利率見直しバナー
   const [showRateBanner, setShowRateBanner] = useState(false)
-  const [showPriceBanner, setShowPriceBanner] = useState(false)
 
   // 起動時チェックは1セッションにつき1回のみ実行
   const startupCheckDone = useRef(false)
@@ -81,11 +78,8 @@ export default function SubshariApp() {
       return
     }
 
-    // 3. 投資利率見直しリマインダー（3ヶ月ごと、別バナー）
+    // 3. 投資利率見直しリマインダー（6ヶ月ごと）
     if (needsRateReview(lastRateCheckDate)) setShowRateBanner(true)
-
-    // 4. マスターリスト価格確認リマインダー（毎月、別バナー）
-    if (needsPriceCheck(lastPriceCheckDate)) setShowPriceBanner(true)
   // ロード完了後1回だけ実行するため依存配列は意図的にisLoadedのみ
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded])
@@ -113,17 +107,9 @@ export default function SubshariApp() {
       {showRateBanner && (
         <div style={{ background: 'rgba(249,115,22,0.1)', borderBottom: '1px solid rgba(249,115,22,0.2)', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
           <div style={{ fontSize: '11px', color: '#f97316', lineHeight: 1.5 }}>
-            📈 投資利率の見直し時期です（3ヶ月ごと）。各ベンチマークの最新リターンを確認してください。
+            📈 投資利率の見直し時期です（6ヶ月ごと）。各ベンチマークの最新リターンを確認してください。
           </div>
           <button onClick={() => { markRateCheckSeen(); setShowRateBanner(false) }} style={{ background: 'none', border: 'none', color: '#555', fontSize: '16px', cursor: 'pointer', flexShrink: 0 }}>✕</button>
-        </div>
-      )}
-      {showPriceBanner && (
-        <div style={{ background: 'rgba(234,179,8,0.08)', borderBottom: '1px solid rgba(234,179,8,0.2)', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-          <div style={{ fontSize: '11px', color: '#eab308', lineHeight: 1.5 }}>
-            💰 マスターリストの価格確認時期です（毎月）。各サービスの公式サイトで値上がりがないか確認してください。
-          </div>
-          <button onClick={() => { markPriceCheckSeen(); setShowPriceBanner(false) }} style={{ background: 'none', border: 'none', color: '#555', fontSize: '16px', cursor: 'pointer', flexShrink: 0 }}>✕</button>
         </div>
       )}
 
