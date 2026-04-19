@@ -106,6 +106,15 @@ const APPS: App[] = [
     screenshot: '/screenshots/mebae.png',
   },
   {
+    icon: '📋',
+    name: 'Task Manager',
+    desc: '重要度×緊急度の2軸でタスクを自動分類。\nアイゼンハワーマトリクスで「すぐやる・後でやる・任せる・保留」に即振り分け。\n登録不要、データはブラウザに保存。',
+    tags: ['無料', '登録不要', '優先度管理', 'ブラウザ保存'],
+    ctaUrl: '/todo-manager/',
+    detailUrl: '/todo-manager',
+    category: '日常・ライフ',
+  },
+  {
     icon: '🛒',
     name: 'SoroSoro',
     desc: '日用品の消費ペースを記録して、切れる前に通知。\nバーコードスキャン・楽天検索で商品を簡単登録。\n楽天・Amazonへのワンタップ購入リンク付き。',
