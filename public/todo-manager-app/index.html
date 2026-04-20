@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Task Manager - nobi-labo</title>
-<meta name="description" content="重要度×緊急度の2軸でタスクを自動分類するToDo管理ツール。アイゼンハワーマトリクスで優先順位を即判断。登録不要・無料。">
+<meta name="description" content="重要度×緊急度の2軸でタスクを自動分類するToDo管理ツール。登録不要・無料。">
 <style>
 :root {
   --primary:       #185FA5;
   --primary-hover: #0C447C;
   --danger:        #A32D2D;
-  --warn-bg:       #FAEEDA;
   --warn-fg:       #854F0B;
   --bg:            #F4F3EF;
   --bg2:           #FFFFFF;
@@ -22,58 +21,70 @@
   --radius-sm:     5px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Georgia,serif;background:var(--bg);color:var(--text);min-width:600px;font-size:13px}
+body{font-family:Georgia,serif;background:var(--bg);color:var(--text);font-size:13px}
 
 /* ── Header ── */
-.hdr{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 20px}
-.hdr-in{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-.app-title{font-size:20px;font-weight:600;color:var(--primary);letter-spacing:.02em}
+.hdr{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 20px;position:sticky;top:0;z-index:100}
+.hdr-in{max-width:1040px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.app-title{font-size:18px;font-weight:600;color:var(--primary);letter-spacing:.02em}
 .hdr-right{display:flex;align-items:center;gap:16px}
-.today{font-size:12px;color:var(--text2)}
+.today{font-size:11px;color:var(--text2)}
 .back-link{font-size:10px;font-weight:700;letter-spacing:2px;color:#555;text-decoration:none;text-transform:uppercase}
 .back-link span{color:#f97316}
 
-/* ── Main ── */
-.main{max-width:960px;margin:0 auto;padding:20px 16px 40px}
-.sec-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin:20px 0 8px}
+/* ── Form Strip ── */
+.form-strip{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 20px}
+.form-strip-in{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:10px}
 
-/* ── KPI Grid ── */
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
-.kpi-lbl{font-size:10px;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-.kpi-val{font-size:28px;font-weight:600;line-height:1;margin-bottom:5px}
-.kpi-sub{font-size:11px;color:var(--text2)}
-.kpi-danger .kpi-val{color:var(--danger)}
-.kpi-warn .kpi-val{color:var(--warn-fg)}
-.prog-track{height:4px;background:var(--border);border-radius:2px;margin:6px 0 5px;overflow:hidden}
-.prog-fill{height:100%;background:var(--primary);border-radius:2px;transition:width .3s}
+.urgent-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#FCEBEB;border:1px solid #F5CACA;border-radius:var(--radius-sm);
+  padding:5px 10px;min-width:52px;flex-shrink:0}
+.urgent-badge.zero{background:var(--bg);border-color:var(--border)}
+.urgent-num{font-size:22px;font-weight:700;line-height:1;color:var(--danger)}
+.urgent-badge.zero .urgent-num{color:var(--text3)}
+.urgent-lbl{font-size:9px;font-weight:600;letter-spacing:.06em;color:var(--danger);margin-top:1px}
+.urgent-badge.zero .urgent-lbl{color:var(--text3)}
 
-/* ── Chart Grid ── */
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
-.chart-title{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
-.chart-card svg{display:block;width:100%}
-
-/* ── Form ── */
-.form-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
-.form-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.finput{font-family:Georgia,serif;font-size:12px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 9px;background:var(--bg);color:var(--text);outline:none}
+.form-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;flex:1}
+.finput{font-family:Georgia,serif;font-size:12px;border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:6px 9px;background:var(--bg);color:var(--text);outline:none}
 .finput:focus{border-color:var(--primary);background:#fff}
-.fname{flex:1;min-width:140px}
-.fcat{width:110px}
-.fcatcustom{width:110px;display:none}
-.fdue{width:128px}
-.fchk{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2);cursor:pointer;user-select:none;white-space:nowrap}
+.fname{flex:1;min-width:130px}
+.fcat{width:108px}
+.fcatcustom{width:108px;display:none}
+.fdue{width:126px}
+.fchk{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2);
+  cursor:pointer;user-select:none;white-space:nowrap}
 .fchk input{cursor:pointer;width:13px;height:13px;accent-color:var(--primary)}
-.btn-add{font-family:Georgia,serif;font-size:12px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);padding:6px 16px;cursor:pointer;white-space:nowrap;font-weight:500}
+.btn-add{font-family:Georgia,serif;font-size:12px;background:var(--primary);color:#fff;
+  border:none;border-radius:var(--radius-sm);padding:6px 16px;cursor:pointer;
+  white-space:nowrap;font-weight:500}
 .btn-add:hover{background:var(--primary-hover)}
 
+/* ── Tab Nav ── */
+.tab-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px}
+.tab-nav-in{max-width:1040px;margin:0 auto;display:flex}
+.tab-btn{font-family:Georgia,serif;font-size:12px;font-weight:600;letter-spacing:.04em;
+  background:none;border:none;border-bottom:2px solid transparent;
+  padding:10px 18px;cursor:pointer;color:var(--text3);transition:color .15s,border-color .15s}
+.tab-btn:hover{color:var(--text2)}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── Main ── */
+.main{max-width:1040px;margin:0 auto;padding:14px 16px 48px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+.sec-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;
+  letter-spacing:.1em;margin:14px 0 8px}
+
 /* ── Matrix ── */
-.matrix-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.matrix-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:767px){.matrix-grid{grid-template-columns:1fr}}
+
 .quadrant{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.q-head{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
+.q-head{padding:9px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
 .q-badge{font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px}
-.q-desc{font-size:11px;color:var(--text2);flex:1}
+.q-desc{font-size:10px;color:var(--text2);flex:1}
 .q-cnt{font-size:11px;color:var(--text3)}
 .b-urgent  {background:#FCEBEB;color:#A32D2D}
 .b-schedule{background:#E6F1FB;color:#185FA5}
@@ -83,38 +94,60 @@ body{font-family:Georgia,serif;background:var(--bg);color:var(--text);min-width:
 .task-list{padding:4px 0}
 .task-empty{padding:14px;font-size:11px;color:var(--text3);text-align:center}
 
-/* task row */
-.titem{display:flex;align-items:center;gap:7px;padding:7px 14px;border-bottom:1px solid var(--border);font-size:12px;flex-wrap:wrap}
+.titem{display:flex;align-items:center;gap:7px;padding:7px 14px;
+  border-bottom:1px solid var(--border);font-size:12px;flex-wrap:wrap}
 .titem:last-child{border-bottom:none}
 .titem.done .tname{text-decoration:line-through;color:var(--text3)}
 .titem.done .tcat,.titem.done .tdue{opacity:.6}
+.titem.row-overdue{background:#FDF5F5}
 .tchk{width:13px;height:13px;cursor:pointer;flex-shrink:0;accent-color:var(--primary)}
 .tname{flex:1;min-width:0;word-break:break-all}
-.tcat{font-size:10px;color:var(--text2);background:var(--bg);border:1px solid var(--border);padding:1px 6px;border-radius:10px;white-space:nowrap}
+.tcat{font-size:10px;color:var(--text2);background:var(--bg);border:1px solid var(--border);
+  padding:1px 6px;border-radius:10px;white-space:nowrap}
 .tdue{font-size:11px;color:var(--text2);white-space:nowrap}
 .tdue.overdue{color:var(--danger);font-weight:500}
-.tdel{font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;padding:2px 4px;border-radius:3px;line-height:1;flex-shrink:0}
+.tdel{font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;
+  padding:2px 4px;border-radius:3px;line-height:1;flex-shrink:0}
 .tdel:hover{background:#F1EFE8;color:var(--danger)}
 
-/* delegate inline buttons */
 .dlg-ui{display:flex;gap:5px;margin-left:2px}
-.dlg-btn{font-family:Georgia,serif;font-size:10px;padding:3px 10px;border-radius:20px;cursor:pointer;border:1px solid;white-space:nowrap}
+.dlg-btn{font-family:Georgia,serif;font-size:10px;padding:3px 10px;border-radius:20px;
+  cursor:pointer;border:1px solid;white-space:nowrap}
 .dlg-btn.d{background:#E6F1FB;color:#185FA5;border-color:#185FA5}
 .dlg-btn.d:hover{background:#185FA5;color:#fff}
 .dlg-btn.s{background:#F1EFE8;color:#5F5E5A;border-color:#9E9C96}
 .dlg-btn.s:hover{background:#5F5E5A;color:#fff}
 
-/* result badges */
 .rbadge{font-size:10px;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0}
 .rbadge.delegated{background:#E6F1FB;color:#185FA5}
 .rbadge.self{background:#F1EFE8;color:#5F5E5A}
 
-/* overdue row highlight */
-.titem.row-overdue{background:#FDF5F5}
+/* ── Dashboard ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:600px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.kpi-lbl{font-size:10px;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.kpi-val{font-size:26px;font-weight:600;line-height:1;margin-bottom:5px}
+.kpi-sub{font-size:11px;color:var(--text2)}
+.kpi-danger .kpi-val{color:var(--danger)}
+.prog-track{height:4px;background:var(--border);border-radius:2px;margin:6px 0 5px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:2px;transition:width .3s}
+
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+@media(max-width:600px){.chart-row{grid-template-columns:1fr}}
+.chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.chart-title{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.chart-card svg{display:block;width:100%}
+.chart-full{grid-column:1/-1}
+
+.pie-legend{display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:8px}
+.pie-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)}
+.pie-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 </style>
 </head>
 <body>
 
+<!-- Header -->
 <header class="hdr">
   <div class="hdr-in">
     <div class="app-title">Task Manager</div>
@@ -125,52 +158,16 @@ body{font-family:Georgia,serif;background:var(--bg);color:var(--text);min-width:
   </div>
 </header>
 
-<main class="main">
-
-  <!-- ── Dashboard ── -->
-  <div class="sec-label">ダッシュボード</div>
-
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <div class="kpi-lbl">総タスク</div>
-      <div class="kpi-val" id="k-total">0</div>
-      <div class="kpi-sub" id="k-total-sub">未完了 0 / 完了 0</div>
+<!-- Form strip (always visible) -->
+<div class="form-strip">
+  <div class="form-strip-in">
+    <div class="urgent-badge zero" id="urgent-badge" title="未完了のすぐやるタスク">
+      <span class="urgent-num" id="urgent-num">0</span>
+      <span class="urgent-lbl">緊急</span>
     </div>
-    <div class="kpi-card" id="k-rate-card">
-      <div class="kpi-lbl">完了率</div>
-      <div class="kpi-val" id="k-rate">0%</div>
-      <div class="prog-track"><div class="prog-fill" id="k-rate-bar" style="width:0%"></div></div>
-      <div class="kpi-sub" id="k-rate-sub">今週完了 0件</div>
-    </div>
-    <div class="kpi-card" id="k-urgent-card">
-      <div class="kpi-lbl">すぐやる</div>
-      <div class="kpi-val" id="k-urgent">0</div>
-      <div class="kpi-sub">未完了の最優先タスク</div>
-    </div>
-    <div class="kpi-card" id="k-overdue-card">
-      <div class="kpi-lbl">期限超過</div>
-      <div class="kpi-val" id="k-overdue">0</div>
-      <div class="kpi-sub" id="k-overdue-sub">期限超過なし</div>
-    </div>
-  </div>
-
-  <div class="chart-grid">
-    <div class="chart-card">
-      <div class="chart-title">カテゴリ別 未完了タスク</div>
-      <svg id="svg-cat" height="140"></svg>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">週次完了トレンド（過去7日）</div>
-      <svg id="svg-trend" height="140"></svg>
-    </div>
-  </div>
-
-  <!-- ── Add form ── -->
-  <div class="sec-label">タスクを追加</div>
-  <div class="form-card">
     <div class="form-row">
       <input id="f-name" type="text"  class="finput fname" placeholder="タスク名（必須）">
-      <select id="f-cat" class="finput fcat">
+      <select id="f-cat"             class="finput fcat">
         <option value="仕事">仕事</option>
         <option value="個人">個人</option>
         <option value="学習">学習</option>
@@ -184,378 +181,432 @@ body{font-family:Georgia,serif;background:var(--bg);color:var(--text);min-width:
       <button id="f-add" class="btn-add">追加</button>
     </div>
   </div>
+</div>
 
-  <!-- ── Matrix ── -->
-  <div class="sec-label">優先度マトリクス</div>
-  <div class="matrix-grid">
-    <div class="quadrant">
-      <div class="q-head">
-        <span class="q-badge b-urgent">すぐやる</span>
-        <span class="q-desc">重要 × 緊急</span>
-        <span class="q-cnt" id="cnt-urgent">0件</span>
+<!-- Tab nav -->
+<div class="tab-nav">
+  <div class="tab-nav-in">
+    <button class="tab-btn active" data-tab="tasks">タスク一覧</button>
+    <button class="tab-btn"        data-tab="dashboard">ダッシュボード</button>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="main">
+
+  <!-- ── タスク一覧 ── -->
+  <div class="tab-pane active" id="tab-tasks">
+    <div class="matrix-grid">
+      <div class="quadrant">
+        <div class="q-head">
+          <span class="q-badge b-urgent">すぐやる</span>
+          <span class="q-desc">重要×緊急</span>
+          <span class="q-cnt" id="cnt-urgent">0件</span>
+        </div>
+        <div class="task-list" id="list-urgent"></div>
       </div>
-      <div class="task-list" id="list-urgent"></div>
-    </div>
-    <div class="quadrant">
-      <div class="q-head">
-        <span class="q-badge b-schedule">後でやる</span>
-        <span class="q-desc">重要 × 非緊急</span>
-        <span class="q-cnt" id="cnt-schedule">0件</span>
+      <div class="quadrant">
+        <div class="q-head">
+          <span class="q-badge b-schedule">後でやる</span>
+          <span class="q-desc">重要×非緊急</span>
+          <span class="q-cnt" id="cnt-schedule">0件</span>
+        </div>
+        <div class="task-list" id="list-schedule"></div>
       </div>
-      <div class="task-list" id="list-schedule"></div>
-    </div>
-    <div class="quadrant">
-      <div class="q-head">
-        <span class="q-badge b-delegate">任せる</span>
-        <span class="q-desc">非重要 × 緊急</span>
-        <span class="q-cnt" id="cnt-delegate">0件</span>
+      <div class="quadrant">
+        <div class="q-head">
+          <span class="q-badge b-delegate">任せる</span>
+          <span class="q-desc">非重要×緊急</span>
+          <span class="q-cnt" id="cnt-delegate">0件</span>
+        </div>
+        <div class="task-list" id="list-delegate"></div>
       </div>
-      <div class="task-list" id="list-delegate"></div>
-    </div>
-    <div class="quadrant">
-      <div class="q-head">
-        <span class="q-badge b-hold">保留</span>
-        <span class="q-desc">非重要 × 非緊急</span>
-        <span class="q-cnt" id="cnt-hold">0件</span>
+      <div class="quadrant">
+        <div class="q-head">
+          <span class="q-badge b-hold">保留</span>
+          <span class="q-desc">非重要×非緊急</span>
+          <span class="q-cnt" id="cnt-hold">0件</span>
+        </div>
+        <div class="task-list" id="list-hold"></div>
       </div>
-      <div class="task-list" id="list-hold"></div>
     </div>
   </div>
 
-</main>
+  <!-- ── ダッシュボード ── -->
+  <div class="tab-pane" id="tab-dashboard">
+
+    <div class="sec-label">サマリー</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-lbl">総タスク</div>
+        <div class="kpi-val" id="k-total">0</div>
+        <div class="kpi-sub" id="k-total-sub">未完了 0 / 完了 0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-lbl">完了率</div>
+        <div class="kpi-val" id="k-rate">0%</div>
+        <div class="prog-track"><div class="prog-fill" id="k-rate-bar" style="width:0%"></div></div>
+        <div class="kpi-sub" id="k-rate-sub">今週完了 0件</div>
+      </div>
+      <div class="kpi-card" id="k-urgent-card">
+        <div class="kpi-lbl">すぐやる</div>
+        <div class="kpi-val" id="k-urgent">0</div>
+        <div class="kpi-sub">未完了の最優先</div>
+      </div>
+      <div class="kpi-card" id="k-overdue-card">
+        <div class="kpi-lbl">期限超過</div>
+        <div class="kpi-val" id="k-overdue">0</div>
+        <div class="kpi-sub" id="k-overdue-sub">期限超過なし</div>
+      </div>
+    </div>
+
+    <div class="sec-label">内訳</div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">カテゴリ別 未完了タスク</div>
+        <svg id="svg-cat" height="130"></svg>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">優先度別 未完了タスク</div>
+        <svg id="svg-pie" height="130"></svg>
+        <div class="pie-legend" id="pie-legend"></div>
+      </div>
+      <div class="chart-card chart-full">
+        <div class="chart-title">週次完了トレンド（過去7日）</div>
+        <svg id="svg-trend" height="110"></svg>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <script>
-function esc(s) {
-  return String(s ?? '')
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
+// ── Helpers ──────────────────────────────────────────────────────────────────
 function todayISO() {
-  const d = new Date();
+  const d=new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
-function weekStartMs() {
-  const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-6); return d.getTime();
-}
-function dayDiff(isoStr) {
-  const now = new Date(); now.setHours(0,0,0,0);
-  return Math.floor((now - new Date(isoStr+'T00:00:00')) / 86400000);
-}
-function svgEl(tag, attrs) {
-  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
-  Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k, v));
+function weekStartMs(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-6);return d.getTime();}
+function dayDiff(iso){const n=new Date();n.setHours(0,0,0,0);return Math.floor((n-new Date(iso+'T00:00:00'))/86400000);}
+function svgEl(tag,attrs,text){
+  const el=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));
+  if(text!==undefined)el.textContent=text;
   return el;
 }
 
-const KEY = 'tasks_v1';
-let tasks = [];
+// ── Data ─────────────────────────────────────────────────────────────────────
+const KEY='tasks_v1';
+let tasks=[];
 
-function load() {
-  try {
-    const raw = localStorage.getItem(KEY);
-    tasks = raw ? JSON.parse(raw) : seed();
-    if (!raw) save();
-  } catch { tasks = seed(); }
+function load(){
+  try{const raw=localStorage.getItem(KEY);tasks=raw?JSON.parse(raw):seed();if(!raw)save();}
+  catch{tasks=seed();}
 }
-function save() { localStorage.setItem(KEY, JSON.stringify(tasks)); }
+function save(){localStorage.setItem(KEY,JSON.stringify(tasks));}
 
-function seed() {
-  const t = d => { const x=new Date(); x.setDate(x.getDate()+d); return x.toISOString().slice(0,10); };
+function seed(){
+  const t=d=>{const x=new Date();x.setDate(x.getDate()+d);return x.toISOString().slice(0,10);};
   return [
-    {id:1,name:'週次レポートを提出する',        cat:'仕事',catCustom:'',due:t(1), imp:true, urg:true, done:false,doneAt:null,delegateResult:null},
-    {id:2,name:'チームミーティング資料の準備',  cat:'仕事',catCustom:'',due:t(3), imp:true, urg:false,done:false,doneAt:null,delegateResult:null},
-    {id:3,name:'経費精算を申請する',            cat:'仕事',catCustom:'',due:t(1), imp:false,urg:true, done:false,doneAt:null,delegateResult:null},
-    {id:4,name:'オンラインセミナーの参加登録',  cat:'学習',catCustom:'',due:'',   imp:false,urg:false,done:false,doneAt:null,delegateResult:null},
+    {id:1,name:'週次レポートを提出する',       cat:'仕事',catCustom:'',due:t(1),imp:true, urg:true, done:false,doneAt:null,delegateResult:null},
+    {id:2,name:'チームミーティング資料の準備', cat:'仕事',catCustom:'',due:t(3),imp:true, urg:false,done:false,doneAt:null,delegateResult:null},
+    {id:3,name:'経費精算を申請する',           cat:'仕事',catCustom:'',due:t(1),imp:false,urg:true, done:false,doneAt:null,delegateResult:null},
+    {id:4,name:'オンラインセミナーの参加登録', cat:'学習',catCustom:'',due:'',  imp:false,urg:false,done:false,doneAt:null,delegateResult:null},
   ];
 }
 
-function classify(t) {
-  if (t.imp && t.urg)  return 'urgent';
-  if (t.imp && !t.urg) return 'schedule';
-  if (!t.imp && t.urg) return 'delegate';
+function classify(t){
+  if(t.imp&&t.urg)return 'urgent';
+  if(t.imp&&!t.urg)return 'schedule';
+  if(!t.imp&&t.urg)return 'delegate';
   return 'hold';
 }
-function catLabel(t) { return t.cat === 'カスタム' ? (t.catCustom || 'カスタム') : t.cat; }
+function catLabel(t){return t.cat==='カスタム'?(t.catCustom||'カスタム'):t.cat;}
 
-function renderHeader() {
-  const d = new Date();
-  const days = ['日','月','火','水','木','金','土'];
-  document.getElementById('todayLbl').textContent =
+// ── Header ───────────────────────────────────────────────────────────────────
+function renderHeader(){
+  const d=new Date(),days=['日','月','火','水','木','金','土'];
+  document.getElementById('todayLbl').textContent=
     `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`;
 }
 
-function renderKPI() {
-  const today  = todayISO();
-  const total  = tasks.length;
-  const done   = tasks.filter(t=>t.done).length;
-  const undone = total - done;
-  const rate   = total ? Math.round(done/total*100) : 0;
-  const wkDone = tasks.filter(t=>t.done && t.doneAt >= weekStartMs()).length;
-  const urgent = tasks.filter(t=>!t.done && t.imp && t.urg).length;
-  const overL  = tasks.filter(t=>!t.done && t.due && t.due < today);
-  const over   = overL.length;
-
-  document.getElementById('k-total').textContent     = total;
-  document.getElementById('k-total-sub').textContent = `未完了 ${undone} / 完了 ${done}`;
-  document.getElementById('k-rate').textContent      = rate+'%';
-  document.getElementById('k-rate-bar').style.width  = rate+'%';
-  document.getElementById('k-rate-sub').textContent  = `今週完了 ${wkDone}件`;
-  document.getElementById('k-urgent').textContent    = urgent;
-  document.getElementById('k-urgent-card').className = 'kpi-card'+(urgent>0?' kpi-danger':'');
-  document.getElementById('k-overdue').textContent   = over;
-  document.getElementById('k-overdue-card').className= 'kpi-card'+(over>0?' kpi-danger':'');
-  if (over > 0) {
-    const max = Math.max(...overL.map(t=>dayDiff(t.due)));
-    document.getElementById('k-overdue-sub').textContent = `最古の超過 ${max}日前`;
-  } else {
-    document.getElementById('k-overdue-sub').textContent = '期限超過なし';
-  }
+// ── Urgent badge ─────────────────────────────────────────────────────────────
+function renderUrgentBadge(){
+  const n=tasks.filter(t=>!t.done&&t.imp&&t.urg).length;
+  document.getElementById('urgent-num').textContent=n;
+  document.getElementById('urgent-badge').className='urgent-badge'+(n===0?' zero':'');
 }
 
-function renderCatChart() {
-  const svg = document.getElementById('svg-cat');
-  const W   = svg.parentElement.clientWidth - 32;
-  const H   = 140;
-  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
-  svg.setAttribute('width', W);
-  svg.innerHTML = '';
+// ── KPI ──────────────────────────────────────────────────────────────────────
+function renderKPI(){
+  const today=todayISO(),total=tasks.length,done=tasks.filter(t=>t.done).length;
+  const undone=total-done,rate=total?Math.round(done/total*100):0;
+  const wkDone=tasks.filter(t=>t.done&&t.doneAt&&t.doneAt>=weekStartMs()).length;
+  const urgent=tasks.filter(t=>!t.done&&t.imp&&t.urg).length;
+  const overL=tasks.filter(t=>!t.done&&t.due&&t.due<today),over=overL.length;
 
-  const undone = tasks.filter(t=>!t.done);
-  const map = {};
-  undone.forEach(t => { const c=catLabel(t); map[c]=(map[c]||0)+1; });
-  const cats = Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  document.getElementById('k-total').textContent=total;
+  document.getElementById('k-total-sub').textContent=`未完了 ${undone} / 完了 ${done}`;
+  document.getElementById('k-rate').textContent=rate+'%';
+  document.getElementById('k-rate-bar').style.width=rate+'%';
+  document.getElementById('k-rate-sub').textContent=`今週完了 ${wkDone}件`;
+  document.getElementById('k-urgent').textContent=urgent;
+  document.getElementById('k-urgent-card').className='kpi-card'+(urgent>0?' kpi-danger':'');
+  document.getElementById('k-overdue').textContent=over;
+  document.getElementById('k-overdue-card').className='kpi-card'+(over>0?' kpi-danger':'');
+  document.getElementById('k-overdue-sub').textContent=
+    over>0?`最古の超過 ${Math.max(...overL.map(t=>dayDiff(t.due)))}日前`:'期限超過なし';
+}
 
-  if (!cats.length) {
-    const txt = svgEl('text',{x:W/2,y:H/2,'text-anchor':'middle',fill:'#9E9C96','font-size':12,'font-family':'Georgia,serif'});
-    txt.textContent = 'データなし';
-    svg.appendChild(txt);
+// ── Category bar chart ───────────────────────────────────────────────────────
+function renderCatChart(){
+  const svg=document.getElementById('svg-cat');
+  const W=svg.parentElement.clientWidth-32;if(W<=0)return;
+  const H=130;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);svg.innerHTML='';
+
+  const undone=tasks.filter(t=>!t.done);
+  const map={};undone.forEach(t=>{const c=catLabel(t);map[c]=(map[c]||0)+1;});
+  const cats=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  if(!cats.length){
+    svg.appendChild(svgEl('text',{x:W/2,y:H/2,'text-anchor':'middle',fill:'#9E9C96','font-size':12,'font-family':'Georgia,serif'},'データなし'));
+    return;
+  }
+  const maxV=cats[0][1],lblW=52,numW=18,barW=W-lblW-numW-8,rowH=18,gap=8;
+  const totalH=cats.length*(rowH+gap)-gap,topPad=(H-totalH)/2;
+  const colors=['#185FA5','#2E7AC9','#4A95DD','#6EB0EE','#8FC5F5'];
+  cats.forEach(([cat,cnt],i)=>{
+    const y=topPad+i*(rowH+gap);
+    svg.appendChild(svgEl('text',{x:0,y:y+rowH-3,fill:'#6B6965','font-size':11,'font-family':'Georgia,serif'},cat.length>5?cat.slice(0,4)+'…':cat));
+    svg.appendChild(svgEl('rect',{x:lblW,y,width:barW,height:rowH,rx:3,fill:'#F4F3EF'}));
+    svg.appendChild(svgEl('rect',{x:lblW,y,width:Math.max(6,(cnt/maxV)*barW),height:rowH,rx:3,fill:colors[i%5]}));
+    svg.appendChild(svgEl('text',{x:lblW+barW+5,y:y+rowH-3,fill:'#1A1A1A','font-size':11,'font-weight':600,'font-family':'Georgia,serif'},cnt));
+  });
+}
+
+// ── Pie / donut chart ────────────────────────────────────────────────────────
+const Q_META={
+  urgent:  {label:'すぐやる',color:'#D94F4F'},
+  schedule:{label:'後でやる',color:'#185FA5'},
+  delegate:{label:'任せる',  color:'#C07A1A'},
+  hold:    {label:'保留',    color:'#A8A49E'},
+};
+
+function donutArc(cx,cy,r,ir,s,e){
+  const rad=a=>(a-90)*Math.PI/180;
+  const x1=cx+r*Math.cos(rad(s)),y1=cy+r*Math.sin(rad(s));
+  const x2=cx+r*Math.cos(rad(e)),y2=cy+r*Math.sin(rad(e));
+  const ix1=cx+ir*Math.cos(rad(e)),iy1=cy+ir*Math.sin(rad(e));
+  const ix2=cx+ir*Math.cos(rad(s)),iy2=cy+ir*Math.sin(rad(s));
+  const lg=(e-s)>180?1:0;
+  return `M${x1} ${y1} A${r} ${r} 0 ${lg} 1 ${x2} ${y2} L${ix1} ${iy1} A${ir} ${ir} 0 ${lg} 0 ${ix2} ${iy2}Z`;
+}
+
+function renderPieChart(){
+  const svg=document.getElementById('svg-pie');
+  const legend=document.getElementById('pie-legend');
+  const W=svg.parentElement.clientWidth-32;if(W<=0)return;
+  const H=130;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);
+  svg.innerHTML='';legend.innerHTML='';
+
+  const undone=tasks.filter(t=>!t.done);
+  const counts={urgent:0,schedule:0,delegate:0,hold:0};
+  undone.forEach(t=>counts[classify(t)]++);
+  const total=undone.length;
+
+  if(!total){
+    svg.appendChild(svgEl('text',{x:W/2,y:H/2,'text-anchor':'middle',fill:'#9E9C96','font-size':12,'font-family':'Georgia,serif'},'データなし'));
     return;
   }
 
-  const maxV  = cats[0][1];
-  const lblW  = 54;
-  const numW  = 20;
-  const barW  = W - lblW - numW - 8;
-  const rowH  = 18;
-  const gap   = 8;
-  const totalH= cats.length*(rowH+gap)-gap;
-  const topPad= (H-totalH)/2;
+  const cx=H/2,cy=H/2,r=H/2-6,ir=r*0.52;
+  let angle=0;
 
-  cats.forEach(([cat,cnt],i) => {
-    const y = topPad + i*(rowH+gap);
-    const lbl = svgEl('text',{x:0,y:y+rowH-3,fill:'#6B6965','font-size':11,'font-family':'Georgia,serif'});
-    lbl.textContent = cat.length>5 ? cat.slice(0,4)+'…' : cat;
-    svg.appendChild(lbl);
-    svg.appendChild(svgEl('rect',{x:lblW,y,width:barW,height:rowH,rx:3,fill:'#F4F3EF'}));
-    const fillW = Math.max(6,(cnt/maxV)*barW);
-    const colors = ['#185FA5','#2E7AC9','#4A95DD','#6EB0EE','#8FC5F5'];
-    svg.appendChild(svgEl('rect',{x:lblW,y,width:fillW,height:rowH,rx:3,fill:colors[i%colors.length]}));
-    const num = svgEl('text',{x:lblW+barW+6,y:y+rowH-3,fill:'#1A1A1A','font-size':11,'font-weight':600,'font-family':'Georgia,serif'});
-    num.textContent = cnt;
-    svg.appendChild(num);
+  ['urgent','schedule','delegate','hold'].forEach(key=>{
+    const cnt=counts[key];if(!cnt)return;
+    const span=(cnt/total)*360,end=angle+span;
+    svg.appendChild(svgEl('path',{d:donutArc(cx,cy,r,ir,angle,end-0.01),fill:Q_META[key].color}));
+    if(span>24){
+      const mid=(angle+end)/2;
+      const lx=cx+(r*0.76)*Math.cos((mid-90)*Math.PI/180);
+      const ly=cy+(r*0.76)*Math.sin((mid-90)*Math.PI/180);
+      svg.appendChild(svgEl('text',{x:lx,y:ly+4,'text-anchor':'middle',fill:'#fff','font-size':11,'font-weight':700,'font-family':'Georgia,serif'},cnt));
+    }
+    angle=end;
+    const item=document.createElement('div');item.className='pie-legend-item';
+    const dot=document.createElement('div');dot.className='pie-dot';dot.style.background=Q_META[key].color;
+    const lbl=document.createElement('span');lbl.textContent=`${Q_META[key].label} ${cnt}件`;
+    item.appendChild(dot);item.appendChild(lbl);legend.appendChild(item);
   });
+
+  // center
+  svg.appendChild(svgEl('text',{x:cx,y:cy-4,'text-anchor':'middle',fill:'#1A1A1A','font-size':18,'font-weight':700,'font-family':'Georgia,serif'},total));
+  svg.appendChild(svgEl('text',{x:cx,y:cy+11,'text-anchor':'middle',fill:'#9E9C96','font-size':9,'font-family':'Georgia,serif'},'未完了'));
 }
 
-function renderTrendChart() {
-  const svg = document.getElementById('svg-trend');
-  const W   = svg.parentElement.clientWidth - 32;
-  const H   = 140;
-  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
-  svg.setAttribute('width', W);
-  svg.innerHTML = '';
+// ── Weekly trend ─────────────────────────────────────────────────────────────
+function renderTrendChart(){
+  const svg=document.getElementById('svg-trend');
+  const W=svg.parentElement.clientWidth-32;if(W<=0)return;
+  const H=110;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);svg.innerHTML='';
 
-  const now = new Date(); now.setHours(0,0,0,0);
-  const days7 = Array.from({length:7},(_,i)=>{
-    const d=new Date(now); d.setDate(now.getDate()-6+i); return d;
+  const now=new Date();now.setHours(0,0,0,0);
+  const days7=Array.from({length:7},(_,i)=>{const d=new Date(now);d.setDate(now.getDate()-6+i);return d;});
+  const counts=days7.map(d=>{
+    const s=d.getTime(),e=s+86400000;
+    return tasks.filter(t=>t.done&&t.doneAt!=null&&t.doneAt>=s&&t.doneAt<e).length;
   });
-  const counts = days7.map(d=>{
-    const s=d.getTime(), e=s+86400000;
-    return tasks.filter(t=>t.done && t.doneAt!=null && t.doneAt>=s && t.doneAt<e).length;
-  });
+  const maxC=Math.max(...counts,1);
+  const pL=20,pR=10,pT=14,pB=24,plotW=W-pL-pR,plotH=H-pT-pB,step=plotW/6;
+  const pts=counts.map((c,i)=>({x:pL+i*step,y:pT+plotH-(c/maxC)*plotH}));
 
-  const maxC  = Math.max(...counts, 1);
-  const pL=24, pR=10, pT=18, pB=28;
-  const plotW = W-pL-pR;
-  const plotH = H-pT-pB;
-  const step  = plotW/6;
-  const pts = counts.map((c,i)=>({ x:pL+i*step, y:pT+plotH-(c/maxC)*plotH }));
-
-  let area = `M${pts[0].x} ${pT+plotH}`;
-  pts.forEach(p=>{ area+=` L${p.x} ${p.y}`; });
-  area+=` L${pts[6].x} ${pT+plotH} Z`;
+  let area=`M${pts[0].x} ${pT+plotH}`;pts.forEach(p=>{area+=` L${p.x} ${p.y}`;});area+=` L${pts[6].x} ${pT+plotH}Z`;
   svg.appendChild(svgEl('path',{d:area,fill:'#E6F1FB'}));
-
-  let line = `M${pts[0].x} ${pts[0].y}`;
-  pts.slice(1).forEach(p=>{ line+=` L${p.x} ${p.y}`; });
+  let line=`M${pts[0].x} ${pts[0].y}`;pts.slice(1).forEach(p=>{line+=` L${p.x} ${p.y}`;});
   svg.appendChild(svgEl('path',{d:line,fill:'none',stroke:'#185FA5','stroke-width':1.8}));
-
   pts.forEach((p,i)=>{
     svg.appendChild(svgEl('circle',{cx:p.x,cy:p.y,r:3,fill:'#185FA5'}));
-    if (counts[i]>0) {
-      const num = svgEl('text',{x:p.x,y:p.y-7,'text-anchor':'middle',fill:'#185FA5','font-size':10,'font-weight':600,'font-family':'Georgia,serif'});
-      num.textContent = counts[i];
-      svg.appendChild(num);
-    }
+    if(counts[i]>0)svg.appendChild(svgEl('text',{x:p.x,y:p.y-6,'text-anchor':'middle',fill:'#185FA5','font-size':10,'font-weight':700,'font-family':'Georgia,serif'},counts[i]));
     const d=days7[i];
-    const lbl = svgEl('text',{x:p.x,y:H-7,'text-anchor':'middle',fill:'#9E9C96','font-size':10,'font-family':'Georgia,serif'});
-    lbl.textContent = `${d.getMonth()+1}/${d.getDate()}`;
-    svg.appendChild(lbl);
+    svg.appendChild(svgEl('text',{x:p.x,y:H-4,'text-anchor':'middle',fill:'#9E9C96','font-size':10,'font-family':'Georgia,serif'},`${d.getMonth()+1}/${d.getDate()}`));
   });
-
   svg.appendChild(svgEl('line',{x1:pL,y1:pT+plotH,x2:W-pR,y2:pT+plotH,stroke:'#DDD9D0','stroke-width':0.5}));
 }
 
-function renderMatrix() {
-  const today = todayISO();
-  const qs = {urgent:[],schedule:[],delegate:[],hold:[]};
-  tasks.forEach(t => qs[classify(t)].push(t));
-
-  const sortByDue = arr => arr.sort((a,b)=>{
-    if (!a.due&&!b.due) return 0;
-    if (!a.due) return 1;
-    if (!b.due) return -1;
-    return a.due.localeCompare(b.due);
+// ── Matrix ───────────────────────────────────────────────────────────────────
+function renderMatrix(){
+  const today=todayISO();
+  const qs={urgent:[],schedule:[],delegate:[],hold:[]};
+  tasks.forEach(t=>qs[classify(t)].push(t));
+  const sort=arr=>arr.sort((a,b)=>{
+    if(!a.due&&!b.due)return 0;if(!a.due)return 1;if(!b.due)return -1;return a.due.localeCompare(b.due);
   });
-
-  ['urgent','schedule','delegate','hold'].forEach(key => {
-    sortByDue(qs[key]);
-    const undone = qs[key].filter(t=>!t.done).length;
-    document.getElementById('cnt-'+key).textContent = undone+'件';
-    const el = document.getElementById('list-'+key);
-    el.innerHTML = '';
-    if (!qs[key].length) {
-      el.innerHTML = '<div class="task-empty">タスクなし</div>';
-      return;
-    }
-    qs[key].forEach(t => el.appendChild(buildTaskRow(t, key, today)));
+  ['urgent','schedule','delegate','hold'].forEach(key=>{
+    sort(qs[key]);
+    const undone=qs[key].filter(t=>!t.done).length;
+    document.getElementById('cnt-'+key).textContent=undone+'件';
+    const el=document.getElementById('list-'+key);el.innerHTML='';
+    if(!qs[key].length){el.innerHTML='<div class="task-empty">タスクなし</div>';return;}
+    qs[key].forEach(t=>el.appendChild(buildRow(t,key,today)));
   });
 }
 
-function buildTaskRow(t, quadrant, today) {
-  const overdue = !t.done && t.due && t.due < today;
-  const div = document.createElement('div');
-  div.className = 'titem'+(t.done?' done':'')+(overdue?' row-overdue':'');
+function buildRow(t,quad,today){
+  const overdue=!t.done&&t.due&&t.due<today;
+  const div=document.createElement('div');
+  div.className='titem'+(t.done?' done':'')+(overdue?' row-overdue':'');
 
-  const cb = document.createElement('input');
-  cb.type='checkbox'; cb.className='tchk'; cb.checked=t.done;
-  if (quadrant==='delegate' && !t.done) {
-    cb.addEventListener('change', ()=>{ cb.checked=false; toggleDelegateUI(div, t); });
-  } else {
-    cb.addEventListener('change', ()=> complete(t.id));
-  }
+  const cb=document.createElement('input');cb.type='checkbox';cb.className='tchk';cb.checked=t.done;
+  if(quad==='delegate'&&!t.done){
+    cb.addEventListener('change',()=>{cb.checked=false;toggleDlgUI(div,t);});
+  }else{cb.addEventListener('change',()=>complete(t.id));}
   div.appendChild(cb);
 
-  const name = document.createElement('span');
-  name.className='tname'; name.textContent=t.name;
+  const name=document.createElement('span');name.className='tname';name.textContent=t.name;
   div.appendChild(name);
 
-  if (t.done && t.delegateResult) {
-    const b=document.createElement('span');
-    b.className='rbadge '+t.delegateResult;
-    b.textContent=t.delegateResult==='delegated'?'任せた':'自分で';
-    div.appendChild(b);
+  if(t.done&&t.delegateResult){
+    const b=document.createElement('span');b.className='rbadge '+t.delegateResult;
+    b.textContent=t.delegateResult==='delegated'?'任せた':'自分で';div.appendChild(b);
   }
 
-  const cat=document.createElement('span');
-  cat.className='tcat'; cat.textContent=catLabel(t);
-  div.appendChild(cat);
+  const cat=document.createElement('span');cat.className='tcat';cat.textContent=catLabel(t);div.appendChild(cat);
 
-  if (t.due) {
-    const due=document.createElement('span');
-    due.className='tdue'+(overdue?' overdue':'');
+  if(t.due){
+    const due=document.createElement('span');due.className='tdue'+(overdue?' overdue':'');
     const d=new Date(t.due+'T00:00:00');
-    due.textContent=(overdue?'⚠ ':'')+`${d.getMonth()+1}/${d.getDate()}`;
-    div.appendChild(due);
+    due.textContent=(overdue?'⚠ ':'')+`${d.getMonth()+1}/${d.getDate()}`;div.appendChild(due);
   }
 
-  const del=document.createElement('button');
-  del.className='tdel'; del.textContent='×';
-  del.addEventListener('click',()=>{ tasks=tasks.filter(x=>x.id!==t.id); save(); render(); });
-  div.appendChild(del);
-
-  return div;
+  const del=document.createElement('button');del.className='tdel';del.textContent='×';
+  del.addEventListener('click',()=>{tasks=tasks.filter(x=>x.id!==t.id);save();render();});
+  div.appendChild(del);return div;
 }
 
-function toggleDelegateUI(row, t) {
-  const existing = row.querySelector('.dlg-ui');
-  if (existing) { existing.remove(); return; }
-
-  const ui=document.createElement('div'); ui.className='dlg-ui';
-  const mkBtn=(label,cls,result)=>{
-    const b=document.createElement('button');
-    b.className='dlg-btn '+cls; b.textContent=label;
-    b.addEventListener('click',()=>complete(t.id, result));
-    return b;
+function toggleDlgUI(row,t){
+  const ex=row.querySelector('.dlg-ui');if(ex){ex.remove();return;}
+  const ui=document.createElement('div');ui.className='dlg-ui';
+  const mk=(lbl,cls,res)=>{
+    const b=document.createElement('button');b.className='dlg-btn '+cls;b.textContent=lbl;
+    b.addEventListener('click',()=>complete(t.id,res));return b;
   };
-  ui.appendChild(mkBtn('委任して完了','d','delegated'));
-  ui.appendChild(mkBtn('自分でやった','s','self'));
+  ui.appendChild(mk('委任して完了','d','delegated'));
+  ui.appendChild(mk('自分でやった','s','self'));
   row.querySelector('.tname').after(ui);
 }
 
-function complete(id, delegateResult) {
-  const t=tasks.find(x=>x.id===id); if(!t) return;
+function complete(id,delegateResult){
+  const t=tasks.find(x=>x.id===id);if(!t)return;
   t.done=!t.done;
-  if (t.done) {
-    t.doneAt=Date.now();
-    if (delegateResult!==undefined) t.delegateResult=delegateResult;
-  } else {
-    t.doneAt=null; t.delegateResult=null;
-  }
-  save(); render();
+  if(t.done){t.doneAt=Date.now();if(delegateResult!==undefined)t.delegateResult=delegateResult;}
+  else{t.doneAt=null;t.delegateResult=null;}
+  save();render();
 }
 
-function initForm() {
-  const fcat=document.getElementById('f-cat');
-  const fcatc=document.getElementById('f-catc');
+// ── Form ─────────────────────────────────────────────────────────────────────
+function initForm(){
+  const fcat=document.getElementById('f-cat'),fcatc=document.getElementById('f-catc');
   fcat.addEventListener('change',()=>{
-    const show=fcat.value==='カスタム';
-    fcatc.style.display=show?'inline-block':'none';
-    if(!show) fcatc.value='';
+    const show=fcat.value==='カスタム';fcatc.style.display=show?'inline-block':'none';
+    if(!show)fcatc.value='';
   });
-  document.getElementById('f-add').addEventListener('click', submit);
-  document.getElementById('f-name').addEventListener('keydown',e=>{ if(e.key==='Enter') submit(); });
+  document.getElementById('f-add').addEventListener('click',submit);
+  document.getElementById('f-name').addEventListener('keydown',e=>{if(e.key==='Enter')submit();});
 }
 
-function submit() {
+function submit(){
   const name=document.getElementById('f-name').value.trim();
-  if(!name){ document.getElementById('f-name').focus(); return; }
+  if(!name){document.getElementById('f-name').focus();return;}
   const cat=document.getElementById('f-cat').value;
   const catC=document.getElementById('f-catc').value.trim();
-  if(cat==='カスタム'&&!catC){ document.getElementById('f-catc').focus(); return; }
-
+  if(cat==='カスタム'&&!catC){document.getElementById('f-catc').focus();return;}
   tasks.push({
-    id: Date.now(),
-    name,
-    cat,
-    catCustom: cat==='カスタム' ? catC : '',
-    due:  document.getElementById('f-due').value,
-    imp:  document.getElementById('f-imp').checked,
-    urg:  document.getElementById('f-urg').checked,
-    done: false, doneAt: null, delegateResult: null,
+    id:Date.now(),name,cat,catCustom:cat==='カスタム'?catC:'',
+    due:document.getElementById('f-due').value,
+    imp:document.getElementById('f-imp').checked,
+    urg:document.getElementById('f-urg').checked,
+    done:false,doneAt:null,delegateResult:null,
   });
   save();
-
   document.getElementById('f-name').value='';
   document.getElementById('f-due').value='';
   document.getElementById('f-imp').checked=false;
   document.getElementById('f-urg').checked=false;
-  if(cat==='カスタム') document.getElementById('f-catc').value='';
-
+  if(cat==='カスタム')document.getElementById('f-catc').value='';
   render();
 }
 
-function render() {
-  renderKPI();
-  renderMatrix();
-  renderCatChart();
-  renderTrendChart();
+// ── Tabs ─────────────────────────────────────────────────────────────────────
+let activeTab='tasks';
+function initTabs(){
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const tab=btn.dataset.tab;if(tab===activeTab)return;
+      activeTab=tab;
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+      document.querySelectorAll('.tab-pane').forEach(p=>p.classList.toggle('active',p.id==='tab-'+tab));
+      if(tab==='dashboard')renderCharts();
+    });
+  });
 }
 
+// ── Charts ───────────────────────────────────────────────────────────────────
+function renderCharts(){renderCatChart();renderPieChart();renderTrendChart();}
+
+// ── Render ───────────────────────────────────────────────────────────────────
+function render(){
+  renderUrgentBadge();
+  renderMatrix();
+  renderKPI();
+  if(activeTab==='dashboard')renderCharts();
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
 renderHeader();
 load();
 initForm();
+initTabs();
 requestAnimationFrame(render);
-window.addEventListener('resize', ()=>{ renderCatChart(); renderTrendChart(); });
+window.addEventListener('resize',()=>{if(activeTab==='dashboard')renderCharts();});
 </script>
 </body>
 </html>
