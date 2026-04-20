@@ -54,7 +54,7 @@ export default function TaskManagerPage() {
               <span key={tag} style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', padding: '4px 10px', border: `1px solid ${i < 2 ? orange : '#2a2a2a'}`, color: i < 2 ? orange : '#666' }}>{tag}</span>
             ))}
           </div>
-          <a href="/todo-manager/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: orange, color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
+          <a href="/todo-manager-app/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: orange, color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             今すぐ使う →
           </a>
         </div>
@@ -111,7 +111,7 @@ export default function TaskManagerPage() {
         <p style={{ fontSize: '13px', color: '#aaa', marginBottom: '32px' }}>
           ブラウザを閉じてもデータは残ります。
         </p>
-        <a href="/todo-manager/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: orange, color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
+        <a href="/todo-manager-app/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: orange, color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
           Task Manager を使う →
         </a>
       </div>
