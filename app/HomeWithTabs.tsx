@@ -113,6 +113,7 @@ const APPS: App[] = [
     ctaUrl: '/todo-manager-app/',
     detailUrl: '/todo-manager',
     category: '日常・ライフ',
+    screenshot: '/screenshots/todo-manager.png',
   },
   {
     icon: '🛒',
