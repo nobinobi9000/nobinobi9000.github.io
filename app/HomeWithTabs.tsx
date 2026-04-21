@@ -44,6 +44,7 @@ const APPS: App[] = [
     ctaUrl: 'https://subshari.nobi-labo.com',
     detailUrl: '/subshari',
     category: 'お金・投資',
+    screenshot: '/screenshots/subshari-list.png',
   },
   {
     icon: '🧮',
@@ -54,16 +55,6 @@ const APPS: App[] = [
     detailUrl: '/tax-simulator.html',
     category: 'お金・投資',
     screenshot: '/screenshots/tax-simulator.png',
-  },
-  {
-    icon: '🧊',
-    name: 'ねこおじさんタイマー',
-    desc: '会議を凍らせる、愛すべきおやじ。\nカウントダウン終了後、ねこおじさんがAI生成おやじギャグで締める会議タイマー。',
-    tags: ['会議タイマー', 'おやじギャグ', 'AI生成', '無料'],
-    ctaUrl: '/meeting-timer',
-    detailUrl: '/nekoojiisan-timer',
-    category: '日常・ライフ',
-    screenshot: '/screenshots/nekoojiisan-timer.png',
   },
   {
     icon: '📊',
@@ -93,7 +84,7 @@ const APPS: App[] = [
     ctaUrl: 'https://kabu.nobi-labo.com',
     detailUrl: '/kabu-note',
     category: 'お金・投資',
-    screenshot: '/screenshots/kabu-note.png',
+    screenshot: '/screenshots/kabu-note/Stocks.png',
   },
   {
     icon: '🌱',
@@ -103,7 +94,7 @@ const APPS: App[] = [
     ctaUrl: 'https://mebae.nobi-labo.com',
     detailUrl: '/mebae',
     category: '日常・ライフ',
-    screenshot: '/screenshots/mebae.png',
+    screenshot: '/screenshots/mebae/top.png',
   },
   {
     icon: '📋',
@@ -113,7 +104,7 @@ const APPS: App[] = [
     ctaUrl: '/todo-manager-app/',
     detailUrl: '/todo-manager',
     category: '日常・ライフ',
-    screenshot: '/screenshots/todo-manager.png',
+    screenshot: '/screenshots/taskmanager_top.png',
   },
   {
     icon: '🛒',
@@ -123,6 +114,17 @@ const APPS: App[] = [
     ctaUrl: 'https://sorosoro.nobi-labo.com',
     detailUrl: '/sorosoro',
     category: '日常・ライフ',
+    screenshot: '/screenshots/sorosoro/top.png',
+  },
+  {
+    icon: '🧊',
+    name: 'ねこおじさんタイマー',
+    desc: '会議を凍らせる、愛すべきおやじ。\nカウントダウン終了後、ねこおじさんがAI生成おやじギャグで締める会議タイマー。',
+    tags: ['会議タイマー', 'おやじギャグ', 'AI生成', '無料'],
+    ctaUrl: '/meeting-timer',
+    detailUrl: '/nekoojiisan-timer',
+    category: '日常・ライフ',
+    screenshot: '/screenshots/nekoojiisan-timer.png',
   },
 ]
 
