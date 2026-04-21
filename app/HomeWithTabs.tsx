@@ -156,13 +156,26 @@ function MobileAppCard({ app }: { app: App }) {
 
 export default function HomeWithTabs({ posts }: { posts: Post[] }) {
   const [tab, setTab] = useState<'apps' | 'blog'>('apps')
-  const [featuredIndex] = useState<number>(() => Math.floor(Math.random() * APPS.length))
+  const [featuredIndex, setFeaturedIndex] = useState<number>(() => Math.floor(Math.random() * APPS.length))
   const [catFilter, setCatFilter] = useState<'すべて' | '日常・ライフ' | 'お金・投資'>('すべて')
+  const [paused, setPaused] = useState(false)
+  const [animKey, setAnimKey] = useState(0)
+  const [restartSignal, setRestartSignal] = useState(0)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     if (params.get('tab') === 'blog') setTab('blog')
   }, [])
+
+  // 5秒ごとに自動ローテーション
+  useEffect(() => {
+    if (paused) return
+    const timer = setInterval(() => {
+      setFeaturedIndex(i => (i + 1) % APPS.length)
+      setAnimKey(k => k + 1)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [paused, restartSignal])
 
   function handleTab(t: 'apps' | 'blog') {
     setTab(t)
@@ -172,9 +185,14 @@ export default function HomeWithTabs({ posts }: { posts: Post[] }) {
     window.history.replaceState({}, '', url.toString())
   }
 
+  function handleThumbClick(i: number) {
+    setFeaturedIndex(i)
+    setAnimKey(k => k + 1)
+    setRestartSignal(s => s + 1)
+  }
+
   const featuredApp = APPS[featuredIndex]
   const mobileApps = catFilter === 'すべて' ? APPS : APPS.filter(a => a.category === catFilter)
-  const groupedApps = CATEGORIES.map(cat => ({ label: cat, apps: APPS.filter(a => a.category === cat) }))
 
   return (
     <div className="section">
@@ -190,69 +208,69 @@ export default function HomeWithTabs({ posts }: { posts: Post[] }) {
 
           {/* ── PC LAYOUT ── */}
           <div className="pc-layout">
-            {/* Feature card */}
-            <div className="feature-card">
-              <div className="feature-card-body">
-                <span className="feature-card-category">{featuredApp.category}</span>
-                <div className="feature-card-name">{featuredApp.name}</div>
-                <div className="feature-card-desc">
-                  {featuredApp.desc.split('\n').map((line, i, arr) => (
-                    <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-                  ))}
-                </div>
-                <div className="app-tags">
-                  {featuredApp.tags.map(t => <span key={t} className="tag">{t}</span>)}
-                </div>
-                <div className="feature-card-actions">
-                  <a href={featuredApp.ctaUrl} className="feature-cta">今すぐ使う</a>
-                  <a href={featuredApp.detailUrl} className="app-sub-link">詳細を見る</a>
-                </div>
-              </div>
-              <div className="feature-phone">
-                <div className="feature-phone-notch" />
-                {featuredApp.screenshot
-                  ? <img src={featuredApp.screenshot} alt={featuredApp.name} />
-                  : <div className="feature-phone-placeholder">{featuredApp.icon}</div>
-                }
-              </div>
-            </div>
 
-            {/* Carousel — カテゴリごとに独立した行 */}
-            <div className="carousel-rows">
-              {groupedApps.map(group => (
-                <div key={group.label} className="carousel-row">
-                  <div className="category-label">{group.label}</div>
-                  <div className="carousel-row-track">
-                    {group.apps.map(app => (
-                      <div key={app.name} className="carousel-card">
-                        <div className="carousel-card-top">
-                          <span className="carousel-icon">{app.icon}</span>
-                          <span className="app-badge">Live</span>
-                        </div>
-                        <div className="carousel-name">{app.name}</div>
-                        <div className="app-tags" style={{ marginBottom: '12px' }}>
-                          {app.tags.slice(0, 2).map(t => <span key={t} className="tag">{t}</span>)}
-                        </div>
-                        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: 'auto' }}>
-                          <a href={app.ctaUrl} className="carousel-cta">使う →</a>
-                          <a href={app.detailUrl} className="app-sub-link" style={{ fontSize: '9px' }}>詳細</a>
-                        </div>
-                      </div>
+            {/* Spotlight — 自動ローテーション */}
+            <div
+              className="spotlight-wrapper"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => { setPaused(false); setAnimKey(k => k + 1); setRestartSignal(s => s + 1) }}
+            >
+              <div className="feature-card">
+                <div key={featuredIndex} className="feature-card-body spotlight-fade">
+                  <span className="feature-card-category">{featuredApp.category}</span>
+                  <div className="feature-card-name">{featuredApp.name}</div>
+                  <div className="feature-card-desc">
+                    {featuredApp.desc.split('\n').map((line, i, arr) => (
+                      <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
                     ))}
                   </div>
+                  <div className="app-tags">
+                    {featuredApp.tags.map(t => <span key={t} className="tag">{t}</span>)}
+                  </div>
+                  <div className="feature-card-actions">
+                    <a href={featuredApp.ctaUrl} className="feature-cta">今すぐ使う</a>
+                    <a href={featuredApp.detailUrl} className="app-sub-link">詳細を見る</a>
+                  </div>
                 </div>
-              ))}
+                <div className="feature-phone">
+                  <div className="feature-phone-notch" />
+                  <div key={`phone-${featuredIndex}`} className="spotlight-fade" style={{ width: '100%', height: '100%' }}>
+                    {featuredApp.screenshot
+                      ? <img src={featuredApp.screenshot} alt={featuredApp.name} />
+                      : <div className="feature-phone-placeholder">{featuredApp.icon}</div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              {/* Progress bar */}
+              <div className="spotlight-progress">
+                <div
+                  key={animKey}
+                  className="spotlight-progress-bar"
+                  style={{ animationPlayState: paused ? 'paused' : 'running' }}
+                />
+              </div>
             </div>
 
-            {/* Next App — 最下段 */}
-            <div className="next-app-row">
-              <span className="next-app-icon">🔜</span>
-              <div className="next-app-body">
-                <div className="next-app-name">Next App</div>
-                <div className="next-app-desc">次のアプリを開発中</div>
+            {/* Thumbnail strip — 全アプリ一覧 */}
+            <div className="thumb-strip">
+              {APPS.map((app, i) => (
+                <button
+                  key={app.name}
+                  className={`thumb-item${i === featuredIndex ? ' active' : ''}`}
+                  onClick={() => handleThumbClick(i)}
+                >
+                  <span className="thumb-icon">{app.icon}</span>
+                  <span className="thumb-name">{app.name}</span>
+                </button>
+              ))}
+              <div className="thumb-item thumb-coming">
+                <span className="thumb-icon">🔜</span>
+                <span className="thumb-name">Next App</span>
               </div>
-              <span className="app-badge soon">Coming Soon</span>
             </div>
+
           </div>
 
           {/* ── MOBILE LAYOUT ── */}
