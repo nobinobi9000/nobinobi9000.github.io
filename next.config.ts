@@ -1,6 +1,18 @@
 import type { NextConfig } from 'next'
 
 const config: NextConfig = {
+  async headers() {
+    return [
+      {
+        // japan-stock-screener の静的ファイルを CORS 許可（プロキシ用）
+        source: '/japan-stock-screener/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin',  value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       { source: '/comic-checker.html', destination: '/comic-checker', permanent: true },
