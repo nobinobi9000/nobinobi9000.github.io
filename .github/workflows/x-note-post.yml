@@ -1,0 +1,47 @@
+name: note → X 自動投稿
+
+on:
+  # 毎時30分に実行（x-auto-post.yml の毎時0分と時間をずらす）
+  schedule:
+    - cron: '30 * * * *'
+  # 手動実行（テスト用）
+  workflow_dispatch:
+
+jobs:
+  post-note-to-x:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          # note-posted.json をコミットするため書き込み権限付きで取得
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Node.js をセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: scripts/package.json
+
+      - name: 依存関係をインストール
+        working-directory: scripts
+        run: npm install
+
+      - name: note → X に自動投稿
+        working-directory: scripts
+        run: node post-note-to-x.mjs
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+
+      - name: 投稿済みリストをコミット
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/note-posted.json
+          git diff --staged --quiet || git commit -m "chore: note投稿済みリストを更新"
+          git push

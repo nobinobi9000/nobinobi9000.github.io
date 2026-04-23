@@ -37,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="footer-inner">
             <a href="/" className="footer-logo">nobi<span>-labo</span></a>
             <div className="footer-links">
+              <a href="/about">運営者情報</a>
               <a href="/privacy">プライバシーポリシー</a>
               <a href="/admin/login" style={{ color: '#555', fontSize: '11px' }}>管理</a>
             </div>
