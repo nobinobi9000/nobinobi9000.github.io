@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nobi-labo.com/sitemap.xml
