@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import type { Subscription } from './lib/types'
 import { useSubscriptions } from './hooks/useSubscriptions'
-import { getSubscriptionsNeedingUsageCheck, getSubscriptionsNearRenewal } from './lib/danshariScore'
+import { getSubscriptionsNeedingUsageCheck, getSubscriptionsNearRenewal, getExpiringTrials } from './lib/danshariScore'
 import { needsRateReview } from './lib/investmentCalc'
 import SubscriptionList from './components/SubscriptionList'
 import Dashboard from './components/Dashboard'
@@ -49,6 +49,8 @@ export default function SubshariApp() {
 
   // 投資利率見直しバナー
   const [showRateBanner, setShowRateBanner] = useState(false)
+  // トライアル期限切れバナー
+  const [expiringTrials, setExpiringTrials] = useState<import('./lib/types').Subscription[]>([])
 
   // 起動時チェックは1セッションにつき1回のみ実行
   const startupCheckDone = useRef(false)
@@ -59,6 +61,10 @@ export default function SubshariApp() {
 
     const active = subscriptions.filter((s) => s.status === 'active')
     if (active.length === 0) return
+
+    // 0. 無料トライアル期限切れ（7日以内）— 常時バナー表示（他チェックと並行）
+    const expiring = getExpiringTrials(active, 7)
+    if (expiring.length > 0) setExpiringTrials(expiring)
 
     // 1. 更新1ヶ月前チェック（優先度最高）
     const nearRenewal = getSubscriptionsNearRenewal(active)
@@ -104,6 +110,21 @@ export default function SubshariApp() {
       maxWidth: '640px', margin: '0 auto',
     }}>
       {/* ── 通知バナー ─────────────────────────────── */}
+      {expiringTrials.length > 0 && (
+        <div style={{ background: 'rgba(239,68,68,0.1)', borderBottom: '1px solid rgba(239,68,68,0.2)', padding: '10px 20px' }}>
+          {expiringTrials.map((s) => {
+            const days = Math.round((new Date(s.trialEndDate!).getTime() - Date.now()) / 86_400_000)
+            return (
+              <div key={s.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+                <div style={{ fontSize: '11px', color: '#ef4444', lineHeight: 1.5 }}>
+                  ⚠️ <strong>{s.name}</strong> の無料期間があと{days <= 0 ? '本日' : `${days}日`}で終わります
+                </div>
+              </div>
+            )
+          })}
+          <button onClick={() => setExpiringTrials([])} style={{ position: 'absolute', right: '16px', background: 'none', border: 'none', color: '#555', fontSize: '16px', cursor: 'pointer' }}>✕</button>
+        </div>
+      )}
       {showRateBanner && (
         <div style={{ background: 'rgba(249,115,22,0.1)', borderBottom: '1px solid rgba(249,115,22,0.2)', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
           <div style={{ fontSize: '11px', color: '#f97316', lineHeight: 1.5 }}>

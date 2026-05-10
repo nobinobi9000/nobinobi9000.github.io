@@ -106,6 +106,17 @@ export function getSubscriptionsNeedingUsageCheck(subs: Subscription[]): Subscri
   })
 }
 
+/** 無料トライアルが指定日数以内に終了するサブスク（デフォルト: 7日以内） */
+export function getExpiringTrials(subs: Subscription[], withinDays = 7): Subscription[] {
+  const cutoff = Date.now() + withinDays * 86_400_000
+  const today = Date.now()
+  return subs.filter((s) => {
+    if (s.status !== 'active' || !s.trialEndDate) return false
+    const end = new Date(s.trialEndDate).getTime()
+    return end >= today && end <= cutoff
+  })
+}
+
 /** 更新1ヶ月以内のサブスク */
 export function getSubscriptionsNearRenewal(subs: Subscription[]): Subscription[] {
   const oneMonthFromNow = Date.now() + 31 * 86_400_000

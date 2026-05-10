@@ -33,6 +33,7 @@ export interface Subscription {
   startDate: string      // 'YYYY-MM-DD' 契約開始日
   cancelledAt?: string   // 'YYYY-MM-DD' 解約日（解約済みのみ）
   renewalDate?: string   // 'YYYY-MM-DD' 次回更新日（任意）
+  trialEndDate?: string  // 'YYYY-MM-DD' 無料トライアル終了日（設定されていればトライアル中）
   usageFrequency: UsageFrequency
   usageHistory: UsageRecord[]
   notes?: string

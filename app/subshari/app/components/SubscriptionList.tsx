@@ -25,6 +25,36 @@ const FREQ_LABELS: Record<string, string> = {
 type ListTab = 'active' | 'cancelled'
 type ConfirmAction = { type: 'delete' | 'cancel'; id: string } | null
 
+/** 今日から何日後か（負なら過去） */
+function daysUntil(dateStr: string): number {
+  const target = new Date(dateStr)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  target.setHours(0, 0, 0, 0)
+  return Math.round((target.getTime() - today.getTime()) / 86_400_000)
+}
+
+/** 更新日バッジのテキストと色 */
+function renewalBadge(renewalDate: string | undefined, billingCycle: string): { text: string; color: string } | null {
+  if (!renewalDate) return null
+  const days = daysUntil(renewalDate)
+  if (days < 0 || days > 30) return null
+  const color = days <= 7 ? '#ef4444' : '#f97316'
+  const label = billingCycle === 'annual' ? '年払い更新' : '更新'
+  if (days === 0) return { text: `本日${label}`, color }
+  return { text: `${label}まで${days}日`, color }
+}
+
+/** トライアルバッジのテキストと色 */
+function trialBadge(trialEndDate: string | undefined): { text: string; color: string } | null {
+  if (!trialEndDate) return null
+  const days = daysUntil(trialEndDate)
+  if (days < 0) return null
+  const color = days <= 7 ? '#ef4444' : '#f97316'
+  if (days === 0) return { text: '本日課金開始', color }
+  return { text: `課金開始まで${days}日`, color }
+}
+
 export default function SubscriptionList({
   subscriptions,
   investmentProfileId,
@@ -40,6 +70,21 @@ export default function SubscriptionList({
 
   const active = subscriptions.filter((s) => s.status === 'active')
   const cancelled = subscriptions.filter((s) => s.status === 'cancelled')
+
+  // トライアル中（trialEndDate が未来）と通常アクティブに分離
+  const today = new Date(); today.setHours(0, 0, 0, 0)
+  const trialSubs = active.filter((s) => s.trialEndDate && new Date(s.trialEndDate) >= today)
+  const regularSubs = active.filter((s) => !s.trialEndDate || new Date(s.trialEndDate) < today)
+
+  // 今月の更新（当月中に renewalDate があるもの、日付昇順）
+  const thisMonth = new Date(); const thisYear = thisMonth.getFullYear(); const thisMonthNum = thisMonth.getMonth()
+  const thisMonthRenewals = active
+    .filter((s) => {
+      if (!s.renewalDate) return false
+      const d = new Date(s.renewalDate)
+      return d.getFullYear() === thisYear && d.getMonth() === thisMonthNum && daysUntil(s.renewalDate) >= 0
+    })
+    .sort((a, b) => a.renewalDate!.localeCompare(b.renewalDate!))
   const monthly = active.reduce((sum, s) => sum + s.monthlyPrice, 0)
   const profile = getProfile(investmentProfileId)
 
@@ -100,6 +145,30 @@ export default function SubscriptionList({
             <div style={{ fontSize: '11px', color: '#555' }}>年間 ¥{(monthly * 12).toLocaleString()}</div>
           </div>
 
+          {/* 今月の更新サマリー */}
+          {thisMonthRenewals.length > 0 && (
+            <div style={{ padding: '10px 20px', borderBottom: '1px solid var(--border)', background: 'rgba(249,115,22,0.04)' }}>
+              <div style={{ fontSize: '9px', fontWeight: 700, color: '#555', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '8px' }}>今月の更新</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                {thisMonthRenewals.map((s) => {
+                  const d = new Date(s.renewalDate!)
+                  const days = daysUntil(s.renewalDate!)
+                  const isUrgent = days <= 7
+                  return (
+                    <span key={s.id} style={{
+                      fontSize: '10px', padding: '3px 8px',
+                      border: `1px solid ${isUrgent ? 'rgba(239,68,68,0.4)' : 'rgba(249,115,22,0.3)'}`,
+                      color: isUrgent ? '#ef4444' : '#f97316',
+                      background: isUrgent ? 'rgba(239,68,68,0.06)' : 'rgba(249,115,22,0.06)',
+                    }}>
+                      {(d.getMonth() + 1)}/{d.getDate()} {s.name} ¥{s.monthlyPrice.toLocaleString()}
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
           {/* アクティブリスト */}
           <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '80px' }}>
             {active.length === 0 ? (
@@ -116,57 +185,22 @@ export default function SubscriptionList({
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-                {active.map((sub) => (
-                  <div key={sub.id} style={{ background: 'var(--panel)', padding: '16px 20px' }}>
-                    {confirm?.id === sub.id ? (
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <div style={{ fontSize: '13px', color: '#aaa' }}>
-                          {confirm.type === 'cancel'
-                            ? `「${sub.name}」を解約済みにしますか？（あとから復元できます）`
-                            : `「${sub.name}」を完全に削除しますか？`}
-                        </div>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                          <button
-                            onClick={handleConfirm}
-                            style={{ flex: 1, padding: '10px', background: confirm.type === 'cancel' ? accent : '#ef4444', color: '#fff', fontSize: '12px', fontWeight: 700, border: 'none', cursor: 'pointer' }}
-                          >
-                            {confirm.type === 'cancel' ? '✂️ 解約済みにする' : '削除する'}
-                          </button>
-                          <button
-                            onClick={() => setConfirm(null)}
-                            style={{ flex: 1, padding: '10px', background: 'none', color: '#555', fontSize: '12px', fontWeight: 700, border: '1px solid #2a2a2a', cursor: 'pointer' }}
-                          >キャンセル</button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: CATEGORY_COLORS[sub.category] ?? '#555', flexShrink: 0, marginTop: '5px' }} />
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                            <span style={{ fontSize: '14px', fontWeight: 700, color: '#efefef', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sub.name}</span>
-                            <span style={{ fontSize: '15px', fontWeight: 900, color: accent, flexShrink: 0 }}>¥{sub.monthlyPrice.toLocaleString()}</span>
-                          </div>
-                          <div style={{ display: 'flex', gap: '8px', marginTop: '4px', flexWrap: 'wrap' }}>
-                            <span style={{ fontSize: '10px', color: '#555' }}>{sub.category}</span>
-                            <span style={{ fontSize: '10px', color: '#444' }}>·</span>
-                            <span style={{ fontSize: '10px', color: '#555' }}>{FREQ_LABELS[sub.usageFrequency]}</span>
-                            {sub.billingCycle === 'annual' && (
-                              <>
-                                <span style={{ fontSize: '10px', color: '#444' }}>·</span>
-                                <span style={{ fontSize: '10px', color: '#555' }}>年払い</span>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                        <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
-                          <button onClick={() => onEdit(sub)} style={{ padding: '6px 10px', background: 'none', border: '1px solid #2a2a2a', color: '#555', fontSize: '11px', cursor: 'pointer' }}>編集</button>
-                          <button onClick={() => handleAction('cancel', sub.id)} style={{ padding: '6px 10px', background: 'none', border: `1px solid rgba(249,115,22,0.3)`, color: accent, fontSize: '11px', cursor: 'pointer' }}>解約</button>
-                          <button onClick={() => handleAction('delete', sub.id)} style={{ padding: '6px 8px', background: 'none', border: '1px solid #2a2a2a', color: '#444', fontSize: '11px', cursor: 'pointer' }}>×</button>
-                        </div>
+                {/* ── トライアル中セクション ── */}
+                {trialSubs.length > 0 && (
+                  <>
+                    <div style={{ background: 'rgba(249,115,22,0.06)', padding: '8px 20px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ fontSize: '9px', fontWeight: 700, color: accent, letterSpacing: '1.5px', textTransform: 'uppercase' }}>🎁 無料トライアル中</span>
+                    </div>
+                    {trialSubs.map((sub) => <SubCard key={sub.id} sub={sub} confirm={confirm} onEdit={onEdit} handleAction={handleAction} handleConfirm={handleConfirm} setConfirm={setConfirm} accent={accent} isTrial />)}
+                    {regularSubs.length > 0 && (
+                      <div style={{ background: '#0c0c0c', padding: '8px 20px' }}>
+                        <span style={{ fontSize: '9px', fontWeight: 700, color: '#444', letterSpacing: '1.5px', textTransform: 'uppercase' }}>アクティブ</span>
                       </div>
                     )}
-                  </div>
-                ))}
+                  </>
+                )}
+                {/* ── 通常アクティブ ── */}
+                {regularSubs.map((sub) => <SubCard key={sub.id} sub={sub} confirm={confirm} onEdit={onEdit} handleAction={handleAction} handleConfirm={handleConfirm} setConfirm={setConfirm} accent={accent} />)}
               </div>
             )}
           </div>
@@ -263,6 +297,76 @@ export default function SubscriptionList({
               </div>
             </>
           )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── サブスクカード（共通コンポーネント） ───────────────────────
+function SubCard({
+  sub, confirm, onEdit, handleAction, handleConfirm, setConfirm, accent, isTrial = false,
+}: {
+  sub: Subscription
+  confirm: ConfirmAction
+  onEdit: (s: Subscription) => void
+  handleAction: (type: 'delete' | 'cancel', id: string) => void
+  handleConfirm: () => void
+  setConfirm: (c: ConfirmAction) => void
+  accent: string
+  isTrial?: boolean
+}) {
+  const badge = isTrial ? trialBadge(sub.trialEndDate) : renewalBadge(sub.renewalDate, sub.billingCycle)
+
+  return (
+    <div style={{ background: isTrial ? 'rgba(249,115,22,0.04)' : 'var(--panel)', padding: '16px 20px' }}>
+      {confirm?.id === sub.id ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ fontSize: '13px', color: '#aaa' }}>
+            {confirm.type === 'cancel'
+              ? `「${sub.name}」を解約済みにしますか？（あとから復元できます）`
+              : `「${sub.name}」を完全に削除しますか？`}
+          </div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button onClick={handleConfirm} style={{ flex: 1, padding: '10px', background: confirm.type === 'cancel' ? accent : '#ef4444', color: '#fff', fontSize: '12px', fontWeight: 700, border: 'none', cursor: 'pointer' }}>
+              {confirm.type === 'cancel' ? '✂️ 解約済みにする' : '削除する'}
+            </button>
+            <button onClick={() => setConfirm(null)} style={{ flex: 1, padding: '10px', background: 'none', color: '#555', fontSize: '12px', fontWeight: 700, border: '1px solid #2a2a2a', cursor: 'pointer' }}>キャンセル</button>
+          </div>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: CATEGORY_COLORS[sub.category] ?? '#555', flexShrink: 0, marginTop: '5px' }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+              <span style={{ fontSize: '14px', fontWeight: 700, color: '#efefef', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sub.name}</span>
+              <span style={{ fontSize: '15px', fontWeight: 900, color: accent, flexShrink: 0 }}>¥{sub.monthlyPrice.toLocaleString()}</span>
+            </div>
+            <div style={{ display: 'flex', gap: '8px', marginTop: '4px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <span style={{ fontSize: '10px', color: '#555' }}>{sub.category}</span>
+              <span style={{ fontSize: '10px', color: '#444' }}>·</span>
+              <span style={{ fontSize: '10px', color: '#555' }}>{FREQ_LABELS[sub.usageFrequency]}</span>
+              {sub.billingCycle === 'annual' && (
+                <>
+                  <span style={{ fontSize: '10px', color: '#444' }}>·</span>
+                  <span style={{ fontSize: '10px', color: '#555' }}>年払い</span>
+                </>
+              )}
+              {badge && (
+                <span style={{
+                  fontSize: '9px', fontWeight: 700, padding: '2px 6px',
+                  background: `${badge.color}18`,
+                  color: badge.color,
+                  border: `1px solid ${badge.color}44`,
+                }}>{badge.text}</span>
+              )}
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
+            <button onClick={() => onEdit(sub)} style={{ padding: '6px 10px', background: 'none', border: '1px solid #2a2a2a', color: '#555', fontSize: '11px', cursor: 'pointer' }}>編集</button>
+            <button onClick={() => handleAction('cancel', sub.id)} style={{ padding: '6px 10px', background: 'none', border: `1px solid rgba(249,115,22,0.3)`, color: accent, fontSize: '11px', cursor: 'pointer' }}>解約</button>
+            <button onClick={() => handleAction('delete', sub.id)} style={{ padding: '6px 8px', background: 'none', border: '1px solid #2a2a2a', color: '#444', fontSize: '11px', cursor: 'pointer' }}>×</button>
+          </div>
         </div>
       )}
     </div>

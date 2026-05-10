@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import type { Subscription, SubscriptionCategory, BillingCycle, UsageFrequency } from '../lib/types'
 import { MASTER_SUBSCRIPTIONS, CATEGORY_ORDER, PRICE_AS_OF } from '../lib/masterList'
 
@@ -36,6 +36,9 @@ export default function AddSubscriptionModal({ initial, onSave, onClose }: Props
   const [autoRenewal, setAutoRenewal] = useState(initial?.autoRenewal ?? true)
   const [startDate, setStartDate] = useState(initial?.startDate ?? today())
   const [renewalDate, setRenewalDate] = useState(initial?.renewalDate ?? '')
+  const [renewalAutoCalc, setRenewalAutoCalc] = useState(!initial?.renewalDate) // 新規登録は自動計算ON
+  const [isTrial, setIsTrial] = useState(!!initial?.trialEndDate)
+  const [trialEndDate, setTrialEndDate] = useState(initial?.trialEndDate ?? '')
   const [usageFrequency, setUsageFrequency] = useState<UsageFrequency>(initial?.usageFrequency ?? 'weekly')
   const [masterId, setMasterId] = useState(initial?.masterId)
   const [isFromMaster, setIsFromMaster] = useState(initial?.isFromMaster ?? false)
@@ -61,6 +64,18 @@ export default function AddSubscriptionModal({ initial, onSave, onClose }: Props
     setStep('form')
   }
 
+  // 更新日の自動計算（startDate または billingCycle が変わったとき）
+  useEffect(() => {
+    if (!renewalAutoCalc || !startDate || initial) return
+    const d = new Date(startDate)
+    if (billingCycle === 'monthly') {
+      d.setMonth(d.getMonth() + 1)
+    } else {
+      d.setFullYear(d.getFullYear() + 1)
+    }
+    setRenewalDate(d.toISOString().slice(0, 10))
+  }, [startDate, billingCycle, renewalAutoCalc])
+
   function handleCustom() {
     setName('')
     setCategory('動画配信')
@@ -85,6 +100,7 @@ export default function AddSubscriptionModal({ initial, onSave, onClose }: Props
       startDate,
       cancelledAt: initial?.cancelledAt,
       renewalDate: renewalDate || undefined,
+      trialEndDate: (isTrial && trialEndDate) ? trialEndDate : undefined,
       usageFrequency,
       usageHistory: initial?.usageHistory ?? [],
       isFromMaster,
@@ -292,15 +308,53 @@ export default function AddSubscriptionModal({ initial, onSave, onClose }: Props
               </div>
               {/* 更新日 */}
               <div>
-                <label style={labelStyle}>次回更新日（任意）</label>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                  <label style={{ ...labelStyle, marginBottom: 0 }}>次回更新日</label>
+                  {renewalAutoCalc && renewalDate && !initial && (
+                    <span style={{ fontSize: '9px', color: '#555' }}>自動計算</span>
+                  )}
+                </div>
                 <input
                   style={{ ...inputStyle, colorScheme: 'dark' }}
                   type="date"
                   value={renewalDate}
-                  onChange={(e) => setRenewalDate(e.target.value)}
-                  placeholder="空白でもOK"
+                  onChange={(e) => { setRenewalDate(e.target.value); setRenewalAutoCalc(false) }}
                 />
                 <div style={{ fontSize: '10px', color: '#444', marginTop: '4px' }}>設定すると更新1ヶ月前に利用頻度チェックを促します</div>
+              </div>
+
+              {/* 無料トライアル */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                  <label style={{ ...labelStyle, marginBottom: 0 }}>無料トライアル中</label>
+                  <button
+                    onClick={() => { setIsTrial(!isTrial); if (isTrial) setTrialEndDate('') }}
+                    style={{
+                      width: '44px', height: '24px', borderRadius: '12px',
+                      background: isTrial ? '#f97316' : '#2a2a2a',
+                      border: 'none', cursor: 'pointer', position: 'relative', transition: 'background 0.2s',
+                    }}
+                  >
+                    <div style={{
+                      position: 'absolute', top: '3px',
+                      left: isTrial ? '23px' : '3px',
+                      width: '18px', height: '18px', borderRadius: '50%',
+                      background: '#fff', transition: 'left 0.2s',
+                    }} />
+                  </button>
+                </div>
+                {isTrial && (
+                  <div>
+                    <label style={labelStyle}>無料期間終了日 *</label>
+                    <input
+                      style={{ ...inputStyle, colorScheme: 'dark', borderColor: '#f97316' }}
+                      type="date"
+                      value={trialEndDate}
+                      onChange={(e) => setTrialEndDate(e.target.value)}
+                    />
+                    <div style={{ fontSize: '10px', color: '#f97316', marginTop: '4px' }}>この日から課金が始まります。忘れずに見直しを！</div>
+                  </div>
+                )}
               </div>
               {/* 自動更新 */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
