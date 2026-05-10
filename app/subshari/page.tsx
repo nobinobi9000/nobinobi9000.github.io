@@ -167,6 +167,19 @@ export default function SubshariPage() {
         </div>
       </div>
 
+      {/* STORY */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: accent, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            Story
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
+            「自分のサブスクを全部書き出してみたら、月額が想像以上だった。「この金額を投資に回したらどうなるんだろう」という純粋な興味から、計算ツールとして作り始めた。」
+          </blockquote>
+        </div>
+      </div>
+
       {/* ── HOW IT WORKS（4タブモック） ──────────────── */}
       <div style={{ borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
@@ -210,7 +223,7 @@ export default function SubshariPage() {
               {
                 num: '02',
                 title: '支出をカテゴリ別ドーナツチャートで可視化',
-                desc: '動画配信・音楽・フィットネス・ソフトウェアなど8カテゴリの内訳を純粋SVGのドーナツチャートで表示。「どこにいくら使っているか」が一目で把握できます。',
+                desc: '動画配信・音楽・スポーツ・学習・ビジネスなど13カテゴリの内訳を純粋SVGのドーナツチャートで表示。「どこにいくら使っているか」が一目で把握できます。',
               },
               {
                 num: '03',
@@ -224,11 +237,16 @@ export default function SubshariPage() {
               },
               {
                 num: '05',
+                title: '無料トライアル管理と期日バッジ',
+                desc: '無料トライアル中のサービスをマイリスト先頭に分離表示。終了7日前から赤バナーで警告し「課金開始まであとN日」をリアルタイムで表示します。更新日が30日以内のサブスクにも「更新まであとN日」バッジが自動表示されます。',
+              },
+              {
+                num: '06',
                 title: '半年ごとの利用確認と更新前リマインダー',
                 desc: '6ヶ月以上利用チェックが未実施のサブスク、または更新1ヶ月前のサブスクを自動検出してチェックを促します。頻度が下がっていると断捨離スコアに反映され、解約の意思決定をサポートします。',
               },
               {
-                num: '06',
+                num: '07',
                 title: '解約済みアーカイブで断捨離成果を記録',
                 desc: '解約したサブスクは削除せずアーカイブとして保存。「解約後に投資していたら今いくらになっていたか」という過去の機会費用も表示し、断捨離の成果を実感できます。',
               },
