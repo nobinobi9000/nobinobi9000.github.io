@@ -39,51 +39,54 @@ export default function AdminClient({ article }: { article: Article }) {
 
   if (step === 'done') {
     return (
-      <div style={{ padding: '1rem', background: '#f0fdf4', border: '1px solid #86efac', borderRadius: '8px' }}>
-        <p style={{ color: '#16a34a', fontSize: '0.9rem' }}>✅ 投稿済みにしました：{article.title}</p>
+      <div style={{ background: 'var(--panel)', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <span style={{ color: '#10b981', fontSize: '16px' }}>✅</span>
+        <span style={{ color: '#10b981', fontSize: '13px', fontWeight: 700 }}>投稿済みにしました：{article.title}</span>
       </div>
     )
   }
 
   return (
-    <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
+    <div style={{ background: 'var(--panel)' }}>
       {/* ヘッダー */}
-      <div style={{ padding: '0.75rem 1rem', background: '#f9fafb', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <span style={{ fontSize: '0.75rem', color: '#6b7280', background: '#e5e7eb', padding: '2px 8px', borderRadius: '4px' }}>
-          {article.category ?? 'カテゴリーなし'}
-        </span>
-        <p style={{ fontWeight: 'bold', fontSize: '0.9rem', margin: 0 }}>{article.title}</p>
+      <div style={{ padding: '12px 20px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {article.category && (
+          <span style={{ fontSize: '10px', color: 'var(--orange)', background: 'rgba(249,115,22,0.1)', padding: '2px 8px', letterSpacing: '1px', fontWeight: 700, textTransform: 'uppercase' }}>
+            {article.category}
+          </span>
+        )}
+        <p style={{ fontWeight: 700, fontSize: '13px', margin: 0, color: 'var(--white)' }}>{article.title}</p>
       </div>
 
-      <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {/* STEP 1 */}
-        <div style={{ border: step === 'idle' ? '2px solid #000' : '1px solid #e5e7eb', borderRadius: '6px', padding: '0.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+        <div style={{ border: `1px solid ${step === 'idle' ? 'var(--orange)' : '#222'}`, padding: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
             <span style={{
               width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '11px', fontWeight: 'bold', flexShrink: 0,
-              background: step === 'step1done' ? '#16a34a' : '#000',
+              background: step === 'step1done' ? '#10b981' : 'var(--orange)',
               color: '#fff',
             }}>
               {step === 'step1done' ? '✓' : '1'}
             </span>
-            <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#374151' }}>本文を投稿（リンクなし）</span>
+            <span style={{ fontSize: '11px', fontWeight: 700, color: '#aaa', letterSpacing: '1px', textTransform: 'uppercase' }}>本文を投稿（リンクなし）</span>
           </div>
           <pre style={{
-            background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '4px',
-            padding: '0.75rem', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all',
-            marginBottom: '0.5rem', color: '#374151',
+            background: '#111', border: '1px solid #1a1a1a',
+            padding: '12px', fontSize: '12px', whiteSpace: 'pre-wrap', wordBreak: 'break-all',
+            marginBottom: '10px', color: '#bbb', borderRadius: '2px',
           }}>
             {article.tweetText}
           </pre>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '0.7rem', color: '#9ca3af' }}>文字数: {article.tweetText.length}</span>
+            <span style={{ fontSize: '11px', color: '#444' }}>文字数: {article.tweetText.length}</span>
             <button
               onClick={openMainTweet}
               style={{
-                padding: '0.4rem 1rem', background: '#000', color: '#fff',
-                border: 'none', borderRadius: '6px', cursor: 'pointer',
-                fontSize: '0.85rem', fontWeight: 'bold',
+                padding: '6px 16px', background: '#000', color: '#fff',
+                border: '1px solid #333', cursor: 'pointer',
+                fontSize: '12px', fontWeight: 700, letterSpacing: '0.5px',
               }}
             >
               𝕏 で本文を投稿 →
@@ -93,36 +96,38 @@ export default function AdminClient({ article }: { article: Article }) {
 
         {/* STEP 2 */}
         <div style={{
-          border: step === 'step1done' ? '2px solid #000' : '1px solid #e5e7eb',
-          borderRadius: '6px', padding: '0.75rem',
-          opacity: step === 'idle' ? 0.4 : 1,
+          border: `1px solid ${step === 'step1done' ? 'var(--orange)' : '#1a1a1a'}`,
+          padding: '14px',
+          opacity: step === 'idle' ? 0.35 : 1,
+          transition: 'opacity 0.2s',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
             <span style={{
               width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '11px', fontWeight: 'bold', flexShrink: 0,
-              background: '#6b7280', color: '#fff',
+              background: '#333', color: '#aaa',
             }}>2</span>
-            <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#374151' }}>スレッドにURLを返信する</span>
+            <span style={{ fontSize: '11px', fontWeight: 700, color: '#aaa', letterSpacing: '1px', textTransform: 'uppercase' }}>スレッドにURLを返信</span>
           </div>
           <pre style={{
-            background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '4px',
-            padding: '0.75rem', fontSize: '0.8rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all',
-            marginBottom: '0.5rem', color: '#374151',
+            background: '#111', border: '1px solid #1a1a1a',
+            padding: '12px', fontSize: '12px', whiteSpace: 'pre-wrap', wordBreak: 'break-all',
+            marginBottom: '10px', color: '#bbb', borderRadius: '2px',
           }}>
             {article.threadText}
           </pre>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '0.7rem', color: '#9ca3af' }}>↑ 投稿①に返信する形で投稿してください</span>
+            <span style={{ fontSize: '11px', color: '#444' }}>↑ 投稿①に返信する形で投稿してください</span>
             <button
               onClick={openThreadTweet}
               disabled={step === 'idle'}
               style={{
-                padding: '0.4rem 1rem', background: step === 'idle' ? '#e5e7eb' : '#1d9bf0',
-                color: step === 'idle' ? '#9ca3af' : '#fff',
-                border: 'none', borderRadius: '6px',
+                padding: '6px 16px',
+                background: step === 'step1done' ? '#1d9bf0' : '#111',
+                color: step === 'step1done' ? '#fff' : '#444',
+                border: `1px solid ${step === 'step1done' ? '#1d9bf0' : '#222'}`,
                 cursor: step === 'idle' ? 'not-allowed' : 'pointer',
-                fontSize: '0.85rem', fontWeight: 'bold',
+                fontSize: '12px', fontWeight: 700, letterSpacing: '0.5px',
               }}
             >
               𝕏 でURLを投稿 →
@@ -136,12 +141,12 @@ export default function AdminClient({ article }: { article: Article }) {
             onClick={markPosted}
             disabled={loading || step === 'idle'}
             style={{
-              padding: '0.4rem 1rem', background: '#fff',
-              color: step === 'idle' ? '#9ca3af' : '#374151',
-              border: `1px solid ${step === 'idle' ? '#e5e7eb' : '#d1d5db'}`,
-              borderRadius: '6px',
+              padding: '6px 16px',
+              background: 'transparent',
+              color: step === 'idle' ? '#333' : '#aaa',
+              border: `1px solid ${step === 'idle' ? '#1a1a1a' : '#444'}`,
               cursor: step === 'idle' || loading ? 'not-allowed' : 'pointer',
-              fontSize: '0.85rem',
+              fontSize: '12px', letterSpacing: '0.5px',
             }}
           >
             {loading ? '処理中...' : '✓ 投稿済みにする'}
