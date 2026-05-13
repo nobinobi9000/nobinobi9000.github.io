@@ -4,6 +4,9 @@ import InstallGuide from '@/components/InstallGuide'
 export const metadata: Metadata = {
   title: 'サブスクの断捨離 | 投資換算・断捨離スコアで固定費を見直す',
   description: '契約中のサブスクを登録して支出を可視化。解約した場合にS&P500へ積立投資したら将来いくらになるか計算します。断捨離スコアで優先的に見直すべきサブスクを自動提案。登録不要・完全無料。',
+  alternates: {
+    canonical: '/subshari',
+  },
   openGraph: {
     title: 'サブスクの断捨離 | 投資換算・断捨離スコアで固定費を見直す',
     description: '契約中のサブスクを登録して支出を可視化。解約した場合にS&P500へ積立投資したら将来いくらになるか計算。断捨離スコアで優先的に見直すべきサブスクを自動提案。',

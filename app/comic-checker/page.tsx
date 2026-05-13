@@ -4,6 +4,9 @@ import InstallGuide from '@/components/InstallGuide'
 export const metadata: Metadata = {
   title: 'comic-checker | マンガ新刊チェッカー',
   description: 'マンガの新刊を自動チェック。発売14日前・7日前・当日にPush通知でお知らせ。無料・スマホのホーム画面に追加して使えます。',
+  alternates: {
+    canonical: '/comic-checker',
+  },
 }
 
 export default function ComicCheckerPage() {
@@ -32,6 +35,19 @@ export default function ComicCheckerPage() {
           <a href="https://comic.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             今すぐ無料で使う →
           </a>
+        </div>
+      </div>
+
+      {/* STORY */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            Story
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
+            「好きなマンガの新刊を何度も買い逃したのがきっかけ。「そろそろ出る頃かな」と思って本屋に行ったら既に出ていた、ということが続いて、自分専用の新刊通知が必要だと感じた。」
+          </blockquote>
         </div>
       </div>
 

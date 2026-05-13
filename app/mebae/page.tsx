@@ -4,6 +4,9 @@ import InstallGuide from '@/components/InstallGuide'
 export const metadata: Metadata = {
   title: 'めばえ | 習慣スタックビルダー',
   description: '毎日の習慣に、ちいさな新習慣を積み上げよう。アンカー習慣の直後にスタック習慣を設定するだけ。継続を見える化するミニマルな習慣トラッカー。無料・スマホのホーム画面に追加して使えます。',
+  alternates: {
+    canonical: '/mebae',
+  },
 }
 
 const accent = '#f97316'
@@ -129,6 +132,19 @@ export default function MebaePage() {
           <a href="https://mebae.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: accent, color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             今すぐ無料で使う →
           </a>
+        </div>
+      </div>
+
+      {/* STORY */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: accent, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            Story
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
+            「毎年4月に「今年こそ習慣を作ろう」と思うが、続いたためしがない。意志力に頼らない「習慣スタック」という手法に出会い、それを実践するシンプルなアプリを作った。」
+          </blockquote>
         </div>
       </div>
 

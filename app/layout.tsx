@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: { default: 'nobi-labo | 日々の生活にちょっと便利をプラス', template: '%s | nobi-labo' },
   description: '日々の生活にちょっと便利をプラス。nobi-laboの個人開発Webアプリ一覧。',
   metadataBase: new URL('https://nobi-labo.com'),
+  alternates: {
+    canonical: '/',
+  },
   icons: {
     icon: '/favicon.svg',
     apple: '/apple-touch-icon.png',
@@ -30,6 +33,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header>
           <a href="/" className="logo">nobi<span>-labo</span></a>
+          <nav className="header-nav">
+            <a href="/apps">Apps</a>
+            <a href="/blog">Blog</a>
+            <a href="/about">About</a>
+            <a href="https://note.com/suzukidaichisan" target="_blank" rel="noopener noreferrer">Note ↗</a>
+          </nav>
         </header>
         {children}
         <Analytics />

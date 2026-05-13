@@ -4,6 +4,9 @@ import CatSlideshow from './CatSlideshow'
 export const metadata: Metadata = {
   title: 'ねこおじさんタイマー - nobi-labo',
   description: '会議を凍らせる、愛すべきおやじ。カウントダウン終了後、ねこおじさんがAI生成おやじギャグで締める会議タイマー。無料・登録不要。',
+  alternates: {
+    canonical: '/nekoojiisan-timer',
+  },
 }
 
 export default function NekoojiisanTimerPage() {
@@ -38,6 +41,19 @@ export default function NekoojiisanTimerPage() {
           <a href="/meeting-timer/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             会議を凍らせる →
           </a>
+        </div>
+      </div>
+
+      {/* STORY */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            Story
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
+            「「AIがおやじギャグで会議を終わらせる」という発想が面白いかなと思って作った。実際は外れだった。初期作品として、恥ずかしいけど残してある。」
+          </blockquote>
         </div>
       </div>
 

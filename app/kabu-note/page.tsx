@@ -3,6 +3,9 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Kabu Note（カブノート）- nobi-labo',
   description: '日本株ポートフォリオを一元管理するWebダッシュボード。複数証券会社の口座をまたいで資産・損益・配当を可視化。無料・メール登録のみ。',
+  alternates: {
+    canonical: '/kabu-note',
+  },
 }
 
 export default function KabuNotePage() {
@@ -38,6 +41,19 @@ export default function KabuNotePage() {
           <a href="https://kabu.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             今すぐ無料で使う →
           </a>
+        </div>
+      </div>
+
+      {/* STORY */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            Story
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
+            「証券口座が3つあって、それぞれの損益を別々に確認するのが面倒だった。持ち株会の株が日々減っていく中、総資産ベースで今どうなっているのかを一目で把握したかった。」
+          </blockquote>
         </div>
       </div>
 

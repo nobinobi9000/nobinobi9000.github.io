@@ -14,6 +14,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: `${post.category ?? 'nobi-labo'} | ${post.tags.join(', ')}`,
+    alternates: {
+      canonical: `/blog/${id}`,
+    },
   }
 }
 

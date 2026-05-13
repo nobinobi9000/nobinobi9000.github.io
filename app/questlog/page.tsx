@@ -4,6 +4,9 @@ import InstallGuide from '@/components/InstallGuide'
 export const metadata: Metadata = {
   title: 'QUESTLOG | 積みゲー冒険ログ',
   description: '積みゲーを冒険の地図として管理するゲームバックログアプリ。新作・予約情報、冒険統計、ステータス管理。無料・スマホのホーム画面に追加して使えます。',
+  alternates: {
+    canonical: '/questlog',
+  },
 }
 
 const SCREENSHOTS = [
@@ -98,6 +101,19 @@ export default function QuestlogPage() {
           <a href="https://gamelog.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             冒険を始める →
           </a>
+        </div>
+      </div>
+
+      {/* STORY */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            Story
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
+            「積みゲーが増えすぎて、罪悪感ばかりが積み上がっていた。罪悪感ではなく「まだ見ぬ冒険」として楽しく管理できるアプリが欲しかった。満足度はまだ45点。作り続けている。」
+          </blockquote>
         </div>
       </div>
 

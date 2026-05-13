@@ -3,6 +3,9 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Task Manager - nobi-labo',
   description: '重要度×緊急度の2軸でタスクを自動分類するToDo管理ツール。アイゼンハワーマトリクスで「すぐやる・後でやる・任せる・保留」に即振り分け。登録不要・無料。',
+  alternates: {
+    canonical: '/todo-manager',
+  },
 }
 
 const orange = '#f97316'
@@ -40,6 +43,19 @@ export default function TaskManagerPage() {
           <a href="/todo-manager-app/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: orange, color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             今すぐ使う →
           </a>
+        </div>
+      </div>
+
+      {/* STORY */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: orange, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            Story
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
+            「締め切りが近いタスクばかり対応して、本当に重要なことを後回しにし続けていた。アイゼンハワーマトリクスで優先順位を可視化するツールを自分のために作った。」
+          </blockquote>
         </div>
       </div>
 

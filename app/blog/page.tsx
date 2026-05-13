@@ -4,6 +4,9 @@ import { getPosts } from '@/lib/notion'
 export const metadata: Metadata = {
   title: 'ブログ',
   description: 'nobi-laboのブログ。マンガ・アプリ・日常のお役立ち情報を発信。',
+  alternates: {
+    canonical: '/blog',
+  },
 }
 
 export const revalidate = 3600 // 1時間ごとに再生成

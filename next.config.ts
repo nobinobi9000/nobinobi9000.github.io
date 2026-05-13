@@ -15,6 +15,12 @@ const config: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.nobi-labo.com' }],
+        destination: 'https://nobi-labo.com/:path*',
+        permanent: true,
+      },
       { source: '/comic-checker.html', destination: '/comic-checker', permanent: true },
       { source: '/nekoojiisan-timer.html', destination: '/nekoojiisan-timer', permanent: true },
       { source: '/japan-stock-screener', destination: 'https://nobinobi9000.github.io/japan-stock-screener/', permanent: false },

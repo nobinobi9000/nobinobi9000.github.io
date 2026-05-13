@@ -4,6 +4,9 @@ import InstallGuide from '@/components/InstallGuide'
 export const metadata: Metadata = {
   title: 'SoroSoro | 日用品ストックトラッカー',
   description: '日用品の消費ペースを記録して、切れる前に通知。楽天・Amazonへのワンタップ購入リンク付き。スマホのホーム画面に追加して使えます。',
+  alternates: {
+    canonical: '/sorosoro',
+  },
 }
 
 export default function SoroSoroPage() {
@@ -32,6 +35,19 @@ export default function SoroSoroPage() {
           <a href="https://sorosoro.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
             今すぐ無料で使う →
           </a>
+        </div>
+      </div>
+
+      {/* STORY */}
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            Story
+            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+          </div>
+          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
+            「Amazon定期便を使っていたが、届くタイミングがまったく合わない。欲しい時には切れていて、要らない時に届く。消費ペースを自分で記録して、切れる前に通知が来ればいいと気づいた。」
+          </blockquote>
         </div>
       </div>
 
@@ -83,35 +99,6 @@ export default function SoroSoroPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-
-      {/* SCREENSHOTS */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            Screenshots
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-            <div style={{ display: 'flex', gap: '20px', width: 'max-content', padding: '4px 2px 16px' }}>
-              {[
-                { src: '/screenshots/sorosoro/top.png', label: 'Top' },
-                { src: '/screenshots/sorosoro/add.png', label: 'アイテム追加' },
-              ].map(({ src, label }) => (
-                <div key={src} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
-                  <div style={{ width: '160px', background: '#1a1a1a', borderRadius: '32px', border: '2px solid #333', padding: '12px 8px', boxShadow: '0 16px 48px rgba(0,0,0,0.6)' }}>
-                    <div style={{ width: '48px', height: '5px', background: '#2a2a2a', borderRadius: '3px', margin: '0 auto 8px' }} />
-                    <div style={{ borderRadius: '20px', overflow: 'hidden' }}>
-                      <img src={src} alt={label} style={{ width: '100%', display: 'block' }} />
-                    </div>
-                    <div style={{ width: '32px', height: '4px', background: '#2a2a2a', borderRadius: '2px', margin: '8px auto 0' }} />
-                  </div>
-                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', color: '#555', textTransform: 'uppercase' }}>{label}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
