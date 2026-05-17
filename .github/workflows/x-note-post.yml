@@ -10,6 +10,8 @@ on:
 jobs:
   post-note-to-x:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: リポジトリをチェックアウト
