@@ -32,7 +32,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/todo-manager`,       changeFrequency: 'monthly', priority: 0.8 },
     // アプリ詳細ページ（静的HTML）
     { url: `${BASE_URL}/tax-simulator/`,  changeFrequency: 'monthly', priority: 0.7 },
-    // /japan-stock-screener/ は外部にリダイレクトされるためサイトマップから除外
+    { url: `${BASE_URL}/stock-screener`, changeFrequency: 'monthly', priority: 0.8 },
+    // /japan-stock-screener は /stock-screener にリダイレクト済み（サイトマップからは除外）
     // その他
     { url: `${BASE_URL}/about`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/apps`,  changeFrequency: 'weekly',  priority: 0.9 },

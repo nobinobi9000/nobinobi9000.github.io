@@ -23,9 +23,11 @@ const config: NextConfig = {
       },
       { source: '/comic-checker.html', destination: '/comic-checker', permanent: true },
       { source: '/nekoojiisan-timer.html', destination: '/nekoojiisan-timer', permanent: true },
-      { source: '/japan-stock-screener', destination: 'https://nobinobi9000.github.io/japan-stock-screener/', permanent: false },
-      { source: '/japan-stock-screener/', destination: 'https://nobinobi9000.github.io/japan-stock-screener/', permanent: false },
-      { source: '/japan-stock-screener/:path+', destination: 'https://nobinobi9000.github.io/japan-stock-screener/:path+', permanent: false },
+      // 旧詳細ページURL → 新詳細ページURL（SEO維持）
+      { source: '/japan-stock-screener', destination: '/stock-screener', permanent: true },
+      // サービスURL（スラッシュあり・サブパス）→ screener.nobi-labo.com
+      { source: '/japan-stock-screener/', destination: 'https://screener.nobi-labo.com', permanent: false },
+      { source: '/japan-stock-screener/:path+', destination: 'https://screener.nobi-labo.com/:path+', permanent: false },
     ]
   },
   async rewrites() {
