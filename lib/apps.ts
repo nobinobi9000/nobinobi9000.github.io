@@ -6,6 +6,7 @@ export type App = {
   story?: string
   tags: string[]
   ctaUrl: string | null   // null = 準備中
+  ctaLabel?: string       // デフォルト: 今すぐ使う →
   detailUrl: string
   category: AppCategory
   screenshot?: string
@@ -125,6 +126,30 @@ export const APPS: App[] = [
     screenshot: '/screenshots/japan-stock-screener.png',
     tint: '#FBF4EC',
     catColor: '#92400E',
+  },
+  {
+    name: 'Note Deck',
+    desc: 'note.comのマルチアカウントをデスクトップで切り替え。Googleログインも完全対応。インストール不要のWindows用無料ツール。',
+    tags: ['無料', 'Windows対応', 'デスクトップアプリ', '登録不要'],
+    ctaUrl: 'https://github.com/nobinobi9000/note-multi-account/releases/latest',
+    ctaLabel: 'ダウンロード →',
+    detailUrl: '/note-deck',
+    category: 'Work',
+    screenshot: '/screenshots/note-deck.png',
+    tint: '#F5F1FC',
+    catColor: '#6D28D9',
+  },
+  {
+    name: 'Task Manager',
+    desc: '重要度×緊急度の2軸でタスクを自動分類。アイゼンハワーマトリクスで即振り分け。登録不要・無料。',
+    story: '締め切りが近いタスクばかり対応して、本当に重要なことを後回しにし続けていた。アイゼンハワーマトリクスで優先順位を可視化するツールを自分のために作った。',
+    tags: ['無料', '登録不要', '優先度管理'],
+    ctaUrl: '/todo-manager-app/',
+    detailUrl: '/task-manager',
+    category: 'Work',
+    screenshot: '/screenshots/taskmanager_top.png',
+    tint: '#F5F1FC',
+    catColor: '#6D28D9',
   },
   {
     name: '法律書類ジェネレーター',

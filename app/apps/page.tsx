@@ -1,151 +1,128 @@
 'use client'
-import React, { useState, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { APPS, type App } from '@/lib/apps'
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { APPS, CAT_COLORS, type AppCategory } from '@/lib/apps'
 
-function AppStoryCard({ app }: { app: App }) {
-  return (
-    <div className="app-story-card">
-      <div className="app-story-header">
-        <div className="app-story-icon">{app.icon}</div>
-        <span className="app-badge">Live</span>
-      </div>
-      <div>
-        <div className="app-story-name">{app.name}</div>
-        <div className="app-story-category">{app.category}</div>
-      </div>
-      {app.story && (
-        <blockquote className="app-story-quote">
-          「{app.story}」
-        </blockquote>
-      )}
-      <div className="app-tags">
-        {app.tags.map(t => <span key={t} className="tag">{t}</span>)}
-      </div>
-      <div className="app-story-actions">
-        <a href={app.ctaUrl} className="feature-cta" style={{ fontSize: '11px', padding: '10px 20px' }}>
-          今すぐ使う
-        </a>
-        <a href={app.detailUrl} className="app-sub-link">詳細を見る</a>
-      </div>
-    </div>
-  )
-}
+type FilterKey = 'all' | AppCategory
 
-function AppHeroCard({ app, index }: { app: App; index: number }) {
-  const reverse = index % 2 === 1
-  return (
-    <div className="app-hero-card">
-      <div className={`app-hero-inner${reverse ? ' app-hero-reverse' : ''}`}>
-        <div className="app-hero-content">
-          <span className="feature-card-category">{app.category}</span>
-          <div className="app-hero-name">{app.icon} {app.name}</div>
-          <div className="app-hero-desc">
-            {app.desc.split('\n').map((line, i, arr) => (
-              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-            ))}
-          </div>
-          {app.story && (
-            <blockquote className="app-hero-quote">
-              「{app.story}」
-            </blockquote>
-          )}
-          <div className="app-tags" style={{ marginBottom: '24px' }}>
-            {app.tags.map(t => <span key={t} className="tag">{t}</span>)}
-          </div>
-          <div className="feature-card-actions">
-            <a href={app.ctaUrl} className="feature-cta">今すぐ使う</a>
-            <a href={app.detailUrl} className="app-sub-link">詳細を見る →</a>
-          </div>
-        </div>
-        <div className="app-hero-visual">
-          <div className="feature-phone" style={{ width: '160px', height: '320px' }}>
-            <div className="feature-phone-notch" />
-            {app.screenshot
-              ? <img src={app.screenshot} alt={app.name} />
-              : <div className="feature-phone-placeholder">{app.icon}</div>
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+export default function AppsPage() {
+  const [active, setActive] = useState<FilterKey>('all')
 
-function AppsContent() {
-  const searchParams = useSearchParams()
-  const initialCat = searchParams.get('category')
-  const validCats = ['日常・ライフ', 'お金・投資'] as const
-  const initFilter = validCats.find(c => c === initialCat) ?? 'すべて'
-  const [catFilter, setCatFilter] = useState<'すべて' | '日常・ライフ' | 'お金・投資'>(initFilter)
-  const filtered = catFilter === 'すべて' ? APPS : APPS.filter(a => a.category === catFilter)
-  const isFiltered = catFilter !== 'すべて'
+  const visible = active === 'all' ? APPS : APPS.filter(a => a.category === active)
+
+  const filters: { key: FilterKey; label: string }[] = [
+    { key: 'all',   label: 'すべて' },
+    { key: 'Life',  label: 'Life（暮らし）' },
+    { key: 'Money', label: 'Money（お金）' },
+    { key: 'Work',  label: 'Work（しごと）' },
+  ]
 
   return (
-    <>
-      {/* HERO */}
-      <div className="apps-page-hero">
-        <div className="apps-page-hero-inner">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
-            <a href="/" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: '#555', textDecoration: 'none', textTransform: 'uppercase' }}>← nobi-labo</a>
-          </div>
-          <span style={{ display: 'inline-block', background: 'var(--orange)', color: '#fff', fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', padding: '4px 10px', marginBottom: '24px' }}>Apps</span>
-          <h1 style={{ fontSize: 'clamp(28px, 6vw, 52px)', fontWeight: 900, letterSpacing: '-2px', lineHeight: 1.1, marginBottom: '16px' }}>
-            日常の不便を、<br /><em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>アプリで解決する。</em>
-          </h1>
-          <p style={{ fontSize: '14px', color: '#888', lineHeight: 1.8, maxWidth: '480px' }}>
-            「自分が使いたいから作る」をモットーに、生活の小さな不便を解消するWebアプリを個人開発しています。
-            現在 {APPS.length} 本を公開中。
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white">
 
-      {/* BODY */}
-      <div className="apps-page-body">
-        {/* Filter */}
-        <div className="apps-page-filter">
-          {(['すべて', '日常・ライフ', 'お金・投資'] as const).map(cat => (
+      {/* PAGE HEADER */}
+      <section className="max-w-[1200px] mx-auto px-6 pt-14 pb-12">
+        <div className="flex items-center gap-2 text-[13px] text-[#999999] mb-8">
+          <Link href="/" className="hover:text-[#2D6A4F] transition-colors">nobi-labo</Link>
+          <span>›</span>
+          <span className="text-[#111111] font-medium">Apps</span>
+        </div>
+        <h1 className="font-extrabold tracking-[-0.03em] leading-[1.1]"
+          style={{ fontSize: 'clamp(40px, 5.5vw, 68px)' }}>
+          Apps
+        </h1>
+        <p className="mt-4 text-[17px] text-[#444444] leading-[1.7] max-w-[560px]">
+          AIと一緒に作った、暮らし・お金・しごとを楽にする{APPS.length}本のWebアプリ。
+        </p>
+
+        {/* Category Filter */}
+        <div className="mt-9 flex gap-[10px] flex-wrap">
+          {filters.map(f => (
             <button
-              key={cat}
-              className={`apps-page-filter-btn${catFilter === cat ? ' active' : ''}`}
-              onClick={() => setCatFilter(cat)}
+              key={f.key}
+              onClick={() => setActive(f.key)}
+              className={`px-[18px] py-[9px] text-[14px] font-semibold rounded-full border-[1.5px] transition-colors ${
+                active === f.key
+                  ? 'border-[#2D6A4F] bg-[#F0F7F4] text-[#2D6A4F]'
+                  : 'border-[#EBEBEB] bg-white text-[#444444] hover:border-[#2D6A4F] hover:text-[#2D6A4F]'
+              }`}
             >
-              {cat}
+              {f.label}
             </button>
           ))}
         </div>
+      </section>
 
-        {/* すべて: グリッドサマリー */}
-        {!isFiltered && (
-          <div className="apps-grid">
-            {filtered.map(app => (
-              <AppStoryCard key={app.name} app={app} />
-            ))}
-            <div className="app-story-card" style={{ opacity: 0.4, alignItems: 'center', justifyContent: 'center', minHeight: '200px' }}>
-              <div style={{ fontSize: '32px', marginBottom: '12px' }}>🔜</div>
-              <div className="app-story-name" style={{ textAlign: 'center' }}>Next App</div>
-              <div style={{ fontSize: '13px', color: '#666', textAlign: 'center' }}>次のアプリを開発中です。</div>
-            </div>
-          </div>
-        )}
+      {/* APP LIST */}
+      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+        <div className="flex flex-col border border-[#EBEBEB] rounded-[20px] overflow-hidden">
+          {visible.map(app => {
+            const cat = CAT_COLORS[app.category]
+            const isExternal = app.ctaUrl?.startsWith('http')
+            return (
+              <div
+                key={app.name}
+                className="flex items-stretch bg-white border-b border-[#EBEBEB] last:border-0"
+              >
+                {/* Screenshot */}
+                <div className="flex-none w-[140px] flex items-center justify-center p-[18px]"
+                  style={{ background: app.tint }}>
+                  {app.screenshot ? (
+                    <img src={app.screenshot} alt={app.name} className="w-full h-auto object-contain rounded-lg" style={{ maxHeight: '120px' }} />
+                  ) : (
+                    <div className="w-full aspect-[9/16] border-[1.5px] border-dashed rounded-[10px]"
+                      style={{ borderColor: cat.color }} />
+                  )}
+                </div>
 
-        {/* カテゴリ絞り込み: ヒーローリスト */}
-        {isFiltered && (
-          <div className="app-hero-list">
-            {filtered.map((app, i) => (
-              <AppHeroCard key={app.name} app={app} index={i} />
-            ))}
-          </div>
-        )}
-      </div>
-    </>
-  )
-}
+                {/* Content */}
+                <div className="flex-1 min-w-0 py-[22px] px-6">
+                  <div className="flex items-center gap-[10px] flex-wrap">
+                    <span className="px-[11px] py-1 text-[11.5px] font-bold rounded-full"
+                      style={{ color: cat.color, background: app.tint }}>
+                      {cat.label}
+                    </span>
+                    <h2 className="text-[20px] font-extrabold tracking-[-0.02em]">{app.name}</h2>
+                  </div>
+                  <p className="mt-[10px] text-[14.5px] leading-[1.75] text-[#444444] max-w-[620px]">{app.desc}</p>
+                  <div className="mt-[14px] flex gap-2 flex-wrap">
+                    {app.tags.map(tag => (
+                      <span key={tag} className="px-[11px] py-1 text-[12px] font-medium rounded-md text-[#444444] bg-[#F7F7F7] border border-[#EBEBEB]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-export default function AppsPage() {
-  return (
-    <Suspense fallback={null}>
-      <AppsContent />
-    </Suspense>
+                {/* CTAs */}
+                <div className="flex-none flex flex-col items-end justify-center gap-3 px-7 pl-4">
+                  {app.ctaUrl ? (
+                    <a
+                      href={app.ctaUrl}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noopener noreferrer' : undefined}
+                      className="whitespace-nowrap text-[13px] font-bold text-white bg-[#2D6A4F] px-4 py-2 rounded-lg hover:bg-[#21503b] transition-colors"
+                    >
+                      {app.ctaLabel ?? '今すぐ使う →'}
+                    </a>
+                  ) : (
+                    <span className="whitespace-nowrap text-[13px] font-bold text-[#CCCCCC] bg-[#F7F7F7] px-4 py-2 rounded-lg cursor-not-allowed">
+                      準備中
+                    </span>
+                  )}
+                  <Link
+                    href={app.detailUrl}
+                    className="whitespace-nowrap text-[13px] font-semibold text-[#2D6A4F] border border-[#2D6A4F] px-4 py-2 rounded-lg hover:bg-[#F0F7F4] transition-colors"
+                  >
+                    詳細を見る
+                  </Link>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+
+    </div>
   )
 }
