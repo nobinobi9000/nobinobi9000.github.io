@@ -23,7 +23,10 @@ const config: NextConfig = {
       },
       { source: '/comic-checker.html', destination: '/comic-checker', permanent: true },
       { source: '/nekoojiisan-timer.html', destination: '/nekoojiisan-timer', permanent: true },
+      { source: '/todo-manager', destination: '/task-manager', permanent: true },
       // 旧詳細ページURL → 新詳細ページURL（SEO維持）
+      { source: '/tax-simulator', destination: '/tax-simulator-detail', permanent: true },
+      { source: '/tax-simulator/', destination: '/tax-simulator-detail', permanent: true },
       { source: '/japan-stock-screener', destination: '/stock-screener', permanent: true },
       // サービスURL（スラッシュあり・サブパス）→ screener.nobi-labo.com
       { source: '/japan-stock-screener/', destination: 'https://screener.nobi-labo.com', permanent: false },
@@ -32,6 +35,7 @@ const config: NextConfig = {
   },
   async rewrites() {
     return [
+      // 静的HTMLアプリのリライト（vercel.json は使わず next.config.ts に集約）
       { source: '/meeting-timer', destination: '/meeting-timer/index.html' },
       { source: '/meeting-timer/', destination: '/meeting-timer/index.html' },
     ]
