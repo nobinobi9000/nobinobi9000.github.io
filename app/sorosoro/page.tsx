@@ -1,150 +1,91 @@
 import type { Metadata } from 'next'
-import InstallGuide from '@/components/InstallGuide'
+import Link from 'next/link'
+import AppCarousel from '@/components/AppCarousel'
 
 export const metadata: Metadata = {
-  title: 'SoroSoro | 日用品ストックトラッカー',
-  description: '日用品の消費ペースを記録して、切れる前に通知。楽天・Amazonへのワンタップ購入リンク付き。スマホのホーム画面に追加して使えます。',
-  alternates: {
-    canonical: '/sorosoro',
-  },
+  title: 'SoroSoro | 日用品在庫管理',
+  description: '日用品の消費ペースを記録して、切れる前に通知。バーコードスキャン・楽天連携で商品を簡単登録。',
+  alternates: { canonical: '/sorosoro' },
 }
+
+const SLIDES = [
+  { src: '/screenshots/sorosoro/top.png', caption: 'ホーム' },
+  { src: '/screenshots/sorosoro/add.png', caption: '商品追加' },
+]
 
 export default function SoroSoroPage() {
   return (
-    <>
-      {/* HERO */}
-      <div style={{ position: 'relative', overflow: 'hidden', padding: '72px 24px 64px', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
-            <a href="/" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: '#555', textDecoration: 'none', textTransform: 'uppercase' }}>← nobi-labo</a>
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--orange)' }}>SoroSoro</span>
-          </div>
-          <div style={{ fontSize: '40px', marginBottom: '16px' }}>🛒</div>
-          <h1 style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: '16px' }}>
-            切れる前に、<br /><em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>そろそろ買おう。</em>
-          </h1>
-          <p style={{ fontSize: '15px', color: '#888', lineHeight: 1.8, maxWidth: '480px', marginBottom: '32px' }}>
-            日用品の消費ペースを自動で記録。<br />
-            在庫が少なくなると通知で知らせてくれる、生活ストックトラッカー。
-          </p>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '32px' }}>
-            {['無料', 'ホーム追加OK', 'Push通知', '楽天連携', 'Amazon連携', 'バーコード対応'].map((b, i) => (
-              <span key={b} style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', padding: '4px 10px', border: `1px solid ${i < 3 ? 'var(--orange)' : '#2a2a2a'}`, color: i < 3 ? 'var(--orange)' : '#666' }}>{b}</span>
-            ))}
-          </div>
-          <a href="https://sorosoro.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
-            今すぐ無料で使う →
-          </a>
+    <div className="min-h-screen bg-white">
+      <section className="max-w-[1200px] mx-auto px-6 pt-14 pb-[72px]">
+        <div className="flex items-center gap-2 text-[13px] text-[#999999] mb-10">
+          <Link href="/" className="hover:text-[#2D6A4F] transition-colors">nobi-labo</Link>
+          <span>›</span>
+          <Link href="/apps" className="hover:text-[#2D6A4F] transition-colors">Apps</Link>
+          <span>›</span>
+          <span className="text-[#111111] font-medium">SoroSoro</span>
         </div>
-      </div>
+        <div className="grid gap-16 items-center" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+          <div>
+            <span className="inline-block px-3 py-[5px] text-[12px] font-bold rounded-full text-[#2563EB] bg-[#F0F5FF]">🛒 Life</span>
+            <h1 className="mt-[22px] font-extrabold leading-[1.15] tracking-[-0.03em]" style={{ fontSize: 'clamp(32px, 4.5vw, 54px)' }}>
+              切れる前に、<br />教えてくれる。
+            </h1>
+            <p className="mt-[22px] text-[17px] leading-[1.85] text-[#444444] max-w-[480px]">
+              日用品の消費ペースを記録して、なくなる前に通知。バーコードスキャンで商品を簡単登録。楽天・Amazonへのワンタップ購入リンク付き。
+            </p>
+            <div className="mt-6 flex gap-2 flex-wrap">
+              {['無料', 'Push通知', '楽天連携', 'ホーム追加OK'].map(tag => (
+                <span key={tag} className="px-3 py-[5px] text-[12.5px] font-medium rounded-lg text-[#444444] bg-[#F7F7F7] border border-[#EBEBEB]">{tag}</span>
+              ))}
+            </div>
+            <a href="https://sorosoro.nobi-labo.com" target="_blank" rel="noopener noreferrer"
+              className="mt-8 inline-block px-7 py-4 text-[15px] font-bold text-white bg-[#2D6A4F] rounded-[11px] hover:bg-[#21503b] transition-colors">
+              今すぐ無料で使う →
+            </a>
+          </div>
+          <AppCarousel slides={SLIDES} accentColor="#2563EB" bgColor="#F0F5FF" />
+        </div>
+      </section>
 
-      {/* STORY */}
-      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-            Story
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">STORY — 開発の背景</div>
+          <div className="mt-9 max-w-[720px]">
+            <blockquote className="border-l-[3px] border-[#2D6A4F] pl-7">
+              <p className="text-[20px] font-semibold leading-[1.8] text-[#111111]">「Amazon定期便を使っていたが、届くタイミングがまったく合わない。」</p>
+            </blockquote>
+            <p className="mt-7 text-[16px] leading-[1.9] text-[#444444]">欲しい時には切れていて、要らない時に届く。消費ペースを自分で記録して、切れる前に通知が来ればいいと気づいた。そのツールを自分で作りました。</p>
           </div>
-          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
-            「Amazon定期便を使っていたが、届くタイミングがまったく合わない。欲しい時には切れていて、要らない時に届く。消費ペースを自分で記録して、切れる前に通知が来ればいいと気づいた。」
-          </blockquote>
         </div>
-      </div>
+      </section>
 
-      {/* FEATURES */}
-      <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-        <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-          Features
-          <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">FEATURES — 機能</div>
+        <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
           {[
-            { num: '01', title: '消費ペース自動記録', desc: '開封日・使い切り日を記録するだけで、消費ペースを自動計算。次の補充タイミングを残り日数で表示します。' },
-            { num: '02', title: '在庫切れ前にPush通知', desc: '設定した日数前になると、まとめて1日1回のPush通知でお知らせ。通知疲れなく、買い忘れを防ぎます。' },
-            { num: '03', title: '楽天・Amazonでワンタップ購入', desc: '各アイテムから楽天・Amazonの購入ページへ直接ジャンプ。アフィリエイト連携でいつも最短経路で買い物できます。' },
-            { num: '04', title: 'バーコードで商品登録', desc: 'Chrome搭載のバーコードスキャン機能でJANコードを読み取り、楽天APIで商品を自動検索。商品名・画像・URLを一括取得できます。' },
-            { num: '05', title: 'カテゴリ分類＆検索', desc: '日用品・洗剤・食品・スキンケアなどカテゴリで管理。検索・並び替えで目当てのアイテムをすぐに見つけられます。' },
+            { num: '01', title: 'バーコードスキャン登録', desc: 'スマホカメラでバーコードをスキャン。商品情報を自動取得して登録できます。' },
+            { num: '02', title: '消費ペース記録', desc: '使用開始日と残量を記録することで、いつなくなるかを自動計算します。' },
+            { num: '03', title: 'Push通知', desc: '設定した残量・日数になったら通知。「あ、切れてた」を防げます。' },
+            { num: '04', title: '楽天・Amazon連携', desc: '通知から楽天・Amazonへワンタップで購入ページへ遷移。そのまま注文できます。' },
           ].map(f => (
-            <div key={f.num} style={{ background: 'var(--panel)', padding: '28px 24px', display: 'grid', gridTemplateColumns: '48px 1fr', gap: '0 20px' }}>
-              <div style={{ fontSize: '32px', fontWeight: 900, color: '#383838', lineHeight: 1 }}>{f.num}</div>
-              <div>
-                <div style={{ fontSize: '16px', fontWeight: 900, marginBottom: '8px', color: 'var(--orange)' }}>{f.title}</div>
-                <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.8 }}>{f.desc}</div>
-              </div>
+            <div key={f.num} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#2D6A4F] transition-colors">
+              <div className="text-[13px] font-extrabold tracking-[0.04em] text-[#2D6A4F]">{f.num}</div>
+              <h3 className="mt-[14px] text-[18px] font-extrabold tracking-[-0.02em]">{f.title}</h3>
+              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">{f.desc}</p>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* HOW TO USE */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            How to use
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-            {[
-              { n: 1, title: 'アイテムを登録する', desc: '商品名を手入力するか、バーコードスキャン・楽天検索・Amazon URLから商品情報を自動取得して登録。', note: '例：シャンプーのバーコードをスキャン → 商品名・画像・購入URLが自動入力' },
-              { n: 2, title: '開封・使い切りを記録する', desc: '新しいものを開けたら「開封」、使い切ったら「使い切り」をタップ。これだけで消費ペースが記録されます。' },
-              { n: 3, title: '通知をONにする', desc: '設定パネルから「通知を許可する」をタップ。在庫が少なくなると1日1回まとめてお知らせします。' },
-              { n: 4, title: '通知が来たら購入する', desc: '通知が届いたらアプリを開いて残り日数を確認。楽天・Amazonボタンで即購入できます。' },
-            ].map(s => (
-              <div key={s.n} style={{ background: 'var(--panel)', padding: '24px', display: 'grid', gridTemplateColumns: '32px 1fr', gap: '0 16px' }}>
-                <div style={{ width: '28px', height: '28px', background: 'var(--orange)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 900, color: '#fff', flexShrink: 0 }}>{s.n}</div>
-                <div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, marginBottom: '6px' }}>{s.title}</div>
-                  <div style={{ fontSize: '12px', color: '#777', lineHeight: 1.7 }}>{s.desc}</div>
-                  {'note' in s && s.note && <div style={{ fontSize: '11px', color: 'var(--orange)', background: 'rgba(249,115,22,0.08)', padding: '8px 12px', marginTop: '10px', borderLeft: '2px solid var(--orange)' }}>{s.note}</div>}
-                </div>
-              </div>
-            ))}
-          </div>
+      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+        <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
+          <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>「切れてた」をなくそう。</h2>
+          <a href="https://sorosoro.nobi-labo.com" target="_blank" rel="noopener noreferrer"
+            className="mt-8 inline-block px-9 py-4 text-[16px] font-bold text-white bg-[#2D6A4F] rounded-[12px] hover:bg-[#21503b] transition-colors">
+            今すぐ無料で使う →
+          </a>
         </div>
-      </div>
-
-      <InstallGuide />
-
-      {/* FAQ */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            FAQ
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-            {[
-              { q: 'アカウント登録は必要ですか？', a: '不要です。アプリを開くだけですぐに使えます。データはお使いの端末（ブラウザのLocalStorage）に保存されるため、メールアドレスやパスワードの登録は一切不要です。' },
-              { q: 'バーコードスキャンはどのブラウザで使えますか？', a: 'バーコードスキャン機能はChrome（デスクトップ・Android）でのみ動作します。iOSのSafariやその他のブラウザでは利用できません。スキャンが使えない環境では、商品名を手入力するか楽天検索・Amazon URLからの登録をお使いください。' },
-              { q: 'iPhoneで通知が届きません', a: 'iOSのPush通知はホーム画面に追加したSafariアプリでのみ動作します（iOS 16.4以降対応）。ホーム画面に追加してからアプリを開き、設定パネルの「通知を許可する」を押してください。通常のSafariブラウザからは通知を受け取れません。' },
-              { q: '機種変更したらデータは引き継げますか？', a: 'データはお使いの端末のLocalStorageに保存されているため、現時点では機種変更時のデータ引き継ぎには対応していません。新しい端末では最初から登録し直す必要があります。' },
-              { q: '楽天・Amazonリンクはアフィリエイトですか？', a: 'nobi-laboのアフィリエイトリンクを使用しています。リンク先での購入に追加費用は一切発生しません。アフィリエイト収益はアプリの維持・改善に充てています。' },
-            ].map((item, i) => (
-              <div key={i} style={{ background: 'var(--panel)', padding: '24px' }}>
-                <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--orange)', marginBottom: '8px' }}>Q. {item.q}</div>
-                <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.8 }}>A. {item.a}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* CTA BOTTOM */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ background: 'var(--panel)', border: '1px solid var(--border)', padding: '40px 32px', textAlign: 'center' }}>
-            <h2 style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '-0.5px', marginBottom: '12px' }}>
-              日用品を<em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>切らさない</em>生活へ。
-            </h2>
-            <p style={{ fontSize: '13px', color: '#777', marginBottom: '28px', lineHeight: 1.7 }}>
-              登録不要・無料で使えます。<br />ホーム画面に追加してすぐ使い始めてください。
-            </p>
-            <a href="https://sorosoro.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
-              無料で始める →
-            </a>
-          </div>
-        </div>
-      </div>
-    </>
+      </section>
+    </div>
   )
 }

@@ -15,29 +15,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'daily',
       priority: 1.0,
     },
-    {
-      url: `${BASE_URL}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    // アプリ詳細ページ（Next.js routes）
-    { url: `${BASE_URL}/comic-checker`,      changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/sorosoro`,           changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/mebae`,              changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/questlog`,           changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/kabu-note`,          changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/nekoojiisan-timer`,  changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/subshari`,           changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/todo-manager`,       changeFrequency: 'monthly', priority: 0.8 },
-    // アプリ詳細ページ（静的HTML）
-    { url: `${BASE_URL}/tax-simulator/`,  changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE_URL}/stock-screener`, changeFrequency: 'monthly', priority: 0.8 },
-    // /japan-stock-screener は /stock-screener にリダイレクト済み（サイトマップからは除外）
+    { url: `${BASE_URL}/apps`,   changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/blog`,   changeFrequency: 'daily',  priority: 0.9 },
+    // /column は note.com への外部リンクが大半のため noindex 設定、sitemapからも除外
+    // アプリ詳細ページ
+    { url: `${BASE_URL}/comic-checker`,        changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/questlog`,             changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/mebae`,                changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/sorosoro`,             changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/nekoojiisan-timer`,    changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/meeting-timer`,        changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/subshari`,             changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/kabu-note`,            changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/kabu-signal`,          changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/tax-simulator-detail`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/stock-screener`,       changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/legalgen`,             changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/task-manager`,         changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/note-deck`,            changeFrequency: 'monthly', priority: 0.8 },
     // その他
-    { url: `${BASE_URL}/about`, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/apps`,  changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE_URL}/privacy`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE_URL}/about`,   changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/contact`, changeFrequency: 'yearly',  priority: 0.5 },
+    { url: `${BASE_URL}/privacy`, changeFrequency: 'yearly',  priority: 0.3 },
   ]
 
   // ブログ記事（Notionから動的取得）

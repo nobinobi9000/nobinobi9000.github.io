@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" width="390" height="844">
+  <rect width="390" height="844" fill="#F5F1FC" rx="0"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="390" height="64" fill="#ffffff"/>
+  <rect x="0" y="63.5" width="390" height="0.5" fill="#E8E0F5"/>
+  <text x="20" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#888888" font-weight="400">← nobi-labo</text>
+  <text x="195" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#111111" font-weight="600" text-anchor="middle">法律書類ジェネレーター</text>
+
+  <!-- Progress -->
+  <rect x="20" y="76" width="350" height="4" fill="#EDE8FA" rx="2"/>
+  <rect x="20" y="76" width="175" height="4" fill="#6D28D9" rx="2"/>
+  <text x="20" y="96" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6D28D9" font-weight="500">STEP 1</text>
+  <text x="370" y="96" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#999999" text-anchor="end">2/4</text>
+
+  <!-- Card: 書類種別 -->
+  <rect x="20" y="108" width="350" height="130" fill="#ffffff" rx="14" stroke="#E8E0F5" stroke-width="1"/>
+  <text x="36" y="136" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6D28D9" font-weight="600" letter-spacing="0.05em">書類の種別を選択</text>
+
+  <!-- Option 1 selected -->
+  <rect x="32" y="146" width="150" height="44" fill="#F5F1FC" rx="10" stroke="#6D28D9" stroke-width="1.5"/>
+  <text x="107" y="163" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6D28D9" text-anchor="middle">📋</text>
+  <text x="107" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6D28D9" font-weight="600" text-anchor="middle">業務委託契約書</text>
+
+  <!-- Option 2 -->
+  <rect x="194" y="146" width="150" height="44" fill="#FAFAFA" rx="10" stroke="#E8E0F5" stroke-width="1"/>
+  <text x="269" y="163" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#888888" text-anchor="middle">🔒</text>
+  <text x="269" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#888888" text-anchor="middle">秘密保持契約（NDA）</text>
+
+  <!-- More options row -->
+  <rect x="32" y="198" width="96" height="30" fill="#FAFAFA" rx="8" stroke="#E8E0F5" stroke-width="1"/>
+  <text x="80" y="218" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#888888" text-anchor="middle">内容証明</text>
+  <rect x="138" y="198" width="96" height="30" fill="#FAFAFA" rx="8" stroke="#E8E0F5" stroke-width="1"/>
+  <text x="186" y="218" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#888888" text-anchor="middle">賃貸借契約</text>
+  <rect x="244" y="198" width="96" height="30" fill="#FAFAFA" rx="8" stroke="#E8E0F5" stroke-width="1"/>
+  <text x="292" y="218" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#888888" text-anchor="middle">その他</text>
+
+  <!-- Card: 依頼主 -->
+  <rect x="20" y="252" width="350" height="160" fill="#ffffff" rx="14" stroke="#E8E0F5" stroke-width="1"/>
+  <text x="36" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6D28D9" font-weight="600" letter-spacing="0.05em">依頼主の情報</text>
+
+  <text x="36" y="306" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#444444">氏名・会社名</text>
+  <rect x="36" y="314" width="318" height="36" fill="#F8F8F8" rx="8" stroke="#DDDDDD" stroke-width="1"/>
+  <text x="52" y="337" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#111111">株式会社 nobi-labo</text>
+
+  <text x="36" y="368" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#444444">住所</text>
+  <rect x="36" y="376" width="318" height="36" fill="#F8F8F8" rx="8" stroke="#DDDDDD" stroke-width="1"/>
+  <text x="52" y="399" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#AAAAAA">〒000-0000 東京都...</text>
+
+  <!-- Card: 相手方 -->
+  <rect x="20" y="426" width="350" height="160" fill="#ffffff" rx="14" stroke="#E8E0F5" stroke-width="1"/>
+  <text x="36" y="454" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6D28D9" font-weight="600" letter-spacing="0.05em">相手方の情報</text>
+
+  <text x="36" y="480" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#444444">氏名・会社名</text>
+  <rect x="36" y="488" width="318" height="36" fill="#F8F8F8" rx="8" stroke="#DDDDDD" stroke-width="1"/>
+  <text x="52" y="511" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#AAAAAA">相手方の名称を入力</text>
+
+  <text x="36" y="542" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#444444">住所</text>
+  <rect x="36" y="550" width="318" height="36" fill="#F8F8F8" rx="8" stroke="#DDDDDD" stroke-width="1"/>
+  <text x="52" y="573" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#AAAAAA">〒000-0000 ...</text>
+
+  <!-- Card: 報酬・期間 -->
+  <rect x="20" y="600" width="350" height="112" fill="#ffffff" rx="14" stroke="#E8E0F5" stroke-width="1"/>
+  <text x="36" y="628" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#6D28D9" font-weight="600" letter-spacing="0.05em">報酬・契約期間</text>
+
+  <text x="36" y="654" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#444444">報酬金額（月額）</text>
+  <rect x="36" y="662" width="150" height="36" fill="#F8F8F8" rx="8" stroke="#DDDDDD" stroke-width="1"/>
+  <text x="52" y="685" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#111111">¥ 200,000</text>
+
+  <text x="202" y="654" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#444444">契約期間</text>
+  <rect x="202" y="662" width="152" height="36" fill="#F8F8F8" rx="8" stroke="#DDDDDD" stroke-width="1"/>
+  <text x="218" y="685" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#111111">6ヶ月</text>
+
+  <!-- Generate Button -->
+  <rect x="20" y="726" width="350" height="52" fill="#6D28D9" rx="14"/>
+  <text x="195" y="758" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#ffffff" font-weight="700" text-anchor="middle">AIで書類を生成する →</text>
+
+  <!-- Free badge -->
+  <rect x="131" y="788" width="128" height="22" fill="#EDE8FA" rx="11"/>
+  <text x="195" y="804" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#6D28D9" font-weight="600" text-anchor="middle">無料 3回まで利用可能</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="820" width="390" height="24" fill="#ffffff"/>
+  <rect x="155" y="828" width="80" height="5" fill="#CCCCCC" rx="2.5"/>
+</svg>

@@ -1,183 +1,154 @@
 import type { Metadata } from 'next'
-import InstallGuide from '@/components/InstallGuide'
+import Link from 'next/link'
+import AppCarousel from '@/components/AppCarousel'
 
 export const metadata: Metadata = {
   title: 'comic-checker | マンガ新刊チェッカー',
   description: 'マンガの新刊を自動チェック。発売14日前・7日前・当日にPush通知でお知らせ。無料・スマホのホーム画面に追加して使えます。',
-  alternates: {
-    canonical: '/comic-checker',
-  },
+  alternates: { canonical: '/comic-checker' },
 }
+
+const SLIDES = [
+  { src: '/screenshots/comic-mylist-list.png', caption: 'マイリスト・リスト' },
+  { src: '/screenshots/comic-mylist-grid.png', caption: 'マイリスト・グリッド' },
+  { src: '/screenshots/comic-newrelease.png',  caption: '新刊情報' },
+  { src: '/screenshots/comic-calendar.png',    caption: '新刊カレンダー' },
+  { src: '/screenshots/comic-search.png',      caption: '検索' },
+]
 
 export default function ComicCheckerPage() {
   return (
-    <>
-      {/* HERO */}
-      <div style={{ position: 'relative', overflow: 'hidden', padding: '72px 24px 64px', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
-            <a href="/" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: '#555', textDecoration: 'none', textTransform: 'uppercase' }}>← nobi-labo</a>
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--orange)' }}>comic-checker</span>
-          </div>
-          <div style={{ fontSize: '40px', marginBottom: '16px' }}>📚</div>
-          <h1 style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: '16px' }}>
-            マンガの新刊を<br /><em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>見逃さない。</em>
-          </h1>
-          <p style={{ fontSize: '15px', color: '#888', lineHeight: 1.8, maxWidth: '480px', marginBottom: '32px' }}>
-            登録したマンガシリーズの新刊を自動でチェック。<br />
-            発売前にPush通知でお知らせするので、予約も買い忘れもなし。
-          </p>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '32px' }}>
-            {['無料', 'ホーム追加OK', 'Push通知', '登録制', '楽天連携', 'Amazon連携'].map((b, i) => (
-              <span key={b} style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', padding: '4px 10px', border: `1px solid ${i < 3 ? 'var(--orange)' : '#2a2a2a'}`, color: i < 3 ? 'var(--orange)' : '#666' }}>{b}</span>
-            ))}
-          </div>
-          <a href="https://comic.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
-            今すぐ無料で使う →
-          </a>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white">
 
-      {/* STORY */}
-      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-            Story
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
-            「好きなマンガの新刊を何度も買い逃したのがきっかけ。「そろそろ出る頃かな」と思って本屋に行ったら既に出ていた、ということが続いて、自分専用の新刊通知が必要だと感じた。」
-          </blockquote>
+      {/* BREADCRUMB + HERO */}
+      <section className="max-w-[1200px] mx-auto px-6 pt-14 pb-[72px]">
+        <div className="flex items-center gap-2 text-[13px] text-[#999999] mb-10">
+          <Link href="/" className="hover:text-[#2D6A4F] transition-colors">nobi-labo</Link>
+          <span>›</span>
+          <Link href="/apps" className="hover:text-[#2D6A4F] transition-colors">Apps</Link>
+          <span>›</span>
+          <span className="text-[#111111] font-medium">comic-checker</span>
         </div>
-      </div>
-
-      {/* SCREENSHOTS */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            Screenshots
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-            <div style={{ display: 'flex', gap: '20px', width: 'max-content', padding: '4px 2px' }}>
-              {[
-                { src: '/screenshots/comic-mylist-list.png', label: 'マイリスト・リスト' },
-                { src: '/screenshots/comic-mylist-grid.png', label: 'マイリスト・グリッド' },
-                { src: '/screenshots/comic-newrelease.png', label: '新刊情報' },
-                { src: '/screenshots/comic-calendar.png', label: '新刊カレンダー' },
-                { src: '/screenshots/comic-search.png', label: '検索' },
-              ].map(s => (
-                <div key={s.src} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-                  <div style={{ width: '200px', background: '#1a1a1a', borderRadius: '32px', border: '2px solid #333', padding: '14px 8px', boxShadow: '0 20px 60px rgba(0,0,0,0.7)' }}>
-                    <div style={{ width: '60px', height: '6px', background: '#2a2a2a', borderRadius: '3px', margin: '0 auto 10px' }} />
-                    <div style={{ width: '100%', borderRadius: '18px', overflow: 'hidden' }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={s.src} alt={s.label} style={{ width: '100%', display: 'block' }} />
-                    </div>
-                    <div style={{ width: '40px', height: '4px', background: '#2a2a2a', borderRadius: '2px', margin: '10px auto 0' }} />
-                  </div>
-                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '1px', color: '#666', textAlign: 'center', textTransform: 'uppercase' }}>{s.label}</div>
-                </div>
+        <div className="grid gap-16 items-center" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+          <div>
+            <span className="inline-block px-3 py-[5px] text-[12px] font-bold rounded-full text-[#2563EB] bg-[#F0F5FF]">📚 Life</span>
+            <h1 className="mt-[22px] font-extrabold leading-[1.15] tracking-[-0.03em]" style={{ fontSize: 'clamp(32px, 4.5vw, 54px)' }}>
+              マンガの新刊を<br />見逃さない。
+            </h1>
+            <p className="mt-[22px] text-[17px] leading-[1.85] text-[#444444] max-w-[480px]">
+              好きなシリーズを登録するだけ。発売14日前・7日前・当日に自動でPush通知。楽天ブックスとの連携でそのままワンタップ購入できます。
+            </p>
+            <div className="mt-6 flex gap-2 flex-wrap">
+              {['無料', 'Push通知', '楽天連携', 'ホーム追加OK'].map(tag => (
+                <span key={tag} className="px-3 py-[5px] text-[12.5px] font-medium rounded-lg text-[#444444] bg-[#F7F7F7] border border-[#EBEBEB]">{tag}</span>
               ))}
             </div>
+            <a href="https://comic.nobi-labo.com" target="_blank" rel="noopener noreferrer"
+              className="mt-8 inline-block px-7 py-4 text-[15px] font-bold text-white bg-[#2D6A4F] rounded-[11px] hover:bg-[#21503b] transition-colors">
+              今すぐ無料で使う →
+            </a>
+          </div>
+          <AppCarousel slides={SLIDES} accentColor="#2563EB" bgColor="#F0F5FF" />
+        </div>
+      </section>
+
+      {/* STORY */}
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">STORY — 開発の背景</div>
+          <div className="mt-9 max-w-[720px]">
+            <blockquote className="border-l-[3px] border-[#2D6A4F] pl-7">
+              <p className="text-[20px] font-semibold leading-[1.8] text-[#111111] tracking-[-0.01em]">「好きなマンガの新刊を何度も買い逃したのがきっかけ。」</p>
+            </blockquote>
+            <p className="mt-7 text-[16px] leading-[1.9] text-[#444444]">何十冊ものシリーズを追っていると、どうしても発売日を忘れてしまいます。メモしても管理が続かず、気づいたら2巻分まとめて買うことも。「自動で教えてくれるアプリがあれば」と思い、自分で作ることにしました。</p>
+            <p className="mt-4 text-[16px] leading-[1.9] text-[#444444]">エンジニアではない自分がAIと一緒に設計・実装。データは出版社の公式情報をベースに毎日更新。楽天ブックスと連携して、通知からそのまま購入できる動線にこだわりました。</p>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* FEATURES */}
-      <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-        <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-          Features
-          <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">FEATURES — 機能</div>
+        <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
           {[
-            { num: '01', title: 'シリーズ一括登録', desc: '1巻を選ぶだけでシリーズ全巻を自動取得・登録。過去巻の所有チェックもまとめて管理できます。' },
-            { num: '02', title: '新刊自動チェック', desc: '毎日自動でマイリストの最新刊情報を更新。新しい巻が発売予定になると新刊リストに追加されます。' },
-            { num: '03', title: '3段階Push通知', desc: '発売14日前・7日前・当日の3回、ブラウザにPush通知が届きます。予約済みにした作品には送りません。' },
-            { num: '04', title: '所有巻・完結フラグ管理', desc: 'シリーズ詳細ページで巻ごとに「所有済み」チェックが可能。完結した作品は完結フラグで区別できます。' },
-            { num: '05', title: '楽天・Amazon連携', desc: '各巻から楽天ブックス・Amazonへワンタップで購入ページへ移動できます。' },
+            { num: '01', title: 'シリーズ一括登録', desc: '巻数・著者名・出版社で検索してワンタップ登録。複数の続刊をまとめて管理できます。' },
+            { num: '02', title: '新刊自動チェック', desc: '毎日データを自動更新。発売スケジュールが変わっても自動で追従します。' },
+            { num: '03', title: '3段階Push通知', desc: '発売14日前・7日前・当日に通知。受け取るタイミングはお好みで設定可能です。' },
+            { num: '04', title: '所有巻・完結フラグ管理', desc: '持っている巻を記録して「どこまで読んだか」を管理。完結済みシリーズにはフラグを立てられます。' },
+            { num: '05', title: '楽天・Amazon連携', desc: '新刊通知から楽天ブックス・Amazonへワンタップで遷移。そのまま購入できます。※アフィリエイトリンクを含みます' },
           ].map(f => (
-            <div key={f.num} style={{ background: 'var(--panel)', padding: '28px 24px', display: 'grid', gridTemplateColumns: '48px 1fr', gap: '0 20px' }}>
-              <div style={{ fontSize: '32px', fontWeight: 900, color: '#383838', lineHeight: 1 }}>{f.num}</div>
-              <div>
-                <div style={{ fontSize: '16px', fontWeight: 900, marginBottom: '8px', color: 'var(--orange)' }}>{f.title}</div>
-                <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.8 }}>{f.desc}</div>
+            <div key={f.num} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#2D6A4F] transition-colors">
+              <div className="text-[13px] font-extrabold tracking-[0.04em] text-[#2D6A4F]">{f.num}</div>
+              <h3 className="mt-[14px] text-[18px] font-extrabold tracking-[-0.02em]">{f.title}</h3>
+              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HOW TO USE */}
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">HOW TO USE — 使い方</div>
+          <div className="mt-9 max-w-[600px] flex flex-col gap-0">
+            {[
+              { n: '1', title: 'アカウント登録', desc: 'メールアドレスまたはGoogleアカウントで無料登録。30秒で完了します。' },
+              { n: '2', title: 'マンガを検索して登録', desc: 'タイトルや著者名で検索し、追いかけたいシリーズをマイリストに追加。' },
+              { n: '3', title: '通知をON', desc: 'ブラウザまたはホーム画面追加後にPush通知を許可するだけ。' },
+              { n: '4', title: 'あとは待つだけ', desc: '発売日が近づくと自動でお知らせ。通知から楽天ブックスへそのまま購入できます。' },
+            ].map(step => (
+              <div key={step.n} className="flex gap-5 pb-9">
+                <div className="flex flex-col items-center gap-0 flex-none">
+                  <div className="w-9 h-9 rounded-full bg-[#2D6A4F] text-white text-[14px] font-extrabold flex items-center justify-center flex-none">{step.n}</div>
+                  <div className="w-[1.5px] flex-1 bg-[#EBEBEB] mt-2" />
+                </div>
+                <div className="pt-[6px]">
+                  <div className="text-[17px] font-bold tracking-[-0.01em]">{step.title}</div>
+                  <div className="mt-2 text-[14px] leading-[1.75] text-[#444444]">{step.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">FAQ — よくある質問</div>
+        <div className="mt-8 border border-[#EBEBEB] rounded-2xl overflow-hidden">
+          {[
+            { q: '登録・利用は無料ですか？', a: 'はい、すべての機能を無料でご利用いただけます。課金プランはありません。' },
+            { q: 'iPhoneでPush通知が届きません。', a: 'iOS 16.4以降のSafariでホーム画面に追加するとPush通知が利用できます。設定アプリ → 通知 → comic-checker で通知が許可されているかご確認ください。' },
+            { q: '新刊情報はどのくらいの頻度で更新されますか？', a: '毎日自動更新しています。発売日の変更や新刊情報の追加も自動で反映されます。' },
+            { q: '楽天・AmazonリンクはアフィリエイトLinksですか？', a: 'はい、楽天アフィリエイトおよびAmazonアソシエイトのリンクを含みます。リンク経由での購入時に一定の手数料が発生する場合がありますが、購入者のお支払い金額に変わりはありません。' },
+          ].map((faq, i, arr) => (
+            <div key={i} className={`p-7 ${i < arr.length - 1 ? 'border-b border-[#EBEBEB]' : ''}`}>
+              <div className="flex gap-[14px] items-start">
+                <span className="flex-none text-[18px] font-extrabold text-[#2D6A4F] leading-[1.3]">Q.</span>
+                <div>
+                  <div className="text-[16px] font-bold tracking-[-0.01em]">{faq.q}</div>
+                  <div className="mt-3 text-[14.5px] leading-[1.8] text-[#444444]">{faq.a}</div>
+                </div>
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* HOW TO USE */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            How to use
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-            {[
-              { n: 1, title: 'アカウント登録（無料）', desc: 'メールアドレスとパスワードで登録。登録後すぐに使えます。' },
-              { n: 2, title: 'マンガを検索して登録', desc: 'タイトルで検索して気になる作品を選ぶだけ。シリーズ全巻が自動でマイリストに追加されます。', note: '例：「SPY×FAMILY」→ 全巻一括登録' },
-              { n: 3, title: '通知をONにする', desc: '設定画面から「通知をONにする」を押すだけ。ブラウザの通知許可を求めるダイアログが表示されます。' },
-              { n: 4, title: 'あとは待つだけ', desc: '毎日自動で新刊チェックが走り、発売前に通知が届きます。新刊ページから予約・購入もできます。' },
-            ].map(s => (
-              <div key={s.n} style={{ background: 'var(--panel)', padding: '24px', display: 'grid', gridTemplateColumns: '32px 1fr', gap: '0 16px' }}>
-                <div style={{ width: '28px', height: '28px', background: 'var(--orange)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 900, color: '#fff', flexShrink: 0 }}>{s.n}</div>
-                <div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, marginBottom: '6px' }}>{s.title}</div>
-                  <div style={{ fontSize: '12px', color: '#777', lineHeight: 1.7 }}>{s.desc}</div>
-                  {s.note && <div style={{ fontSize: '11px', color: 'var(--orange)', background: 'rgba(249,115,22,0.08)', padding: '8px 12px', marginTop: '10px', borderLeft: '2px solid var(--orange)' }}>{s.note}</div>}
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* BOTTOM CTA */}
+      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+        <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
+          <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>
+            新刊を見逃さない生活へ。
+          </h2>
+          <p className="mt-4 text-[17px] leading-[1.8] text-[#444444] max-w-[480px] mx-auto">登録は無料。シリーズを追加するだけで、あとは自動でお知らせします。</p>
+          <a href="https://comic.nobi-labo.com" target="_blank" rel="noopener noreferrer"
+            className="mt-8 inline-block px-9 py-4 text-[16px] font-bold text-white bg-[#2D6A4F] rounded-[12px] hover:bg-[#21503b] transition-colors">
+            今すぐ無料で使う →
+          </a>
         </div>
-      </div>
+      </section>
 
-      <InstallGuide />
-
-      {/* FAQ */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            FAQ
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-            {[
-              { q: '登録は無料ですか？', a: 'はい、完全無料です。メールアドレスとパスワードでアカウント登録するだけで、すべての機能をご利用いただけます。' },
-              { q: 'iPhoneで通知が届きません', a: 'iOSのPush通知はホーム画面に追加したSafariアプリでのみ動作します（iOS 16.4以降対応）。ホーム画面に追加してからアプリを開き、設定画面の「通知をONにする」を押してください。' },
-              { q: '新刊情報はいつ更新されますか？', a: '毎日サーバー側で自動更新されます。アプリを開いていなくても最新情報が反映されるため、通知が届いた時点で必ず最新の新刊情報になっています。' },
-              { q: '登録したマンガを削除するには？', a: 'マイリストでシリーズ名をタップして詳細ページを開き、「マイリストから削除」ボタンで削除できます。' },
-              { q: '楽天・Amazonリンクはアフィリエイトですか？', a: 'nobi-laboのアフィリエイトリンクを使用しています。リンク先での購入に追加費用は一切発生しません。アフィリエイト収益はアプリの維持・改善に充てています。' },
-            ].map((item, i) => (
-              <div key={i} style={{ background: 'var(--panel)', padding: '24px' }}>
-                <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--orange)', marginBottom: '8px' }}>Q. {item.q}</div>
-                <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.8 }}>A. {item.a}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* CTA BOTTOM */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ background: 'var(--panel)', border: '1px solid var(--border)', padding: '40px 32px', textAlign: 'center' }}>
-            <h2 style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '-0.5px', marginBottom: '12px' }}>
-              新刊を<em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>見逃さない</em>生活へ。
-            </h2>
-            <p style={{ fontSize: '13px', color: '#777', marginBottom: '28px', lineHeight: 1.7 }}>
-              登録は無料。マンガ好きのための新刊通知アプリ。<br />今すぐ使い始めてください。
-            </p>
-            <a href="https://comic.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
-              無料で始める →
-            </a>
-          </div>
-        </div>
-      </div>
-    </>
+    </div>
   )
 }

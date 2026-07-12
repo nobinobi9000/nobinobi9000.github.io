@@ -58,7 +58,7 @@ export default function AppsPage() {
         <div className="flex flex-col border border-[#EBEBEB] rounded-[20px] overflow-hidden">
           {visible.map(app => {
             const cat = CAT_COLORS[app.category]
-            const isExternal = app.ctaUrl?.startsWith('http')
+            // アプリ本体は別ページ扱いのため、常に新規タブで開く
             return (
               <div
                 key={app.name}
@@ -99,8 +99,8 @@ export default function AppsPage() {
                   {app.ctaUrl ? (
                     <a
                       href={app.ctaUrl}
-                      target={isExternal ? '_blank' : undefined}
-                      rel={isExternal ? 'noopener noreferrer' : undefined}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="whitespace-nowrap text-[13px] font-bold text-white bg-[#2D6A4F] px-4 py-2 rounded-lg hover:bg-[#21503b] transition-colors"
                     >
                       {app.ctaLabel ?? '今すぐ使う →'}

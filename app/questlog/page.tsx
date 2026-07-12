@@ -1,236 +1,95 @@
 import type { Metadata } from 'next'
-import InstallGuide from '@/components/InstallGuide'
+import Link from 'next/link'
+import AppCarousel from '@/components/AppCarousel'
 
 export const metadata: Metadata = {
-  title: 'QUESTLOG | 積みゲー冒険ログ',
-  description: '積みゲーを冒険の地図として管理するゲームバックログアプリ。新作・予約情報、冒険統計、ステータス管理。無料・スマホのホーム画面に追加して使えます。',
-  alternates: {
-    canonical: '/questlog',
-  },
+  title: 'QUESTLOG | ゲームバックログ管理',
+  description: '積みゲーを冒険の地図として前向きに管理。Backlog→Playing→Clearedでプレイ状況を記録。Push通知で新作リリース情報もお届け。',
+  alternates: { canonical: '/questlog' },
 }
 
-const SCREENSHOTS = [
-  { src: '/screenshots/questlog/Top.png',    label: '冒険の地図' },
-  { src: '/screenshots/questlog/tsumi.png',  label: '積みゲー一覧' },
-  { src: '/screenshots/questlog/new.png',    label: '新作・予約情報' },
-  { src: '/screenshots/questlog/tokei.png',  label: '冒険統計' },
-  { src: '/screenshots/questlog/dendo.png',  label: '殿堂' },
-  { src: '/screenshots/questlog/tusika.png', label: 'ゲームを追加' },
-]
-
-const FEATURES = [
-  {
-    num: '01',
-    title: '冒険の地図（ダッシュボード）',
-    desc: '積みゲーの総資産・制覇率・残り冒険時間をワンページで確認。NEW PICKで最新ゲーム情報、今週の注目クエストでランダムにゲームをピックアップ。',
-  },
-  {
-    num: '02',
-    title: 'ゲーム検索・一発登録',
-    desc: '日本語・英語どちらでもOK。楽天ブックス・Steam・RAWGの3ソースから正確なゲーム情報とパッケージ画像を自動取得。ジャンル・プラットフォームを確認してから登録できる。',
-  },
-  {
-    num: '03',
-    title: 'ステータス管理',
-    desc: 'Backlog → Playing → Cleared の3ステップでプレイ進捗を管理。予想クリア時間・実際のクリア時間・感想メモも記録できる。気分タグで「ほっこり」「燃える」などの分類も可能。',
-  },
-  {
-    num: '04',
-    title: '新作・予約情報',
-    desc: 'ファミ通・4Gamer・Steamから最新ゲーム情報を自動取得。近日発売タイトルはAmazon・楽天の予約リンクつき。気になるタイトルはワンタップで積む予定リストに追加。',
-  },
-  {
-    num: '05',
-    title: '冒険統計',
-    desc: 'ジャンル別・プラットフォーム別の積みゲー内訳をグラフで確認。制覇済みタイトルの分析も。プレイ傾向が一目でわかる。',
-  },
-  {
-    num: '06',
-    title: 'ホーム画面に追加して使える',
-    desc: 'スマホのホーム画面に追加してアプリのように使える。インストール不要でいつでも起動。Push通知で新作情報もお届け。',
-  },
-]
-
-const STEPS = [
-  {
-    n: 1,
-    title: 'アカウント登録（無料）',
-    desc: 'メールアドレスとパスワードで登録。登録後すぐに使えます。',
-  },
-  {
-    n: 2,
-    title: 'ゲームを検索して追加',
-    desc: '「追加」タブでタイトルを検索。日本語・英語どちらでもOK。見つかったら「本棚に追加」を押すだけ。',
-    note: '例：「龍が如く8」「Elden Ring」',
-  },
-  {
-    n: 3,
-    title: 'ステータスを更新しながら遊ぶ',
-    desc: 'ゲームをタップして詳細画面を開き「プレイ開始」→「クリア！」とステータスを進めていく。クリア時間や感想も記録できる。',
-  },
-  {
-    n: 4,
-    title: 'ホーム画面に追加してアプリとして使う',
-    desc: 'ブラウザの「ホーム画面に追加」でアプリのように起動できる。通知もONにすれば新作・予約情報が届く。',
-  },
+const SLIDES = [
+  { src: '/screenshots/questlog/Top.png',    caption: 'ホーム' },
+  { src: '/screenshots/questlog/tsumi.png',  caption: 'バックログ' },
+  { src: '/screenshots/questlog/tusika.png', caption: 'ゲーム追加' },
+  { src: '/screenshots/questlog/tokei.png',  caption: 'プレイ時間' },
+  { src: '/screenshots/questlog/new.png',    caption: '新作情報' },
+  { src: '/screenshots/questlog/dendo.png',  caption: '殿堂入り' },
 ]
 
 export default function QuestlogPage() {
   return (
-    <>
-      {/* HERO */}
-      <div style={{ position: 'relative', overflow: 'hidden', padding: '72px 24px 64px', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
-            <a href="/" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: '#555', textDecoration: 'none', textTransform: 'uppercase' }}>← nobi-labo</a>
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--orange)' }}>QUESTLOG</span>
-          </div>
-          <div style={{ fontSize: '40px', marginBottom: '16px' }}>🗺️</div>
-          <h1 style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: '16px' }}>
-            積みゲーは<br /><em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>冒険の地図。</em>
-          </h1>
-          <p style={{ fontSize: '15px', color: '#888', lineHeight: 1.8, maxWidth: '480px', marginBottom: '32px' }}>
-            「積みゲー」を罪悪感ではなく、まだ見ぬ冒険への期待として管理するゲームバックログアプリ。<br />
-            Backlog → Playing → Cleared で自分だけの冒険記録を残そう。
-          </p>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '32px' }}>
-            {['無料', 'ホーム追加OK', 'Push通知', 'ゲーム管理', '新作情報', '予約リンク'].map((b, i) => (
-              <span key={b} style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', padding: '4px 10px', border: `1px solid ${i < 3 ? 'var(--orange)' : '#2a2a2a'}`, color: i < 3 ? 'var(--orange)' : '#666' }}>{b}</span>
-            ))}
-          </div>
-          <a href="https://gamelog.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
-            冒険を始める →
-          </a>
+    <div className="min-h-screen bg-white">
+      <section className="max-w-[1200px] mx-auto px-6 pt-14 pb-[72px]">
+        <div className="flex items-center gap-2 text-[13px] text-[#999999] mb-10">
+          <Link href="/" className="hover:text-[#2D6A4F] transition-colors">nobi-labo</Link>
+          <span>›</span>
+          <Link href="/apps" className="hover:text-[#2D6A4F] transition-colors">Apps</Link>
+          <span>›</span>
+          <span className="text-[#111111] font-medium">QUESTLOG</span>
         </div>
-      </div>
-
-      {/* STORY */}
-      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--dark)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '40px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-            Story
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <blockquote style={{ fontSize: '14px', color: '#ccc', lineHeight: 1.9, borderLeft: '3px solid rgba(249,115,22,0.4)', paddingLeft: '20px', margin: 0 }}>
-            「積みゲーが増えすぎて、罪悪感ばかりが積み上がっていた。罪悪感ではなく「まだ見ぬ冒険」として楽しく管理できるアプリが欲しかった。満足度はまだ45点。作り続けている。」
-          </blockquote>
-        </div>
-      </div>
-
-      {/* SCREENSHOTS */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            Screenshots
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-            <div style={{ display: 'flex', gap: '20px', width: 'max-content', padding: '4px 2px' }}>
-              {SCREENSHOTS.map(s => (
-                <div key={s.src} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-                  <div style={{ width: '200px', background: '#1a1a1a', borderRadius: '32px', border: '2px solid #333', padding: '14px 8px', boxShadow: '0 20px 60px rgba(0,0,0,0.7)' }}>
-                    <div style={{ width: '60px', height: '6px', background: '#2a2a2a', borderRadius: '3px', margin: '0 auto 10px' }} />
-                    <div style={{ width: '100%', borderRadius: '18px', overflow: 'hidden' }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={s.src} alt={s.label} style={{ width: '100%', display: 'block' }} />
-                    </div>
-                    <div style={{ width: '40px', height: '4px', background: '#2a2a2a', borderRadius: '2px', margin: '10px auto 0' }} />
-                  </div>
-                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '1px', color: '#666', textAlign: 'center', textTransform: 'uppercase' }}>{s.label}</div>
-                </div>
+        <div className="grid gap-16 items-center" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+          <div>
+            <span className="inline-block px-3 py-[5px] text-[12px] font-bold rounded-full text-[#2563EB] bg-[#F0F5FF]">🗺️ Life</span>
+            <h1 className="mt-[22px] font-extrabold leading-[1.15] tracking-[-0.03em]" style={{ fontSize: 'clamp(32px, 4.5vw, 54px)' }}>
+              積みゲーを、<br />冒険の地図に。
+            </h1>
+            <p className="mt-[22px] text-[17px] leading-[1.85] text-[#444444] max-w-[480px]">
+              Backlog → Playing → Cleared の3ステータスでゲームを管理。罪悪感ではなく「まだ見ぬ冒険」として積みゲーを楽しく整理できます。
+            </p>
+            <div className="mt-6 flex gap-2 flex-wrap">
+              {['無料', 'Push通知', 'ゲーム管理', 'ホーム追加OK'].map(tag => (
+                <span key={tag} className="px-3 py-[5px] text-[12.5px] font-medium rounded-lg text-[#444444] bg-[#F7F7F7] border border-[#EBEBEB]">{tag}</span>
               ))}
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* CONCEPT */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            Concept
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-            {[
-              { icon: '📦', status: 'Backlog', color: '#94a3b8', desc: 'まだ踏み入れていない未踏の地。積んでいるゲームは「罪」じゃない。いつか訪れる冒険先リスト。' },
-              { icon: '⚔️', status: 'Playing', color: '#f97316', desc: '今まさに探索中。プレイ中のゲームは冒険の真っ只中。クリアまでの道のりを記録しよう。' },
-              { icon: '🏆', status: 'Cleared', color: '#f1c40f', desc: '攻略済みの伝説。クリアしたゲームは殿堂入りとして永遠に記録される。' },
-            ].map(s => (
-              <div key={s.status} style={{ background: 'var(--panel)', padding: '28px 24px', display: 'grid', gridTemplateColumns: '48px 1fr', gap: '0 20px', alignItems: 'start' }}>
-                <div style={{ fontSize: '28px', lineHeight: 1 }}>{s.icon}</div>
-                <div>
-                  <div style={{ fontSize: '16px', fontWeight: 900, marginBottom: '8px', color: s.color }}>{s.status}</div>
-                  <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.8 }}>{s.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* FEATURES */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            Features
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-            {FEATURES.map(f => (
-              <div key={f.num} style={{ background: 'var(--panel)', padding: '28px 24px', display: 'grid', gridTemplateColumns: '48px 1fr', gap: '0 20px' }}>
-                <div style={{ fontSize: '32px', fontWeight: 900, color: '#383838', lineHeight: 1 }}>{f.num}</div>
-                <div>
-                  <div style={{ fontSize: '16px', fontWeight: 900, marginBottom: '8px', color: 'var(--orange)' }}>{f.title}</div>
-                  <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.8 }}>{f.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* HOW TO USE */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
-            How to use
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-            {STEPS.map(s => (
-              <div key={s.n} style={{ background: 'var(--panel)', padding: '24px', display: 'grid', gridTemplateColumns: '32px 1fr', gap: '0 16px' }}>
-                <div style={{ width: '28px', height: '28px', background: 'var(--orange)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 900, color: '#fff', flexShrink: 0 }}>{s.n}</div>
-                <div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, marginBottom: '6px' }}>{s.title}</div>
-                  <div style={{ fontSize: '12px', color: '#777', lineHeight: 1.7 }}>{s.desc}</div>
-                  {s.note && <div style={{ fontSize: '11px', color: 'var(--orange)', background: 'rgba(249,115,22,0.08)', padding: '8px 12px', marginTop: '10px', borderLeft: '2px solid var(--orange)' }}>{s.note}</div>}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <InstallGuide />
-
-      {/* CTA BOTTOM */}
-      <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-          <div style={{ background: 'var(--panel)', border: '1px solid var(--border)', padding: '40px 32px', textAlign: 'center' }}>
-            <h2 style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '-0.5px', marginBottom: '12px' }}>
-              積みゲーを<em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>冒険の記録</em>へ。
-            </h2>
-            <p style={{ fontSize: '13px', color: '#777', marginBottom: '28px', lineHeight: 1.7 }}>
-              登録は無料。ゲーマーのためのバックログ管理アプリ。<br />
-              今すぐ冒険の地図を開こう。
-            </p>
-            <a href="https://gamelog.nobi-labo.com" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--orange)', color: '#fff', fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '14px 28px' }}>
-              冒険を始める →
+            <a href="https://gamelog.nobi-labo.com" target="_blank" rel="noopener noreferrer"
+              className="mt-8 inline-block px-7 py-4 text-[15px] font-bold text-white bg-[#2D6A4F] rounded-[11px] hover:bg-[#21503b] transition-colors">
+              今すぐ無料で使う →
             </a>
           </div>
+          <AppCarousel slides={SLIDES} accentColor="#2563EB" bgColor="#F0F5FF" />
         </div>
-      </div>
-    </>
+      </section>
+
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">STORY — 開発の背景</div>
+          <div className="mt-9 max-w-[720px]">
+            <blockquote className="border-l-[3px] border-[#2D6A4F] pl-7">
+              <p className="text-[20px] font-semibold leading-[1.8] text-[#111111]">「積みゲーが増えすぎて、罪悪感ばかりが積み上がっていた。」</p>
+            </blockquote>
+            <p className="mt-7 text-[16px] leading-[1.9] text-[#444444]">積みゲーは「やらなきゃいけないもの」ではなく「まだ楽しんでいないもの」のはず。罪悪感ではなく期待感を持って管理できるアプリが欲しくて作りました。満足度はまだ45点。作り続けています。</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">FEATURES — 機能</div>
+        <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          {[
+            { num: '01', title: '3ステータス管理', desc: 'Backlog（積み）→ Playing（プレイ中）→ Cleared（クリア済）でゲームの状態を整理。' },
+            { num: '02', title: 'プレイ時間記録', desc: 'ゲームごとのプレイ時間を記録。どのゲームに何時間使ったか一目でわかります。' },
+            { num: '03', title: '新作・発売情報通知', desc: '気になるタイトルを登録しておくと、発売日が近づいたときにPush通知でお知らせ。' },
+            { num: '04', title: '殿堂入り機能', desc: 'クリアしたゲームに評価をつけて殿堂入りに登録。思い出のゲームを振り返れます。' },
+          ].map(f => (
+            <div key={f.num} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#2D6A4F] transition-colors">
+              <div className="text-[13px] font-extrabold tracking-[0.04em] text-[#2D6A4F]">{f.num}</div>
+              <h3 className="mt-[14px] text-[18px] font-extrabold tracking-[-0.02em]">{f.title}</h3>
+              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+        <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
+          <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>積みゲーを、冒険に変えよう。</h2>
+          <a href="https://gamelog.nobi-labo.com" target="_blank" rel="noopener noreferrer"
+            className="mt-8 inline-block px-9 py-4 text-[16px] font-bold text-white bg-[#2D6A4F] rounded-[12px] hover:bg-[#21503b] transition-colors">
+            今すぐ無料で使う →
+          </a>
+        </div>
+      </section>
+    </div>
   )
 }

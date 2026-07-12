@@ -8,15 +8,17 @@ import SubscriptionList from './components/SubscriptionList'
 import Dashboard from './components/Dashboard'
 import InvestmentCalculator from './components/InvestmentCalculator'
 import DanshariMode from './components/DanshariMode'
+import CalendarView from './components/CalendarView'
 import AddSubscriptionModal from './components/AddSubscriptionModal'
 import UsageCheckModal from './components/UsageCheckModal'
 
-type Tab = 'list' | 'dashboard' | 'invest' | 'danshari'
+type Tab = 'list' | 'dashboard' | 'calendar' | 'invest' | 'danshari'
 type UsageCheckTrigger = 'startup' | 'renewal'
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'list', label: 'マイリスト', icon: '📋' },
+  { id: 'list', label: 'リスト', icon: '📋' },
   { id: 'dashboard', label: '支出', icon: '📊' },
+  { id: 'calendar', label: 'カレンダー', icon: '📅' },
   { id: 'invest', label: '投資換算', icon: '📈' },
   { id: 'danshari', label: '断捨離', icon: '✂️' },
 ]
@@ -169,6 +171,7 @@ export default function SubshariApp() {
               />
             )}
             {activeTab === 'dashboard' && <Dashboard subscriptions={active} />}
+            {activeTab === 'calendar' && <CalendarView subscriptions={subscriptions} />}
             {activeTab === 'invest' && (
               <InvestmentCalculator
                 subscriptions={subscriptions}
@@ -192,7 +195,7 @@ export default function SubshariApp() {
       <nav style={{
         position: 'sticky', bottom: 0,
         background: '#0c0c0c', borderTop: '1px solid var(--border)',
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', zIndex: 50,
+        display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', zIndex: 50,
       }}>
         {TABS.map((tab) => {
           const isActive = activeTab === tab.id
@@ -207,7 +210,7 @@ export default function SubshariApp() {
               }}
             >
               <span style={{ fontSize: '18px', lineHeight: 1 }}>{tab.icon}</span>
-              <span style={{ fontSize: '9px', fontWeight: 700, color: isActive ? '#f97316' : '#444' }}>{tab.label}</span>
+              <span style={{ fontSize: '8px', fontWeight: 700, color: isActive ? '#f97316' : '#444' }}>{tab.label}</span>
             </button>
           )
         })}

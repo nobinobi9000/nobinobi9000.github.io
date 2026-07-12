@@ -1,15 +1,14 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { getPosts } from '@/lib/notion'
 
 export const metadata: Metadata = {
   title: 'ブログ',
   description: 'nobi-laboのブログ。マンガ・アプリ・日常のお役立ち情報を発信。',
-  alternates: {
-    canonical: '/blog',
-  },
+  alternates: { canonical: '/blog' },
 }
 
-export const revalidate = 3600 // 1時間ごとに再生成
+export const revalidate = 3600
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
@@ -20,55 +19,54 @@ export default async function BlogPage() {
   const posts = await getPosts()
 
   return (
-    <>
-      <section className="hero" style={{ paddingBottom: '48px' }}>
-        <div className="hero-inner">
-          <span className="hero-label">Blog</span>
-          <h1 style={{ fontSize: 'clamp(28px, 7vw, 48px)', marginBottom: '16px' }}>
-            ノウハウ・<br /><em>お役立ち情報</em>
-          </h1>
-          <p className="hero-sub">
-            マンガ・アプリ・日常の小ネタを<br />
-            定期的に発信しています。
-          </p>
+    <div className="min-h-screen bg-white">
+
+      {/* PAGE HEADER */}
+      <section className="max-w-[1200px] mx-auto px-6 pt-14 pb-12">
+        <div className="flex items-center gap-2 text-[13px] text-[#999999] mb-8">
+          <Link href="/" className="hover:text-[#2D6A4F] transition-colors">nobi-labo</Link>
+          <span>›</span>
+          <span className="text-[#111111] font-medium">Blog</span>
+        </div>
+        <h1 className="font-extrabold tracking-[-0.03em] leading-[1.1]"
+          style={{ fontSize: 'clamp(40px, 5.5vw, 68px)' }}>
+          Blog
+        </h1>
+        <p className="mt-[14px] text-[16px] text-[#999999]">マンガ・アプリ・日常のお役立ち情報を発信</p>
+      </section>
+
+      {/* ARTICLE LIST */}
+      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+        <div className="border border-[#EBEBEB] rounded-[20px] overflow-hidden">
+          {posts.length === 0 ? (
+            <div className="px-6 py-12 text-center text-[#999999] text-[14px]">記事を準備中です</div>
+          ) : posts.map(post => (
+            <Link key={post.id} href={`/blog/${post.id}`}
+              className="flex items-center gap-5 px-6 py-[22px] border-b border-[#EBEBEB] last:border-0 hover:bg-[#F0F7F4] transition-colors">
+              <span className="flex-none w-14 text-center py-[6px] text-[11px] font-bold rounded-lg text-[#2D6A4F] bg-[#F0F7F4]">
+                Blog
+              </span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-3 flex-wrap">
+                  {post.publishedAt && (
+                    <span className="text-[12.5px] text-[#999999]">{formatDate(post.publishedAt)}</span>
+                  )}
+                  {post.category && (
+                    <span className="px-[9px] py-[2px] text-[11px] font-bold rounded-full text-[#2563EB] bg-[#F0F5FF]">
+                      {post.category}
+                    </span>
+                  )}
+                </div>
+                <div className="mt-[7px] text-[16px] font-bold tracking-[-0.01em] leading-[1.5] truncate">
+                  {post.title}
+                </div>
+              </div>
+              <span className="flex-none text-[#999999] text-[18px]">→</span>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <div className="section">
-        {posts.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '64px 0', color: '#555' }}>
-            <p style={{ fontSize: '32px', marginBottom: '16px' }}>📝</p>
-            <p style={{ fontSize: '14px' }}>記事を準備中です。しばらくお待ちください。</p>
-          </div>
-        ) : (
-          <>
-            <div className="section-header">
-              <span className="section-label">Articles</span>
-              <div className="section-line"></div>
-              <span style={{ fontSize: '11px', color: '#555', whiteSpace: 'nowrap' }}>{posts.length}件</span>
-            </div>
-            <div className="blog-list">
-              {posts.map((post) => (
-                <a key={post.id} href={`/blog/${post.id}`} className="blog-card">
-                  <div className="blog-card-meta">
-                    {post.publishedAt && (
-                      <span className="blog-date">{formatDate(post.publishedAt)}</span>
-                    )}
-                    {post.category && (
-                      <span className="blog-category">{post.category}</span>
-                    )}
-                    {post.tags.map((tag) => (
-                      <span key={tag} className="blog-tag">{tag}</span>
-                    ))}
-                  </div>
-                  <div className="blog-title">{post.title}</div>
-                  <span className="blog-arrow">→</span>
-                </a>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-    </>
+    </div>
   )
 }

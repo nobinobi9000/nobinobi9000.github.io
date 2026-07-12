@@ -1,178 +1,148 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import { APPS } from '@/lib/apps'
 
 export const metadata: Metadata = {
-  title: 'About - nobi',
-  description: 'nobi-labo運営者・nobIのプロフィール。会社員（非エンジニア）が2026年1月からAIと一緒にアプリを作り始めた話。マンガ1000冊・積みゲー・投資・音楽好き。',
-  alternates: {
-    canonical: '/about',
-  },
+  title: 'About',
+  description: 'nobi-labo運営者・nobIのプロフィール。会社員（非エンジニア）が2026年1月からAIと一緒にアプリを作り始めた話。',
+  alternates: { canonical: '/about' },
 }
 
 const STATS = [
-  { num: '2026.01', label: '開発スタート月' },
-  { num: '10+', label: '公開アプリ数' },
-  { num: '1000+', label: '所持マンガ冊数' },
-  { num: '∞', label: '積みゲー' },
+  { value: '2026.01',        label: 'SINCE' },
+  { value: String(APPS.length), label: 'APPS' },
+  { value: '1,000+',         label: 'マンガ冊数' },
+  { value: '∞',              label: '積みゲー' },
 ]
 
 const INTERESTS = [
-  {
-    icon: '📚',
-    title: 'マンガ',
-    body: '気づいたら1000冊を超えていた。ジャンル問わず読む。新刊の発売日を把握しきれなくなって comic-checker を作った。',
-  },
-  {
-    icon: '🎮',
-    title: 'ゲーム',
-    body: '積みゲーが増え続けている。「いつか絶対やる」と思いながら積んでいる。それを前向きに管理したくて QUESTLOG を作った。',
-  },
-  {
-    icon: '💰',
-    title: '投資',
-    body: 'お小遣い程度にコツコツ。証券口座が3つになって管理が面倒になり Kabu Note を作った。サブスクを見直したくてサブスク断捨離も作った。',
-  },
-  {
-    icon: '🎵',
-    title: '音楽',
-    body: 'スカ・レゲエからテクノ・EDMまで幅広く聴く。DJがどうやってMixしているのかが最近気になっている。次に作るアプリはこのあたりかもしれない。',
-  },
+  { icon: '📚', title: 'マンガ',
+    desc: '1,000冊以上所持。少年・青年・少女を問わず読みます。新刊チェックが追いつかなくなったのがcomic-checker開発のきっかけ。' },
+  { icon: '🎮', title: 'ゲーム',
+    desc: 'RPG・アドベンチャー・ローグライク好き。積みゲーが無限に増えるのでQUESTLOGを作りました。' },
+  { icon: '💰', title: '投資',
+    desc: 'インデックス積立がメイン。日本株もたしなみます。お金まわりのアプリが多いのはこのためです。' },
+  { icon: '🎵', title: '音楽',
+    desc: 'ジャパニーズレゲエ・スカ・レゲトン・ボカロ・ハードテクノ・ゲームサントラが好きです。ジャンルの幅だけは広い。' },
+]
+
+const TOOLS = [
+  { name: 'Claude Code',
+    desc: 'AIペアプログラミングの主力。設計の相談から実装・デバッグまで全工程をともに進めます。エンジニアでない自分がアプリを作れているのはこのツールのおかげです。' },
+  { name: 'Next.js + Vercel',
+    desc: 'フロントエンドはNext.js、デプロイはVercel。設定ほぼゼロで本番環境が立ち上がるので、開発スピードが全然違います。' },
+  { name: 'Supabase',
+    desc: 'バックエンド・データベース・認証を一手に担います。SQL不要のダッシュボードが直感的で、非エンジニアでも扱いやすい。' },
+  { name: 'Notion',
+    desc: 'アイデアメモからアプリ仕様書・リリースチェックリストまで、すべての思考をここに集約しています。' },
 ]
 
 export default function AboutPage() {
   return (
-    <>
-      {/* HERO */}
-      <div style={{ borderBottom: '1px solid var(--border)', padding: '80px 24px 72px' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '32px' }}>
-            <a href="/" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: '#555', textDecoration: 'none', textTransform: 'uppercase' }}>← nobi-labo</a>
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--orange)' }}>about</span>
-          </div>
+    <div className="min-h-screen bg-white">
 
-          <div style={{ fontSize: '56px', marginBottom: '24px', lineHeight: 1 }}>👋</div>
-
-          <h1 style={{ fontSize: 'clamp(32px, 7vw, 52px)', fontWeight: 900, letterSpacing: '-2px', lineHeight: 1.1, marginBottom: '20px' }}>
-            nobi <em style={{ fontStyle: 'normal', color: 'var(--orange)' }}>です。</em>
-          </h1>
-
-          <p style={{ fontSize: '15px', color: '#aaa', lineHeight: 1.9, maxWidth: '520px', marginBottom: '32px' }}>
-            会社員（非エンジニア）です。<br />
-            2026年1月、AIと遊びたくてアプリを作り始めました。<br />
-            自分が困ったことを解決するツールを、自分のために作っています。
-          </p>
-
-          {/* Stats */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1px', background: 'var(--border)', maxWidth: '480px' }}>
-            {STATS.map(s => (
-              <div key={s.label} style={{ background: 'var(--panel)', padding: '20px 24px' }}>
-                <div style={{ fontSize: '28px', fontWeight: 900, color: 'var(--orange)', letterSpacing: '-1px', lineHeight: 1, marginBottom: '6px' }}>{s.num}</div>
-                <div style={{ fontSize: '11px', color: '#666', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
+      {/* BREADCRUMB */}
+      <div className="max-w-[1200px] mx-auto px-6 pt-10">
+        <div className="flex items-center gap-2 text-[13px] text-[#999999]">
+          <Link href="/" className="hover:text-[#2D6A4F] transition-colors">nobi-labo</Link>
+          <span>›</span>
+          <span className="text-[#111111] font-medium">About</span>
         </div>
       </div>
+
+      {/* HERO */}
+      <section className="max-w-[1200px] mx-auto px-6 pt-12 pb-[72px]">
+        <div className="grid gap-16 items-center" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+          <div>
+            <div className="text-[13px] font-bold tracking-[0.08em] text-[#2D6A4F]">ABOUT</div>
+            <h1 className="mt-5 font-extrabold leading-[1.15] tracking-[-0.03em]"
+              style={{ fontSize: 'clamp(30px, 3.6vw, 48px)' }}>
+              自分の「困った」を、<br />ツールに変える人。
+            </h1>
+            <p className="mt-6 text-[17px] leading-[1.85] text-[#444444] max-w-[480px]">
+              会社員として働きながら、AIを相棒に個人開発を続けています。エンジニアのスキルはゼロ。でも「自分が本当に欲しいもの」を作るという動機だけで、ここまで来ました。
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <div className="w-[200px] h-[200px] rounded-[24px] bg-[#F0F7F4] border-[1.5px] border-[#EBEBEB] flex items-center justify-center text-[72px]">
+              👋
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS BAR */}
+      <section className="border-t border-b border-[#EBEBEB]">
+        <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-4">
+          {STATS.map((s, i) => (
+            <div key={s.label}
+              className={`py-9 px-6 text-center ${i < STATS.length - 1 ? 'border-r border-[#EBEBEB]' : ''}`}>
+              <div className="text-[32px] font-extrabold tracking-[-0.02em]">{s.value}</div>
+              <div className="mt-[6px] text-[12.5px] font-semibold tracking-[0.05em] text-[#999999]">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* STORY */}
-      <div style={{ borderBottom: '1px solid var(--border)', background: 'var(--dark)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '56px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '28px' }}>
-            Story
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', fontSize: '14px', color: '#bbb', lineHeight: 1.9 }}>
-            <p>
-              エンジニアではありません。コードは基本的に書けません。
-              それでも2026年1月、Claude Codeと出会ってからアプリを作り始めました。
-            </p>
-            <p>
-              きっかけは単純で、「自分が困っていることをAIに話したら、アプリができた」という体験です。
-              マンガの新刊を買い逃す → comic-checker。
-              積みゲーが罪悪感になる → QUESTLOG。
-              サブスクがいくらかからなかった → サブスク断捨離。
-              全部、自分の「困った」から始まっています。
-            </p>
-            <p>
-              「作れる人間」ではなく「使いたい人間」として作っているので、
-              使い勝手には人一倍こだわっています。
-              余計な機能は入れない。登録不要で使える。スマホのホーム画面に追加できる。
-              そのへんは妥協しないようにしています。
-            </p>
-            <p style={{ color: '#666', fontStyle: 'italic' }}>
-              「AI使えば誰でもアプリ作れる」という言葉をよく見かけますが、
-              実際やってみると「誰でも」ではないとわかります。
-              でも、やってみる価値はあります。
-            </p>
-          </div>
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">STORY</div>
+        <div className="mt-9 max-w-[720px] flex flex-col gap-7">
+          {[
+            'エンジニアではありません。コードは書けません。でも「自分が使いたいアプリが世の中にない」という経験を何度も繰り返してきました。マンガの新刊通知、積みゲーの管理、サブスクの断捨離——どれも既存サービスでは痒いところに手が届かなかった。',
+            '転機は2026年1月。AIと対話しながら設計・実装するという方法を知り、「これなら自分にもできる」と思い、最初のアプリ comic-checker を作りました。リリースから数日で思いのほか反響があり、そのまま続けることにしました。',
+            'こだわりは「使い勝手」だけ。見た目がきれいでも、使いにくければ意味がない。自分自身がヘビーユーザーとして毎日使い続けられるかどうかを判断軸にしています。',
+          ].map((p, i) => (
+            <p key={i} className="text-[17px] leading-[1.9] text-[#444444]">{p}</p>
+          ))}
         </div>
-      </div>
+      </section>
 
       {/* INTERESTS */}
-      <div style={{ borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '56px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '28px' }}>
-            Interests
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">INTERESTS</div>
+          <div className="mt-8 grid gap-[18px]" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
             {INTERESTS.map(item => (
-              <div key={item.title} style={{ background: 'var(--panel)', padding: '24px 28px', display: 'grid', gridTemplateColumns: '40px 1fr', gap: '0 16px', alignItems: 'start' }}>
-                <div style={{ fontSize: '28px', lineHeight: 1.2 }}>{item.icon}</div>
-                <div>
-                  <div style={{ fontSize: '15px', fontWeight: 900, color: 'var(--white)', marginBottom: '8px' }}>{item.title}</div>
-                  <div style={{ fontSize: '13px', color: '#aaa', lineHeight: 1.8 }}>{item.body}</div>
-                </div>
+              <div key={item.title} className="border border-[#EBEBEB] rounded-2xl p-7 bg-white hover:border-[#2D6A4F] transition-colors">
+                <div className="text-[36px]">{item.icon}</div>
+                <h3 className="mt-[18px] text-[19px] font-extrabold tracking-[-0.02em]">{item.title}</h3>
+                <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* HOW I BUILD */}
-      <div style={{ borderBottom: '1px solid var(--border)', background: 'var(--dark)' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '56px 24px' }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'var(--orange)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '28px' }}>
-            How I Build
-            <span style={{ flex: 1, height: '1px', background: 'var(--border)', display: 'block' }} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
-            {[
-              { tool: 'Claude Code', desc: 'メインの開発環境。コードは基本AIに書いてもらっています。アイデアと仕様を言葉で渡すと、動くものができます。' },
-              { tool: 'Supabase', desc: '認証・データベース。バックエンドの知識がなくても使えるのがありがたい。' },
-              { tool: 'Next.js / Vercel', desc: 'このサイト（nobi-labo.com）の構築に使用。デプロイが1コマンドで済むのが気に入っています。' },
-              { tool: 'Notion', desc: 'ブログ記事の管理。記事をNotionに書けば自動でサイトに反映される仕組みを作っています。' },
-            ].map(t => (
-              <div key={t.tool} style={{ background: 'var(--panel)', padding: '20px 24px' }}>
-                <div style={{ fontSize: '13px', fontWeight: 900, color: 'var(--orange)', marginBottom: '6px' }}>{t.tool}</div>
-                <div style={{ fontSize: '13px', color: '#aaa', lineHeight: 1.7 }}>{t.desc}</div>
-              </div>
-            ))}
-          </div>
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">HOW I BUILD</div>
+        <div className="mt-8 border border-[#EBEBEB] rounded-2xl overflow-hidden">
+          {TOOLS.map((t, i) => (
+            <div key={t.name} className={`flex items-start gap-6 p-7 ${i < TOOLS.length - 1 ? 'border-b border-[#EBEBEB]' : ''}`}>
+              <div className="flex-none w-[140px] text-[15px] font-extrabold tracking-[-0.01em] pt-[2px]">{t.name}</div>
+              <div className="flex-1 text-[15px] leading-[1.75] text-[#444444]">{t.desc}</div>
+            </div>
+          ))}
         </div>
-      </div>
+      </section>
 
-      {/* CTA */}
-      <div style={{ maxWidth: '640px', margin: '0 auto', padding: '64px 24px' }}>
-        <div style={{ background: 'var(--panel)', border: '1px solid var(--border)', padding: '40px 32px', textAlign: 'center' }}>
-          <p style={{ fontSize: '13px', color: '#aaa', lineHeight: 1.8, marginBottom: '28px' }}>
-            作ったアプリや、マンガ・ゲーム・投資のことを<br />
-            ブログとnoteに書いています。
-          </p>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="/apps" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--orange)', color: '#fff', fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '12px 24px' }}>
-              Apps →
-            </a>
-            <a href="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid var(--border)', color: '#aaa', fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '12px 24px' }}>
-              Blog →
-            </a>
-            <a href="https://note.com/suzukidaichisan" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid var(--border)', color: '#aaa', fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', padding: '12px 24px' }}>
-              Note ↗
-            </a>
+      {/* CTA STRIP */}
+      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+        <div className="bg-[#F0F7F4] rounded-[20px] p-12 flex items-center justify-between gap-8 flex-wrap">
+          <div className="flex-1 min-w-[240px]">
+            <div className="text-[13px] font-bold tracking-[0.08em] text-[#2D6A4F]">CONTACT</div>
+            <p className="mt-[14px] text-[19px] font-semibold leading-[1.6] tracking-[-0.01em]">
+              フィードバック・コラボのご相談など、<br />お気軽にどうぞ。
+            </p>
           </div>
+          <Link href="/contact"
+            className="flex-none px-[26px] py-[14px] text-[15px] font-semibold text-white bg-[#2D6A4F] rounded-[10px] hover:bg-[#21503b] transition-colors">
+            お問い合わせ →
+          </Link>
         </div>
-      </div>
-    </>
+      </section>
+
+    </div>
   )
 }

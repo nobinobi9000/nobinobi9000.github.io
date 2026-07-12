@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ねこおじさん〜絶対零度会議室〜</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/meeting-timer/style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="app-header">
+      <div class="header-ice">🧊</div>
+      <h1 class="app-title">ねこおじさん</h1>
+      <p class="app-subtitle">絶対零度会議室</p>
+      <p class="app-tagline">会議を凍らせる、愛すべきおやじ。</p>
+    </header>
+
+    <main class="app-main">
+
+      <!-- ねこおじさん -->
+      <div class="cat-area">
+        <div class="cat-container" id="catContainer">
+
+          <!-- ふきだし -->
+          <div class="bubble" id="bubble">
+            <p id="bubbleText">会議を始めましょう！<br><small>時間をセットしてください</small></p>
+          </div>
+
+          <!-- 猫写真 -->
+          <div class="cat-photo-wrap">
+            <img id="catImg" class="cat-photo" src="/meeting-timer/cat_pic/cat1.png" alt="ねこおじさん">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- タイマー表示 -->
+      <div class="timer-section">
+        <div class="timer-display" id="timerDisplay">00:00</div>
+        <div class="timer-status" id="timerStatus">時間をセットしてください</div>
+      </div>
+
+      <!-- 時間追加ボタン -->
+      <div class="btn-row time-row">
+        <button class="btn btn-time" onclick="addTime(1)">＋1分</button>
+        <button class="btn btn-time" onclick="addTime(10)">＋10分</button>
+        <button class="btn btn-time" onclick="addTime(30)">＋30分</button>
+        <button class="btn btn-time" onclick="addTime(60)">＋60分</button>
+      </div>
+
+      <!-- コントロールボタン -->
+      <div class="btn-row ctrl-row">
+        <button class="btn btn-start" id="startBtn" onclick="handleStartBtn()">スタート</button>
+        <button class="btn btn-reset" id="resetBtn" onclick="resetTimer()">リセット</button>
+      </div>
+
+      <!-- 今日の一言（強制終了） -->
+      <div class="btn-row">
+        <button class="btn btn-closing" onclick="showClosingRemark()">
+          今日の一言
+          <span class="closing-hint">（強制終了）</span>
+        </button>
+      </div>
+
+    </main>
+
+    <footer class="app-footer">
+      <p>🐱 おやじギャグはAI生成です &nbsp;|&nbsp; 時々いいことも言います</p>
+    </footer>
+
+  </div>
+
+  <!-- モーダル（おやじギャグ／知恵） -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box" id="modalBox">
+      <div class="modal-badge" id="modalBadge">おやじギャグ</div>
+      <div class="modal-face">
+        <img id="modalImg" class="modal-cat-img" src="/meeting-timer/cat_pic/cat1.png" alt="">
+      </div>
+      <div class="modal-text" id="modalText"></div>
+      <button class="btn btn-stop" onclick="closeModal()">ストップ</button>
+    </div>
+  </div>
+
+  <script src="/meeting-timer/script.js"></script>
+</body>
+</html>

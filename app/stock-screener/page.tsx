@@ -47,6 +47,8 @@ export default function JapanStockScreenerPage() {
             </div>
             <a
               href="https://screener.nobi-labo.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-8 inline-block px-7 py-4 text-[15px] font-bold text-white bg-[#2D6A4F] rounded-[11px] hover:bg-[#21503b] transition-colors"
             >
               今すぐ使う →
@@ -122,6 +124,8 @@ export default function JapanStockScreenerPage() {
           </p>
           <a
             href="https://screener.nobi-labo.com"
+              target="_blank"
+              rel="noopener noreferrer"
             className="mt-8 inline-block px-9 py-4 text-[16px] font-bold text-white bg-[#2D6A4F] rounded-[12px] hover:bg-[#21503b] transition-colors"
           >
             今すぐ使う →

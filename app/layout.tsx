@@ -1,21 +1,22 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
+import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 import './globals.css'
 
 const notoSansJP = Noto_Sans_JP({
-  weight: ['400', '700', '900'],
+  weight: ['400', '500', '700', '800', '900'],
   subsets: ['latin'],
   display: 'swap',
+  variable: '--font-noto',
 })
 
 export const metadata: Metadata = {
-  title: { default: 'nobi-labo | 日々の生活にちょっと便利をプラス', template: '%s | nobi-labo' },
-  description: '日々の生活にちょっと便利をプラス。nobi-laboの個人開発Webアプリ一覧。',
+  title: { default: 'nobi-labo | 自分の「困った」をツールに変える場所', template: '%s | nobi-labo' },
+  description: '会社員・非エンジニアがAIと一緒に作る個人開発の記録。暮らし・お金・しごとの小さな不便を、Webアプリで解決しています。',
   metadataBase: new URL('https://nobi-labo.com'),
-  alternates: {
-    canonical: '/',
-  },
+  alternates: { canonical: '/' },
   icons: {
     icon: '/favicon.svg',
     apple: '/apple-touch-icon.png',
@@ -24,35 +25,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={notoSansJP.className}>
+    <html lang="ja" className={notoSansJP.variable}>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        {/* Google AdSense */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3281505059279597" crossOrigin="anonymous"></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3281505059279597"
+          crossOrigin="anonymous"
+        />
       </head>
-      <body>
-        <header>
-          <a href="/" className="logo">nobi<span>-labo</span></a>
-          <nav className="header-nav">
-            <a href="/apps">Apps</a>
-            <a href="/blog">Blog</a>
-            <a href="/about">About</a>
-            <a href="https://note.com/suzukidaichisan" target="_blank" rel="noopener noreferrer">Note ↗</a>
-          </nav>
-        </header>
+      <body className="min-h-screen bg-white text-ink">
+        <Nav />
         {children}
+        <Footer />
         <Analytics />
-        <footer>
-          <div className="footer-inner">
-            <a href="/" className="footer-logo">nobi<span>-labo</span></a>
-            <div className="footer-links">
-              <a href="/about">運営者情報</a>
-              <a href="/privacy">プライバシーポリシー</a>
-              <a href="/admin/login" style={{ color: '#555', fontSize: '11px' }}>管理</a>
-            </div>
-            <div className="footer-copy">© 2026 nobi-labo. All rights reserved.</div>
-          </div>
-        </footer>
       </body>
     </html>
   )
