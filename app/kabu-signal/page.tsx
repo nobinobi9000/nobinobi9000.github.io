@@ -4,7 +4,7 @@ import AppCarousel from '@/components/AppCarousel'
 
 export const metadata: Metadata = {
   title: 'kabu-signal | 日本株エントリーシグナル通知',
-  description: 'JVQMファクターで日本株をスコアリング。上方修正・自社株買いと重なった銘柄をPush通知でお届け。毎朝7時自動スキャン。',
+  description: 'JVQMファクターで日本株をスコアリング。上方修正・自社株買いと重なった銘柄をPush通知でお届け。平日21時自動スキャン。',
   alternates: { canonical: '/kabu-signal' },
 }
 
@@ -27,10 +27,10 @@ export default function KabuSignalPage() {
           <div>
             <span className="inline-block px-3 py-[5px] text-[12px] font-bold rounded-full text-[#92400E] bg-[#FBF4EC]">📈 Money</span>
             <h1 className="mt-[22px] font-extrabold leading-[1.15] tracking-[-0.03em]" style={{ fontSize: 'clamp(32px, 4.5vw, 54px)' }}>
-              毎朝7時に、<br />シグナルが届く。
+              平日21時に、<br />シグナルが届く。
             </h1>
             <p className="mt-[22px] text-[17px] leading-[1.85] text-[#444444] max-w-[480px]">
-              JVQMシステム（割安・収益性・モメンタム）で日本株をスコアリング。上方修正・自社株買いと重なった銘柄を毎朝7時にPush通知でお届け。スマホのホーム画面に追加するだけで使えます。
+              JVQMシステム（割安・収益性・モメンタム）で日本株をスコアリング。上方修正・自社株買いと重なった銘柄を平日21時にPush通知でお届け。スマホのホーム画面に追加するだけで使えます。
             </p>
             <div className="mt-6 flex gap-2 flex-wrap">
               {['無料', 'Push通知', '日本株', 'ホーム追加OK'].map(tag => (
@@ -53,7 +53,7 @@ export default function KabuSignalPage() {
             <blockquote className="border-l-[3px] border-[#2D6A4F] pl-7">
               <p className="text-[20px] font-semibold leading-[1.8] text-[#111111]">「Kabu Noteで保有株を管理するうちに、どの銘柄を買えばいいかを統計的に判断したくなった。」</p>
             </blockquote>
-            <p className="mt-7 text-[16px] leading-[1.9] text-[#444444]">世界の学術論文100件以上を収集・検証し、バリュー×クオリティ×モメンタム×イベントの4ファクタープレミアムを重ねたJVQMシステムを設計。毎朝7時に自動でシグナルをスキャンして届けるPWAを作りました。</p>
+            <p className="mt-7 text-[16px] leading-[1.9] text-[#444444]">世界の学術論文100件以上を収集・検証し、バリュー×クオリティ×モメンタム×イベントの4ファクタープレミアムを重ねたJVQMシステムを設計。平日21時に自動でシグナルをスキャンして届けるPWAを作りました。</p>
           </div>
         </div>
       </section>
@@ -70,7 +70,7 @@ export default function KabuSignalPage() {
             {
               num: '02',
               title: '適時開示との自動照合',
-              desc: 'TDnetの適時開示情報と候補銘柄を毎朝照合。上方修正（修正幅10%以上）または自社株買い発表があった銘柄のみシグナル対象。',
+              desc: 'TDnetの適時開示情報と候補銘柄を照合。上方修正（修正幅10%以上）または自社株買い発表があった銘柄のみシグナル対象。',
             },
             {
               num: '03',
@@ -94,7 +94,7 @@ export default function KabuSignalPage() {
 
       <section className="max-w-[1200px] mx-auto px-6 pb-24">
         <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
-          <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>今朝の候補銘柄を、確認する。</h2>
+          <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>本日の候補銘柄を、確認する。</h2>
           <a href="https://signal.nobi-labo.com" target="_blank" rel="noopener noreferrer"
             className="mt-8 inline-block px-9 py-4 text-[16px] font-bold text-white bg-[#2D6A4F] rounded-[12px] hover:bg-[#21503b] transition-colors">
             今すぐ無料で使う →
