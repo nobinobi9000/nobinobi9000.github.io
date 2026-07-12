@@ -70,6 +70,8 @@ export default function KabuNotePage() {
             { num: '02', title: '損益・評価額の自動計算', desc: '取得単価と現在株価から損益・評価額を自動計算。含み益/含み損が一目でわかります。' },
             { num: '03', title: '平日16時に自動更新', desc: '東証の取引終了後に株価を自動取得。毎日最新の評価額を確認できます。' },
             { num: '04', title: 'セクター・配当分析', desc: 'セクターごとの保有比率や配当収入の集計を自動表示。ポートフォリオのバランスを把握できます。' },
+            { num: '05', title: 'ウォッチリスト', desc: '保有前の気になる銘柄を、保有株とは別リストで管理。日本株スクリーナーの通知から銘柄をワンタップで追加できます。' },
+            { num: '06', title: '株式分割・併合の検知', desc: '保有銘柄の株式分割・併合を検知し、保有株数・取得単価の調整をご自身で確認のうえ反映できます（自動での書き換えは行いません）。' },
           ].map(f => (
             <div key={f.num} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#2D6A4F] transition-colors">
               <div className="text-[13px] font-extrabold tracking-[0.04em] text-[#2D6A4F]">{f.num}</div>

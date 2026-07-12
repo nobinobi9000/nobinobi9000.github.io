@@ -82,6 +82,16 @@ export default function KabuSignalPage() {
               title: 'Push通知でお届け',
               desc: 'ホーム画面に追加してPWAとして使用。ご自身のウォッチリスト・保有銘柄に該当するシグナルが見つかった日の21時に通知が届く。通知には銘柄名・スコア・現在値を表示。',
             },
+            {
+              num: '05',
+              title: 'ログインで個別最適化',
+              desc: 'Kabu Note等と共通のアカウントでログイン。ウォッチリスト・保有銘柄に該当するシグナルのみが届くため、無関係な銘柄の通知はありません。',
+            },
+            {
+              num: '06',
+              title: '手仕舞い条件・損益アラート',
+              desc: 'デッドクロスやMA200割れなど、保有銘柄の手仕舞い条件成立も通知。取得単価からの乖離率をご自身で設定し、その閾値を超えた場合にも通知します。',
+            },
           ].map(f => (
             <div key={f.num} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#2D6A4F] transition-colors">
               <div className="text-[13px] font-extrabold tracking-[0.04em] text-[#2D6A4F]">{f.num}</div>

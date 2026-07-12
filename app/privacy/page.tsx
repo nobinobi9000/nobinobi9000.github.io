@@ -59,6 +59,15 @@ const SECTIONS = [
     paras: ['本ポリシーの内容は、法令の改正やサービス内容の変更に伴い、予告なく改定する場合があります。変更後のポリシーは当ページに掲載した時点で効力を生じます。'],
     list: null,
   },
+  {
+    title: '8. 日本株スクリーナー・kabu-signal・Kabu Noteについて',
+    paras: [
+      'これら3つのサービスは共通のアカウント基盤を利用しており、保有銘柄・取得単価・ウォッチリスト・損益アラート設定等の金融情報を扱います。これらの情報は利用者ごとにアクセス制御されたデータベースに保存し、他の利用者から参照できない構成としています。',
+    ],
+    list: [
+      '詳細は日本株スクリーナーの「プライバシーポリシー」をご確認ください（screener.nobi-labo.com/legal/privacy.html）',
+    ],
+  },
 ]
 
 export default function PrivacyPage() {
@@ -76,7 +85,7 @@ export default function PrivacyPage() {
           style={{ fontSize: 'clamp(32px, 4.5vw, 52px)' }}>
           プライバシーポリシー
         </h1>
-        <p className="mt-[14px] text-[14px] text-muted">最終更新：2026年1月</p>
+        <p className="mt-[14px] text-[14px] text-muted">最終更新：2026年7月</p>
       </section>
 
       {/* BODY */}
