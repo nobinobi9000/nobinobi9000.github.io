@@ -77,7 +77,31 @@ export default function SoroSoroPage() {
         </div>
       </section>
 
-      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">FAQ — よくある質問</div>
+          <div className="mt-8 border border-[#EBEBEB] rounded-2xl overflow-hidden bg-white">
+            {[
+              { q: 'バーコードのない商品も登録できますか？', a: 'はい。バーコードがない商品は手入力で商品名・カテゴリを登録できます。写真を添付することも可能です。' },
+              { q: '残量はどうやって記録するのですか？', a: '使い切った・半分減った・少しだけ減ったなど、感覚的な選択肢から記録できます。厳密な計量は不要です。' },
+              { q: '通知はどのタイミングで届きますか？', a: '過去の消費ペースから「そろそろ切れそうな時期」を自動計算し、数日前にPush通知でお知らせします。' },
+              { q: '無料で使えますか？', a: 'はい、登録している商品数に関わらずすべての機能を無料でご利用いただけます。' },
+            ].map((faq, i, arr) => (
+              <div key={i} className={`p-7 ${i < arr.length - 1 ? 'border-b border-[#EBEBEB]' : ''}`}>
+                <div className="flex gap-[14px] items-start">
+                  <span className="flex-none text-[18px] font-extrabold text-[#2D6A4F] leading-[1.3]">Q.</span>
+                  <div>
+                    <div className="text-[16px] font-bold tracking-[-0.01em]">{faq.q}</div>
+                    <div className="mt-3 text-[14.5px] leading-[1.8] text-[#444444]">{faq.a}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-[1200px] mx-auto px-6 pb-24 pt-[72px]">
         <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
           <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>「切れてた」をなくそう。</h2>
           <a href="https://sorosoro.nobi-labo.com" target="_blank" rel="noopener noreferrer"

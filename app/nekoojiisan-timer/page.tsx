@@ -75,6 +75,23 @@ export default function NekoojiisanTimerPage() {
         </div>
       </section>
 
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">こんな場面で使えます</div>
+        <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+          {[
+            { icon: '📅', title: '定例ミーティング', desc: '「今日は45分で終わらせる」と決めた会議に。時間になったらねこおじさんが締めてくれます。' },
+            { icon: '🎯', title: '朝会・夕会', desc: '短時間で終わらせたいスタンドアップミーティングに。ダラダラ延長するのを防ぎます。' },
+            { icon: '☕', title: '休憩・ポモドーロ', desc: '個人の作業時間の区切りにも。ちょっとした息抜きとしてタイマー終了を楽しめます。' },
+          ].map(item => (
+            <div key={item.title} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#2D6A4F] transition-colors">
+              <div className="text-[28px]">{item.icon}</div>
+              <h3 className="mt-[14px] text-[16px] font-extrabold tracking-[-0.02em]">{item.title}</h3>
+              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="max-w-[1200px] mx-auto px-6 pb-24">
         <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
           <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>次の会議、おやじで締めよう。</h2>

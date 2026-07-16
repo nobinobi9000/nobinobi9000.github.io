@@ -82,7 +82,26 @@ export default function KabuNotePage() {
         </div>
       </section>
 
-      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">連携アプリ</div>
+          <p className="mt-4 text-[15px] leading-[1.8] text-[#444444] max-w-[600px]">Kabu Noteは同じ「お金」カテゴリのアプリと組み合わせることで、資産管理から銘柄探しまでを一貫して行えます。</p>
+          <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+            <Link href="/kabu-signal" className="block border border-[#EBEBEB] rounded-2xl p-7 bg-white hover:border-[#92400E] transition-colors">
+              <div className="text-[28px]">📈</div>
+              <h3 className="mt-[14px] text-[16px] font-extrabold tracking-[-0.02em]">kabu-signal</h3>
+              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">JVQMファクターで日本株をスコアリングし、エントリーシグナルをPush通知。Kabu Noteのウォッチリストにワンタップで追加できます。</p>
+            </Link>
+            <Link href="/stock-screener" className="block border border-[#EBEBEB] rounded-2xl p-7 bg-white hover:border-[#92400E] transition-colors">
+              <div className="text-[28px]">📊</div>
+              <h3 className="mt-[14px] text-[16px] font-extrabold tracking-[-0.02em]">日本株スクリーナー</h3>
+              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">3,700銘柄を毎日自動スキャンし、テクニカル指標×AIスコアリングで上昇シグナル銘柄をDiscord配信します。</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-[1200px] mx-auto px-6 pb-24 pt-[72px]">
         <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
           <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>全口座の損益を、一画面で。</h2>
           <a href="https://kabu.nobi-labo.com" target="_blank" rel="noopener noreferrer"

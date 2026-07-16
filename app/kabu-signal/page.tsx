@@ -102,6 +102,13 @@ export default function KabuSignalPage() {
         </div>
       </section>
 
+      <section className="max-w-[1200px] mx-auto px-6 pb-[72px]">
+        <div className="bg-[#FBF4EC] rounded-2xl p-7 border border-[#EBEBEB]">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#92400E]">免責事項</div>
+          <p className="mt-3 text-[14px] leading-[1.8] text-[#444444]">本ツールが提供するシグナルは統計モデルに基づく参考情報であり、投資を推奨するものではありません。投資判断はご自身の責任で行ってください。JVQMスコアや適時開示情報の正確性を保証するものではなく、株式投資には元本割れのリスクがあります。</p>
+        </div>
+      </section>
+
       <section className="max-w-[1200px] mx-auto px-6 pb-24">
         <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
           <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>本日の候補銘柄を、確認する。</h2>

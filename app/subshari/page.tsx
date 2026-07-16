@@ -79,7 +79,26 @@ export default function SubshariPage() {
         </div>
       </section>
 
-      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">断捨離スコアの見方</div>
+          <div className="mt-8 grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+            {[
+              { label: '要見直し', range: '70点以上', bg: '#FCEBEB', fg: '#A32D2D', desc: '直近1ヶ月使っていない・類似サービスと重複しているなど、解約候補として提案されます。' },
+              { label: '様子見', range: '40〜69点', bg: '#FAEEDA', fg: '#854F0B', desc: '利用頻度は低めだが完全に不要とも言い切れないもの。次回見直し時に再評価対象になります。' },
+              { label: '継続推奨', range: '39点以下', bg: '#EAF3DE', fg: '#3B6D11', desc: '定期的に使っており費用対効果も高いと判定されたサブスク。特に見直しは不要です。' },
+            ].map(item => (
+              <div key={item.label} className="rounded-2xl p-6" style={{ background: item.bg }}>
+                <div className="text-[16px] font-extrabold mb-1" style={{ color: item.fg }}>{item.label}</div>
+                <div className="text-[11px] mb-3 tracking-[0.02em]" style={{ color: item.fg, opacity: 0.8 }}>{item.range}</div>
+                <div className="text-[13px] leading-[1.75]" style={{ color: item.fg, opacity: 0.9 }}>{item.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-[1200px] mx-auto px-6 pb-24 pt-[72px]">
         <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
           <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>使っていないサブスク、断捨離しよう。</h2>
           <a href="https://subshari.nobi-labo.com" target="_blank" rel="noopener noreferrer"

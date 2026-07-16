@@ -81,7 +81,32 @@ export default function QuestlogPage() {
         </div>
       </section>
 
-      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">HOW TO USE — 使い方</div>
+          <div className="mt-9 max-w-[600px] flex flex-col gap-0">
+            {[
+              { n: '1', title: '積みゲーを登録', desc: 'タイトルを検索するか手入力で追加。まずは今持っている「積み」を全部Backlogに放り込むところから。' },
+              { n: '2', title: 'プレイ中に切り替え', desc: '実際に遊び始めたらPlayingへドラッグ。今どのゲームに手をつけているか一目でわかる。' },
+              { n: '3', title: 'クリアしたらCleared', desc: 'クリアしたゲームはCleared行き。評価を付ければ殿堂入り候補として記録されます。' },
+              { n: '4', title: '新作通知を受け取る', desc: '気になるタイトルを登録しておくと、発売が近づいた時にPush通知でお知らせします。' },
+            ].map((step, i, arr) => (
+              <div key={step.n} className="flex gap-5 pb-9">
+                <div className="flex flex-col items-center gap-0 flex-none">
+                  <div className="w-9 h-9 rounded-full bg-[#2D6A4F] text-white text-[14px] font-extrabold flex items-center justify-center flex-none">{step.n}</div>
+                  {i < arr.length - 1 && <div className="w-[1.5px] flex-1 bg-[#EBEBEB] mt-2" />}
+                </div>
+                <div className="pt-[6px]">
+                  <div className="text-[17px] font-bold tracking-[-0.01em]">{step.title}</div>
+                  <div className="mt-2 text-[14px] leading-[1.75] text-[#444444]">{step.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-[1200px] mx-auto px-6 pb-24 pt-[72px]">
         <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
           <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>積みゲーを、冒険に変えよう。</h2>
           <a href="https://gamelog.nobi-labo.com" target="_blank" rel="noopener noreferrer"

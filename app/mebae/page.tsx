@@ -78,6 +78,23 @@ export default function MebaePage() {
         </div>
       </section>
 
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">TIPS — 習慣スタックのコツ</div>
+        <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          {[
+            { icon: '☕', title: 'アンカーは「毎日必ずやること」を選ぶ', desc: '歯磨き・コーヒーを淹れる・通勤電車に乗るなど、意識しなくても毎日発生する行動をアンカーにすると継続率が上がります。' },
+            { icon: '⏱️', title: '新習慣は2分以内で終わるものから', desc: 'スクワット1回、水を1杯飲む、本を1ページ読む——ハードルを極限まで下げることが挫折しないコツです。' },
+            { icon: '🔗', title: '「〇〇したら△△する」と明文化する', desc: '「歯磨きしたらストレッチする」のように、アンカーと新習慣をセットで言語化すると実行率が大きく上がります。' },
+          ].map(tip => (
+            <div key={tip.title} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#2D6A4F] transition-colors">
+              <div className="text-[28px]">{tip.icon}</div>
+              <h3 className="mt-[14px] text-[16px] font-extrabold tracking-[-0.02em] leading-[1.5]">{tip.title}</h3>
+              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">{tip.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="max-w-[1200px] mx-auto px-6 pb-24">
         <div className="bg-[#F0F7F4] rounded-[20px] p-16 text-center">
           <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>小さな一歩を、毎日続けよう。</h2>
