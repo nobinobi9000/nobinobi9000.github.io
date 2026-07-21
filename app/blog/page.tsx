@@ -32,7 +32,12 @@ export default async function BlogPage() {
           style={{ fontSize: 'clamp(40px, 5.5vw, 68px)' }}>
           Blog
         </h1>
-        <p className="mt-[14px] text-[16px] text-[#999999]">マンガ・アプリ・日常のお役立ち情報を発信</p>
+        <div className="mt-[14px] flex items-center gap-3 flex-wrap">
+          <p className="text-[16px] text-[#999999]">マンガ・アプリ・日常のお役立ち情報を発信</p>
+          <a href="/blog/rss.xml" className="inline-flex items-center gap-1 text-[13px] font-semibold text-[#2D6A4F] hover:text-[#21503b] transition-colors">
+            RSS →
+          </a>
+        </div>
       </section>
 
       {/* ARTICLE LIST */}

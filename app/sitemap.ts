@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getPosts } from '@/lib/notion'
+import { getAllArchiveArticles } from '@/lib/note-archive'
 
 const BASE_URL = 'https://nobi-labo.com'
 
@@ -53,5 +54,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Notion APIエラー時はブログ記事なしで続行
   }
 
-  return [...staticPages, ...blogPages]
+  // コラムアーカイブ記事（noteからインポートした本文込み記事）
+  const columnPages: MetadataRoute.Sitemap = getAllArchiveArticles().map(a => ({
+    url: `${BASE_URL}/column/${a.slug}`,
+    lastModified: a.publishedAt ? new Date(a.publishedAt) : new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...staticPages, ...blogPages, ...columnPages]
 }

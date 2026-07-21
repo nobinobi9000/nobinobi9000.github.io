@@ -1,16 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import AppCarousel from '@/components/AppCarousel'
 
 export const metadata: Metadata = {
   title: 'Note Deck | note.comマルチアカウント切替',
   description: 'note.comのアカウントをデスクトップで瞬時に切り替え。Googleログインも完全対応。インストール不要のWindows用無料ツール。',
   alternates: { canonical: '/note-deck' },
 }
-
-const SLIDES = [
-  { src: '/screenshots/note-deck.png', caption: 'マルチアカウントを切り替え' },
-]
 
 const GITHUB_URL = 'https://github.com/nobinobi9000/note-multi-account'
 const DOWNLOAD_URL = `${GITHUB_URL}/releases/latest`
@@ -61,7 +56,9 @@ export default function NoteDeckPage() {
             </a>
           </div>
 
-          <AppCarousel slides={SLIDES} accentColor="#6D28D9" bgColor="#F5F1FC" />
+          <div className="rounded-2xl overflow-hidden border border-[#EBEBEB]">
+            <img src="/screenshots/note-deck.png" alt="Note Deck 画面" className="w-full h-auto block" />
+          </div>
         </div>
       </section>
 
@@ -78,6 +75,33 @@ export default function NoteDeckPage() {
       </section>
 
       <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">MENU — サイドバーの見方</div>
+        <div className="mt-9 grid gap-10 items-start" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+          <div className="flex justify-center">
+            <div className="rounded-2xl overflow-hidden border border-[#EBEBEB] w-full max-w-[280px]">
+              <img src="/screenshots/note-deck-sidebar.png" alt="Note Deck メニューバー" className="w-full h-auto block" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6">
+            {[
+              { title: 'ナビゲーションボタン', desc: '← → で戻る・進む、⟳ で再読み込み。ブラウザと同じ感覚で操作できます。' },
+              { title: 'URLをコピー', desc: '今開いているページのURLをワンクリックでコピー。記事のシェアや保存に便利です。' },
+              { title: 'アカウント一覧', desc: 'クリックした瞬間にそのアカウントへ切り替わります。緑のバーが付いているのが現在選択中のアカウント。' },
+              { title: 'アカウントを追加', desc: '下部のボタンから新しいnoteアカウントを何個でも追加できます。' },
+            ].map(item => (
+              <div key={item.title} className="flex gap-4">
+                <div className="flex-none w-2 h-2 rounded-full mt-2" style={{ background: '#f97316' }} />
+                <div>
+                  <div className="text-[15px] font-extrabold tracking-[-0.01em]">{item.title}</div>
+                  <div className="mt-1 text-[14px] leading-[1.75] text-[#444444]">{item.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-[1200px] mx-auto px-6 pb-[72px]">
         <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">FEATURES — 機能</div>
         <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
           {[

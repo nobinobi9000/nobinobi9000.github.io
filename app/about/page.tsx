@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { APPS } from '@/lib/apps'
+import { getPosts } from '@/lib/notion'
+import { getAllArchiveArticles } from '@/lib/note-archive'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -8,20 +10,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/about' },
 }
 
-const STATS = [
-  { value: '2026.01',        label: 'SINCE' },
-  { value: String(APPS.length), label: 'APPS' },
-  { value: '1,000+',         label: 'マンガ冊数' },
-  { value: '∞',              label: '積みゲー' },
-]
-
 const INTERESTS = [
   { icon: '📚', title: 'マンガ',
-    desc: '1,000冊以上所持。少年・青年・少女を問わず読みます。新刊チェックが追いつかなくなったのがcomic-checker開発のきっかけ。' },
+    desc: '保有マンガ1,000冊以上。電子コミックは常時100冊以上を継続読書中で、毎月10冊以上のペースで新規タイトルを発掘しています。新刊チェックが追いつかなくなったのがcomic-checker開発のきっかけ。' },
   { icon: '🎮', title: 'ゲーム',
     desc: 'RPG・アドベンチャー・ローグライク好き。積みゲーが無限に増えるのでQUESTLOGを作りました。' },
   { icon: '💰', title: '投資',
-    desc: 'インデックス積立がメイン。日本株もたしなみます。お金まわりのアプリが多いのはこのためです。' },
+    desc: 'インデックス積立を中心に投資歴5年。日本株もたしなみますが、まだまだ勉強中です。お金まわりのアプリが多いのはこのためです。' },
   { icon: '🎵', title: '音楽',
     desc: 'ジャパニーズレゲエ・スカ・レゲトン・ボカロ・ハードテクノ・ゲームサントラが好きです。ジャンルの幅だけは広い。' },
 ]
@@ -37,7 +32,19 @@ const TOOLS = [
     desc: 'アイデアメモからアプリ仕様書・リリースチェックリストまで、すべての思考をここに集約しています。' },
 ]
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [posts, archiveArticles] = await Promise.all([
+    getPosts().catch(() => []),
+    Promise.resolve(getAllArchiveArticles()),
+  ])
+
+  const stats = [
+    { value: '2026.01', label: 'SINCE' },
+    { value: String(APPS.length), label: 'APPS' },
+    { value: String(posts.length + archiveArticles.length), label: '執筆記事数' },
+    { value: '5年', label: '投資歴' },
+  ]
+
   return (
     <div className="min-h-screen bg-white">
 
@@ -74,9 +81,9 @@ export default function AboutPage() {
       {/* STATS BAR */}
       <section className="border-t border-b border-[#EBEBEB]">
         <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-4">
-          {STATS.map((s, i) => (
+          {stats.map((s, i) => (
             <div key={s.label}
-              className={`py-9 px-6 text-center ${i < STATS.length - 1 ? 'border-r border-[#EBEBEB]' : ''}`}>
+              className={`py-9 px-6 text-center ${i < stats.length - 1 ? 'border-r border-[#EBEBEB]' : ''}`}>
               <div className="text-[32px] font-extrabold tracking-[-0.02em]">{s.value}</div>
               <div className="mt-[6px] text-[12.5px] font-semibold tracking-[0.05em] text-[#999999]">{s.label}</div>
             </div>
@@ -114,21 +121,51 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* HOW I BUILD */}
+      {/* WRITING */}
       <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
-        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">HOW I BUILD</div>
-        <div className="mt-8 border border-[#EBEBEB] rounded-2xl overflow-hidden">
-          {TOOLS.map((t, i) => (
-            <div key={t.name} className={`flex items-start gap-6 p-7 ${i < TOOLS.length - 1 ? 'border-b border-[#EBEBEB]' : ''}`}>
-              <div className="flex-none w-[140px] text-[15px] font-extrabold tracking-[-0.01em] pt-[2px]">{t.name}</div>
-              <div className="flex-1 text-[15px] leading-[1.75] text-[#444444]">{t.desc}</div>
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">WRITING — 発信について</div>
+        <p className="mt-9 text-[17px] leading-[1.9] text-[#444444] max-w-[720px]">
+          このサイトのBlogに加え、noteでも継続的に発信しています。アプリ開発の裏側やマンガ紹介、お金にまつわる話など、テーマごとに書き分けています。
+        </p>
+        <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+          <a href="https://note.com/suzukidaichisan" target="_blank" rel="noopener noreferrer"
+            className="block border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#00B899] transition-colors">
+            <div className="flex items-center gap-[10px]">
+              <span className="w-[10px] h-[10px] rounded-full bg-[#00B899]" />
+              <span className="text-[12px] font-bold text-[#00B899]">suzukidaichisan</span>
             </div>
-          ))}
+            <p className="mt-3 text-[14px] leading-[1.75] text-[#444444]">アプリ開発記・お金にまつわる話・AIと競馬など</p>
+            <div className="mt-4 text-[13px] font-semibold text-[#2D6A4F]">noteを見る →</div>
+          </a>
+          <a href="https://note.com/nobi9000nobi" target="_blank" rel="noopener noreferrer"
+            className="block border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#E8384F] transition-colors">
+            <div className="flex items-center gap-[10px]">
+              <span className="w-[10px] h-[10px] rounded-full bg-[#E8384F]" />
+              <span className="text-[12px] font-bold text-[#E8384F]">nobi-nobi</span>
+            </div>
+            <p className="mt-3 text-[14px] leading-[1.75] text-[#444444]">マンガ紹介・レトロゲーム・投資関連のコラム</p>
+            <div className="mt-4 text-[13px] font-semibold text-[#2D6A4F]">noteを見る →</div>
+          </a>
+        </div>
+      </section>
+
+      {/* HOW I BUILD */}
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">HOW I BUILD</div>
+          <div className="mt-8 border border-[#EBEBEB] rounded-2xl overflow-hidden bg-white">
+            {TOOLS.map((t, i) => (
+              <div key={t.name} className={`flex items-start gap-6 p-7 ${i < TOOLS.length - 1 ? 'border-b border-[#EBEBEB]' : ''}`}>
+                <div className="flex-none w-[140px] text-[15px] font-extrabold tracking-[-0.01em] pt-[2px]">{t.name}</div>
+                <div className="flex-1 text-[15px] leading-[1.75] text-[#444444]">{t.desc}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA STRIP */}
-      <section className="max-w-[1200px] mx-auto px-6 pb-24">
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
         <div className="bg-[#F0F7F4] rounded-[20px] p-12 flex items-center justify-between gap-8 flex-wrap">
           <div className="flex-1 min-w-[240px]">
             <div className="text-[13px] font-bold tracking-[0.08em] text-[#2D6A4F]">CONTACT</div>

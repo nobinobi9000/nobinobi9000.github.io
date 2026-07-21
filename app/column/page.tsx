@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ColumnClient from './ColumnClient'
+import { getAllArchiveArticles } from '@/lib/note-archive'
 
 export const metadata: Metadata = {
   title: 'コラム',
   description: 'note で発信しているコラム記事を一覧表示しています。',
   alternates: { canonical: '/column' },
-  // note.com への外部リンクのみのため、検索エンジンにはインデックスさせない
-  // オリジナルコンテンツは /blog に集約する
+  // 一部は自サイトホストの本文込み記事だが、大半は外部noteへのリンクのため
+  // 検索エンジンにはインデックスさせない（個別記事ページ /column/[slug] は別途indexable）
   robots: { index: false, follow: true },
 }
 
@@ -34,6 +35,7 @@ type UnifiedPost = {
   href: string
   account: string
   eyecatch?: string | null
+  isArchive: boolean
 }
 
 function formatDate(str: string): string {
@@ -42,8 +44,8 @@ function formatDate(str: string): string {
 }
 
 const NOTE_ACCOUNTS = [
-  { urlname: 'suzukidaichisan', src: 'nobi1' as const, label: 'nobi¹', color: '#00B899', bg: '#E6F8F3' },
-  { urlname: 'nobi9000nobi',   src: 'nobi2' as const, label: 'nobi²', color: '#E8384F', bg: '#FDEEF0' },
+  { urlname: 'suzukidaichisan', src: 'nobi1' as const, label: 'suzuki\ndaichisan', color: '#00B899', bg: '#E6F8F3' },
+  { urlname: 'nobi9000nobi',   src: 'nobi2' as const, label: 'nobi-nobi', color: '#E8384F', bg: '#FDEEF0' },
 ]
 
 const MAGAZINES = [
@@ -81,13 +83,34 @@ async function fetchNoteArticles(urlname: string): Promise<NoteArticle[]> {
 
 export default async function ColumnPage() {
   const noteResults = await Promise.all(NOTE_ACCOUNTS.map(a => fetchNoteArticles(a.urlname)))
+  const archiveArticles = getAllArchiveArticles()
+  const archiveSlugs = new Set(archiveArticles.map(a => a.slug))
 
   const posts: UnifiedPost[] = []
 
+  // 自サイトにホストしているアーカイブ記事（本文込み・内部リンク）
+  for (const a of archiveArticles) {
+    posts.push({
+      id: `archive-${a.slug}`,
+      src: a.account,
+      srcLabel: a.accountLabel,
+      srcColor: a.accountColor,
+      srcBg: a.accountBg,
+      date: a.publishedAt ? formatDate(a.publishedAt) : '',
+      title: a.title,
+      href: `/column/${a.slug}`,
+      account: `note / ${a.accountUrlname}`,
+      eyecatch: null,
+      isArchive: true,
+    })
+  }
+
+  // note APIのライブ結果（アーカイブ済みのものは除外して重複防止）
   for (let i = 0; i < NOTE_ACCOUNTS.length; i++) {
     const acc = NOTE_ACCOUNTS[i]
     const articles = noteResults[i]
     for (const a of articles) {
+      if (archiveSlugs.has(a.key)) continue
       posts.push({
         id: `${acc.src}-${a.id}`,
         src: acc.src,
@@ -99,6 +122,7 @@ export default async function ColumnPage() {
         href: a.noteUrl ?? `https://note.com/${acc.urlname}`,
         account: `note / ${acc.urlname}`,
         eyecatch: a.eyecatch ?? null,
+        isArchive: false,
       })
     }
   }

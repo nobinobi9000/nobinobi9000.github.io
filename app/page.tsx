@@ -41,8 +41,8 @@ const MAGAZINES = [
 ]
 
 const NOTE_ACCOUNTS = [
-  { urlname: 'suzukidaichisan', src: 'nobi1', label: 'nobi¹', color: '#00B899', bg: '#E6F8F3' },
-  { urlname: 'nobi9000nobi',   src: 'nobi2', label: 'nobi²', color: '#E8384F', bg: '#FDEEF0' },
+  { urlname: 'suzukidaichisan', src: 'nobi1', label: 'suzuki\ndaichisan', color: '#00B899', bg: '#E6F8F3' },
+  { urlname: 'nobi9000nobi',   src: 'nobi2', label: 'nobi-nobi', color: '#E8384F', bg: '#FDEEF0' },
 ]
 
 type UnifiedPost = {
@@ -244,7 +244,7 @@ export default async function Home() {
           {blogPosts.length > 0 ? blogPosts.map(post => (
             <a key={post.id} href={post.href}
               className="flex items-center gap-5 px-6 py-[22px] border-b border-[#EBEBEB] last:border-0 hover:bg-[#F0F7F4] transition-colors">
-              <span className="flex-none w-14 text-center py-[6px] text-[11px] font-bold rounded-lg"
+              <span className="flex-none w-14 text-center py-[6px] text-[11px] font-bold rounded-lg leading-[1.3] whitespace-pre-line"
                 style={{ color: post.srcColor, background: post.srcBg }}>
                 {post.srcLabel}
               </span>
@@ -283,7 +283,7 @@ export default async function Home() {
           {columnPosts.length > 0 ? columnPosts.map(post => (
             <a key={post.id} href={post.href} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-5 px-6 py-[22px] border-b border-[#EBEBEB] last:border-0 hover:bg-[#F0F7F4] transition-colors">
-              <span className="flex-none w-14 text-center py-[6px] text-[11px] font-bold rounded-lg"
+              <span className="flex-none w-14 text-center py-[6px] text-[11px] font-bold rounded-lg leading-[1.3] whitespace-pre-line"
                 style={{ color: post.srcColor, background: post.srcBg }}>
                 {post.srcLabel}
               </span>
