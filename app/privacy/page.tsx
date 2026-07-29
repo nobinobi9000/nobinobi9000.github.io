@@ -40,9 +40,18 @@ const SECTIONS = [
   },
   {
     title: '5. アフィリエイト・広告について',
+    subsections: [
+      {
+        heading: 'Amazonアソシエイト・プログラムについて',
+        body: 'Amazonのアソシエイトとして、nobi-laboは適格販売により収入を得ています。',
+      },
+      {
+        heading: '楽天アフィリエイトについて',
+        body: '当サイトは楽天アフィリエイトプログラムに参加しており、楽天市場の商品・ショップを紹介するリンクを通じて成果報酬を得る場合があります。',
+      },
+    ],
     paras: [
-      '当サイトの一部リンクは、楽天アフィリエイトおよびAmazonアソシエイトのアフィリエイトリンクを含みます。リンク経由でのご購入時に手数料が発生する場合がありますが、購入者のお支払い金額に変わりはありません。',
-      'アフィリエイトリンクを含むコンテンツは、その旨を明記するよう努めます。',
+      'いずれのリンクも、経由でのご購入時に手数料が発生する場合がありますが、購入者のお支払い金額に変わりはありません。アフィリエイトリンクを含むページには、その旨がわかるよう表示しています。',
     ],
     list: null,
   },
@@ -95,6 +104,16 @@ export default function PrivacyPage() {
             <h2 className="text-[20px] font-extrabold tracking-[-0.02em] pb-[14px] border-b border-border">
               {sec.title}
             </h2>
+            {sec.subsections && (
+              <div className="mt-5 flex flex-col gap-5">
+                {sec.subsections.map((sub, i) => (
+                  <div key={i}>
+                    <h3 className="text-[15px] font-bold text-ink">{sub.heading}</h3>
+                    <p className="mt-2 text-[15px] leading-[1.9] text-ink2">{sub.body}</p>
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="mt-5 flex flex-col gap-[14px]">
               {sec.paras.map((p, i) => (
                 <p key={i} className="text-[15px] leading-[1.9] text-ink2">{p}</p>
