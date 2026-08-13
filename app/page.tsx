@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { APPS, CAT_COLORS, type AppCategory } from '@/lib/apps'
 import { getPosts } from '@/lib/notion'
+import { getAllArchiveArticles } from '@/lib/note-archive'
 
 export const revalidate = 3600
 
@@ -40,11 +41,6 @@ const MAGAZINES = [
   { title: 'レトロゲーム', desc: 'ファミコン・スーファミ・PS時代の名作やカルト作品にまつわるコラム集。', account: 'nobi-nobi', color: '#E8384F', url: 'https://note.com/nobi9000nobi/m/m001bbe577cbb' },
 ]
 
-const NOTE_ACCOUNTS = [
-  { urlname: 'suzukidaichisan', src: 'nobi1', label: 'suzuki\ndaichisan', color: '#00B899', bg: '#E6F8F3' },
-  { urlname: 'nobi9000nobi',   src: 'nobi2', label: 'nobi-nobi', color: '#E8384F', bg: '#FDEEF0' },
-]
-
 type UnifiedPost = {
   id: string
   srcLabel: string
@@ -59,37 +55,10 @@ type UnifiedPost = {
   isExternal: boolean
 }
 
-async function fetchNoteTop(urlname: string, label: string, color: string, bg: string): Promise<UnifiedPost[]> {
-  try {
-    const res = await fetch(
-      `https://note.com/api/v2/creators/${urlname}/contents?kind=note&page=1`,
-      { next: { revalidate: 3600 }, headers: { 'User-Agent': 'Mozilla/5.0 (compatible; nobi-labo/1.0)', 'Accept': 'application/json' } }
-    )
-    if (!res.ok) return []
-    const json = await res.json()
-    return ((json?.data?.contents ?? []) as { id: string; name: string; publishAt: string; noteUrl: string }[])
-      .slice(0, 10)
-      .map(a => ({
-        id: `${urlname}-${a.id}`,
-        srcLabel: label,
-        srcColor: color,
-        srcBg: bg,
-        date: a.publishAt ? formatDate(a.publishAt) : '',
-        cat: 'Life',
-        catColor: '#2563EB',
-        catBg: '#F0F5FF',
-        title: a.name,
-        href: a.noteUrl ?? `https://note.com/${urlname}`,
-        isExternal: true,
-      }))
-  } catch { return [] }
-}
-
 export default async function Home() {
-  const [notionPosts, note1, note2] = await Promise.all([
+  const [notionPosts, archiveArticles] = await Promise.all([
     getPosts().catch(() => []),
-    fetchNoteTop(NOTE_ACCOUNTS[0].urlname, NOTE_ACCOUNTS[0].label, NOTE_ACCOUNTS[0].color, NOTE_ACCOUNTS[0].bg),
-    fetchNoteTop(NOTE_ACCOUNTS[1].urlname, NOTE_ACCOUNTS[1].label, NOTE_ACCOUNTS[1].color, NOTE_ACCOUNTS[1].bg),
+    Promise.resolve(getAllArchiveArticles()),
   ])
 
   const blogPosts: UnifiedPost[] = notionPosts.map(p => ({
@@ -106,7 +75,20 @@ export default async function Home() {
     isExternal: false,
   })).slice(0, 5)
 
-  const columnPosts = [...note1, ...note2]
+  const columnPosts: UnifiedPost[] = archiveArticles
+    .map(a => ({
+      id: `archive-${a.slug}`,
+      srcLabel: a.accountLabel,
+      srcColor: a.accountColor,
+      srcBg: a.accountBg,
+      date: a.publishedAt ? formatDate(a.publishedAt) : '',
+      cat: 'Life',
+      catColor: '#2563EB',
+      catBg: '#F0F5FF',
+      title: a.title,
+      href: `/column/${a.slug}`,
+      isExternal: false,
+    }))
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 5)
 
@@ -281,7 +263,7 @@ export default async function Home() {
 
         <div className="mt-8 border border-[#EBEBEB] rounded-2xl overflow-hidden">
           {columnPosts.length > 0 ? columnPosts.map(post => (
-            <a key={post.id} href={post.href} target="_blank" rel="noopener noreferrer"
+            <a key={post.id} href={post.href}
               className="flex items-center gap-5 px-6 py-[22px] border-b border-[#EBEBEB] last:border-0 hover:bg-[#F0F7F4] transition-colors">
               <span className="flex-none w-14 text-center py-[6px] text-[11px] font-bold rounded-lg leading-[1.3] whitespace-pre-line"
                 style={{ color: post.srcColor, background: post.srcBg }}>

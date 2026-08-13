@@ -5,24 +5,11 @@ import { getAllArchiveArticles } from '@/lib/note-archive'
 
 export const metadata: Metadata = {
   title: 'コラム',
-  description: 'note で発信しているコラム記事を一覧表示しています。',
+  description: 'note からサイトに取り込んだコラム記事を一覧表示しています。',
   alternates: { canonical: '/column' },
-  // 一部は自サイトホストの本文込み記事だが、大半は外部noteへのリンクのため
-  // 検索エンジンにはインデックスさせない（個別記事ページ /column/[slug] は別途indexable）
-  robots: { index: false, follow: true },
 }
 
 export const revalidate = 3600
-
-type NoteArticle = {
-  id: string
-  name: string
-  publishAt: string
-  noteUrl: string
-  key: string
-  type: string
-  eyecatch: string | null
-}
 
 type UnifiedPost = {
   id: string
@@ -35,18 +22,12 @@ type UnifiedPost = {
   href: string
   account: string
   eyecatch?: string | null
-  isArchive: boolean
 }
 
 function formatDate(str: string): string {
   const d = new Date(str)
   return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`
 }
-
-const NOTE_ACCOUNTS = [
-  { urlname: 'suzukidaichisan', src: 'nobi1' as const, label: 'suzuki\ndaichisan', color: '#00B899', bg: '#E6F8F3' },
-  { urlname: 'nobi9000nobi',   src: 'nobi2' as const, label: 'nobi-nobi', color: '#E8384F', bg: '#FDEEF0' },
-]
 
 const MAGAZINES = [
   { title: 'AIを使ってプログラム作成', desc: '非エンジニアがAIと一緒にWebアプリを作る記録。アイデアの出し方から実装・リリースまで。', account: 'suzukidaichisan', color: '#00B899', url: 'https://note.com/suzukidaichisan/m/macf88bf0d9c2' },
@@ -57,75 +38,22 @@ const MAGAZINES = [
   { title: 'レトロゲーム', desc: 'ファミコン・スーファミ・PS時代の名作やカルト作品にまつわるコラム集。', account: 'nobi-nobi', color: '#E8384F', url: 'https://note.com/nobi9000nobi/m/m001bbe577cbb' },
 ]
 
-async function fetchNoteArticles(urlname: string): Promise<NoteArticle[]> {
-  const headers = {
-    'User-Agent': 'Mozilla/5.0 (compatible; nobi-labo/1.0)',
-    'Accept': 'application/json',
-  }
-  const articles: NoteArticle[] = []
-  for (let page = 1; page <= 15; page++) {
-    try {
-      const res = await fetch(
-        `https://note.com/api/v2/creators/${urlname}/contents?kind=note&page=${page}`,
-        { next: { revalidate: 3600 }, headers }
-      )
-      if (!res.ok) break
-      const json = await res.json()
-      const items = (json?.data?.contents ?? []) as NoteArticle[]
-      if (items.length === 0) break
-      articles.push(...items)
-    } catch {
-      break
-    }
-  }
-  return articles
-}
-
 export default async function ColumnPage() {
-  const noteResults = await Promise.all(NOTE_ACCOUNTS.map(a => fetchNoteArticles(a.urlname)))
   const archiveArticles = getAllArchiveArticles()
-  const archiveSlugs = new Set(archiveArticles.map(a => a.slug))
 
-  const posts: UnifiedPost[] = []
-
-  // 自サイトにホストしているアーカイブ記事（本文込み・内部リンク）
-  for (const a of archiveArticles) {
-    posts.push({
-      id: `archive-${a.slug}`,
-      src: a.account,
-      srcLabel: a.accountLabel,
-      srcColor: a.accountColor,
-      srcBg: a.accountBg,
-      date: a.publishedAt ? formatDate(a.publishedAt) : '',
-      title: a.title,
-      href: `/column/${a.slug}`,
-      account: `note / ${a.accountUrlname}`,
-      eyecatch: null,
-      isArchive: true,
-    })
-  }
-
-  // note APIのライブ結果（アーカイブ済みのものは除外して重複防止）
-  for (let i = 0; i < NOTE_ACCOUNTS.length; i++) {
-    const acc = NOTE_ACCOUNTS[i]
-    const articles = noteResults[i]
-    for (const a of articles) {
-      if (archiveSlugs.has(a.key)) continue
-      posts.push({
-        id: `${acc.src}-${a.id}`,
-        src: acc.src,
-        srcLabel: acc.label,
-        srcColor: acc.color,
-        srcBg: acc.bg,
-        date: a.publishAt ? formatDate(a.publishAt) : '',
-        title: a.name,
-        href: a.noteUrl ?? `https://note.com/${acc.urlname}`,
-        account: `note / ${acc.urlname}`,
-        eyecatch: a.eyecatch ?? null,
-        isArchive: false,
-      })
-    }
-  }
+  // サイトに取り込んだアーカイブ記事のみを表示（本文込み・内部リンク）
+  const posts: UnifiedPost[] = archiveArticles.map(a => ({
+    id: `archive-${a.slug}`,
+    src: a.account,
+    srcLabel: a.accountLabel,
+    srcColor: a.accountColor,
+    srcBg: a.accountBg,
+    date: a.publishedAt ? formatDate(a.publishedAt) : '',
+    title: a.title,
+    href: `/column/${a.slug}`,
+    account: `note / ${a.accountUrlname}`,
+    eyecatch: null,
+  }))
 
   posts.sort((a, b) => b.date.localeCompare(a.date))
 

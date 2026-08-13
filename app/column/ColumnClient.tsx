@@ -12,7 +12,6 @@ type Post = {
   href: string
   account: string
   eyecatch?: string | null
-  isArchive: boolean
 }
 
 type Magazine = {
@@ -72,14 +71,10 @@ export default function ColumnClient({ posts, magazines }: { posts: Post[]; maga
         <div className="border border-[#EBEBEB] rounded-[20px] overflow-hidden">
           {visible.length === 0 ? (
             <div className="px-6 py-12 text-center text-[#999999] text-[14px]">記事がありません</div>
-          ) : visible.map(post => {
-            const isInternal = post.href.startsWith('/')
-            return (
+          ) : visible.map(post => (
             <a
               key={post.id}
               href={post.href}
-              target={isInternal ? undefined : '_blank'}
-              rel={isInternal ? undefined : 'noopener noreferrer'}
               className="flex items-center gap-5 px-6 py-[22px] border-b border-[#EBEBEB] last:border-0 hover:bg-[#F0F7F4] transition-colors"
             >
               <span className="flex-none w-14 text-center py-[6px] px-1 text-[11px] font-bold rounded-lg leading-[1.3] whitespace-pre-line"
@@ -87,14 +82,7 @@ export default function ColumnClient({ posts, magazines }: { posts: Post[]; maga
                 {post.srcLabel}
               </span>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-[12.5px] text-[#999999]">{post.date}</span>
-                  {post.isArchive && (
-                    <span className="flex-none px-[7px] py-[1px] text-[10px] font-bold rounded-full text-[#2D6A4F] bg-[#F0F7F4] border border-[#2D6A4F]/30">
-                      保存版
-                    </span>
-                  )}
-                </div>
+                <span className="text-[12.5px] text-[#999999]">{post.date}</span>
                 <div className="mt-2 text-[16px] font-bold tracking-[-0.01em] leading-[1.5] truncate">
                   {post.title}
                 </div>
@@ -110,7 +98,7 @@ export default function ColumnClient({ posts, magazines }: { posts: Post[]; maga
                 <span className="flex-none text-[#CCCCCC] text-[16px]">→</span>
               )}
             </a>
-          )})}
+          ))}
         </div>
 
         {/* Pagination */}
