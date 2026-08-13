@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: 'コラム',
   description: 'note からサイトに取り込んだコラム記事を一覧表示しています。',
   alternates: { canonical: '/column' },
+  // 掲載記事はnote.comに原文がある複製コンテンツのため、検索エンジンにはインデックスさせない
+  robots: { index: false, follow: true },
 }
 
 export const revalidate = 3600

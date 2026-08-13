@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
 import { getPosts } from '@/lib/notion'
-import { getAllArchiveArticles } from '@/lib/note-archive'
 
 const BASE_URL = 'https://nobi-labo.com'
 
@@ -18,7 +17,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     { url: `${BASE_URL}/apps`,   changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/blog`,   changeFrequency: 'daily',  priority: 0.9 },
-    // /column は note.com への外部リンクが大半のため noindex 設定、sitemapからも除外
+    // /column および /column/[slug] は note.com に原文がある複製コンテンツのため
+    // noindex 設定、sitemapからも除外
     // アプリ詳細ページ
     { url: `${BASE_URL}/comic-checker`,        changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/questlog`,             changeFrequency: 'monthly', priority: 0.8 },
@@ -54,13 +54,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Notion APIエラー時はブログ記事なしで続行
   }
 
-  // コラムアーカイブ記事（noteからインポートした本文込み記事）
-  const columnPages: MetadataRoute.Sitemap = getAllArchiveArticles().map(a => ({
-    url: `${BASE_URL}/column/${a.slug}`,
-    lastModified: a.publishedAt ? new Date(a.publishedAt) : new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }))
-
-  return [...staticPages, ...blogPages, ...columnPages]
+  return [...staticPages, ...blogPages]
 }

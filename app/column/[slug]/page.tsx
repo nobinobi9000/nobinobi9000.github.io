@@ -17,6 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.title,
     description: article.title,
     alternates: { canonical: `/column/${slug}` },
+    // note.comに原文が存在する複製コンテンツのため、AdSense/検索の重複コンテンツ判定を避けてnoindex
+    robots: { index: false, follow: true },
   }
 }
 
