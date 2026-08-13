@@ -61,22 +61,9 @@ export default async function ColumnArticlePage({ params }: Props) {
 
       {/* BODY */}
       <article
-        className="blog-post-content max-w-[800px] mx-auto px-6 pb-12"
+        className="blog-post-content max-w-[800px] mx-auto px-6 pb-24"
         dangerouslySetInnerHTML={{ __html: article.html }}
       />
-
-      {/* ORIGINAL LINK */}
-      <section className="max-w-[800px] mx-auto px-6 pb-24">
-        <div className="bg-[#F7F7F7] rounded-2xl px-8 py-7">
-          <p className="text-[14px] leading-[1.8] text-[#444444]">
-            この記事は note（{article.accountUrlname}）に投稿したものです。
-            <a href={article.originalUrl} target="_blank" rel="noopener noreferrer"
-              className="text-[#2D6A4F] underline underline-offset-[3px] ml-1">
-              noteで見る →
-            </a>
-          </p>
-        </div>
-      </section>
 
     </div>
   )
