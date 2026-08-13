@@ -13,7 +13,7 @@ if (!xmlPathArg || !assetsDirArg || !accountArg) {
 }
 
 const ACCOUNTS = {
-  nobi1: { urlname: 'suzukidaichisan', label: 'suzukidaichisan', color: '#00B899', bg: '#E6F8F3' },
+  nobi1: { urlname: 'suzukidaichisan', label: 'suzuki\ndaichisan', color: '#00B899', bg: '#E6F8F3' },
   nobi2: { urlname: 'nobi9000nobi',   label: 'nobi-nobi', color: '#E8384F', bg: '#FDEEF0' },
 }
 const account = ACCOUNTS[accountArg]
