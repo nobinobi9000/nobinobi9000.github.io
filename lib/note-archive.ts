@@ -32,3 +32,22 @@ export function getArchiveArticle(slug: string): ArchiveArticle | null {
   const all = getAllArchiveArticles()
   return all.find(a => a.slug === slug) ?? null
 }
+
+// note-podcastツール（音声化・ポッドキャスト配信ツール）が記事アップロードのたびに
+// slug→音声URLのマッピングを書き込む。note-archive-*.json（記事本体）とは別ファイルにして、
+// note記事の再インポート（scripts/import-note-archive.mjs、JSON全体を上書き）で
+// 音声URLが消えないようにしている。
+function loadAudioMap(): Record<string, string> {
+  const filePath = path.join(process.cwd(), 'lib', 'note-audio-map.json')
+  if (!fs.existsSync(filePath)) return {}
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf-8')) as Record<string, string>
+  } catch {
+    return {}
+  }
+}
+
+export function getAudioUrl(slug: string): string | null {
+  const map = loadAudioMap()
+  return map[slug] ?? null
+}

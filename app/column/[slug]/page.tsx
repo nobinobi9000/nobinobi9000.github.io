@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getArchiveArticle, getAllArchiveArticles } from '@/lib/note-archive'
+import { getArchiveArticle, getAllArchiveArticles, getAudioUrl } from '@/lib/note-archive'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -32,6 +32,7 @@ export default async function ColumnArticlePage({ params }: Props) {
   const { slug } = await params
   const article = getArchiveArticle(slug)
   if (!article) notFound()
+  const audioUrl = getAudioUrl(slug)
 
   return (
     <div className="min-h-screen bg-white">
@@ -59,6 +60,15 @@ export default async function ColumnArticlePage({ params }: Props) {
         <h1 className="font-extrabold tracking-[-0.02em] leading-[1.35]" style={{ fontSize: 'clamp(24px, 4vw, 36px)' }}>
           {article.title}
         </h1>
+
+        {audioUrl && (
+          <div className="mt-6 p-4 rounded-xl bg-[#F0F7F4]">
+            <p className="text-[12px] font-bold text-[#2D6A4F] mb-2">音声で聴く</p>
+            <audio controls preload="none" className="w-full" src={audioUrl}>
+              お使いのブラウザは音声再生に対応していません。
+            </audio>
+          </div>
+        )}
       </section>
 
       {/* BODY */}
