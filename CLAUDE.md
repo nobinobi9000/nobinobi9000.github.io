@@ -162,11 +162,15 @@ const SLIDES = [
 
 ---
 
-## note API 連携（コラム・ホーム）
+## コラム（note記事アーカイブ）
 
-- `app/column/page.tsx`：2アカウント × 最大15ページを非同期並列取得
-- `app/page.tsx`：各アカウントの1ページ目（最新10件）を取得してBlogと混在表示
-- キャッシュ: `revalidate: 3600`（1時間）
+2026-08時点、note APIのライブ連携ではなく**静的JSONアーカイブ**方式（コミット `658a7b3`で移行済み）。
+
+- データ: `lib/note-archive-nobi1.json` / `lib/note-archive-nobi2.json`（アカウントごと、記事オブジェクトの配列。`html`フィールドに本文HTMLをまるごと保持）
+- 読み込み: `lib/note-archive.ts`（`getAllArchiveArticles()` / `getArchiveArticle(slug)`）
+- 一覧: `app/column/page.tsx`、詳細: `app/column/[slug]/page.tsx`（`dangerouslySetInnerHTML`で描画）
+- 記事の追加・更新: `scripts/import-note-archive.mjs`がnoteのWXR(WordPress形式)エクスポートを読み込み、該当アカウントのJSONを**全体上書き**生成する（増分追記ではない）
+- `slug`はnote記事URL(`note.com/{user}/n/{key}`)の`{key}`部分と一致
 
 ### note アカウント
 
@@ -174,6 +178,14 @@ const SLIDES = [
 |-------|----------|--------|-----|
 | nobi1 | suzukidaichisan | nobi¹ | `#00B899` |
 | nobi2 | nobi9000nobi | nobi² | `#E8384F` |
+
+### 音声プレイヤー（note-podcastツール連携）
+
+- `note-podcast`ツール（`../note-podcast/`, `../note-podcast-2/`）がnote記事を音声化してCloudflare R2に配信している
+- `lib/note-audio-map.json`（slug→音声URL のマッピング。上記の記事アーカイブJSONとは別ファイル）にnote-podcastツールがR2アップロード成功時に自動で書き込む
+  - アーカイブJSONと分離しているのは、`import-note-archive.mjs`の全体上書きで音声URLが消えないようにするため
+- `lib/note-archive.ts`の`getAudioUrl(slug)`で参照し、`app/column/[slug]/page.tsx`が`audioUrl`があれば`<audio>`プレイヤーを表示する
+- **例外ルール（2026-08-14、ユーザー承認済み）**: `lib/note-audio-map.json`の変更をcommit/push、および`vercel deploy --prod --yes`でのデプロイは、このnote-podcast連携の範囲に限り、実行のたびの確認を省略してよい（初回実行2026-08-14に確認済み・成功）。他のファイルを含む変更や、この連携以外のデプロイには適用されない（下記「本番デプロイ前に必ずユーザーに確認を取ること」が原則のまま）
 
 ---
 
