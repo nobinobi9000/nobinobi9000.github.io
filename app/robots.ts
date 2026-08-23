@@ -5,7 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/admin', '/admin/', '/api/'],
+      // /column は note.com に原文がある複製コンテンツのため、AdSense/検索クローラーの
+      // 到達自体を防ぐ（noindexだけではクロール自体は防げないため）
+      disallow: ['/admin', '/admin/', '/api/', '/column', '/column/'],
     },
     sitemap: 'https://nobi-labo.com/sitemap.xml',
   }
