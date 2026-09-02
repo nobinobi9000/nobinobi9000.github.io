@@ -16,14 +16,16 @@ export default function ProductCard({ product }: { product: Product }) {
         <h3 className="text-[16px] font-extrabold tracking-[-0.02em] leading-[1.4]">{product.name}</h3>
         <p className="mt-2 text-[13.5px] leading-[1.75] text-[#444444] flex-1">{product.comment}</p>
         <div className="mt-4 flex gap-2">
-          <a
-            href={product.articleUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 text-center text-[12.5px] font-semibold text-[#2D6A4F] border border-[#2D6A4F] px-3 py-[9px] rounded-lg hover:bg-[#F0F7F4] transition-colors"
-          >
-            元記事を読む
-          </a>
+          {product.articleUrl && (
+            <a
+              href={product.articleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 text-center text-[12.5px] font-semibold text-[#2D6A4F] border border-[#2D6A4F] px-3 py-[9px] rounded-lg hover:bg-[#F0F7F4] transition-colors"
+            >
+              元記事を読む
+            </a>
+          )}
           <a
             href={product.amazonUrl}
             target="_blank"

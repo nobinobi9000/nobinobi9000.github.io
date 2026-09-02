@@ -34,6 +34,7 @@ type Article = {
 }
 
 const QUICK_LINKS = [
+  { label: 'おすすめ商品を追加', url: '/admin/picks' },
   { label: 'Vercel Analytics', url: 'https://vercel.com/nonobinoi9000s-projects/nobi-labo-site/analytics' },
   { label: 'Search Console', url: 'https://search.google.com/search-console?resource_id=https://nobi-labo.com/' },
   { label: 'Notion Blog', url: 'https://www.notion.so/32d14e1c154580319050d297ace3ae7b' },
