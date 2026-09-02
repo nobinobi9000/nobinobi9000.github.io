@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: '/apps', label: 'Apps' },
   { href: '/blog', label: 'Blog' },
   { href: '/column', label: 'コラム' },
+  { href: '/picks', label: 'おすすめ' },
   { href: '/about', label: 'About' },
 ]
 

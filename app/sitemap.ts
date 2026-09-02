@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     { url: `${BASE_URL}/apps`,   changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/blog`,   changeFrequency: 'daily',  priority: 0.9 },
+    { url: `${BASE_URL}/picks`,  changeFrequency: 'weekly', priority: 0.8 },
     // /column および /column/[slug] は note.com に原文がある複製コンテンツのため
     // noindex 設定、sitemapからも除外
     // アプリ詳細ページ
