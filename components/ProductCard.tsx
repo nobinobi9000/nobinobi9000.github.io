@@ -5,7 +5,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col border border-[#EBEBEB] rounded-2xl overflow-hidden hover:border-[#2D6A4F] transition-colors bg-white">
-      <div className="aspect-square flex items-center justify-center" style={{ background: cat.bg }}>
+      <div className="aspect-square overflow-hidden flex items-center justify-center" style={{ background: cat.bg }}>
         {product.imageUrl ? (
           <img src={product.imageUrl} alt={product.name} className="w-full h-full object-contain p-6" />
         ) : (
