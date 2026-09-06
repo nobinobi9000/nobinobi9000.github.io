@@ -109,6 +109,7 @@ export default function NoteDeckPage() {
             { num: '02', title: 'Googleログインも完全対応', desc: '各アカウントが独立したブラウザセッションを持つため、Google OAuth認証でも問題なく動作する。' },
             { num: '03', title: 'アカウント数無制限', desc: '使いたいアカウントを追加するだけ。ジャンル別・用途別に何個でも管理できる。' },
             { num: '04', title: 'ナビゲーション＆URLコピー', desc: '戻る・進む・再読み込みボタン付き。現在のページURLをワンクリックでコピー可能。' },
+            { num: '05', title: '切り替え中も作業状態を保持', desc: '各アカウントの画面はメモリ上に保持されているため、記事を書きかけた状態でアカウントを切り替えても、戻ってきたときにそのまま続きから作業できます。' },
           ].map(f => (
             <div key={f.num} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#f97316] transition-colors">
               <div className="text-[13px] font-extrabold tracking-[0.04em]" style={{ color: '#f97316' }}>{f.num}</div>
@@ -120,6 +121,81 @@ export default function NoteDeckPage() {
       </section>
 
       <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">COMPARE — 他の方法と比べると</div>
+          <div className="mt-8 overflow-x-auto">
+            <table className="w-full border-collapse text-[14px]" style={{ minWidth: '640px' }}>
+              <thead>
+                <tr>
+                  <th className="text-left py-3 px-4 text-[12px] font-bold text-[#999999] border-b border-[#EBEBEB] w-[180px]">比較項目</th>
+                  {[
+                    { label: 'ブラウザ切り替え', highlight: false },
+                    { label: 'Chromeプロファイル', highlight: false },
+                    { label: 'Multi Note拡張', highlight: false },
+                    { label: 'Note Deck', highlight: true },
+                  ].map(col => (
+                    <th
+                      key={col.label}
+                      className="text-center py-3 px-4 text-[13px] font-extrabold border-b"
+                      style={col.highlight
+                        ? { color: '#f97316', borderColor: '#f97316', borderBottomWidth: '2px', background: '#FFF8F5' }
+                        : { color: '#444444', borderColor: '#EBEBEB', background: 'white' }}
+                    >
+                      {col.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    label: '切り替えの手間',
+                    vals: ['❌ 毎回ログイン', '△ プロファイル切替', '△ 拡張メニュー'],
+                    note: { text: '✅ ワンクリック', strong: true },
+                  },
+                  {
+                    label: 'Googleログイン',
+                    vals: ['❌ 対応困難', '✅ 対応', '△ 不安定な場合あり'],
+                    note: { text: '✅ 完全対応', strong: true },
+                  },
+                  {
+                    label: '切り替え中の編集状態',
+                    vals: ['❌ 失われる', '❌ 失われる', '❌ 失われる'],
+                    note: { text: '✅ メモリで保持', strong: true },
+                  },
+                  {
+                    label: '外部への情報送信',
+                    vals: ['—', '—', '⚠️ 可能性あり'],
+                    note: { text: '✅ 完全ローカル', strong: true },
+                  },
+                  {
+                    label: '無料',
+                    vals: ['✅', '✅', '✅'],
+                    note: { text: '✅', strong: false },
+                  },
+                ].map((row, i) => (
+                  <tr key={row.label} style={{ background: i % 2 === 0 ? 'white' : '#FAFAFA' }}>
+                    <td className="py-3 px-4 text-[13px] font-semibold text-[#444444] border-b border-[#EBEBEB]">{row.label}</td>
+                    {row.vals.map((v, vi) => (
+                      <td key={vi} className="py-3 px-4 text-center text-[13px] text-[#666666] border-b border-[#EBEBEB]">{v}</td>
+                    ))}
+                    <td
+                      className="py-3 px-4 text-center text-[13px] font-bold border-b"
+                      style={row.note.strong
+                        ? { color: '#f97316', borderColor: '#f97316', background: '#FFF8F5' }
+                        : { color: '#f97316', borderColor: '#EBEBEB', background: '#FFF8F5' }}
+                    >
+                      {row.note.text}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-[72px] px-6">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">DOWNLOAD — ダウンロード</div>
           <div className="mt-8 flex flex-col gap-5 max-w-[640px]">
