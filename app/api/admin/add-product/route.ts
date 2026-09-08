@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { CATEGORY_ORDER, type Product, type ProductCategory } from '@/lib/affiliate-products'
+import { CATEGORY_ORDER, type Product, type ProductCategory, type ProductPlatform } from '@/lib/affiliate-products'
 
 const FILE_PATH = path.join(process.cwd(), 'lib', 'affiliate-products.json')
 const VALID_CATEGORIES: ProductCategory[] = CATEGORY_ORDER
+const VALID_PLATFORMS: ProductPlatform[] = ['amazon', 'anbernic', 'rakuten']
 
 function isAuthorized(request: NextRequest): boolean {
   const token = request.cookies.get('admin-token')?.value
@@ -17,12 +18,14 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json()
-  const { category, tags, name, comment, articleUrl, amazonUrl, imageUrl } = body
+  const { category, tags, name, comment, articleUrl, amazonUrl, purchaseUrl, imageUrl } = body
+  const platform: ProductPlatform = VALID_PLATFORMS.includes(body.platform) ? body.platform : 'amazon'
+  const linkUrl = platform === 'amazon' ? amazonUrl : purchaseUrl
 
   if (!VALID_CATEGORIES.includes(category)) {
     return NextResponse.json({ error: 'カテゴリが不正です' }, { status: 400 })
   }
-  if (!name || !comment || !amazonUrl) {
+  if (!name || !comment || !linkUrl) {
     return NextResponse.json({ error: '必須項目が不足しています' }, { status: 400 })
   }
 
@@ -41,7 +44,7 @@ export async function POST(request: NextRequest) {
     name,
     comment,
     articleUrl,
-    amazonUrl,
+    ...(platform === 'amazon' ? { amazonUrl: linkUrl } : { platform, purchaseUrl: linkUrl }),
     imageUrl: imageUrl || '',
     addedAt: new Date().toISOString().slice(0, 10),
   }

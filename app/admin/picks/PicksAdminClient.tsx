@@ -1,17 +1,24 @@
 'use client'
 import { useState } from 'react'
 import ProductCard from '@/components/ProductCard'
-import { CATEGORY_META, CATEGORY_ORDER, type Product, type ProductCategory } from '@/lib/affiliate-products'
+import { CATEGORY_META, CATEGORY_ORDER, type Product, type ProductCategory, type ProductPlatform } from '@/lib/affiliate-products'
 
 type ArticleOption = { label: string; value: string }
 
+const PLATFORM_OPTIONS: { value: ProductPlatform; label: string }[] = [
+  { value: 'amazon', label: 'Amazon' },
+  { value: 'anbernic', label: 'ANBERNIC' },
+  { value: 'rakuten', label: '楽天' },
+]
+
 const EMPTY_FORM = {
   category: 'gadget' as ProductCategory,
+  platform: 'amazon' as ProductPlatform,
   tagsText: '',
   name: '',
   comment: '',
   articleUrl: '',
-  amazonUrl: '',
+  linkUrl: '',
   imageUrl: '',
 }
 
@@ -34,9 +41,11 @@ export default function PicksAdminClient({
     name: form.name || '商品名がここに表示されます',
     comment: form.comment || 'ひとことコメントがここに表示されます',
     articleUrl: form.articleUrl || undefined,
-    amazonUrl: form.amazonUrl || '#',
     imageUrl: form.imageUrl,
     addedAt: '',
+    ...(form.platform === 'amazon'
+      ? { amazonUrl: form.linkUrl || '#' }
+      : { platform: form.platform, purchaseUrl: form.linkUrl || '#' }),
   }
 
   function update<K extends keyof typeof EMPTY_FORM>(key: K, value: (typeof EMPTY_FORM)[K]) {
@@ -45,9 +54,9 @@ export default function PicksAdminClient({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!form.name || !form.comment || !form.amazonUrl) {
+    if (!form.name || !form.comment || !form.linkUrl) {
       setStatus('error')
-      setErrorMsg('商品名・コメント・Amazonリンクは必須です')
+      setErrorMsg('商品名・コメント・リンクは必須です')
       return
     }
     setStatus('saving')
@@ -58,11 +67,13 @@ export default function PicksAdminClient({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         category: form.category,
+        platform: form.platform,
         tags: form.tagsText.split(',').map(t => t.trim()).filter(Boolean),
         name: form.name,
         comment: form.comment,
         articleUrl: form.articleUrl,
-        amazonUrl: form.amazonUrl,
+        amazonUrl: form.platform === 'amazon' ? form.linkUrl : undefined,
+        purchaseUrl: form.platform !== 'amazon' ? form.linkUrl : undefined,
         imageUrl: form.imageUrl,
       }),
     })
@@ -99,6 +110,19 @@ export default function PicksAdminClient({
       <div style={{ marginTop: '32px', display: 'grid', gap: '32px', gridTemplateColumns: 'minmax(320px, 480px) 1fr' }}>
         {/* FORM */}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+          <div>
+            <label style={labelStyle}>プラットフォーム</label>
+            <select
+              value={form.platform}
+              onChange={e => update('platform', e.target.value as ProductPlatform)}
+              style={inputStyle}
+            >
+              {PLATFORM_OPTIONS.map(p => (
+                <option key={p.value} value={p.value}>{p.label}</option>
+              ))}
+            </select>
+          </div>
+
           <div>
             <label style={labelStyle}>カテゴリ</label>
             <select
@@ -149,8 +173,15 @@ export default function PicksAdminClient({
           </div>
 
           <div>
-            <label style={labelStyle}>AmazonアソシエイトURL *</label>
-            <input style={inputStyle} value={form.amazonUrl} onChange={e => update('amazonUrl', e.target.value)} placeholder="https://amzn.to/xxxxx" />
+            <label style={labelStyle}>
+              {form.platform === 'amazon' ? 'Amazonアソシエイト' : PLATFORM_OPTIONS.find(p => p.value === form.platform)?.label}URL *
+            </label>
+            <input
+              style={inputStyle}
+              value={form.linkUrl}
+              onChange={e => update('linkUrl', e.target.value)}
+              placeholder={form.platform === 'amazon' ? 'https://amzn.to/xxxxx' : 'https://...'}
+            />
           </div>
 
           <div>

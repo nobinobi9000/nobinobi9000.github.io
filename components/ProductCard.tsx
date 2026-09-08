@@ -1,7 +1,15 @@
-import { CATEGORY_META, type Product } from '@/lib/affiliate-products'
+import { CATEGORY_META, getPurchaseLabel, getPurchaseUrl, type Product } from '@/lib/affiliate-products'
+
+const PURCHASE_BUTTON_COLOR: Record<string, string> = {
+  amazon: '#FF9900',
+  anbernic: '#22262B',
+  rakuten: '#BF0000',
+}
 
 export default function ProductCard({ product }: { product: Product }) {
   const cat = CATEGORY_META[product.category]
+  const purchaseUrl = getPurchaseUrl(product)
+  const purchaseColor = PURCHASE_BUTTON_COLOR[product.platform ?? 'amazon']
 
   return (
     <div className="flex flex-col border border-[#EBEBEB] rounded-2xl overflow-hidden hover:border-[#2D6A4F] transition-colors bg-white">
@@ -27,13 +35,13 @@ export default function ProductCard({ product }: { product: Product }) {
             </a>
           )}
           <a
-            href={product.amazonUrl}
+            href={purchaseUrl}
             target="_blank"
             rel="nofollow sponsored noopener noreferrer"
             className="flex-1 text-center text-[12.5px] font-bold text-white px-3 py-[9px] rounded-lg transition-colors"
-            style={{ background: '#FF9900' }}
+            style={{ background: purchaseColor }}
           >
-            Amazonで見る
+            {getPurchaseLabel(product)}
           </a>
         </div>
       </div>

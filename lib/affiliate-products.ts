@@ -4,6 +4,10 @@ import productsData from './affiliate-products.json'
 // assoc-tool自体がまだ改良予定のため、この分類は今後変わる前提の仮のもの。
 export type ProductCategory = 'gadget' | 'diy' | 'home' | 'nas' | 'manga' | 'license' | 'uncategorized'
 
+// assoc-tool側のプラットフォーム区分（Amazon/ANBERNIC/楽天）と対応。
+// 省略時は既存データ互換のため'amazon'扱いにする。
+export type ProductPlatform = 'amazon' | 'anbernic' | 'rakuten'
+
 export type Product = {
   id: string
   category: ProductCategory
@@ -11,9 +15,28 @@ export type Product = {
   name: string
   comment: string
   articleUrl?: string
-  amazonUrl: string
+  platform?: ProductPlatform
+  amazonUrl?: string    // platform='amazon'（省略時含む）のとき使用
+  purchaseUrl?: string  // platform!=='amazon'のとき使用する汎用リンク
   imageUrl?: string
   addedAt: string
+}
+
+export function getPurchaseUrl(product: Product): string {
+  if (product.platform && product.platform !== 'amazon') {
+    return product.purchaseUrl || ''
+  }
+  return product.amazonUrl || ''
+}
+
+const PURCHASE_LABELS: Record<ProductPlatform, string> = {
+  amazon: 'Amazonで見る',
+  anbernic: 'ANBERNICで見る',
+  rakuten: '楽天で見る',
+}
+
+export function getPurchaseLabel(product: Product): string {
+  return PURCHASE_LABELS[product.platform ?? 'amazon']
 }
 
 export const CATEGORY_ORDER: ProductCategory[] = ['gadget', 'diy', 'home', 'nas', 'manga', 'license', 'uncategorized']
