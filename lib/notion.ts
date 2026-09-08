@@ -51,17 +51,24 @@ async function fetchChildren(blockId: string): Promise<BlockWithChildren[]> {
   const blocks: BlockWithChildren[] = []
   let cursor: string | undefined
 
-  do {
-    const response = await notion.blocks.children.list({
-      block_id: blockId,
-      start_cursor: cursor,
-      page_size: 100,
-    })
-    blocks.push(
-      ...response.results.filter((b): b is BlockObjectResponse => b.object === 'block')
-    )
-    cursor = response.next_cursor ?? undefined
-  } while (cursor)
+  try {
+    do {
+      const response = await notion.blocks.children.list({
+        block_id: blockId,
+        start_cursor: cursor,
+        page_size: 100,
+      })
+      blocks.push(
+        ...response.results.filter((b): b is BlockObjectResponse => b.object === 'block')
+      )
+      cursor = response.next_cursor ?? undefined
+    } while (cursor)
+  } catch (error) {
+    // Notion APIの一時的な失敗(レート制限・タイムアウト等)でページ全体を
+    // クラッシュさせない。取得できた分だけ返し、本文が一部欠けるだけに留める
+    console.error(`fetchChildren failed for block ${blockId}:`, error)
+    return blocks
+  }
 
   // Recursively fetch children for nested blocks (tables, columns, toggles, etc.)
   await Promise.all(
