@@ -62,21 +62,21 @@ export default function AppsPage() {
             return (
               <div
                 key={app.name}
-                className="flex items-stretch bg-white border-b border-[#EBEBEB] last:border-0"
+                className="flex flex-col md:flex-row md:items-stretch bg-white border-b border-[#EBEBEB] last:border-0"
               >
                 {/* Screenshot */}
-                <div className="flex-none w-[140px] flex items-center justify-center p-[18px]"
+                <div className="flex-none w-full h-[150px] md:w-[140px] md:h-auto overflow-hidden flex items-center justify-center p-[18px]"
                   style={{ background: app.tint }}>
                   {app.screenshot ? (
                     <img src={app.screenshot} alt={app.name} className="w-full h-auto object-contain rounded-lg" style={{ maxHeight: '120px' }} />
                   ) : (
-                    <div className="w-full aspect-[9/16] border-[1.5px] border-dashed rounded-[10px]"
+                    <div className="w-[90px] aspect-[9/16] border-[1.5px] border-dashed rounded-[10px]"
                       style={{ borderColor: cat.color }} />
                   )}
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 min-w-0 py-[22px] px-6">
+                <div className="flex-1 min-w-0 py-5 px-5 md:py-[22px] md:px-6">
                   <div className="flex items-center gap-[10px] flex-wrap">
                     <span className="px-[11px] py-1 text-[11.5px] font-bold rounded-full"
                       style={{ color: cat.color, background: app.tint }}>
@@ -95,7 +95,7 @@ export default function AppsPage() {
                 </div>
 
                 {/* CTAs */}
-                <div className="flex-none flex flex-col items-end justify-center gap-3 px-7 pl-4">
+                <div className="flex-none flex flex-row flex-wrap items-center gap-2 px-5 pb-5 md:flex-col md:items-end md:justify-center md:gap-3 md:px-7 md:pl-4 md:pb-0">
                   {app.ctaUrl ? (
                     <a
                       href={app.ctaUrl}
