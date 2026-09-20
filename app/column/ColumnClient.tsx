@@ -23,15 +23,43 @@ type Magazine = {
 }
 
 type FilterKey = 'all' | 'nobi1' | 'nobi2'
-const PER_PAGE = 10
+const MONTH_LABELS = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+
+function yearOf(dateStr: string): string { return dateStr.slice(0, 4) }
+function monthOf(dateStr: string): number { return Number(dateStr.slice(5, 7)) }
+
+// 有効な日付(YYYY.MM.DD)を持つ投稿だけを対象に、年→月ごとの件数を集計する
+function buildYearMonthIndex(items: Post[]) {
+  const years = new Map<string, Map<number, Post[]>>()
+  for (const post of items) {
+    if (post.date.length !== 10) continue
+    const y = yearOf(post.date)
+    const m = monthOf(post.date)
+    if (!years.has(y)) years.set(y, new Map())
+    const months = years.get(y)!
+    if (!months.has(m)) months.set(m, [])
+    months.get(m)!.push(post)
+  }
+  return years
+}
 
 export default function ColumnClient({ posts, magazines }: { posts: Post[]; magazines: Magazine[] }) {
   const [filter, setFilter] = useState<FilterKey>('all')
-  const [page, setPage] = useState(1)
 
   const filtered = filter === 'all' ? posts : posts.filter(p => p.src === filter)
-  const totalPages = Math.ceil(filtered.length / PER_PAGE)
-  const visible = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE)
+  const yearIndex = buildYearMonthIndex(filtered)
+  const years = [...yearIndex.keys()].sort((a, b) => b.localeCompare(a))
+
+  const latestYear = years[0] ?? null
+  const [selectedYear, setSelectedYear] = useState<string | null>(latestYear)
+  const activeYear = selectedYear && years.includes(selectedYear) ? selectedYear : latestYear
+
+  const monthsForYear: Map<number, Post[]> = activeYear ? yearIndex.get(activeYear) ?? new Map() : new Map()
+  const latestMonth = monthsForYear.size > 0 ? Math.max(...monthsForYear.keys()) : null
+  const [selectedMonth, setSelectedMonth] = useState<number | null>(latestMonth)
+  const activeMonth = selectedMonth && monthsForYear.has(selectedMonth) ? selectedMonth : latestMonth
+
+  const visible = activeMonth ? monthsForYear.get(activeMonth) ?? [] : []
 
   const filters: { key: FilterKey; label: string; dot?: string }[] = [
     { key: 'all',   label: 'すべて' },
@@ -41,7 +69,14 @@ export default function ColumnClient({ posts, magazines }: { posts: Post[]; maga
 
   function changeFilter(key: FilterKey) {
     setFilter(key)
-    setPage(1)
+    // 年月選択は新しいフィルターの最新年月に合わせてリセットする
+    setSelectedYear(null)
+    setSelectedMonth(null)
+  }
+
+  function changeYear(y: string) {
+    setSelectedYear(y)
+    setSelectedMonth(null) // その年の最新月に自動で合わせる
   }
 
   return (
@@ -66,8 +101,61 @@ export default function ColumnClient({ posts, magazines }: { posts: Post[]; maga
         </div>
       </section>
 
+      {/* YEAR TABS */}
+      <section className="max-w-[1200px] mx-auto px-6 pb-4">
+        <div className="flex gap-[8px] flex-wrap">
+          {years.map(y => (
+            <button
+              key={y}
+              onClick={() => changeYear(y)}
+              className={`px-4 py-[7px] text-[14px] font-bold rounded-lg transition-colors ${
+                activeYear === y
+                  ? 'bg-[#111111] text-white'
+                  : 'bg-[#F7F7F7] text-[#666666] hover:bg-[#EBEBEB]'
+              }`}
+            >
+              {y}年
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* MONTH GRID */}
+      <section className="max-w-[1200px] mx-auto px-6 pb-8">
+        <div className="grid grid-cols-4 sm:grid-cols-6 gap-[8px]">
+          {MONTH_LABELS.map((label, i) => {
+            const m = i + 1
+            const count = monthsForYear.get(m)?.length ?? 0
+            const isActive = activeMonth === m
+            const isEmpty = count === 0
+            return (
+              <button
+                key={m}
+                onClick={() => !isEmpty && setSelectedMonth(m)}
+                disabled={isEmpty}
+                className={`flex flex-col items-center justify-center gap-[2px] py-[10px] rounded-[10px] border-[1.5px] text-[13.5px] font-semibold transition-colors ${
+                  isEmpty
+                    ? 'border-[#F0F0F0] text-[#CCCCCC] cursor-not-allowed'
+                    : isActive
+                      ? 'border-[#2D6A4F] bg-[#F0F7F4] text-[#2D6A4F]'
+                      : 'border-[#EBEBEB] bg-white text-[#444444] hover:border-[#2D6A4F] hover:text-[#2D6A4F]'
+                }`}
+              >
+                {label}
+                <span className="text-[10.5px] font-normal">{isEmpty ? '−' : `${count}件`}</span>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+
       {/* ARTICLE LIST */}
       <section className="max-w-[1200px] mx-auto px-6 pb-[72px]">
+        {activeYear && activeMonth && (
+          <div className="mb-4 text-[13px] font-bold text-[#999999]">
+            {activeYear}年{activeMonth}月の記事（{visible.length}件）
+          </div>
+        )}
         <div className="border border-[#EBEBEB] rounded-[20px] overflow-hidden">
           {visible.length === 0 ? (
             <div className="px-6 py-12 text-center text-[#999999] text-[14px]">記事がありません</div>
@@ -100,33 +188,6 @@ export default function ColumnClient({ posts, magazines }: { posts: Post[]; maga
             </a>
           ))}
         </div>
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="mt-10 flex items-center justify-center gap-[6px]">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
-              <button
-                key={n}
-                onClick={() => setPage(n)}
-                className={`w-10 h-10 rounded-[10px] border-[1.5px] text-[14px] font-semibold transition-colors ${
-                  page === n
-                    ? 'border-[#2D6A4F] bg-[#2D6A4F] text-white'
-                    : 'border-[#EBEBEB] bg-white text-[#444444] hover:border-[#2D6A4F] hover:text-[#2D6A4F]'
-                }`}
-              >
-                {n}
-              </button>
-            ))}
-            {page < totalPages && (
-              <button
-                onClick={() => setPage(p => p + 1)}
-                className="px-[18px] h-10 rounded-[10px] border-[1.5px] border-[#EBEBEB] bg-white text-[#444444] text-[14px] font-semibold hover:border-[#2D6A4F] hover:text-[#2D6A4F] transition-colors"
-              >
-                次へ →
-              </button>
-            )}
-          </div>
-        )}
       </section>
 
       {/* NOTE MAGAZINES */}
