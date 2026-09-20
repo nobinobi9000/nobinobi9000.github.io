@@ -174,6 +174,18 @@ export const APPS: App[] = [
     tint: '#F5F1FC',
     catColor: '#6D28D9',
   },
+  {
+    name: 'AccoDeck',
+    desc: '複数のアフィリエイト・ECサイトのアカウントを、ログイン状態を保持したまま切り替えられるデスクトップアプリ。',
+    story: 'A8.net・SUZURI・Amazonアソシエイトなど、アフィリエイト用のアカウントを複数運用していると、ブラウザで切り替えるたびにログインし直しになるのが地味に手間だった。アカウントごとに完全に独立したセッションを持たせて、切り替えても一切ログアウトさせない仕組みを作った。',
+    tags: ['有料', 'Windows対応', 'デスクトップアプリ', 'マルチアカウント'],
+    ctaUrl: null,
+    detailUrl: '/accodeck',
+    category: 'Work',
+    screenshot: '/screenshots/accodeck.png',
+    tint: '#ECFDF5',
+    catColor: '#10b981',
+  },
 ]
 
 export const CATEGORIES = ['Life', 'Money', 'Work'] as const
