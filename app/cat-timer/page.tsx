@@ -54,8 +54,8 @@ export default function CatTimerPage() {
             </a>
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-[#EBEBEB] bg-[#F7F7F7] flex items-center justify-center" style={{ minHeight: '300px' }}>
-            <img src="/screenshots/cat-timer.png" alt="Cat Timer 画面" className="w-full h-auto block" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+          <div className="rounded-2xl overflow-hidden border border-[#EBEBEB]">
+            <img src="/screenshots/cat-timer.png" alt="Cat Timer 画面" className="w-full h-auto block" />
           </div>
         </div>
       </section>
