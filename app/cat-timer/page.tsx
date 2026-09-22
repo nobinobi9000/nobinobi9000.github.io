@@ -91,6 +91,30 @@ export default function CatTimerPage() {
         </div>
       </section>
 
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">CHARACTERS — ねこおじさん詳細設定</div>
+        <p className="mt-4 text-[15px] leading-[1.85] text-[#444444] max-w-[640px]">
+          タイマーに登場する4人のねこおじさんたち。アプリの設定画面から「ねこおじさんの詳細設定」を開くと、それぞれのキャラクタープロフィールと表情バリエーションを確認できます。
+        </p>
+        <div className="mt-8 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
+          <img src="/screenshots/cat-timer-characters.png" alt="ねこおじさん キャラクター詳細" className="w-full h-auto block" />
+        </div>
+        <div className="mt-6 grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+          {[
+            { label: 'A', name: 'たまお（48歳）', type: 'まるっとタイプ', desc: 'みんなの癒し系リーダー。口癖は「まあ、いいか」。' },
+            { label: 'B', name: 'すずき（45歳）', type: 'ちょいスマートタイプ', desc: 'できるけど、ちょっと不器用。口癖は「たぶん、大丈夫です」。' },
+            { label: 'C', name: 'けんた（50歳）', type: 'くたびれタイプ', desc: '見た目はダメでも、仕事はする。口癖は「いや…まあ…」。' },
+            { label: 'D', name: 'ひろし（47歳）', type: 'オフスタイル', desc: '家では、ただのおじさん猫。口癖は「まあええか」。' },
+          ].map(c => (
+            <div key={c.label} className="border border-[#EBEBEB] rounded-xl p-5 hover:border-[#f97316] transition-colors">
+              <div className="text-[12px] font-extrabold tracking-[0.06em] mb-2" style={{ color: '#f97316' }}>{c.label} — {c.type}</div>
+              <div className="text-[15px] font-extrabold">{c.name}</div>
+              <p className="mt-2 text-[13px] leading-[1.7] text-[#555555]">{c.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="py-[72px] px-6 bg-[#F7F7F7]">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">DOWNLOAD — ダウンロード</div>
