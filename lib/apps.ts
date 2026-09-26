@@ -74,7 +74,7 @@ export const APPS: App[] = [
     desc: 'カウントダウン中にねこ画像がランダム表示されるデスクトップタイマー。MAX 24時間・アラーム5種類・Windows用無料EXE。',
     story: 'WEB版ねこおじさんタイマーをデスクトップアプリとして作り直した。画面にずっとねこが映り続けるタイマーが欲しかった。',
     tags: ['無料', 'Windows 10/11', 'デスクトップアプリ', 'EXE'],
-    ctaUrl: 'https://github.com/nobinobi9000/cat-timer/releases/download/v1.0.0/CatTimer.exe',
+    ctaUrl: 'https://github.com/nobinobi9000/cat-timer/releases/download/v1.1.0/CatTimer.exe',
     ctaLabel: 'ダウンロード →',
     detailUrl: '/cat-timer',
     category: 'Life',

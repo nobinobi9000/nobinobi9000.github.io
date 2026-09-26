@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/cat-timer' },
 }
 
-const DOWNLOAD_URL = 'https://github.com/nobinobi9000/cat-timer/releases/download/v1.0.0/CatTimer.exe'
+const DOWNLOAD_URL = 'https://github.com/nobinobi9000/cat-timer/releases/download/v1.1.0/CatTimer.exe'
 const GITHUB_URL = 'https://github.com/nobinobi9000/cat-timer'
 
 export default function CatTimerPage() {
@@ -77,7 +77,7 @@ export default function CatTimerPage() {
         <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
           {[
             { num: '01', title: 'カウントダウン最大24時間', desc: 'H:M:Sを▲▼ボタンまたは直接キーボード入力で設定。0時間0分1秒〜24時間まで対応。' },
-            { num: '02', title: 'ランダムねこ画像が常に表示', desc: 'カウントダウン中はねこ画像が8〜15秒ごとにランダム切替表示。作業しながらねこを眺められる。' },
+            { num: '02', title: 'ランダムねこ画像が常に表示', desc: 'カウントダウン中はねこ画像が8〜15秒ごとにランダム切替表示。おじさん猫・わかもの・おんなのこ計64枚から毎回違う顔が登場。' },
             { num: '03', title: 'アラーム5種類から選択', desc: '設定画面でアラーム音を5種類から選択。試聴ボタンで確認してから決められる。' },
             { num: '04', title: '起動・終了画面', desc: '起動時はスタート画面、タイマー終了時は「お時間です。」メッセージとフィニッシュ画面＋アラーム音でお知らせ。' },
             { num: '05', title: '一時停止・再開', desc: 'カウントダウン中に一時停止・再開が可能。中断してもカウントはその時点を保持。' },
@@ -91,27 +91,112 @@ export default function CatTimerPage() {
         </div>
       </section>
 
-      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
-        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">CHARACTERS — ねこおじさん詳細設定</div>
-        <p className="mt-4 text-[15px] leading-[1.85] text-[#444444] max-w-[640px]">
-          タイマーに登場する4人のねこおじさんたち。アプリの設定画面から「ねこおじさんの詳細設定」を開くと、それぞれのキャラクタープロフィールと表情バリエーションを確認できます。
-        </p>
-        <div className="mt-8 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
-          <img src="/screenshots/cat-timer-characters.png" alt="ねこおじさん キャラクター詳細" className="w-full h-auto block" />
+      <section className="bg-[#FFF8F5] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">PREVIEW — タイマー中の表示イメージ</div>
+          <p className="mt-4 text-[15px] leading-[1.85] text-[#444444] max-w-[640px]">
+            8〜15秒ごとにランダムで切り替わる。こんな感じで、ずっとねこがいる。
+          </p>
+          <div className="mt-8 grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+            {[
+              { src: '/screenshots/cat-timer-sample-1.png', caption: 'おじさん猫A — プレゼン中' },
+              { src: '/screenshots/cat-timer-sample-2.png', caption: 'おじさん猫F — のびをする' },
+              { src: '/screenshots/cat-timer-sample-3.png', caption: 'わかいねこG — 会議を仕切る' },
+              { src: '/screenshots/cat-timer-sample-4.png', caption: 'おんなのこI — コーヒータイム' },
+            ].map(s => (
+              <div key={s.src} className="rounded-2xl overflow-hidden border border-[#EBEBEB] bg-white shadow-sm">
+                <img src={s.src} alt={s.caption} className="w-full h-auto block" />
+                <div className="px-4 py-3 text-[13px] text-[#555555] font-medium text-center">{s.caption}</div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="mt-6 grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
-          {[
-            { label: 'A', name: 'たまお（48歳）', type: 'まるっとタイプ', desc: 'みんなの癒し系リーダー。口癖は「まあ、いいか」。' },
-            { label: 'B', name: 'すずき（45歳）', type: 'ちょいスマートタイプ', desc: 'できるけど、ちょっと不器用。口癖は「たぶん、大丈夫です」。' },
-            { label: 'C', name: 'けんた（50歳）', type: 'くたびれタイプ', desc: '見た目はダメでも、仕事はする。口癖は「いや…まあ…」。' },
-            { label: 'D', name: 'ひろし（47歳）', type: 'オフスタイル', desc: '家では、ただのおじさん猫。口癖は「まあええか」。' },
-          ].map(c => (
-            <div key={c.label} className="border border-[#EBEBEB] rounded-xl p-5 hover:border-[#f97316] transition-colors">
-              <div className="text-[12px] font-extrabold tracking-[0.06em] mb-2" style={{ color: '#f97316' }}>{c.label} — {c.type}</div>
-              <div className="text-[15px] font-extrabold">{c.name}</div>
-              <p className="mt-2 text-[13px] leading-[1.7] text-[#555555]">{c.desc}</p>
-            </div>
-          ))}
+      </section>
+
+      <section className="max-w-[1200px] mx-auto px-6 py-[72px]">
+        <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">CHARACTERS — 登場するねこたち</div>
+        <p className="mt-4 text-[15px] leading-[1.85] text-[#444444] max-w-[640px]">
+          タイマーに登場するのは個性豊かな16匹のねこたち。おじさん猫・わかもの・おんなのこねこ、それぞれにキャラクター設定があります。アプリの設定画面からプロフィールを確認できます。
+        </p>
+
+        <div className="mt-10">
+          <div className="text-[12px] font-bold tracking-[0.06em] text-[#999999] mb-4">🐱 おじさん猫（A〜H）</div>
+          <div className="mb-6 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
+            <img src="/screenshots/cat-timer-characters.png" alt="ねこおじさん キャラクター詳細" className="w-full h-auto block" />
+          </div>
+          <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {[
+              { label: 'A', name: 'まるおさん（48歳）', type: 'まるっとタイプ', desc: '頼まれると断れない優しいおじさん。茶トラ白のほんわか系。' },
+              { label: 'B', name: 'たかしさん（42歳）', type: 'ちょいスマートタイプ', desc: '真面目で知的、仕事はきっちり。ハチワレのメガネおじさん。' },
+              { label: 'C', name: 'けんじさん（52歳）', type: 'くたびれタイプ', desc: '疲れた中間管理職。口癖は「まあ、今日も頑張るか…」。' },
+              { label: 'D', name: 'ひろしさん（47歳）', type: 'オフスタイルタイプ', desc: 'のんびりマイペース。家で過ごすのがいちばん好き。' },
+            ].map(c => (
+              <div key={c.label} className="border border-[#EBEBEB] rounded-xl p-5 hover:border-[#f97316] transition-colors">
+                <div className="text-[12px] font-extrabold tracking-[0.06em] mb-2" style={{ color: '#f97316' }}>{c.label} — {c.type}</div>
+                <div className="text-[15px] font-extrabold">{c.name}</div>
+                <p className="mt-2 text-[13px] leading-[1.7] text-[#555555]">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="grid gap-4 mt-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {[
+              { label: 'E', name: 'しょうたさん（45歳）', type: 'シャムタイプ', desc: '誠実でまじめ、人に優しい。新しいことへの挑戦が好き。' },
+              { label: 'F', name: 'まさるさん（49歳）', type: 'ロシアンブルータイプ', desc: '冷静・論理的・穏やか。いつも効率を重視するスマートおじさん。' },
+              { label: 'G', name: 'こうじさん（51歳）', type: 'メインクーンタイプ', desc: '義理・面倒見がいい。ちょっと口が悪いけど根は優しい。' },
+              { label: 'H', name: 'りょうたさん（46歳）', type: 'ベンガルタイプ', desc: '行動的で陽気、チャレンジが好きなエネルギッシュなおじさん。' },
+            ].map(c => (
+              <div key={c.label} className="border border-[#EBEBEB] rounded-xl p-5 hover:border-[#f97316] transition-colors">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="text-[12px] font-extrabold tracking-[0.06em]" style={{ color: '#f97316' }}>{c.label} — {c.type}</div>
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded text-white" style={{ background: '#f97316' }}>NEW</span>
+                </div>
+                <div className="text-[15px] font-extrabold">{c.name}</div>
+                <p className="mt-2 text-[13px] leading-[1.7] text-[#555555]">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-14">
+          <div className="text-[12px] font-bold tracking-[0.06em] text-[#999999] mb-4">🐱 わかいねこ（E〜H）</div>
+          <div className="mb-6 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
+            <img src="/screenshots/cat-timer-characters-wakamono.png" alt="わかいねこ キャラクター詳細" className="w-full h-auto block" />
+          </div>
+          <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {[
+              { label: 'E', name: 'はると（20代）', type: '若者ノーマルタイプ', desc: 'まっすぐで元気！新人のがんばり屋さん。口癖は「よろしくお願いします！」。' },
+              { label: 'F', name: 'そうた（20代）', type: '若者スマートタイプ', desc: 'クールでおしゃれ。仕事もプライベートも楽しみたい。メガネがトレードマーク。' },
+              { label: 'G', name: 'りく（20代）', type: '若者やんちゃタイプ', desc: '明るくて元気！ちょっとドジだけど前向き。口癖は「やってみよ！」。' },
+              { label: 'H', name: 'けんた（20代）', type: '若者オフタイプ', desc: 'のんびりマイペース。好きなことが最優先。口癖は「まあ、いっか〜」。' },
+            ].map(c => (
+              <div key={c.label} className="border border-[#EBEBEB] rounded-xl p-5 hover:border-[#f97316] transition-colors">
+                <div className="text-[12px] font-extrabold tracking-[0.06em] mb-2" style={{ color: '#f97316' }}>{c.label} — {c.type}</div>
+                <div className="text-[15px] font-extrabold">{c.name}</div>
+                <p className="mt-2 text-[13px] leading-[1.7] text-[#555555]">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-14">
+          <div className="text-[12px] font-bold tracking-[0.06em] text-[#999999] mb-4">🐱 おんなのこねこ（I〜L）</div>
+          <div className="mb-6 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
+            <img src="/screenshots/cat-timer-characters-onnano.png" alt="おんなのこねこ キャラクター詳細" className="w-full h-auto block" />
+          </div>
+          <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {[
+              { label: 'I', name: 'みこ（20代）', type: '女の子ノーマルタイプ', desc: '明るくて真面目な新入社員。みんなから好かれる癒し系。' },
+              { label: 'J', name: 'あやか（20代）', type: '女の子おっとりタイプ', desc: '穏やかで優しい。マイペースだけど周りを和ませる存在。' },
+              { label: 'K', name: 'ひより（20代）', type: '女の子元気タイプ', desc: '明るくて行動的。ちょっとドジだけどめげない前向きさ。口癖は「よっし！」。' },
+              { label: 'L', name: 'るな（20代）', type: '女の子クールタイプ', desc: '落ち着いていて知的。仕事ができるクールな女の子。でも実はちょっと甘えん坊。' },
+            ].map(c => (
+              <div key={c.label} className="border border-[#EBEBEB] rounded-xl p-5 hover:border-[#f97316] transition-colors">
+                <div className="text-[12px] font-extrabold tracking-[0.06em] mb-2" style={{ color: '#f97316' }}>{c.label} — {c.type}</div>
+                <div className="text-[15px] font-extrabold">{c.name}</div>
+                <p className="mt-2 text-[13px] leading-[1.7] text-[#555555]">{c.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
