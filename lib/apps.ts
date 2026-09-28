@@ -95,6 +95,17 @@ export const APPS: App[] = [
     catColor: '#2563EB',
   },
   {
+    name: 'タブレット情報モニター',
+    desc: '古いAndroidタブレットを、時計・天気・ニュース・株価・カレンダーの常時表示モニターに。HTMLを開くだけで動き、サーバー・月額不要。',
+    tags: ['準備中', 'Androidタブレット', 'サーバー不要', '月額不要'],
+    ctaUrl: null,
+    detailUrl: '/tablet-dashboard',
+    category: 'Life',
+    screenshot: '/screenshots/tablet-dashboard/weather.png',
+    tint: '#ECFDF5',
+    catColor: '#10b981',
+  },
+  {
     name: 'サブスクの断捨離',
     desc: 'サブスク支出を可視化して断捨離。S&P500換算で将来額を表示。断捨離スコアで提案。',
     story: '自分のサブスクを全部書き出してみたら、月額が想像以上だった。「この金額を投資に回したらどうなるんだろう」という純粋な興味から作り始めた。',
