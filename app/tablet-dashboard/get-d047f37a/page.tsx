@@ -14,6 +14,7 @@ const ACCENT = '#10b981'
 
 // リリースのたびにここへ追記する（新しい行を先頭に）
 const CHANGELOG = [
+  { version: '1.0.1', date: '2026-10-01', notes: '外部データ（RSS記事・Googleカレンダーの予定名など）の表示を安全化。動作の見た目に変化はありません' },
   { version: '1.0.0', date: '2026-09-30', notes: '初回リリース' },
 ]
 
@@ -77,6 +78,13 @@ export default function TabletDashboardDownloadPage() {
             設定（テーマ・天気の地域・ニュースのカテゴリ・Googleカレンダー連携など）はそのまま引き継がれます。
             <br />
             ※ 別のフォルダに置き直すと設定が引き継がれないのでご注意ください。
+          </div>
+        </section>
+
+        <section className="mt-14">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">既知の制限</div>
+          <div className="mt-5 p-5 rounded-xl border border-[#EBEBEB] bg-[#FAFAFA] text-[14px] leading-[1.9] text-[#444444]">
+            💡 Googleカレンダーの「毎週」「毎年」などの繰り返し予定には、現在対応していません。繰り返し予定は最初の1回分の日付にのみ表示され、2回目以降は表示されません。単発の予定は問題なく表示されます。
           </div>
         </section>
 

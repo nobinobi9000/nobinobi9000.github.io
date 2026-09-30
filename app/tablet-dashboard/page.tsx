@@ -156,8 +156,9 @@ export default function TabletDashboardPage() {
             ))}
           </div>
 
-          <div className="mt-8 p-5 rounded-xl border border-[#EBEBEB] bg-white text-[14px] leading-[1.9] text-[#555555] max-w-[800px]">
-            💡 Googleカレンダーを連携する場合、カレンダーのURLは中継サービスを経由して取得されます。連携しなくても、日本の祝日カレンダーは表示されます。
+          <div className="mt-8 p-5 rounded-xl border border-[#EBEBEB] bg-white text-[14px] leading-[1.9] text-[#555555] max-w-[800px] space-y-2">
+            <p>💡 Googleカレンダーを連携する場合、カレンダーのURLは中継サービスを経由して取得されます。連携しなくても、日本の祝日カレンダーは表示されます。</p>
+            <p>💡 「毎週」「毎年」などの繰り返し予定には現在対応していません。繰り返し予定は、最初の1回分の日付にのみ表示されます。</p>
           </div>
         </div>
       </section>

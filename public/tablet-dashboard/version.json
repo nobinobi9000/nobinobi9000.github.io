@@ -1,5 +1,5 @@
 {
-  "latest": "1.0.0",
-  "url": "https://nobi-labo.com/tablet-dashboard/download",
-  "notes": ""
+  "latest": "1.0.1",
+  "url": "https://nobi-labo.com/tablet-dashboard/get-d047f37a",
+  "notes": "外部データの表示を安全化しました（動作に変化はありません）"
 }
