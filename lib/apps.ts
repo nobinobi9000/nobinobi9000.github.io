@@ -97,8 +97,10 @@ export const APPS: App[] = [
   {
     name: 'タブレット情報モニター',
     desc: '古いAndroidタブレットを、時計・天気・ニュース・株価・カレンダーの常時表示モニターに。HTMLを開くだけで動き、サーバー・月額不要。',
-    tags: ['準備中', 'Androidタブレット', 'サーバー不要', '月額不要'],
-    ctaUrl: null,
+    story: '朝起きてスマホで天気を見て、次にニュース、金融、カレンダー…という毎朝の動作が地味に面倒だった。専用モニターは1万円以上して手が出ず、ふと引き出しの奥で眠っていた古いAndroidタブレットに目がいったのがきっかけ。',
+    tags: ['有料', 'Androidタブレット', 'サーバー不要', '月額不要'],
+    ctaUrl: 'https://note.com/suzukidaichisan/n/na797cc26de12',
+    ctaLabel: 'noteで購入 →',
     detailUrl: '/tablet-dashboard',
     category: 'Life',
     screenshot: '/screenshots/tablet-dashboard/weather.png',

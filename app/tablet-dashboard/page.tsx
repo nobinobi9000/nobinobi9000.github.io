@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 }
 
 const ACCENT = '#10b981'
+const NOTE_URL = 'https://note.com/suzukidaichisan/n/na797cc26de12'
 
 const SCREENS = [
   {
@@ -76,21 +77,36 @@ export default function TabletDashboardPage() {
               使わなくなったAndroidタブレットを、時計・天気・ニュース・株価・カレンダーを映し続けるモニターに。HTMLファイルを開くだけで動き、サーバーも月額料金もいりません。
             </p>
             <div className="mt-6 flex gap-2 flex-wrap">
-              {['準備中', 'Androidタブレット', 'サーバー不要', '月額不要'].map(tag => (
+              {['有料', 'Androidタブレット', 'サーバー不要', '月額不要'].map(tag => (
                 <span key={tag} className="px-3 py-[5px] text-[12.5px] font-medium rounded-lg text-[#444444] bg-[#F7F7F7] border border-[#EBEBEB]">{tag}</span>
               ))}
             </div>
 
-            <span
-              className="mt-8 inline-flex items-center gap-2 px-7 py-4 text-[15px] font-bold rounded-[11px] cursor-not-allowed"
-              style={{ color: '#999999', background: '#F7F7F7' }}
+            <a
+              href={NOTE_URL}
+              target="_blank"
+              rel="noopener"
+              className="mt-8 inline-flex items-center gap-2 px-7 py-4 text-[15px] font-bold rounded-[11px] text-white transition-opacity hover:opacity-90"
+              style={{ background: ACCENT }}
             >
-              リリース準備中
-            </span>
+              noteで購入する →
+            </a>
           </div>
 
           <div className="rounded-2xl overflow-hidden border border-[#EBEBEB]">
             <img src="/screenshots/tablet-dashboard/weather.png" alt="タブレット情報モニター 時刻・天気画面" className="w-full h-auto block" />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#F7F7F7] py-[72px] px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">STORY — 開発の背景</div>
+          <div className="mt-9 max-w-[720px]">
+            <blockquote className="border-l-[3px] pl-7" style={{ borderColor: ACCENT }}>
+              <p className="text-[20px] font-semibold leading-[1.8] text-[#111111]">「捨てるには惜しいけれど、使い道もない。そんな中途半端な立場のガジェットを、もう一度働かせてみたくなった。」</p>
+            </blockquote>
+            <p className="mt-7 text-[16px] leading-[1.9] text-[#444444]">朝起きてスマホで天気を見て、次にニュース、金融、カレンダー…という毎朝の動作が地味に面倒だった。専用の情報モニターも検討したが、1万円以上するものが多く踏み切れない。そんなとき、引き出しの奥で何年も充電されずに眠っていた古いAndroidタブレットに目がいったのが、このアプリのきっかけ。</p>
           </div>
         </div>
       </section>
@@ -151,12 +167,15 @@ export default function TabletDashboardPage() {
           <h2 className="font-extrabold tracking-[-0.03em] leading-[1.2]" style={{ fontSize: 'clamp(26px, 3.8vw, 42px)' }}>
             眠っているタブレットに、もう一度仕事を。
           </h2>
-          <span
-            className="mt-8 inline-block px-9 py-4 text-[16px] font-bold rounded-[12px] cursor-not-allowed"
-            style={{ color: '#999999', background: 'white' }}
+          <a
+            href={NOTE_URL}
+            target="_blank"
+            rel="noopener"
+            className="mt-8 inline-block px-9 py-4 text-[16px] font-bold rounded-[12px] text-white transition-opacity hover:opacity-90"
+            style={{ background: ACCENT }}
           >
-            リリース準備中
-          </span>
+            noteで購入する →
+          </a>
         </div>
       </section>
     </div>
