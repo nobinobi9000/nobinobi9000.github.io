@@ -205,7 +205,7 @@ const SLIDES = [
 
 ## 注意事項
 
-- `app/subshari/` はミラーコピーのため**編集禁止**。subshari の変更は `../subshari/` フォルダで行う
+- `app/subshari/` には紹介ページ（`page.tsx`）のみ置く。アプリ本体のミラー（`app/subshari/app/`）は 2026-10-03 に削除済み。subshari 本体の変更は `../subshari/` フォルダで行う
 - 本番デプロイ前に必ずユーザーに確認を取ること
 - Tailwind v4 は Next.js 16 Turbopack と互換性問題あり → **v3 を使うこと**
 - `/japan-stock-screener/`（スラッシュあり）は GitHub Pages へのリダイレクト。`/japan-stock-screener`（スラッシュなし）が詳細ページ
