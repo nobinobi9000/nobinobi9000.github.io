@@ -120,7 +120,7 @@ export default function CatTimerPage() {
         </p>
 
         <div className="mt-10">
-          <div className="text-[12px] font-bold tracking-[0.06em] text-[#999999] mb-4">🐱 おじさん猫（A〜D）</div>
+          <div className="text-[12px] font-bold tracking-[0.06em] text-[#999999] mb-4">🐱 おじさん猫（A〜H）</div>
           <div className="mb-4 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
             <img src="/screenshots/cat-timer-characters.png" alt="おじさん猫 キャラクター詳細" className="w-full h-auto block" />
           </div>
@@ -129,10 +129,14 @@ export default function CatTimerPage() {
           </div>
           <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
             {[
-              { label: 'A', type: 'まるっとタイプ', name: 'たまお', desc: '頼まれると断れない優しいおじさん。みんなの癒し系リーダー。' },
-              { label: 'B', type: 'ちょいスマートタイプ', name: 'すずき', desc: '真面目で几帳面、でも少し不器用。仕事はきっちりやりたい派。' },
-              { label: 'C', type: 'くたびれタイプ', name: 'けんた', desc: '疲れた中間管理職。見た目はダメでも、仕事はする。' },
-              { label: 'D', type: 'オフスタイル', name: 'ひろし', desc: 'のんびりマイペース。家では完全にだらける。家族は大好き。' },
+              { label: 'A', type: 'まるっとタイプ', name: 'まるおさん', desc: '頼まれると断れない優しいおじさん。みんなの相談役。' },
+              { label: 'B', type: 'ちょいスマートタイプ', name: 'たかしさん', desc: '真面目で几帳面。仕事はきっちりやりたいが少し疲れ気味。' },
+              { label: 'C', type: 'くたびれタイプ', name: 'けんじさん', desc: '疲れ切った中間管理職。口癖は「まあ、今日も頑張るか…」。' },
+              { label: 'D', type: 'オフスタイルタイプ', name: 'ひろしさん', desc: 'のんびりマイペース。家では完全にだらける。家族大好き。' },
+              { label: 'E', type: 'シャムタイプ', name: 'しょうたさん', desc: '誠実でまじめ。人に優しく、新しいことに前向きな若手。' },
+              { label: 'F', type: 'ロシアンブルータイプ', name: 'まさるさん', desc: '冷静・論理的・穏やか。効率よく進めましょう派。' },
+              { label: 'G', type: 'メインクーンタイプ', name: 'こうじさん', desc: '豪快で面倒見がいい。チャレンジをいとわない頼れる存在。' },
+              { label: 'H', type: 'ベンガルタイプ', name: 'りょうたさん', desc: '行動的・負けず嫌い。よし、いこうか！が口癖。' },
             ].map(c => (
               <div key={c.label} className="border border-[#EBEBEB] rounded-xl p-5 hover:border-[#f97316] transition-colors">
                 <div className="text-[12px] font-extrabold tracking-[0.06em] mb-2" style={{ color: '#f97316' }}>{c.label} — {c.type}</div>
