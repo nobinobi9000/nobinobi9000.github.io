@@ -121,18 +121,21 @@ export default function CatTimerPage() {
 
         <div className="mt-10">
           <div className="text-[12px] font-bold tracking-[0.06em] text-[#999999] mb-4">🐱 おじさん猫（A〜D）</div>
-          <div className="mb-6 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
+          <div className="mb-4 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
             <img src="/screenshots/cat-timer-characters.png" alt="おじさん猫 キャラクター詳細" className="w-full h-auto block" />
+          </div>
+          <div className="mb-6 rounded-2xl overflow-hidden border border-[#EBEBEB] shadow-sm">
+            <img src="/screenshots/cat-timer-characters-2.png" alt="おじさん猫 シーンいろいろ" className="w-full h-auto block" />
           </div>
           <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
             {[
-              { label: 'A', name: 'まるっとタイプ', desc: '頼まれると断れない優しいおじさん。茶トラ白のほんわか系。' },
-              { label: 'B', name: 'ちょいスマートタイプ', desc: '真面目で知的、仕事はきっちり。ハチワレのメガネおじさん。' },
-              { label: 'C', name: 'くたびれタイプ', desc: '疲れた中間管理職。口癖は「まあ、今日も頑張るか…」。' },
-              { label: 'D', name: 'オフスタイルタイプ', desc: 'のんびりマイペース。家で過ごすのがいちばん好き。' },
+              { label: 'A', type: 'まるっとタイプ', name: 'たまお', desc: '頼まれると断れない優しいおじさん。みんなの癒し系リーダー。' },
+              { label: 'B', type: 'ちょいスマートタイプ', name: 'すずき', desc: '真面目で几帳面、でも少し不器用。仕事はきっちりやりたい派。' },
+              { label: 'C', type: 'くたびれタイプ', name: 'けんた', desc: '疲れた中間管理職。見た目はダメでも、仕事はする。' },
+              { label: 'D', type: 'オフスタイル', name: 'ひろし', desc: 'のんびりマイペース。家では完全にだらける。家族は大好き。' },
             ].map(c => (
               <div key={c.label} className="border border-[#EBEBEB] rounded-xl p-5 hover:border-[#f97316] transition-colors">
-                <div className="text-[12px] font-extrabold tracking-[0.06em] mb-2" style={{ color: '#f97316' }}>{c.label}</div>
+                <div className="text-[12px] font-extrabold tracking-[0.06em] mb-2" style={{ color: '#f97316' }}>{c.label} — {c.type}</div>
                 <div className="text-[15px] font-extrabold">{c.name}</div>
                 <p className="mt-2 text-[13px] leading-[1.7] text-[#555555]">{c.desc}</p>
               </div>
