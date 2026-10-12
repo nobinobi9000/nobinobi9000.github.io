@@ -1,6 +1,6 @@
 [
   {
-    "id": "gadget-mr9dqlj40g1sm",
+    "id": "mr9dqlj40g1sm",
     "category": "gadget",
     "tags": [
       "CIO",
@@ -8,12 +8,13 @@
     ],
     "name": "CIO 半固体 Qi2 MagSafe対応 モバイルバッテリー 5000mAh",
     "comment": "日本企業・半固体電池　Qi2・Magsafe対応\n半固体電池だから発火のリスクが少なくなりました。",
-    "amazonUrl": "https://amzn.to/44oKg0a",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/41DCdaCZm7L._AC_SL1500_.jpg",
-    "addedAt": "2026-07-06"
+    "addedAt": "2026-07-06",
+    "amazonUrl": "https://amzn.to/44oKg0a"
   },
   {
-    "id": "gadget-mralsd71d1swc",
+    "id": "mralsd71d1swc",
     "category": "gadget",
     "tags": [
       "CIO",
@@ -21,12 +22,13 @@
     ],
     "name": "CIO 絡まないシリコンショートケーブル 0.15m ＆ カラビナ付きホルダー セット (ブラック)",
     "comment": "15cmケーブルがモバイルバッテリーやノートPCの横で充電するのにぴったり。カラビナ付きだからカバンにぶら下げておくだけでもう忘れない。",
-    "amazonUrl": "https://amzn.to/4wrIg38",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/31WFUN1n3yL._AC_.jpg",
-    "addedAt": "2026-07-07"
+    "addedAt": "2026-07-07",
+    "amazonUrl": "https://amzn.to/4wrIg38"
   },
   {
-    "id": "gadget-mran2pyto9uns",
+    "id": "mran2pyto9uns",
     "category": "gadget",
     "tags": [
       "CIO",
@@ -34,12 +36,13 @@
     ],
     "name": "CIO NovaPort QUADⅡ 65W 4ポート 急速充電器",
     "comment": "65W給電でノートPCも充電できる。重さも120g。旅行にも出張にも使える。",
-    "amazonUrl": "https://amzn.to/4bynabf",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61U50w6SOgL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-07"
+    "addedAt": "2026-07-07",
+    "amazonUrl": "https://amzn.to/4bynabf"
   },
   {
-    "id": "gadget-mran6nik9ezen",
+    "id": "mran6nik9ezen",
     "category": "gadget",
     "tags": [
       "CIO",
@@ -47,72 +50,78 @@
     ],
     "name": "CIO NovaPort QUADⅡ 100W 4ポート 急速充電器",
     "comment": "レッツノートの給電にも使える100Wタイプ。190グラム。",
-    "amazonUrl": "https://amzn.to/4viXoPu",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/618okkXlZ3L._AC_SL1500_.jpg",
-    "addedAt": "2026-07-07"
+    "addedAt": "2026-07-07",
+    "amazonUrl": "https://amzn.to/4viXoPu"
   },
   {
-    "id": "gadget-mranayaholf73",
+    "id": "mranayaholf73",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "Plaud Note Pro AIボイスレコーダー",
     "comment": "文字起こし。多次元要約まで。AIボイスレコーダー",
-    "amazonUrl": "https://amzn.to/4vpY1H5",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61e7wIXxZrL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-07"
+    "addedAt": "2026-07-07",
+    "amazonUrl": "https://amzn.to/4vpY1H5"
   },
   {
-    "id": "gadget-mranx7eh7w03a",
+    "id": "mranx7eh7w03a",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "Anker Nano ドッキングステーション (13-in-1, 着脱式USB-C ハブ)",
     "comment": "100W出力　最大3画面同時出力　10Gbps高速データ転送。在宅でのノートPCの最強の友",
-    "amazonUrl": "https://amzn.to/4f6QGGb",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/611gc7QH34L._AC_SL1500_.jpg",
-    "addedAt": "2026-07-07"
+    "addedAt": "2026-07-07",
+    "amazonUrl": "https://amzn.to/4f6QGGb"
   },
   {
-    "id": "home-mrao7age1pgcc",
+    "id": "mrao7age1pgcc",
     "category": "home",
     "tags": [
       "SwitchBot"
     ],
     "name": "SwitchBot スマートロック Ultra & 顔認証パッドPro",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4f0QR5S",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71S1PA1RAuL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-07"
+    "addedAt": "2026-07-07",
+    "amazonUrl": "https://amzn.to/4f0QR5S"
   },
   {
-    "id": "home-mrd9ye9cj414e",
+    "id": "mrd9ye9cj414e",
     "category": "home",
     "tags": [
       "SwitchBot"
     ],
     "name": "SwitchBot スマートリモコン ハブミニ",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4phuQog",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61A9oENBl7L._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4phuQog"
   },
   {
-    "id": "home-mrda0qpkrr1kz",
+    "id": "mrda0qpkrr1kz",
     "category": "home",
     "tags": [
       "SwitchBot"
     ],
     "name": "SwitchBot 温湿度計プラス",
     "comment": "",
-    "amazonUrl": "https://amzn.to/3SOPv6R",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/619p7vVZCDL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/3SOPv6R"
   },
   {
-    "id": "diy-mrda38qpwsgkg",
+    "id": "mrda38qpwsgkg",
     "category": "diy",
     "tags": [
       "DIY",
@@ -120,12 +129,13 @@
     ],
     "name": "アイワ金属 STAND BAR4 4組入 AP-3027A",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4vQ0J9F",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71DOPN7mvkL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4vQ0J9F"
   },
   {
-    "id": "diy-mrda4n038b9x2",
+    "id": "mrda4n038b9x2",
     "category": "diy",
     "tags": [
       "DIY",
@@ -133,48 +143,52 @@
     ],
     "name": "アイワ金属 STAND BAR6 6組入 AP-3027B",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4h3NOMM",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71aE1tTUGrL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4h3NOMM"
   },
   {
-    "id": "home-mrda7gv147bnc",
+    "id": "mrda7gv147bnc",
     "category": "home",
     "tags": [
       "収納"
     ],
     "name": "[コジット] 正規品 ダンボールのストック&ゴミ出し、これ一つで解決! 持ち運びできる段ボールストッカー",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4f7ldUa",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71WsbK4ywpL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4f7ldUa"
   },
   {
-    "id": "home-mrda9295s64or",
+    "id": "mrda9295s64or",
     "category": "home",
     "tags": [
       "文房具"
     ],
     "name": "無印良品 ストリップカット ハンドシュレッダー",
     "comment": "",
-    "amazonUrl": "https://amzn.to/3SVnfPW",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/51Lu3UFf5UL._AC_SL1260_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/3SVnfPW"
   },
   {
-    "id": "home-mrdab2eqg5xpr",
+    "id": "mrdab2eqg5xpr",
     "category": "home",
     "tags": [
       "文房具"
     ],
     "name": "【Amazon限定色】 プラス 個人情報保護スタンプ ローラーケシポン ワイド ブラック 専用カードリッジセット",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4ybEYCH",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/519wfO9sA1L._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4ybEYCH"
   },
   {
-    "id": "diy-mrdad6ql4yeah",
+    "id": "mrdad6ql4yeah",
     "category": "diy",
     "tags": [
       "DIY",
@@ -183,84 +197,91 @@
     ],
     "name": "テーブル下収納ラック",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4f8kimH",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61OOs+zW7jL._AC_SL1280_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4f8kimH"
   },
   {
-    "id": "gadget-mrdakd3ef3igg",
+    "id": "mrdakd3ef3igg",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "Acer モバイルモニター 15.6インチ フルHD IPS 非光沢 60Hz 6ms(GTG) 700g 超薄型",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4eSXVCQ",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61B+hsEKXrL._AC_SL1000_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4eSXVCQ"
   },
   {
-    "id": "gadget-mrdan6ewu6700",
+    "id": "mrdan6ewu6700",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "UGREEN HDMI KVM切替器 4K@60Hz",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4vPnfQ5",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71WmC0HTLgL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4vPnfQ5"
   },
   {
-    "id": "gadget-mrdapf3frlil5",
+    "id": "mrdapf3frlil5",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "Elgato Stream Deck +",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4fbl2Y5",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/513etP8+3TL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4fbl2Y5"
   },
   {
-    "id": "gadget-mrdarfujvq3q1",
+    "id": "mrdarfujvq3q1",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "ロジクール 静音 ワイヤレス トラックボール マウス M575SPd",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4gugEG2",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/619NsX0xdiL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4gugEG2"
   },
   {
-    "id": "gadget-mrdaw0dve57gz",
+    "id": "mrdaw0dve57gz",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "ロジクール Webカメラ C920n",
     "comment": "",
-    "amazonUrl": "https://amzn.to/3R7MzBD",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61FLOm0OiLL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/3R7MzBD"
   },
   {
-    "id": "gadget-mrdaxzbm3ixln",
+    "id": "mrdaxzbm3ixln",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "Black Shark ゲーミング マウスパッド 800mm x 300mm x4mm デスクマット",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4ycK41C",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/51rs8fRJpCL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4ycK41C"
   },
   {
-    "id": "gadget-mrdb1pjqz9w85",
+    "id": "mrdb1pjqz9w85",
     "category": "gadget",
     "tags": [
       "ガジェット",
@@ -268,12 +289,13 @@
     ],
     "name": "FineGood ガジェットポーチ",
     "comment": "",
-    "amazonUrl": "https://amzn.to/3Tr3P5y",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/719P673yQLL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/3Tr3P5y"
   },
   {
-    "id": "gadget-mrdb4kjjxq2r9",
+    "id": "mrdb4kjjxq2r9",
     "category": "gadget",
     "tags": [
       "ガジェット",
@@ -281,594 +303,895 @@
     ],
     "name": "ガジェットポーチ 薄型",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4vgdrgR",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/817Qiv9aMnL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4vgdrgR"
   },
   {
-    "id": "gadget-mrdb8iob5i8ie",
+    "id": "mrdb8iob5i8ie",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "JBL T210",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4pcnCli",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61vsrX-6kVL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4pcnCli"
   },
   {
-    "id": "nas-mrdbbmb3l0e34",
+    "id": "mrdbbmb3l0e34",
     "category": "nas",
     "tags": [
       "NAS"
     ],
     "name": "Synology NASキット 2ベイ DS223j/G【ガイドブック付】",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4f3K0Zo",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/51bv5K2k9GL._AC_SL1196_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4f3K0Zo"
   },
   {
-    "id": "nas-mrdbezjzlfhpk",
+    "id": "mrdbezjzlfhpk",
     "category": "nas",
     "tags": [
       "NAS"
     ],
     "name": "UGREEN NASync DH2300 2ベイ",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4vWgRqk",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/51Esaa52phL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4vWgRqk"
   },
   {
-    "id": "nas-mrdbh71oxrdr0",
+    "id": "mrdbh71oxrdr0",
     "category": "nas",
     "tags": [
       "NAS"
     ],
     "name": "UGREEN NASync DXP2800 2ベイ",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4pcBlIR",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61WvMIHMDcL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4pcBlIR"
   },
   {
-    "id": "nas-mrdbj9t6lxdp1",
+    "id": "mrdbj9t6lxdp1",
     "category": "nas",
     "tags": [
       "NAS"
     ],
     "name": "UGREEN NASync DXP2800 GT 2ベイ",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4vWhi3W",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/51sRXDivCML._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4vWhi3W"
   },
   {
-    "id": "home-mrdbnvy7f6ykp",
+    "id": "mrdbnvy7f6ykp",
     "category": "home",
     "tags": [
       "SwitchBot"
     ],
     "name": "SwitchBot スマートロック Ultra",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4h2K9ib",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71qsNWsy1dL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4h2K9ib"
   },
   {
-    "id": "license-mrdbon6n20aau",
+    "id": "mrdbon6n20aau",
     "category": "license",
     "tags": [
       "ライセンス"
     ],
     "name": "ソースネクスト ｜ 1Password 3年版 (1人用) ｜ パスワード管理サービス",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4wzRZ7H",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61DzYGT5B-L._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4wzRZ7H"
   },
   {
-    "id": "license-mrdbsnpvd4wf3",
+    "id": "mrdbsnpvd4wf3",
     "category": "license",
     "tags": [
       "ライセンス"
     ],
     "name": "ソースネクスト ｜ 1Password 3年版 ファミリー(5人用)｜ パスワード管理サービス",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4vTHiga",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61oZ9VwxY9L._AC_SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4vTHiga"
   },
   {
-    "id": "manga-mrdl3ucatliyd",
+    "id": "mrdl3ucatliyd",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "田んぼで拾った女騎士、田舎で俺の嫁だと思われている(1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4aMX0RY",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/81BV7Ob8peL._SL1423_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4aMX0RY"
   },
   {
-    "id": "manga-mrdl5crt74y1k",
+    "id": "mrdl5crt74y1k",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "無職転生~エリスは本気で牙を砥ぐ~(1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4w5L6uM",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71Xcgst05gL._SL1422_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4w5L6uM"
   },
   {
-    "id": "manga-mrdl6n54ciojx",
+    "id": "mrdl6n54ciojx",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "無職転生 ~異世界行ったら本気だす~ 失意の魔術師編 1",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4wtN4oB",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/81pw6jniKSL._SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4wtN4oB"
   },
   {
-    "id": "manga-mrdl7orypra90",
+    "id": "mrdl7orypra90",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "無職転生 ~異世界行ったら本気だす~ 1",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4f7Ppyu",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71lvlGnALQL._SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4f7Ppyu"
   },
   {
-    "id": "manga-mrdlbd4j42xar",
+    "id": "mrdlbd4j42xar",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "無職転生 ~ロキシーだって本気です~ 1",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4gtFHsP",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71ftIqDERlL._SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4gtFHsP"
   },
   {
-    "id": "manga-mrdlduj4gi06g",
+    "id": "mrdlduj4gi06g",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "クラスで2番目に可愛い女の子と友だちになった 1",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4wseF9M",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71LJC+f3hzL._SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4wseF9M"
   },
   {
-    "id": "manga-mrdlf2lrs71dm",
+    "id": "mrdlf2lrs71dm",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "ベー革 (1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4vk5BTk",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71C09jY+9dL._SL1000_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4vk5BTk"
   },
   {
-    "id": "manga-mrdlgqb60gvz1",
+    "id": "mrdlgqb60gvz1",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "ドラフトキング 1",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4b41Haf",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71YdTdCS6FL._SL1200_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4b41Haf"
   },
   {
-    "id": "manga-mrdlic0y8sjxb",
+    "id": "mrdlic0y8sjxb",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "盤上のオリオン(1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4aMqb7z",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71vLzqgxOoL._SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4aMqb7z"
   },
   {
-    "id": "manga-mrdljjoei5g4i",
+    "id": "mrdljjoei5g4i",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "龍と苺 (1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4wtvHEr",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71G0qutOJ-L._SL1000_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4wtvHEr"
   },
   {
-    "id": "manga-mrdll5bsekv36",
+    "id": "mrdll5bsekv36",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "薫る花は凛と咲く(1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/3R3Je6M",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71vSjLb98fL._SL1499_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/3R3Je6M"
   },
   {
-    "id": "manga-mrdlno8zuqirh",
+    "id": "mrdlno8zuqirh",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "お気楽領主の楽しい領地防衛 1",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4ybH99B",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/816CN+A30lL._SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4ybH99B"
   },
   {
-    "id": "manga-mrdlpaydyizar",
+    "id": "mrdlpaydyizar",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "辺境の薬師、都でSランク冒険者となる~英雄村の少年がチート薬で無自覚無双~(1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4w5MJZq",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71BtMkCW2aL._SL1410_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4w5MJZq"
   },
   {
-    "id": "manga-mrdlr5zhx3k0a",
+    "id": "mrdlr5zhx3k0a",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "メダリスト(1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4eXwR3S",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71fJ41zozKL._SL1424_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4eXwR3S"
   },
   {
-    "id": "manga-mrdlsix3v4ypp",
+    "id": "mrdlsix3v4ypp",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "追い出された万能職に新しい人生が始まりました (1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4bcsKA0",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/91orSbj87sL._SL1500_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4bcsKA0"
   },
   {
-    "id": "manga-mrdlu4mxxqhxm",
+    "id": "mrdlu4mxxqhxm",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "【パクパクですわ】追放されたお嬢様の『モンスターを食べるほど強くなる』スキルは、1食で1レベルアップする前代未聞の最強スキルでした。3日で人類最強になりましたわ~!(1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4fquHLz",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71pNM7stxzL._SL1420_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4fquHLz"
   },
   {
-    "id": "manga-mrdm7vyf2stqo",
+    "id": "mrdm7vyf2stqo",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "お嬢様系底辺ダンジョン配信者、迷惑系をボコったらバズって伝説になってますわ!? (1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4wAlFl6",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71vK3yBP0DL._SL1000_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/4wAlFl6"
   },
   {
-    "id": "manga-mrdmohhpg5ic8",
+    "id": "mrdmohhpg5ic8",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "限界集落を脱村した錬金術士、都会で”最強”なのがバレまくる。~老害どもにはいい加減愛想が尽きました~(1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/3TqCAYR",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71Wn849ECQL._SL1425_.jpg",
-    "addedAt": "2026-07-09"
+    "addedAt": "2026-07-09",
+    "amazonUrl": "https://amzn.to/3TqCAYR"
   },
   {
-    "id": "manga-mriftdl4ijbtt",
+    "id": "mriftdl4ijbtt",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "新米姉妹のふたりごはん1",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4few3rI",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71SRhs1GeSL._SL1000_.jpg",
-    "addedAt": "2026-07-12"
+    "addedAt": "2026-07-12",
+    "amazonUrl": "https://amzn.to/4few3rI"
   },
   {
-    "id": "manga-mrm5agdam6kcl",
+    "id": "mrm5agdam6kcl",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "辺境モブ貴族のウチに嫁いできた悪役令嬢が、めちゃくちゃできる良い嫁なんだが? 1",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4yoWVhh",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/71cz86TOAKL._SL1500_.jpg",
-    "addedAt": "2026-07-15"
+    "addedAt": "2026-07-15",
+    "amazonUrl": "https://amzn.to/4yoWVhh"
   },
   {
-    "id": "manga-mrm5kxf859lrb",
+    "id": "mrm5kxf859lrb",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "貴族転生 ~恵まれた生まれから最強の力を得る~ (1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/44v0KUI",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/91DuTB0ni8L._SL1500_.jpg",
-    "addedAt": "2026-07-15"
+    "addedAt": "2026-07-15",
+    "amazonUrl": "https://amzn.to/44v0KUI"
   },
   {
-    "id": "manga-mrvbqk27g0ts3",
+    "id": "mrvbqk27g0ts3",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "転生してハイエルフになりましたが、スローライフは120年で飽きました -Highelf with a long life- (1)",
     "comment": "",
-    "amazonUrl": "https://amzn.to/4wUfecE",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/81Sftc2XjXL._SL1500_.jpg",
-    "addedAt": "2026-07-22"
+    "addedAt": "2026-07-22",
+    "amazonUrl": "https://amzn.to/4wUfecE"
   },
   {
-    "id": "manga-ms3edemwv0pm5",
+    "id": "ms3edemwv0pm5",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "辺境の錬金術師　～今更予算ゼロの職場に戻るとかもう無理～ 1",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B00LnEVwk",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/913RrvMwxmL._SL1500_.jpg",
-    "addedAt": "2026-07-27"
+    "addedAt": "2026-07-27",
+    "amazonUrl": "https://link.amazon/B00LnEVwk"
   },
   {
-    "id": "uncategorized-ms3f1g4wu1ni1",
+    "id": "ms3f1g4wu1ni1",
     "category": "uncategorized",
     "tags": [
       "ゲーム"
     ],
     "name": "AYN Odin 2 Portal Pro",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B00zICdaN",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61jmsiNikXL._AC_SL1500_.jpg",
-    "addedAt": "2026-07-27"
+    "addedAt": "2026-07-27",
+    "amazonUrl": "https://link.amazon/B00zICdaN"
   },
   {
-    "id": "uncategorized-ms3f4zgeb5xcy",
+    "id": "ms3f4zgeb5xcy",
     "category": "uncategorized",
     "tags": [
       "ゲーム"
     ],
     "name": "AYN Odin 3 Pro",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B0j3XS91w",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/31wACVWYSKL._AC_.jpg",
-    "addedAt": "2026-07-27"
+    "addedAt": "2026-07-27",
+    "amazonUrl": "https://link.amazon/B0j3XS91w"
   },
   {
-    "id": "uncategorized-msot4fatt5ifn",
+    "id": "msot4fatt5ifn",
     "category": "uncategorized",
     "tags": [
       "収納"
     ],
     "name": "ミドリ カッター ダンボールカッター 黒",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B0cltCrDF",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/41hMgwNzFBL._AC_SL1000_.jpg",
-    "addedAt": "2026-08-11"
+    "addedAt": "2026-08-11",
+    "amazonUrl": "https://link.amazon/B0cltCrDF"
   },
   {
-    "id": "gadget-mtlkpczo8s2l9",
+    "id": "mtlkpczo8s2l9",
     "category": "gadget",
     "tags": [
       "ガジェット"
     ],
     "name": "EarFun Clip 2 イヤーカフ イヤホン",
     "comment": "軽い・邪魔にならない・耳が痛くならない",
-    "amazonUrl": "https://link.amazon/B033GfRJe",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/I/61Ndq9yBT9L._AC_SL1500_.jpg",
-    "addedAt": "2026-09-03"
+    "addedAt": "2026-09-03",
+    "amazonUrl": "https://link.amazon/B033GfRJe"
   },
   {
-    "id": "manga-mtnr6d6fns2lf",
+    "id": "mtnr6d6fns2lf",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "本好きの下剋上~司書になるためには手段を選んでいられません~第一部 「本がないなら作ればいい! 1」",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B0j38URNG",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T3/images/I/91CAdi8LoHL._SL1500_.jpg",
-    "addedAt": "2026-09-05"
+    "addedAt": "2026-09-05",
+    "amazonUrl": "https://link.amazon/B0j38URNG"
   },
   {
-    "id": "manga-mtnrrmhjrylwn",
+    "id": "mtnrrmhjrylwn",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "異世界ウォーキング(1)",
     "comment": "",
-    "amazonUrl": "異世界ウォーキング(1)",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T3/images/I/71z2QBTuhiL._SL1430_.jpg",
-    "addedAt": "2026-09-05"
+    "addedAt": "2026-09-05",
+    "amazonUrl": "異世界ウォーキング(1)"
   },
   {
-    "id": "manga-mtnruyvbuaned",
+    "id": "mtnruyvbuaned",
     "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "え、神絵師を追い出すんですか？　1",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B07KVYlLB",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T3/images/I/81jT5zldeqL._SL1500_.jpg",
-    "addedAt": "2026-09-05"
+    "addedAt": "2026-09-05",
+    "amazonUrl": "https://link.amazon/B07KVYlLB"
   },
   {
-    "id": "uncategorized-mtpwh62uxam0x",
+    "id": "mtpwh62uxam0x",
     "category": "uncategorized",
     "tags": [],
     "name": "ANBERNIC RG 557",
     "comment": "",
-    "amazonUrl": "https://jp.anbernic.com/products/rg557?sca_ref=12030223.hXQyaR6QM8",
+    "articleUrl": "",
     "imageUrl": "https://cdn.shopify.com/s/files/1/0588/4579/0381/files/c35b47026fe38d00d1fb401963aedce.jpg?v=1762493572",
-    "addedAt": "2026-09-06"
+    "addedAt": "2026-09-06",
+    "platform": "anbernic",
+    "purchaseUrl": "https://jp.anbernic.com/products/rg557?sca_ref=12030223.hXQyaR6QM8"
   },
   {
-    "id": "uncategorized-mtrvi20c2kafy",
+    "id": "mtrvi20c2kafy",
     "category": "uncategorized",
     "tags": [
       "ゲーム"
     ],
     "name": "ANBERNIC RG 55G1",
     "comment": "",
-    "amazonUrl": "https://jp.anbernic.com/products/rg-55g1?sca_ref=12030223.hXQyaR6QM8",
+    "articleUrl": "",
     "imageUrl": "https://jp.anbernic.com/cdn/shop/files/RG55G1_1_580x_crop_center.jpg?v=1787727066",
-    "addedAt": "2026-09-07"
+    "addedAt": "2026-09-07",
+    "platform": "anbernic",
+    "purchaseUrl": "https://jp.anbernic.com/products/rg-55g1?sca_ref=12030223.hXQyaR6QM8"
   },
   {
-    "id": "uncategorized-mtrvjdw9fngzo",
+    "id": "mtrvjdw9fngzo",
     "category": "uncategorized",
     "tags": [
       "ゲーム"
     ],
     "name": "ANBERNIC RG DS",
     "comment": "",
-    "amazonUrl": "https://jp.anbernic.com/collections/new-arrivals/products/rgds?sca_ref=12030223.hXQyaR6QM8&sca_source=note",
+    "articleUrl": "",
     "imageUrl": "https://jp.anbernic.com/cdn/shop/files/RGDS_580x_crop_center.jpg?v=1761287390",
-    "addedAt": "2026-09-07"
+    "addedAt": "2026-09-07",
+    "platform": "anbernic",
+    "purchaseUrl": "https://jp.anbernic.com/collections/new-arrivals/products/rgds?sca_ref=12030223.hXQyaR6QM8&sca_source=note"
   },
   {
-    "id": "uncategorized-mtrvm0ws3ko35",
+    "id": "mtrvm0ws3ko35",
     "category": "uncategorized",
     "tags": [
       "ゲーム"
     ],
     "name": "ANBERNIC RGSP",
     "comment": "",
-    "amazonUrl": "https://jp.anbernic.com/products/rg-sp?sca_ref=12030223.hXQyaR6QM8&sca_source=note",
+    "articleUrl": "",
     "imageUrl": "https://jp.anbernic.com/cdn/shop/files/ANBERNIC_RG_SP_669247c1-d85b-43b1-b769-f6f210e9af5e_580x_crop_center.jpg?v=1785751426",
-    "addedAt": "2026-09-07"
+    "addedAt": "2026-09-07",
+    "platform": "anbernic",
+    "purchaseUrl": "https://jp.anbernic.com/products/rg-sp?sca_ref=12030223.hXQyaR6QM8&sca_source=note"
   },
   {
-    "id": "uncategorized-mu18tcotrvl7g",
+    "id": "mu18tcotrvl7g",
     "category": "uncategorized",
     "tags": [
       "ガジェット"
     ],
     "name": "MiLi LiTag Duo",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B0cBk3CwH",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/713d1nFNmYL._AC_SL1500_.jpg",
-    "addedAt": "2026-09-14"
+    "addedAt": "2026-09-14",
+    "amazonUrl": "https://link.amazon/B0cBk3CwH"
   },
   {
-    "id": "uncategorized-mu18uuhcfthnw",
+    "id": "mu18uuhcfthnw",
     "category": "uncategorized",
     "tags": [
       "ガジェット"
     ],
     "name": "Xiaomi Tag",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B04WGZC2l",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/51UGV5WffVL._AC_SL1500_.jpg",
-    "addedAt": "2026-09-14"
+    "addedAt": "2026-09-14",
+    "amazonUrl": "https://link.amazon/B04WGZC2l"
   },
   {
-    "id": "uncategorized-mu18wn69t3tcp",
+    "id": "mu18wn69t3tcp",
     "category": "uncategorized",
     "tags": [
       "ガジェット"
     ],
     "name": "UGREEN FineTrack Slim Duo",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B08CMi9qx",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/517IXaSzDOL._AC_SX679_.jpg",
-    "addedAt": "2026-09-14"
+    "addedAt": "2026-09-14",
+    "amazonUrl": "https://link.amazon/B08CMi9qx"
   },
   {
-    "id": "uncategorized-mu18z6zcm99yv",
+    "id": "mu18z6zcm99yv",
     "category": "uncategorized",
     "tags": [
       "ガジェット"
     ],
     "name": "Anker Eufy SmartTrack Card E40",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B01xt18j0",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/41JA44tQqeL._AC_SY300_SX300_QL70_ML2_.jpg",
-    "addedAt": "2026-09-14"
+    "addedAt": "2026-09-14",
+    "amazonUrl": "https://link.amazon/B01xt18j0"
   },
   {
-    "id": "uncategorized-mu193npx07fgx",
+    "id": "mu193npx07fgx",
     "category": "uncategorized",
     "tags": [
       "ガジェット"
     ],
     "name": "Air Tag",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B03EsxEfD",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/714MWdN4CXL._AC_SX679_.jpg",
-    "addedAt": "2026-09-14"
+    "addedAt": "2026-09-14",
+    "amazonUrl": "https://link.amazon/B03EsxEfD"
   },
   {
-    "id": "uncategorized-mu8celvlda1ym",
-    "category": "uncategorized",
+    "id": "mu8celvlda1ym",
+    "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "尾守つみきと奇日常。",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B0ff4PhgU",
+    "articleUrl": "",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/81BoVXFfbEL._SL1500_.jpg",
-    "addedAt": "2026-09-19"
+    "addedAt": "2026-09-19",
+    "amazonUrl": "https://link.amazon/B0ff4PhgU"
   },
   {
-    "id": "uncategorized-mu9bmyn0tytnq",
-    "category": "uncategorized",
+    "id": "mu9bmyn0tytnq",
+    "category": "manga",
     "tags": [
       "マンガ"
     ],
     "name": "追放された転生重騎士はゲーム知識で無双する",
     "comment": "",
-    "amazonUrl": "https://link.amazon/B0fvxMhBD",
+    "articleUrl": "https://nobi-labo.com/column/n104cbdda75d2",
     "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/91trbHF0bLL._SL1500_.jpg",
-    "addedAt": "2026-09-20"
+    "addedAt": "2026-09-20",
+    "amazonUrl": "https://link.amazon/B0fvxMhBD"
+  },
+  {
+    "id": "mudo7r89irfkc",
+    "category": "manga",
+    "tags": [
+      "マンガ"
+    ],
+    "name": "魔女と傭兵",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/71Jx5VWjssL._SL1421_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B0cyAQXVS"
+  },
+  {
+    "id": "mudpx6b1hmwu2",
+    "category": "manga",
+    "tags": [
+      "マンガ"
+    ],
+    "name": "追放された転生貴族、外れスキルで内政無双 ～気ままに領地運営するはずが、スキル『ガチャ』のお陰で最強領地を作り上げてしまった～",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/91+aLNniS6L._SL1500_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B0fpbRw7v"
+  },
+  {
+    "id": "mudqlmxkhck0b",
+    "category": "manga",
+    "tags": [
+      "マンガ"
+    ],
+    "name": "いつでも自宅に帰れる俺は、異世界で行商人をはじめました",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/71WZ8PFbJCL._SL1000_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B04RPbXAa"
+  },
+  {
+    "id": "mudqwkpvfazco",
+    "category": "manga",
+    "tags": [
+      "マンガ"
+    ],
+    "name": "勘違いの工房主: 英雄パーティの元雑用係が、実は戦闘以外がSSSランクだったというよくある話",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/91AwM8SqaOL._SL1500_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B0ajzJ2Ut"
+  },
+  {
+    "id": "mudrmqqtdpzsn",
+    "category": "manga",
+    "tags": [
+      "マンガ"
+    ],
+    "name": "お母さん冒険者、ログインボーナスでスキル【主婦】に目覚めました。週一貰えるチラシで冒険者生活頑張ります！",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/71xHtBeE+3L._SL1429_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B09LKRpFV"
+  },
+  {
+    "id": "muds2n0dowmmh",
+    "category": "manga",
+    "tags": [
+      "マンガ"
+    ],
+    "name": "ゲーム中盤で死ぬ悪役貴族に転生したので、外れスキル【テイム】を駆使して最強を目指してみた",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/71jH5AtqJDL._SL1431_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B00swn37F"
+  },
+  {
+    "id": "mudsti78zt9ir",
+    "category": "gadget",
+    "tags": [
+      "ゲーム"
+    ],
+    "name": "Miyoo Mini Plus",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/61z568FE3ML._AC_SL1200_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B03EpD0MZ"
+  },
+  {
+    "id": "mudt9jkww0xk9",
+    "category": "gadget",
+    "tags": [
+      "ガジェット"
+    ],
+    "name": "RingConn Gen 3 スマートリング",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/51wMU7GCxyL._AC_SL1500_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B0eAmmBXc"
+  },
+  {
+    "id": "mudtakele2bke",
+    "category": "gadget",
+    "tags": [
+      "ガジェット"
+    ],
+    "name": "RingConn Gen 2 スマートリング",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T2/images/I/61Ck481AKOL._AC_SL1500_.jpg",
+    "addedAt": "2026-09-23",
+    "amazonUrl": "https://link.amazon/B0aiIEqXp"
+  },
+  {
+    "id": "muva2ca50wt4v",
+    "category": "gadget",
+    "tags": [
+      "ガジェット"
+    ],
+    "name": "Amazon Echo Dot",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/710GmYYsbTL._AC_SX425_.jpg",
+    "addedAt": "2026-10-05",
+    "amazonUrl": "https://link.amazon/B03UZN559"
+  },
+  {
+    "id": "muva4wjhcw14a",
+    "category": "gadget",
+    "tags": [
+      "ガジェット"
+    ],
+    "name": "Amazon Fire TV Stick 4K Select",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/61+59M8o84L._AC_SY550_.jpg",
+    "addedAt": "2026-10-05",
+    "amazonUrl": "https://link.amazon/B0fTBDnsX"
+  },
+  {
+    "id": "muwqeudn4q64d",
+    "category": "gadget",
+    "tags": [
+      "ガジェット"
+    ],
+    "name": "Echo Dot Max",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/71ozCbsdgZL._AC_SY741_.jpg",
+    "addedAt": "2026-10-06",
+    "amazonUrl": "https://link.amazon/B03wzcQj0"
+  },
+  {
+    "id": "muwqjeqmqlkn8",
+    "category": "uncategorized",
+    "tags": [
+      "飲料"
+    ],
+    "name": "ウィルキンソン タンサン 500ml×24本",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/71MMOCYBQxL._AC_SX679_PIbundle-24,TopRight,0,0_SH20_.jpg",
+    "addedAt": "2026-10-06",
+    "amazonUrl": "https://link.amazon/B051fff5s"
+  },
+  {
+    "id": "muwqltzfrc00k",
+    "category": "uncategorized",
+    "tags": [
+      "食品"
+    ],
+    "name": "by Amazon シーチキン Lフレーク",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/912SDresIAL._AC_SX679_.jpg",
+    "addedAt": "2026-10-06",
+    "amazonUrl": "https://link.amazon/B0j39XiHU"
+  },
+  {
+    "id": "muwqnqn9vmlts",
+    "category": "uncategorized",
+    "tags": [
+      "飲料"
+    ],
+    "name": "コカ・コーラ ラベルレス 500mlPET×24本",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/617W4nFBd5L._AC_SX679_PIbundle-24,TopRight,0,0_SH20_.jpg",
+    "addedAt": "2026-10-06",
+    "amazonUrl": "https://link.amazon/B0iyO2hXc"
+  },
+  {
+    "id": "muwqpviv7wym5",
+    "category": "gadget",
+    "tags": [
+      "ガジェット"
+    ],
+    "name": "【Amazon.co.jp限定】ゼンハイザー (Sennheiser) ワイヤレスイヤホン MOMENTUM True Wireless 3",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/81D1ztnaGBL._AC_SX679_.jpg",
+    "addedAt": "2026-10-06",
+    "amazonUrl": "https://link.amazon/B02tWKfAZ"
+  },
+  {
+    "id": "muwqsntqh1j7k",
+    "category": "uncategorized",
+    "tags": [
+      "タブレット"
+    ],
+    "name": "Apple 11インチiPad Air（M4）：Liquid Retinaディスプレイ、128GB",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/71cEd-F5hgL._AC_SX679_.jpg",
+    "addedAt": "2026-10-06",
+    "amazonUrl": "https://link.amazon/B0ck8xDpt"
+  },
+  {
+    "id": "muwqv9iqbsip4",
+    "category": "uncategorized",
+    "tags": [
+      "飲料"
+    ],
+    "name": "サントリー 天然水 ラベルレス 2L ×9本",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/91Z5tPhB3-L._AC_SX679_PIbundle-9,TopRight,0,0_SH20_.jpg",
+    "addedAt": "2026-10-06",
+    "amazonUrl": "https://link.amazon/B08IuuNbf"
+  },
+  {
+    "id": "muwqxhcwodnk7",
+    "category": "uncategorized",
+    "tags": [
+      "飲料"
+    ],
+    "name": "by Amazon 天然水 ラベルレス 500ml ×24本",
+    "comment": "",
+    "articleUrl": "",
+    "imageUrl": "https://m.media-amazon.com/images/I/51hwXLaE-8L._AC_SX679_PIbundle-24,TopRight,0,0_SH20_.jpg",
+    "addedAt": "2026-10-06",
+    "amazonUrl": "https://link.amazon/B05S3lZgJ"
   }
 ]
