@@ -50,7 +50,6 @@ nobinobi9000.github.io/
 │   ├── icon-192.png
 │   ├── icon-512.png
 │   ├── manifest.json
-│   ├── japan-stock-screener.html  # 日本株スクリーナー 詳細紹介ページ（静的HTML）
 │   ├── tax-simulator.html          # 確定申告シミュレーター 詳細紹介ページ（静的HTML）
 │   ├── nekoojiisan-timer.html      # （旧静的HTML / Next.jsルートにリダイレクト）
 │   ├── tax-simulator/
@@ -74,8 +73,9 @@ nobinobi9000.github.io/
 | `/blog/[id]` | ブログ記事詳細 | Next.js |
 | `/tax-simulator.html` | 確定申告シミュレーター 詳細紹介ページ | 静的HTML |
 | `/tax-simulator/` | 確定申告シミュレーター 本体アプリ | 静的HTML |
-| `/japan-stock-screener.html` | 日本株スクリーナー 詳細紹介ページ | 静的HTML |
-| `/japan-stock-screener/` | 日本株スクリーナー本体（GitHub Pagesプロキシ） | リライト |
+| `/stock-screener` | 日本株スクリーナー 詳細紹介ページ（`/japan-stock-screener.html` は308で転送） | Next.js |
+| `/japan-stock-screener/` | screener.nobi-labo.com へ転送（旧プロキシは廃止） | リダイレクト(307) |
+| `/kabu-signal` | 非公開中。`/kabu-note` へ転送 | リダイレクト(307) |
 
 ### リダイレクト（next.config.ts）
 ```
@@ -112,10 +112,10 @@ nobinobi9000.github.io/
 - **タグ**：会議タイマー、おやじギャグ、AI生成、無料
 
 ### 4-4. 日本株スクリーナー
-- **URL**：`/japan-stock-screener/`（GitHub Pages プロキシ）
-- **詳細ページ**：`/japan-stock-screener.html`（静的HTML）
-- **機能**：東証3,700銘柄を毎日自動スキャン、テクニカル×AIスコアリング、Discord夕方配信
-- **タグ**：無料、Discord連携、テクニカル分析、毎日夕方
+- **URL**：https://screener.nobi-labo.com
+- **詳細ページ**：`/stock-screener`
+- **機能**：東証上場の約4,400銘柄（ETF等を含む）を営業日にスキャン、9条件の固定配点スコア、厳選3銘柄はDiscord #daily-picks にも投稿。全銘柄分析はログイン後
+- **タグ**：無料枠あり、Discord連携、営業日更新
 - **スコアリング**：9つの指標×合計100点
 
 #### スコア指標詳細（2026年3月時点）

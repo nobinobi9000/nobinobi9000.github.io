@@ -28,6 +28,9 @@ const config: NextConfig = {
       { source: '/tax-simulator', destination: '/tax-simulator-detail', permanent: true },
       { source: '/tax-simulator/', destination: '/tax-simulator-detail', permanent: true },
       { source: '/japan-stock-screener', destination: '/stock-screener', permanent: true },
+      { source: '/japan-stock-screener.html', destination: '/stock-screener', permanent: true },
+      // kabu-signal は公開前・終息予定のため非公開（再公開時は本行と lib/apps.ts・sitemap.ts を戻す。_hub/TODO.md #27）
+      { source: '/kabu-signal', destination: '/kabu-note', permanent: false },
       // サービスURL（スラッシュあり・サブパス）→ screener.nobi-labo.com
       { source: '/japan-stock-screener/', destination: 'https://screener.nobi-labo.com', permanent: false },
       { source: '/japan-stock-screener/:path+', destination: 'https://screener.nobi-labo.com/:path+', permanent: false },

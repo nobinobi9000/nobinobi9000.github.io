@@ -29,7 +29,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/meeting-timer`,        changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/subshari`,             changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/kabu-note`,            changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/kabu-signal`,          changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/tax-simulator-detail`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/stock-screener`,       changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/legalgen`,             changeFrequency: 'monthly', priority: 0.8 },

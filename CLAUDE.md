@@ -82,7 +82,8 @@ Tailwindに登録していないためインラインで指定する。
 | `/subshari` | `app/subshari/page.tsx` | アプリ詳細 |
 | `/kabu-note` | `app/kabu-note/page.tsx` | アプリ詳細 |
 | `/tax-simulator` | `app/tax-simulator/page.tsx` | アプリ詳細（実アプリは `/tax-simulator/`） |
-| `/japan-stock-screener` | `app/japan-stock-screener/page.tsx` | アプリ詳細（実アプリは `/japan-stock-screener/`） |
+| `/stock-screener` | `app/stock-screener/page.tsx` | アプリ詳細（`/japan-stock-screener`・`/japan-stock-screener.html` は308でここへ。実アプリは screener.nobi-labo.com） |
+| `/kabu-signal` | `app/kabu-signal/page.tsx` | **非公開中**（307で `/kabu-note` へ転送。一覧・sitemapからも除外。再公開時は全面書き換え。`_hub/TODO.md` #27） |
 | `/legalgen` | `app/legalgen/page.tsx` | アプリ詳細 |
 
 ### 既存URLの維持（変更禁止）
@@ -208,7 +209,7 @@ const SLIDES = [
 - `app/subshari/` には紹介ページ（`page.tsx`）のみ置く。アプリ本体のミラー（`app/subshari/app/`）は 2026-10-03 に削除済み。subshari 本体の変更は `../subshari/` フォルダで行う
 - 本番デプロイ前に必ずユーザーに確認を取ること
 - Tailwind v4 は Next.js 16 Turbopack と互換性問題あり → **v3 を使うこと**
-- `/japan-stock-screener/`（スラッシュあり）は GitHub Pages へのリダイレクト。`/japan-stock-screener`（スラッシュなし）が詳細ページ
+- `/japan-stock-screener/`（スラッシュあり）は screener.nobi-labo.com へのリダイレクト（307）。`/japan-stock-screener`（スラッシュなし）と `/japan-stock-screener.html` は `/stock-screener`（詳細ページ）へ308
 - `app/tax-simulator/page.tsx` = 詳細ページ。`/public/tax-simulator/index.html` = 実際のアプリ（別物）
 
 ---

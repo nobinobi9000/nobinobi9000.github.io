@@ -1,3 +1,5 @@
+// 【非公開中】このページは next.config.ts の redirects（307）で /kabu-note へ転送され、一覧・sitemap からも外している。
+// 本文は旧内容（適時開示の取得撤去・買い側シグナル終了・時刻表記が実態と不一致）のため、再公開時は全面書き換えること（_hub/TODO.md #27）。
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import AppCarousel from '@/components/AppCarousel'

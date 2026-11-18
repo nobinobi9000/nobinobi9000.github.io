@@ -4,7 +4,7 @@ import AppCarousel from '@/components/AppCarousel'
 
 export const metadata: Metadata = {
   title: 'Kabu Note | 日本株ポートフォリオ管理',
-  description: '複数証券口座の保有株を一元管理。損益・評価額を自動計算。平日16時に株価を自動更新。',
+  description: '複数証券口座の保有株を一元管理。損益・評価額を自動計算。株価は営業日の夕方以降に更新（遅れる場合があります）。',
   alternates: { canonical: '/kabu-note' },
 }
 
@@ -34,7 +34,7 @@ export default function KabuNotePage() {
               複数口座の株を、<br />一画面で管理。
             </h1>
             <p className="mt-[22px] text-[17px] leading-[1.85] text-[#444444] max-w-[480px]">
-              複数の証券口座にまたがる保有株を一元管理。証券コード・株数・取得単価を登録するだけで損益・評価額を自動計算。平日16時に株価を自動更新します。
+              複数の証券口座にまたがる保有株を一元管理。証券コード・株数・取得単価を登録するだけで損益・評価額を自動計算。株価は営業日の夕方以降に自動で更新します（処理状況により遅れる場合があります）。
             </p>
             <div className="mt-6 flex gap-2 flex-wrap">
               {['無料', '日本株', '複数口座対応', '損益管理'].map(tag => (
@@ -68,9 +68,9 @@ export default function KabuNotePage() {
           {[
             { num: '01', title: '複数口座を一元管理', desc: '持ち株会・NISA・特定口座など複数の証券口座の保有株をまとめて登録・管理。' },
             { num: '02', title: '損益・評価額の自動計算', desc: '取得単価と現在株価から損益・評価額を自動計算。含み益/含み損が一目でわかります。' },
-            { num: '03', title: '平日16時に自動更新', desc: '東証の取引終了後に株価を自動取得。毎日最新の評価額を確認できます。' },
+            { num: '03', title: '営業日の夕方以降に自動更新', desc: '日本株スクリーナーの日次データ（終値）をもとに、取引終了後に評価額を更新します。更新は処理の完了後で、遅れる場合があります。' },
             { num: '04', title: 'セクター・配当分析', desc: 'セクターごとの保有比率や配当収入の集計を自動表示。ポートフォリオのバランスを把握できます。' },
-            { num: '05', title: 'ウォッチリスト', desc: '保有前の気になる銘柄を、保有株とは別リストで管理。日本株スクリーナーの通知から銘柄をワンタップで追加できます。' },
+            { num: '05', title: 'ウォッチリスト', desc: '保有前の気になる銘柄を、保有株とは別リストで管理。Kabu Note内に表示される日本株スクリーナーの厳選3銘柄から、ワンタップでウォッチリストに追加できます。' },
             { num: '06', title: '株式分割・併合の検知', desc: '保有銘柄の株式分割・併合を検知し、保有株数・取得単価の調整をご自身で確認のうえ反映できます（自動での書き換えは行いません）。' },
           ].map(f => (
             <div key={f.num} className="border border-[#EBEBEB] rounded-2xl p-7 hover:border-[#2D6A4F] transition-colors">
@@ -85,17 +85,12 @@ export default function KabuNotePage() {
       <section className="bg-[#F7F7F7] py-[72px] px-6">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-[13px] font-bold tracking-[0.08em] text-[#999999]">連携アプリ</div>
-          <p className="mt-4 text-[15px] leading-[1.8] text-[#444444] max-w-[600px]">Kabu Noteは同じ「お金」カテゴリのアプリと組み合わせることで、資産管理から銘柄探しまでを一貫して行えます。</p>
+          <p className="mt-4 text-[15px] leading-[1.8] text-[#444444] max-w-[600px]">Kabu Noteは、同じ運営の日本株スクリーナーの日次データを利用しています。</p>
           <div className="mt-8 grid gap-5" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
-            <Link href="/kabu-signal" className="block border border-[#EBEBEB] rounded-2xl p-7 bg-white hover:border-[#92400E] transition-colors">
-              <div className="text-[28px]">📈</div>
-              <h3 className="mt-[14px] text-[16px] font-extrabold tracking-[-0.02em]">kabu-signal</h3>
-              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">JVQMファクターで日本株をスコアリングし、エントリーシグナルをPush通知。Kabu Noteのウォッチリストにワンタップで追加できます。</p>
-            </Link>
             <Link href="/stock-screener" className="block border border-[#EBEBEB] rounded-2xl p-7 bg-white hover:border-[#92400E] transition-colors">
               <div className="text-[28px]">📊</div>
               <h3 className="mt-[14px] text-[16px] font-extrabold tracking-[-0.02em]">日本株スクリーナー</h3>
-              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">3,700銘柄を毎日自動スキャンし、テクニカル指標×AIスコアリングで上昇シグナル銘柄をDiscord配信します。</p>
+              <p className="mt-[10px] text-[14px] leading-[1.75] text-[#444444]">東証上場の約4,400銘柄を営業日ごとにスキャンし、テクニカル条件の成立状況をスコアで表示します。厳選3銘柄と市場サマリーは無料で公開しています。</p>
             </Link>
           </div>
         </div>
