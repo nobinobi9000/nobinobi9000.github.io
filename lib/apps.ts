@@ -46,6 +46,17 @@ export const APPS: App[] = [
     catColor: '#2563EB',
   },
   {
+    name: '私のゲーム年表',
+    desc: '1歳につき1本、その年の思い出のベスト1を登録してゲーム年表を完成。年代ごとの画像を保存・シェア。',
+    tags: ['無料', '登録不要', '画像シェア'],
+    ctaUrl: 'https://game-timeline.nobi-labo.com',
+    detailUrl: '/game-timeline',
+    category: 'Life',
+    screenshot: '/screenshots/game-timeline/thumb.jpg',
+    tint: '#F0F5FF',
+    catColor: '#2563EB',
+  },
+  {
     name: 'めばえ',
     desc: 'アンカー習慣の直後に新習慣を積み上げるミニマルな習慣トラッカー。継続を見える化。',
     story: '毎年4月に「今年こそ習慣を作ろう」と思うが、続いたためしがない。意志力に頼らない「習慣スタック」という手法に出会い、それを実践するシンプルなアプリを作った。',

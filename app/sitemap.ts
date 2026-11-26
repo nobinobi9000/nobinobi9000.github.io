@@ -23,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // アプリ詳細ページ
     { url: `${BASE_URL}/comic-checker`,        changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/questlog`,             changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/game-timeline`,        changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/mebae`,                changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/sorosoro`,             changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/nekoojiisan-timer`,    changeFrequency: 'monthly', priority: 0.8 },

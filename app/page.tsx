@@ -28,8 +28,8 @@ const CATEGORIES = CATEGORY_ORDER.map(({ key, jp }) => {
   }
 })
 
-// comic-checker / QUESTLOG / Kabu Note / SoroSoro / 法律書類 / サブスク / 日本株スクリーナー / Note Deck
-const PICKUP_NAMES = ['comic-checker', 'QUESTLOG', 'Kabu Note', 'SoroSoro', '法律書類ジェネレーター', 'サブスクの断捨離', '日本株スクリーナー', 'Note Deck']
+// comic-checker / QUESTLOG / 私のゲーム年表 / Kabu Note / SoroSoro / 法律書類 / サブスク / 日本株スクリーナー / Note Deck
+const PICKUP_NAMES = ['comic-checker', 'QUESTLOG', '私のゲーム年表', 'Kabu Note', 'SoroSoro', '法律書類ジェネレーター', 'サブスクの断捨離', '日本株スクリーナー', 'Note Deck']
 const PICKUP_APPS = PICKUP_NAMES.map(n => APPS.find(a => a.name === n)!).filter(Boolean)
 
 const MAGAZINES = [

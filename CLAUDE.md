@@ -76,6 +76,7 @@ Tailwindに登録していないためインラインで指定する。
 | `/blog/[id]` | `app/blog/[id]/page.tsx` | Notion ブログ記事詳細 |
 | `/comic-checker` | `app/comic-checker/page.tsx` | アプリ詳細 |
 | `/questlog` | `app/questlog/page.tsx` | アプリ詳細 |
+| `/game-timeline` | `app/game-timeline/page.tsx` | アプリ詳細（実アプリは game-timeline.nobi-labo.com。掲載画像はパッケージ仮表示で撮影） |
 | `/mebae` | `app/mebae/page.tsx` | アプリ詳細 |
 | `/sorosoro` | `app/sorosoro/page.tsx` | アプリ詳細 |
 | `/nekoojiisan-timer` | `app/nekoojiisan-timer/page.tsx` | アプリ詳細 |
